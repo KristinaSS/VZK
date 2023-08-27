@@ -8,5 +8,5 @@
     <!-- Changes to include -->
     <include file="changelog/changes/1_create_tables.sql"/>
     <include file="changelog/changes/2_create_tables_check.sql"/>
-    <include file="changelog/changes/3_init_tables.sql"/>
+    <include file="changelog/changes/2_init_tables.sql"/>
 </databaseChangeLog>
