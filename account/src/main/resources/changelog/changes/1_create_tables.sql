@@ -28,3 +28,30 @@ ALTER TABLE `vzk_accounts`.`account_details`
             REFERENCES `vzk_accounts`.`account` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION;
+
+-- Changeset kristina:2023-08-13-create-teams-table-alter
+CREATE TABLE `vzk_accounts`.`teams` (
+                                        `id` INT NOT NULL AUTO_INCREMENT,
+                                        `name` VARCHAR(45) NOT NULL,
+                                        `captain` INT NOT NULL,
+                                        `game` VARCHAR(45) NOT NULL,
+                                        PRIMARY KEY (`id`));
+
+-- Changeset kristina:2023-08-13-create-account_teams-table-alter
+CREATE TABLE `vzk_accounts`.`account_teams` (
+                                                `account_id` INT NOT NULL,
+                                                `team_id` INT NOT NULL,
+                                                PRIMARY KEY (`account_id`, `team_id`),
+                                                INDEX `acc_tea_tea_fk_idx` (`team_id` ASC) VISIBLE,
+                                                CONSTRAINT `acc_tea_acc_fk`
+                                                    FOREIGN KEY (`account_id`)
+                                                        REFERENCES `vzk_accounts`.`account` (`id`)
+                                                        ON DELETE NO ACTION
+                                                        ON UPDATE NO ACTION,
+                                                CONSTRAINT `acc_tea_tea_fk`
+                                                    FOREIGN KEY (`team_id`)
+                                                        REFERENCES `vzk_accounts`.`teams` (`id`)
+                                                        ON DELETE NO ACTION
+                                                        ON UPDATE NO ACTION);
+
+
