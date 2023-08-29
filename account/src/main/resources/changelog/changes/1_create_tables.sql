@@ -10,14 +10,19 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account` (
                                                             PRIMARY KEY (`id`));
 
 -- Changeset kristina:2023-08-13-create-account-details-table
-CREATE TABLE `vzk_accounts`.`account_details` (
-                                                  `account_id` INT NOT NULL,
-                                                  `team` INT NOT NULL,
-                                                  `birthday` VARCHAR(45) NOT NULL,
-                                                  `country_origin` VARCHAR(45) NOT NULL,
-                                                  `image` VARCHAR(200) NULL,
-                                                  `gender` CHAR(1) NOT NULL,
-                                                  PRIMARY KEY (`account_id`));
+CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account_details` (
+                                                  `id` int NOT NULL,
+                                                  `account_id` int NOT NULL,
+                                                  `team` int NOT NULL,
+                                                  `birthday` varchar(45) NOT NULL,
+                                                  `country_origin` varchar(45) NOT NULL,
+                                                  `image` varchar(200) DEFAULT NULL,
+                                                  `gender` char(1) NOT NULL,
+                                                  PRIMARY KEY (`id`),
+                                                  KEY `ac_de_tm_fk_idx` (`team`),
+                                                  CONSTRAINT `ac_de_acc_fk` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`),
+                                                  CONSTRAINT `ac_de_tm_fk` FOREIGN KEY (`team`) REFERENCES `teams` (`id`)
+);
 
 -- Changeset kristina:2023-08-13-create-account-details-table-alter
 ALTER TABLE `vzk_accounts`.`account_details`
@@ -36,7 +41,7 @@ ALTER TABLE `vzk_accounts`.`account_details`
             ON UPDATE NO ACTION;
 
 -- Changeset kristina:2023-08-13-create-teams-table-alter
-CREATE TABLE `vzk_accounts`.`teams` (
+CREATE TABLE IF NOT EXISTS `vzk_accounts`.`teams` (
                                         `id` INT NOT NULL AUTO_INCREMENT,
                                         `name` VARCHAR(45) NOT NULL,
                                         `captain` INT NOT NULL,
@@ -44,7 +49,7 @@ CREATE TABLE `vzk_accounts`.`teams` (
                                         PRIMARY KEY (`id`));
 
 -- Changeset kristina:2023-08-13-create-account_teams-table-alter
-CREATE TABLE `vzk_accounts`.`account_teams` (
+CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account_teams` (
                                                 `account_id` INT NOT NULL,
                                                 `team_id` INT NOT NULL,
                                                 PRIMARY KEY (`account_id`, `team_id`),
