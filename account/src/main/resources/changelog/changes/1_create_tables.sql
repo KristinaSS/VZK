@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account` (
                                                             `id` INT NOT NULL AUTO_INCREMENT,
                                                             `name` VARCHAR(100) NOT NULL,
-                                                            `email` VARCHAR(100) NOT NULL,
+                                                            `email` VARCHAR(100) NOT NULL UNIQUE,
                                                             `password` VARCHAR(45) NOT NULL,
                                                             `is_active` TINYINT NOT NULL,
                                                             PRIMARY KEY (`id`));
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account` (
 -- Changeset kristina:2023-08-13-create-account-details-table
 CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account_details` (
                                                   `id` int NOT NULL,
-                                                  `account_id` int NOT NULL,
+                                                  `account_id` int NOT NULL UNIQUE,
                                                   `team` int NOT NULL,
                                                   `birthday` varchar(45) NOT NULL,
                                                   `country_origin` varchar(45) NOT NULL,
