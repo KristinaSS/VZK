@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account` (
                                                             `name` VARCHAR(100) NOT NULL,
                                                             `email` VARCHAR(100) NOT NULL,
                                                             `password` VARCHAR(45) NOT NULL,
-                                                            `account_type` VARCHAR(10) NOT NULL,
                                                             `is_active` TINYINT NOT NULL,
                                                             PRIMARY KEY (`id`));
 
@@ -14,7 +13,6 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account` (
 CREATE TABLE `vzk_accounts`.`account_details` (
                                                   `account_id` INT NOT NULL,
                                                   `team` INT NOT NULL,
-                                                  `role` VARCHAR(45) NOT NULL,
                                                   `birthday` VARCHAR(45) NOT NULL,
                                                   `country_origin` VARCHAR(45) NOT NULL,
                                                   `image` VARCHAR(200) NULL,
@@ -24,8 +22,16 @@ CREATE TABLE `vzk_accounts`.`account_details` (
 -- Changeset kristina:2023-08-13-create-account-details-table-alter
 ALTER TABLE `vzk_accounts`.`account_details`
     ADD CONSTRAINT `ac_de_acc_fk`
-        FOREIGN KEY (`account_id`)
+        FOREIGN KEY (`team`)
             REFERENCES `vzk_accounts`.`account` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION;
+
+-- Changeset kristina:2023-08-13-create-account-details-table-alter-fk
+ALTER TABLE `vzk_accounts`.`account_details`
+    ADD CONSTRAINT `ac_de_tm_fk`
+        FOREIGN KEY (`account_id`)
+            REFERENCES `vzk_accounts`.`teams` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION;
 
