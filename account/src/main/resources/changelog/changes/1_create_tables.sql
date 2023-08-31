@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account` (
 
 -- Changeset kristina:2023-08-13-create-account-details-table
 CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account_details` (
-                                                  `id` int NOT NULL,
+                                                  `id` INT NOT NULL AUTO_INCREMENT,
                                                   `account_id` int NOT NULL UNIQUE,
                                                   `team` int NOT NULL,
                                                   `birthday` varchar(45) NOT NULL,
