@@ -843,7 +843,6 @@ components:
       properties:
         id:
           type: integer
-          required: false
         name:
           type: string
         email:
@@ -856,7 +855,6 @@ components:
       properties:
         id:
           type: integer
-          required: false
         name:
           type: string
         captain:
@@ -868,7 +866,6 @@ components:
       properties:
         id:
           type: integer
-          required: false
         name:
           type: string
         email:

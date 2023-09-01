@@ -1,27 +1,26 @@
 openapi: 3.0.3
 info:
   version: 1.0.0
-  title: News Service
-  description: API for managing articles.
+  title: Request Service
+  description: API for managing requests.
 servers:
   - url: 'http:/localhost:8080/api'
 paths:
-  /article/all:
+  /request/contact/all:
     get:
       tags:
-        - Article
-      summary: Getting all articles
-      operationId: getAllArticles
+        - Contact Request
+      summary: Getting all contact requests
+      operationId: getAllContactRequests
       responses:
         "201":
-          description: Successful retrieval of all articles.
+          description: Successful retrieval of all contact requests.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleDTO'
-
+                  $ref: '#/components/schemas/ContactRequestDTO'
         "400":
           description: Bad Request
           content:
@@ -40,53 +39,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-  /article/all/active:
+  /request/contact/{id}:
     get:
       tags:
-        - Article
-      summary: Getting all active articles
-      operationId: getAllActiveArticles
+        - Contact Request
+      summary: Getting single contact request by id
+      operationId: getContactRequestById
       responses:
         "201":
-          description: Successful retrieval of all articles.
+          description: Successful retrieval of contact request.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ArticleDTO'
-
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-  /article/{id}:
-    get:
-      tags:
-        - Article
-      summary: Getting single article by id
-      operationId: getArticleById
-      responses:
-        "201":
-          description: Successful retrieval of article.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ArticleDTO'
+                $ref: '#/components/schemas/ContactRequestDTO'
 
         "400":
           description: Bad Request
@@ -111,18 +76,94 @@ paths:
             type: integer
             minimum: 1
           in: query
-          name: Article
+          name: Request
           required: true
-          description: The article id
-  /article/{id}/delete:
-    get:
+          description: The request id
+  /request/contact/create:
+    post:
       tags:
-        - Article
-      summary: Deleting single article by id
-      operationId: deleteArticle
+        - Contact Request
+      summary: Create contact request
+      operationId: createContactRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateContactRequestDTO"
       responses:
         "201":
-          description: Successful deletion of article.
+          description: Successful creation of contact request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactRequestDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+
+  /request/application/all:
+    get:
+      tags:
+        - Application Request
+      summary: Getting all application requests
+      operationId: getAllApplicationRequests
+      responses:
+        "201":
+          description: Successful retrieval of all application requests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationRequestDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /request/application/{id}:
+    get:
+      tags:
+        - Application Request
+      summary: Getting single application request by id
+      operationId: getApplicationRequestById
+      responses:
+        "201":
+          description: Successful retrieval of application request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationRequestDTO'
+
         "400":
           description: Bad Request
           content:
@@ -146,67 +187,28 @@ paths:
             type: integer
             minimum: 1
           in: query
-          name: Article
+          name: Request
           required: true
-          description: The article id
-  /article/update:
+          description: The request id
+  /request/application/create:
     post:
       tags:
-        - Article
-      summary: Update article
-      operationId: updateArticle
+        - Application Request
+      summary: Create application request
+      operationId: createApplicationRequest
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateArticleDTO"
+              $ref: "#/components/schemas/CreateApplicationRequestDTO"
       responses:
         "201":
-          description: Successful update of article.
-        "400":
-          description: Bad Request
+          description: Successful creation of application request.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorDto"
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-      parameters:
-        - schema:
-            $ref: '#/components/schemas/ArticleDTO'
-          in: query
-          name: Updated article
-          required: true
-  /article/create:
-    post:
-      tags:
-        - Article
-      summary: Create article
-      operationId: createArticle
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateArticleDTO"
-      responses:
-        "201":
-          description: Successful creation of article.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ArticleDTO'
+                $ref: '#/components/schemas/ApplicationRequestDTO'
         "400":
           description: Bad Request
           content:
@@ -236,43 +238,87 @@ components:
           type: string
         message:
           type: string
-    ArticleDTO:
+    ContactRequestDTO:
       type: object
       properties:
         id:
           type: integer
-        date:
+        email:
           type: string
-        description:
-          type: string
-        image:
-          type: string
-        isActive:
+        isConsent:
           type: boolean
-    UpdateArticleDTO:
+        subject:
+          type: string
+        message:
+          type: string
+        isApplicationRequest:
+          type: boolean
+    CreateContactRequestDTO:
+      type: object
+      properties:
+        email:
+          type: string
+        isConsent:
+          type: boolean
+        subject:
+          type: string
+        message:
+          type: string
+        isApplicationRequest:
+          type: boolean
+    ApplicationRequestDTO:
       type: object
       properties:
         id:
           type: integer
-          required: true
-        date:
+        contactRequestId:
+          type: integer
+        playerName:
           type: string
-          required: false
+        profileUrl:
+          type: string
+        maxRank:
+          type: string
+        birthday:
+          type: string
+        countryOrigin:
+          type: string
+        appliedGame:
+          type: string
+        appliedRole:
+          type: string
         description:
           type: string
-          required: false
-        image:
+        gender:
           type: string
-          required: false
-    CreateArticleDTO:
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+    CreateApplicationRequestDTO:
       type: object
       properties:
-        date:
+        contactRequestId:
+          type: integer
+        playerName:
           type: string
-          required: true
+        profileUrl:
+          type: string
+        maxRank:
+          type: string
+        birthday:
+          type: string
+        countryOrigin:
+          type: string
+        appliedGame:
+          type: string
+        appliedRole:
+          type: string
         description:
           type: string
-          required: true
-        image:
+        gender:
           type: string
-          required: true
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
