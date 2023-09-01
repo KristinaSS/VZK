@@ -1,0 +1,279 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: News Service
+  description: API for managing articles.
+servers:
+  - url: 'http:/localhost:8080/api'
+paths:
+  /article/all:
+    get:
+      tags:
+        - Article
+      summary: Getting all articles
+      operationId: getAllArticles
+      responses:
+        "201":
+          description: Successful retrieval of all articles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArticleDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /article/all/active:
+    get:
+      tags:
+        - Article
+      summary: Getting all active articles
+      operationId: getAllActiveArticles
+      responses:
+        "201":
+          description: Successful retrieval of all articles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArticleDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /article/{id}:
+    get:
+      tags:
+        - Article
+      summary: Getting single article by id
+      operationId: getArticleById
+      responses:
+        "201":
+          description: Successful retrieval of article.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: Article
+          required: true
+          description: The article id
+  /article/{id}/delete:
+    get:
+      tags:
+        - Article
+      summary: Deleting single article by id
+      operationId: deleteArticle
+      responses:
+        "201":
+          description: Successful deletion of article.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: Article
+          required: true
+          description: The article id
+  /article/update:
+    post:
+      tags:
+        - Article
+      summary: Update article
+      operationId: updateArticle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateArticleDTO"
+      responses:
+        "201":
+          description: Successful update of article.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            $ref: '#/components/schemas/ArticleDTO'
+          in: query
+          name: Updated article
+          required: true
+  /article/create:
+    post:
+      tags:
+        - Article
+      summary: Create article
+      operationId: createArticle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateArticleDTO"
+      responses:
+        "201":
+          description: Successful creation of article.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+
+components:
+  schemas:
+    ErrorDto:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ArticleDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: false
+        date:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        isActive:
+          type: boolean
+    UpdateArticleDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: true
+        date:
+          type: string
+          required: false
+        description:
+          type: string
+          required: false
+        image:
+          type: string
+          required: false
+    CreateArticleDTO:
+      type: object
+      properties:
+        date:
+          type: string
+          required: true
+        description:
+          type: string
+          required: true
+        image:
+          type: string
+          required: true

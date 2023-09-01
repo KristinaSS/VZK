@@ -6,5 +6,6 @@ CREATE TABLE `vzk_news`.`article` (
                                       `date` VARCHAR(45) NOT NULL,
                                       `description` VARCHAR(1000) NOT NULL,
                                       `image` VARCHAR(100) NULL,
+                                      `is_active` VARCHAR(45) NOT NULL,
                                       PRIMARY KEY (`id`));
 
