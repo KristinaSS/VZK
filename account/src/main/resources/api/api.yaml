@@ -2,25 +2,25 @@ openapi: 3.0.3
 info:
   version: 1.0.0
   title: Account Service
-  description: API for managing user accounts.
+  description: API for managing account accounts.
 servers:
   - url: 'http:/localhost:8080/api'
 paths:
-  /user/all:
+  /account/all:
     get:
       tags:
         - Account
-      summary: Getting all users
-      operationId: getAllUsers
+      summary: Getting all accounts
+      operationId: getAllAccounts
       responses:
         "201":
-          description: Successful retrieval of all users.
+          description: Successful retrieval of all accounts.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UserDTO'
+                  $ref: '#/components/schemas/AccountDTO'
 
         "400":
           description: Bad Request
@@ -40,63 +40,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-  /user/{id}:
+  /account/{id}:
     get:
       tags:
         - Account
-      summary: Getting single user by id
-      operationId: getUserById
+      summary: Getting single account by id
+      operationId: getAccountById
       responses:
         "201":
-          description: Successful retrieval of user.
+          description: Successful retrieval of account.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
-
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDto"
-      parameters:
-        - schema:
-            type: number
-            minimum: 1
-          in: query
-          name: User Id
-          required: true
-          description: The account id
-
-  /user/{id}/rights:
-    get:
-      tags:
-        - Account
-      summary: Getting single user's rights by id
-      operationId: getUserRightsById
-      responses:
-        "201":
-          description: Successful retrieval of user rights.
-          content:
-            application/json:
-              schema:
-                type: string
-                enum:
-                  - ADMIN
-                  - USER
+                $ref: '#/components/schemas/AccountDTO'
 
         "400":
           description: Bad Request
@@ -118,21 +74,21 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: number
+            type: integer
             minimum: 1
           in: query
-          name: User Id
+          name: Account
           required: true
           description: The account id
-  /user/{id}/delete:
+  /account/{id}/delete:
     get:
       tags:
         - Account
-      summary: Deleting single user by id
-      operationId: deleteUser
+      summary: Deleting single account by id
+      operationId: deleteAccount
       responses:
         "201":
-          description: Successful deletion of user.
+          description: Successful deletion of account.
         "400":
           description: Bad Request
           content:
@@ -153,25 +109,25 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: number
+            type: integer
             minimum: 1
           in: query
-          name: User Id
+          name: Account
           required: true
           description: The account id
-  /user/{email}:
+  /account/{email}:
     get:
       tags:
         - Account
-      summary: Getting single user by email
-      operationId: getUserByEmail
+      summary: Getting single account by email
+      operationId: getAccountByEmail
       responses:
         "201":
-          description: Successful retrieval of user.
+          description: Successful retrieval of account.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                $ref: '#/components/schemas/AccountDTO'
 
         "400":
           description: Bad Request
@@ -195,18 +151,24 @@ paths:
         - schema:
             type: string
           in: query
-          name: User email
+          name: Account
           required: true
           description: Unique account email
-  /user/update:
-    get:
+  /account/update:
+    post:
       tags:
         - Account
-      summary: Update user
-      operationId: updateUser
+      summary: Update account
+      operationId: updateAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountDTO"
       responses:
         "201":
-          description: Successful update of user.
+          description: Successful update of account.
         "400":
           description: Bad Request
           content:
@@ -227,23 +189,96 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            $ref: '#/components/schemas/UserDTO'
+            $ref: '#/components/schemas/AccountDTO'
           in: query
-          name: Updated user
+          name: Updated account
           required: true
-  /user/create:
-    get:
+  /account/create:
+    post:
       tags:
         - Account
-      summary: Create user
-      operationId: createUser
+      summary: Create account
+      operationId: createAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAccountDTO"
       responses:
         "201":
-          description: Successful creation of user.
+          description: Successful creation of account.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                $ref: '#/components/schemas/AccountDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+
+  /player/all:
+    get:
+      tags:
+        - Player
+      summary: Getting all players
+      operationId: getAllPlayers
+      responses:
+        "201":
+          description: Successful retrieval of all players.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /player/{id}:
+    get:
+      tags:
+        - Player
+      summary: Getting single player by id
+      operationId: getPlayerById
+      responses:
+        "201":
+          description: Successful retrieval of player.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDTO'
+
         "400":
           description: Bad Request
           content:
@@ -264,10 +299,432 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            $ref: '#/components/schemas/UserDTO'
+            type: integer
+            minimum: 1
           in: query
-          name: New user
+          name: Player
           required: true
+          description: The player id
+  /player/{id}/deactivate:
+    get:
+      tags:
+        - Player
+      summary: Deactivating single player by id
+      operationId: deactivatePlayer
+      responses:
+        "201":
+          description: Successful deactivation of player.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: Player
+          required: true
+          description: The player id
+  /player/{email}:
+    get:
+      tags:
+        - Player
+      summary: Getting single player by email
+      operationId: getPlayerByEmail
+      responses:
+        "201":
+          description: Successful retrieval of player.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Player
+          required: true
+          description: Unique player email
+  /player/update:
+    post:
+      tags:
+        - Player
+      summary: Update player
+      operationId: updatePlayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePlayerDTO"
+      responses:
+        "201":
+          description: Successful update of player.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /player/create:
+    post:
+      tags:
+        - Player
+      summary: Create player
+      operationId: createPlayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlayerDTO'
+      responses:
+        "201":
+          description: Successful creation of player.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+
+  /team/all:
+    get:
+      tags:
+        - Team
+      summary: Getting all teams
+      operationId: getAllTeams
+      responses:
+        "201":
+          description: Successful retrieval of all teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /team/{id}:
+    get:
+      tags:
+        - Team
+      summary: Getting single team by id
+      operationId: getTeamById
+      responses:
+        "201":
+          description: Successful retrieval of team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: team
+          required: true
+          description: The team id
+  /team/{id}/deactivate:
+    get:
+      tags:
+        - Team
+      summary: Deactivating single team by id
+      operationId: deactivatePlayer
+      responses:
+        "201":
+          description: Successful deactivation of team.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: team
+          required: true
+          description: The team id
+  /team/update:
+    post:
+      tags:
+        - Team
+      summary: Update team
+      operationId: updateTeam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTeamDTO"
+      responses:
+        "201":
+          description: Successful update of team.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            $ref: '#/components/schemas/TeamDTO'
+          in: query
+          name: Updated team
+          required: true
+  /team/create:
+    post:
+      tags:
+        - Team
+      summary: Create team
+      operationId: createTeam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamDTO'
+      responses:
+        "201":
+          description: Successful creation of team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            $ref: '#/components/schemas/TeamDTO'
+          in: query
+          name: New team
+          required: true
+  /team/{id}/players:
+    get:
+      tags:
+        - Team
+      summary: Getting all players in team
+      operationId: getAllPlayersByTeam
+      responses:
+        "201":
+          description: Successful retrieval of all players in team.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: team
+          required: true
+          description: The team id
+  /team/all/game/{id}:
+    get:
+      tags:
+        - Team
+      summary: Getting all teams by game
+      operationId: getAllTeamsByGameId
+      responses:
+        "201":
+          description: Successful retrieval of all teams by game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: game
+          required: true
+          description: The game id
 
 components:
   schemas:
@@ -279,7 +736,7 @@ components:
           type: string
         message:
           type: string
-    UserDTO:
+    AccountDTO:
       type: object
       properties:
         id:
@@ -293,8 +750,161 @@ components:
           type: string
         isActive:
           type: boolean
-        accountType:
+    TeamDTO:
+      properties:
+        id:
+          type: integer
+          required: false
+        name:
+          type: string
+        captain:
+          type: string
+        game:
+          type: string
+    PlayerDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: false
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        isActive:
+          type: boolean
+        team:
+          $ref: '#/components/schemas/TeamDTO'
+        birthday:
+          type: string
+        countryOrigin:
+          type: string
+        image:
+          type: string
+        gender:
           type: string
           enum:
-            - ADMIN
-            - USER
+            - MALE
+            - FEMALE
+            - OTHER
+    UpdateAccountDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: true
+        name:
+          type: string
+          required: false
+        email:
+          type: string
+          required: false
+        password:
+          type: string
+          required: false
+    CreateAccountDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          required: false
+        email:
+          type: string
+          required: false
+        password:
+          type: string
+          required: false
+    UpdatePlayerDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: true
+        name:
+          type: string
+          required: false
+        email:
+          type: string
+          required: false
+        password:
+          type: string
+          required: false
+        team:
+          type: string
+          required: false
+        birthday:
+          type: string
+          required: false
+        countryOrigin:
+          type: string
+          required: false
+        image:
+          type: string
+          required: false
+        gender:
+          type: string
+          required: false
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+    CreatePlayerDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          required: true
+        email:
+          type: string
+          required: true
+        password:
+          type: string
+          required: true
+        team:
+          type: string
+          required: true
+        birthday:
+          type: string
+          required: true
+        countryOrigin:
+          type: string
+          required: true
+        image:
+          type: string
+          required: true
+        gender:
+          type: string
+          required: true
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+    UpdateTeamDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: true
+        name:
+          type: string
+          required: false
+        captain:
+          type: integer
+          required: false
+        game:
+          type: string
+          required: false
+    CreateTeamDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          required: false
+        captain:
+          type: integer
+          required: false
+        game:
+          type: string
+          required: false

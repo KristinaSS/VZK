@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import no.stelar7.api.r4j.basic.constants.types.lol.LaneType;
 
 import java.util.Date;
 
@@ -51,7 +52,7 @@ public class ApplicationRequest {
 
     @Basic
     @Column(name = "applied_role")
-    private String appliedRole;
+    private LaneType appliedRole;
 
     @Basic
     @Column(name = "applied_game")

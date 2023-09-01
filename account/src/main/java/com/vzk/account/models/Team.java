@@ -32,6 +32,10 @@ public class Team {
     @Column(name = "game")
     private Games game;
 
+    @Basic
+    @Column(name = "is_active")
+    private boolean isActive;
+
     @OneToMany(mappedBy = "team")
     private Set<AccountDetails> members;
 }

@@ -65,4 +65,8 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account_teams` (
                                                         ON DELETE NO ACTION
                                                         ON UPDATE NO ACTION);
 
-
+-- Changeset kristina:2023-08-13-alter-teams
+ALTER TABLE `vzk_accounts`.`teams`
+    ADD COLUMN `is_active` TINYINT NOT NULL AFTER `game`,
+    ADD UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE;
+;
