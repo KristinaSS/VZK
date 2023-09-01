@@ -40,6 +40,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /account/all/active:
+    get:
+      tags:
+        - Account
+      summary: Getting all active accounts
+      operationId: getAllActiveAccounts
+      responses:
+        "201":
+          description: Successful retrieval of all active accounts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
   /account/{id}:
     get:
       tags:
@@ -265,6 +299,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /player/all/active:
+    get:
+      tags:
+        - Player
+      summary: Getting all active players
+      operationId: getAllActivePlayers
+      responses:
+        "201":
+          description: Successful retrieval of all players.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
   /player/{id}:
     get:
       tags:
@@ -456,6 +524,40 @@ paths:
         - Team
       summary: Getting all teams
       operationId: getAllTeams
+      responses:
+        "201":
+          description: Successful retrieval of all teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /team/all/active:
+    get:
+      tags:
+        - Team
+      summary: Getting all active teams
+      operationId: getAllActiveTeams
       responses:
         "201":
           description: Successful retrieval of all teams.

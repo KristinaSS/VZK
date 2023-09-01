@@ -1,0 +1,328 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Event Service
+  description: API for managing events.
+servers:
+  - url: 'http:/localhost:8080/api'
+paths:
+  /event/all:
+    get:
+      tags:
+        - Event
+      summary: Getting all events
+      operationId: getAllEvents
+      responses:
+        "201":
+          description: Successful retrieval of all events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /event/all/active:
+    get:
+      tags:
+        - Event
+      summary: Getting all active events
+      operationId: getAllActiveEvents
+      responses:
+        "201":
+          description: Successful retrieval of all events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /event/{id}:
+    get:
+      tags:
+        - Event
+      summary: Getting single event by id
+      operationId: getEventById
+      responses:
+        "201":
+          description: Successful retrieval of event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: Event
+          required: true
+          description: The event id
+  /event/{id}/delete:
+    get:
+      tags:
+        - Event
+      summary: Deleting single event by id
+      operationId: deleteEvent
+      responses:
+        "201":
+          description: Successful deletion of event.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: Event
+          required: true
+          description: The event id
+  /event/update:
+    post:
+      tags:
+        - Event
+      summary: Update event
+      operationId: updateEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateEventDTO"
+      responses:
+        "201":
+          description: Successful update of event.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            $ref: '#/components/schemas/EventDTO'
+          in: query
+          name: Updated event
+          required: true
+  /event/create:
+    post:
+      tags:
+        - Event
+      summary: Create event
+      operationId: createEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEventDTO"
+      responses:
+        "201":
+          description: Successful creation of event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /event/all/date:
+    post:
+      tags:
+        - Event
+      summary: Getting all active events on date
+      operationId: getAllEvents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventDateDTO"
+      responses:
+        "201":
+          description: Successful retrieval of all active events on date.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+
+components:
+  schemas:
+    ErrorDto:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    EventDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: false
+        date:
+          type: string
+        info:
+          type: string
+        name:
+          type: string
+        isActive:
+          type: boolean
+    UpdateEventDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: true
+        date:
+          type: string
+          required: false
+        info:
+          type: string
+          required: false
+        name:
+          type: string
+          required: false
+    CreateEventDTO:
+      type: object
+      properties:
+        date:
+          type: string
+          required: true
+        info:
+          type: string
+          required: true
+        name:
+          type: string
+          required: true
+    EventDateDTO:
+      type: object
+      properties:
+        dateFrom:
+          type: string
+          required: false
+        dateTo:
+          type: string
+          required: false

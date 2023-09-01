@@ -6,4 +6,5 @@ CREATE TABLE `vzk_events`.`events` (
                                        `date` VARCHAR(45) NOT NULL,
                                        `info` VARCHAR(300) NOT NULL,
                                        `name` VARCHAR(100) NOT NULL,
-                                       PRIMARY KEY (`id`));
+                                       `is_active` TINYINT NOT NULL,
+                                           PRIMARY KEY (`id`));

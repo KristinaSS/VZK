@@ -28,4 +28,8 @@ public class Event {
     @Basic
     @Column(name = "date")
     private String date;
+
+    @Basic
+    @Column(name = "is_active")
+    private String isActive;
 }
