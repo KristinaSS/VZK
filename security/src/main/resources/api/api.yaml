@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Security Service
+  description: API for managing security.
+servers:
+  - url: 'http:/localhost:8080/api'
+paths:
+  /authentication/login:
+    get:
+      tags:
+        - Authentication
+      summary: Login
+      operationId: login
+      responses:
+        302:
+          description: Found
+  /authentication/logout:
+    get:
+      tags:
+        - Authentication
+      summary: Logout
+      operationId: logout
+      responses:
+        302:
+          description: Found
+  /authentication/userInfo:
+    get:
+      tags:
+        - Authentication
+      summary: UserInfo
+      operationId: getUserInfo
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfoDTO"
+  /token/access:
+    get:
+      tags:
+        - Token
+      summary: Access token
+      operationId: access
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /token/id:
+    get:
+      tags:
+        - Token
+      summary: Id token
+      operationId: accessId
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /token/payload:
+    get:
+      tags:
+        - Token
+      summary: Payload token
+      operationId: payload
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /authorization/authorize:
+    get:
+      tags:
+        - Authorization
+      summary: Your GET endpoint
+      operationId: authorize
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: destination
+          required: true
+          description: destination,
+components:
+  schemas:
+    ErrorDto:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    UserInfoDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        isActive:
+          type: boolean
+    PermissionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        isActive:
+          type: boolean
