@@ -22,4 +22,8 @@ public class Permission {
     @Basic
     @Column(name = "name")
     private String name;
+
+    @Basic
+    @Column(name = "is_active")
+    private String isActive;
 }

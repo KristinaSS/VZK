@@ -4,12 +4,14 @@
 CREATE TABLE `vzk_roles`.`role` (
                                     `id` INT NOT NULL AUTO_INCREMENT,
                                     `name` VARCHAR(45) NOT NULL,
+                                    `is_active` TINYINT NOT NULL,
                                     PRIMARY KEY (`id`));
 
 -- Changeset kristina:2023-08-13-create-permissions-table
 CREATE TABLE `vzk_roles`.`permissions` (
                                            `id` INT NOT NULL AUTO_INCREMENT,
                                            `name` VARCHAR(45) NOT NULL,
+                                           `is_active` TINYINT NOT NULL,
                                            PRIMARY KEY (`id`));
 
 -- Changeset kristina:2023-08-13-create-roles_permissions-table
