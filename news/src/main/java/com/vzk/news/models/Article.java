@@ -32,4 +32,8 @@ public class Article {
     @Basic
     @Column(name = "is_active")
     private boolean isActive;
+
+    @Basic
+    @Column(name = "title")
+    private String title;
 }

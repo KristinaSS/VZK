@@ -241,6 +241,8 @@ components:
       properties:
         id:
           type: integer
+        title:
+          type: string
         date:
           type: string
         description:
@@ -255,6 +257,8 @@ components:
         id:
           type: integer
           required: true
+        title:
+          type: string
         date:
           type: string
           required: false
@@ -267,6 +271,8 @@ components:
     CreateArticleDTO:
       type: object
       properties:
+        title:
+          type: string
         date:
           type: string
           required: true
