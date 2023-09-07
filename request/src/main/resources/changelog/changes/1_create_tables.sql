@@ -8,6 +8,7 @@ CREATE TABLE `vzk_request`.`contact_request` (
                                               `subject` VARCHAR(45) NOT NULL,
                                               `message` VARCHAR(45) NOT NULL,
                                               `is_application_request` TINYINT NOT NULL,
+                                              `date_created` VARCHAR(45) NOT NULL,
                                               PRIMARY KEY (`id`));
 
 -- Changeset kristina:2023-08-13-create-application_request-table

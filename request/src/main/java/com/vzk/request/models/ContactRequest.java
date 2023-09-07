@@ -1,13 +1,13 @@
 package com.vzk.request.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "contact_request")
@@ -23,7 +23,7 @@ public class ContactRequest {
 
     @Basic
     @Column(name = "is_consent")
-    private boolean is_consent;
+    private boolean isConsent;
 
     @Basic
     @Column(name = "subject")
@@ -36,4 +36,8 @@ public class ContactRequest {
     @Basic
     @Column(name = "is_application_request")
     private boolean isApplicationRequest;
+
+    @Basic
+    @Column(name = "date_created")
+    private LocalDateTime timeCreated;
 }

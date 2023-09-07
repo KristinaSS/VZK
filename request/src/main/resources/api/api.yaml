@@ -253,6 +253,8 @@ components:
           type: string
         isApplicationRequest:
           type: boolean
+        timeCreated:
+          type: string
     CreateContactRequestDTO:
       type: object
       properties:
@@ -266,6 +268,8 @@ components:
           type: string
         isApplicationRequest:
           type: boolean
+        timeCreated:
+          type: string
     ApplicationRequestDTO:
       type: object
       properties:
