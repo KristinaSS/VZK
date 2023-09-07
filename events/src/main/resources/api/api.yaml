@@ -230,7 +230,7 @@ paths:
       tags:
         - Event
       summary: Getting all active events on date
-      operationId: getAllEvents
+      operationId: getAllEventsByDate
       requestBody:
         required: true
         content:
