@@ -221,12 +221,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-      parameters:
-        - schema:
-            $ref: '#/components/schemas/AccountDTO'
-          in: query
-          name: Updated account
-          required: true
   /account/create:
     post:
       tags:
@@ -858,9 +852,11 @@ components:
         name:
           type: string
         captain:
-          type: string
+          type: integer
         game:
           type: string
+        isActive:
+          type: boolean
     PlayerDTO:
       type: object
       properties:
@@ -875,7 +871,8 @@ components:
         isActive:
           type: boolean
         team:
-          $ref: '#/components/schemas/TeamDTO'
+          type: integer
+          required: false
         birthday:
           type: string
         countryOrigin:
@@ -931,7 +928,7 @@ components:
           type: string
           required: false
         team:
-          type: string
+          type: integer
           required: false
         birthday:
           type: string
@@ -962,8 +959,8 @@ components:
           type: string
           required: true
         team:
-          type: string
-          required: true
+          type: integer
+          required: false
         birthday:
           type: string
           required: true

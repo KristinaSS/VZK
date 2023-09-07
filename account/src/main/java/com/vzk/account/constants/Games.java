@@ -9,4 +9,18 @@ public enum Games {
     Games(String label) {
         this.label = label;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public static Games findGame(String game){
+        switch (game){
+            case "League of Legends":
+                return LEAGUE_OF_LEGENDS;
+            case  "Valorant":
+                return VALORANT;
+        }
+        return null;
+    }
 }
