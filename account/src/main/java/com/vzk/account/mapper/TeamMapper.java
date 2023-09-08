@@ -2,6 +2,8 @@ package com.vzk.account.mapper;
 
 import com.vzk.account.models.Account;
 import com.vzk.account.models.Team;
+import com.vzk.account.services.AccountService;
+import com.vzk.account.services.impl.AccountServiceImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -9,6 +11,8 @@ import org.mapstruct.factory.Mappers;
 import org.openapitools.model.TeamDTO;
 import org.openapitools.model.UpdateTeamDTO;
 import org.openapitools.model.CreateTeamDTO;
+
+import static com.vzk.account.mapper.AccountMapper.ACCOUNT_MAPPER;
 
 @Mapper
 public interface TeamMapper {
@@ -41,7 +45,7 @@ public interface TeamMapper {
 
     @Named("mapCaptain")
     default Account mapCaptain(int captainId) {
-        //todo add mapping logic
-        return Account.builder().build();
+        AccountService accountService = new AccountServiceImpl();
+        return ACCOUNT_MAPPER.mapToModel(accountService.getAccountById(captainId));
     }
 }

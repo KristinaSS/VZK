@@ -1,10 +1,10 @@
 package com.vzk.account.models;
 
-import com.vzk.account.constants.Games;
+import com.vzk.account.constants.Game;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,12 +28,12 @@ public class Team {
 
     @Basic
     @Column(name = "game")
-    private Games game;
+    private Game game;
 
     @Basic
     @Column(name = "is_active")
     private boolean isActive;
 
     @OneToMany(mappedBy = "team")
-    private Set<AccountDetails> members;
+    private List<AccountDetails> members;
 }

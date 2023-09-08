@@ -625,7 +625,7 @@ paths:
       tags:
         - Team
       summary: Deactivating single team by id
-      operationId: deactivatePlayer
+      operationId: deactivateTeam
       responses:
         "201":
           description: Successful deactivation of team.
@@ -688,12 +688,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-      parameters:
-        - schema:
-            $ref: '#/components/schemas/TeamDTO'
-          in: query
-          name: Updated team
-          required: true
   /team/create:
     post:
       tags:
@@ -731,12 +725,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-      parameters:
-        - schema:
-            $ref: '#/components/schemas/TeamDTO'
-          in: query
-          name: New team
-          required: true
   /team/{id}/players:
     get:
       tags:
@@ -779,12 +767,12 @@ paths:
           name: team
           required: true
           description: The team id
-  /team/all/game/{id}:
+  /team/all/game/{name}:
     get:
       tags:
         - Team
       summary: Getting all teams by game
-      operationId: getAllTeamsByGameId
+      operationId: getAllTeamsByGame
       responses:
         "201":
           description: Successful retrieval of all teams by game.
@@ -815,13 +803,11 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
           in: query
           name: game
           required: true
-          description: The game id
-
+          description: The game name
 components:
   schemas:
     ErrorDto:
@@ -877,6 +863,9 @@ components:
           type: string
         countryOrigin:
           type: string
+        playerName:
+          type: string
+          required: true
         image:
           type: string
         gender:
@@ -939,6 +928,9 @@ components:
         image:
           type: string
           required: false
+        playerName:
+          type: string
+          required: true
         gender:
           type: string
           required: false
@@ -949,13 +941,7 @@ components:
     CreatePlayerDTO:
       type: object
       properties:
-        name:
-          type: string
-          required: true
         email:
-          type: string
-          required: true
-        password:
           type: string
           required: true
         team:
@@ -968,6 +954,9 @@ components:
           type: string
           required: true
         image:
+          type: string
+          required: true
+        playerName:
           type: string
           required: true
         gender:

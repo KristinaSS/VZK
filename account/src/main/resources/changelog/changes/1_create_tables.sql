@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`account_details` (
                                                   `country_origin` varchar(45) NOT NULL,
                                                   `image` varchar(200) DEFAULT NULL,
                                                   `gender` char(1) NOT NULL,
+                                                  `player_name` VARCHAR(100) NOT NULL,
                                                   PRIMARY KEY (`id`),
                                                   KEY `ac_de_tm_fk_idx` (`team`),
                                                   CONSTRAINT `ac_de_acc_fk` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`),
@@ -70,3 +71,13 @@ ALTER TABLE `vzk_accounts`.`teams`
     ADD COLUMN `is_active` TINYINT NOT NULL AFTER `game`,
     ADD UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE;
 ;
+
+-- Changeset kristina:2023-08-13-alter-account-details
+ALTER TABLE `vzk_accounts`.`account_details`
+    DROP FOREIGN KEY `ac_de_tm_fk`;
+ALTER TABLE `vzk_accounts`.`account_details`
+    CHANGE COLUMN `team` `team` INT NULL ;
+ALTER TABLE `vzk_accounts`.`account_details`
+    ADD CONSTRAINT `ac_de_tm_fk`
+        FOREIGN KEY (`team`)
+            REFERENCES `vzk_accounts`.`teams` (`id`);

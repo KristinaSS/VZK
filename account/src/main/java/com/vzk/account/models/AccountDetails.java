@@ -37,6 +37,10 @@ public class AccountDetails{
     private Gender gender;
 
     @Basic
+    @Column(name = "player_name")
+    private Gender playerName;
+
+    @Basic
     @Column(name = "image")
     private String image;
 }
