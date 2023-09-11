@@ -34,6 +34,7 @@ public class PlayerServiceImpl implements PlayerService {
     public PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO) {
         AccountDetails createdPlayer = PLAYER_MAPPER.mapToModel(createPlayerDTO);
         Account linkedAccount = accountRepository.findAccountByEmail(createPlayerDTO.getEmail());
+        linkedAccount.setActive(true);
 
         //check if account exists
         verifyAccountExists(linkedAccount, createPlayerDTO.getEmail());

@@ -1,15 +1,13 @@
 package com.vzk.roles.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "permissions")
@@ -25,5 +23,5 @@ public class Permission {
 
     @Basic
     @Column(name = "is_active")
-    private String isActive;
+    private boolean isActive;
 }

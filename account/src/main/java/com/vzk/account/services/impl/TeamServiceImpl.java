@@ -33,6 +33,7 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamDTO createTeam(CreateTeamDTO createTeamDTO) {
         Team createdTeam = TEAM_MAPPER.mapToModel(createTeamDTO);
+        createdTeam.setActive(true);
 
         //check if name available
         verifyNameUnique(createdTeam.getName());

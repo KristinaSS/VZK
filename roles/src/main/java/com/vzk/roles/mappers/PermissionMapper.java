@@ -8,7 +8,7 @@ import org.openapitools.model.PermissionDTO;
 
 @Mapper
 public interface PermissionMapper {
-    PermissionMapper ROLE_MAPPER = Mappers.getMapper(PermissionMapper.class);
+    PermissionMapper PERMISSION_MAPPER = Mappers.getMapper(PermissionMapper.class);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")

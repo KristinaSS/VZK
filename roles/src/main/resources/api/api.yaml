@@ -109,7 +109,7 @@ paths:
             type: integer
             minimum: 1
           in: query
-          name: Request
+          name: roleId
           required: true
           description: The id
   /role/create:
@@ -117,7 +117,7 @@ paths:
       tags:
         - Roles
       summary: Create role
-      operationId: createContactRequest
+      operationId: createRole
       requestBody:
         required: true
         content:
@@ -288,7 +288,7 @@ paths:
             type: integer
             minimum: 1
           in: query
-          name: Request
+          name: permissionId
           required: true
           description: The id
   /permission/create:
@@ -333,10 +333,10 @@ paths:
       tags:
         - Permissions
       summary: Deleting single permission by id
-      operationId: deleteRole
+      operationId: deletePermission
       responses:
         "201":
-          description: Successful deletion of role.
+          description: Successful deletion of permission.
         "400":
           description: Bad Request
           content:
@@ -360,9 +360,9 @@ paths:
             type: integer
             minimum: 1
           in: query
-          name: Article
+          name: Permission
           required: true
-          description: The article id
+          description: The permission id
 
 components:
   schemas:

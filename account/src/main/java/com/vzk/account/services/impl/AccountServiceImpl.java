@@ -27,6 +27,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDTO createAccount(CreateAccountDTO createAccountDTO) {
         Account createdAccount = ACCOUNT_MAPPER.mapToModel(createAccountDTO);
+        createdAccount.setActive(true);
 
         //check if email available
         verifyEmailUnique(createdAccount.getEmail());
