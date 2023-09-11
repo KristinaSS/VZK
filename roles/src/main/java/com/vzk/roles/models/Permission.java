@@ -3,8 +3,6 @@ package com.vzk.roles.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @Builder

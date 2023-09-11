@@ -5,8 +5,6 @@ import com.vzk.account.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.account.exceptions.EntityNotFoundException;
 import com.vzk.account.exceptions.TeamNameUnavailableException;
 import com.vzk.account.models.Team;
-import com.vzk.account.repos.AccountDetailsRepository;
-import com.vzk.account.repos.AccountRepository;
 import com.vzk.account.repos.TeamRepository;
 import com.vzk.account.services.TeamService;
 import org.openapitools.model.CreateTeamDTO;
@@ -65,7 +63,7 @@ public class TeamServiceImpl implements TeamService {
     public List<PlayerDTO> getAllPlayersByTeam(int teamId) {
         Team team = findTeam(teamId);
         return team.getMembers().stream()
-                .map(player-> PLAYER_MAPPER.mapToDTO(player.getAccount(), player))
+                .map(player -> PLAYER_MAPPER.mapToDTO(player.getAccount(), player))
                 .collect(Collectors.toList());
     }
 
@@ -101,7 +99,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     private void verifyNameUnique(String name) {
-        if(teamRepository.existsByName(name)){
+        if (teamRepository.existsByName(name)) {
             throw new TeamNameUnavailableException(name);
         }
     }
@@ -112,7 +110,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     private void verifyIfTeamActive(Team team) {
-        if(!team.isActive()){
+        if (!team.isActive()) {
             throw new EntityAlreadyDeactivatedException(ENTITY, team.getId());
         }
     }
