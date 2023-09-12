@@ -2,12 +2,18 @@ package com.vzk.request.mappers;
 
 import com.vzk.request.models.ApplicationRequest;
 import com.vzk.request.models.ContactRequest;
+import com.vzk.request.services.ApplicationRequestService;
+import com.vzk.request.services.ContactRequestService;
+import com.vzk.request.services.impl.ApplicationRequestServiceImpl;
+import com.vzk.request.services.impl.ContactRequestImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import org.openapitools.model.ApplicationRequestDTO;
 import org.openapitools.model.CreateApplicationRequestDTO;
+
+import static com.vzk.request.mappers.ContactRequestMapper.CONTACT_REQUEST_MAPPER;
 
 @Mapper
 public interface ApplicationRequestMapper {
@@ -29,7 +35,7 @@ public interface ApplicationRequestMapper {
     ApplicationRequestDTO mapToDTO(ApplicationRequest applicationRequest);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "contactRequestId", target = "contactRequest", qualifiedByName = "mapCaptain")
+    @Mapping(source = "contactRequestId", target = "contactRequest", qualifiedByName = "mapRequest")
     @Mapping(source = "playerName", target = "playerName")
     @Mapping(source = "profileUrl", target = "profileURL")
     @Mapping(source = "maxRank", target = "maxRank")
@@ -41,7 +47,7 @@ public interface ApplicationRequestMapper {
     @Mapping(source = "gender", target = "gender")
     ApplicationRequest mapToModel(ApplicationRequestDTO applicationRequestDTO);
 
-    @Mapping(source = "contactRequestId", target = "contactRequest", qualifiedByName = "mapCaptain")
+    @Mapping(source = "contactRequestId", target = "contactRequest", qualifiedByName = "mapRequest")
     @Mapping(source = "playerName", target = "playerName")
     @Mapping(source = "profileUrl", target = "profileURL")
     @Mapping(source = "maxRank", target = "maxRank")
@@ -53,9 +59,9 @@ public interface ApplicationRequestMapper {
     @Mapping(source = "gender", target = "gender")
     ApplicationRequest mapToModel(CreateApplicationRequestDTO createApplicationRequestDTO);
 
-    @Named("mapCaptain")
+    @Named("mapRequest")
     default ContactRequest mapRequest(int requestId) {
-        //todo add mapping logic
-        return ContactRequest.builder().build();
+        ContactRequestService contactRequestService = new ContactRequestImpl();
+        return  CONTACT_REQUEST_MAPPER.mapToModel(contactRequestService.getContactRequestById(requestId));
     }
 }
