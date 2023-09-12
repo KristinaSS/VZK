@@ -2,9 +2,7 @@ package com.vzk.request.mappers;
 
 import com.vzk.request.models.ApplicationRequest;
 import com.vzk.request.models.ContactRequest;
-import com.vzk.request.services.ApplicationRequestService;
 import com.vzk.request.services.ContactRequestService;
-import com.vzk.request.services.impl.ApplicationRequestServiceImpl;
 import com.vzk.request.services.impl.ContactRequestImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -62,6 +60,6 @@ public interface ApplicationRequestMapper {
     @Named("mapRequest")
     default ContactRequest mapRequest(int requestId) {
         ContactRequestService contactRequestService = new ContactRequestImpl();
-        return  CONTACT_REQUEST_MAPPER.mapToModel(contactRequestService.getContactRequestById(requestId));
+        return CONTACT_REQUEST_MAPPER.mapToModel(contactRequestService.getContactRequestById(requestId));
     }
 }
