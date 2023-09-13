@@ -1,15 +1,13 @@
 package com.vzk.roles.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
@@ -20,5 +18,5 @@ public class RoleAccountID  implements Serializable {
 
     @Basic
     @Column(name = "account_id")
-    private String name;
+    private String accountId;
 }

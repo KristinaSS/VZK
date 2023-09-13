@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   version: 1.0.0
   title: Roles Service
-  description: API for managing roles and permissions. 
+  description: API for managing roles and permissions.
 servers:
   - url: 'http:/localhost:8080/api'
 paths:
@@ -184,6 +184,129 @@ paths:
           name: Article
           required: true
           description: The article id
+  /role/{id}/permissions:
+    get:
+      tags:
+        - Roles
+      summary: Getting permissions by id
+      operationId: getPermissionsByRoleId
+      responses:
+        "201":
+          description: Successful retrieval of all roles.
+          content:
+            permission/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PermissionDTO'
+        "400":
+          description: Bad Request
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: roleId
+          required: true
+          description: The id
+  /role/{id}/addPermission:
+    get:
+      tags:
+        - Roles
+      summary: Give account role
+      operationId: giveAccountRole
+      requestBody:
+        required: true
+        content:
+          permission/json:
+            schema:
+              type: integer
+      responses:
+        "201":
+          description: Successful.
+        "400":
+          description: Bad Request
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: roleId
+          required: true
+          description: roleId
+  /role/{id}/deletePermission:
+    get:
+      tags:
+        - Roles
+      summary: Delete permission role
+      operationId: deletePermissionToRole
+      requestBody:
+        required: true
+        content:
+          permission/json:
+            schema:
+              type: integer
+      responses:
+        "201":
+          description: Successful.
+        "400":
+          description: Bad Request
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: roleId
+          required: true
+          description: roleId
 
   /permission/all:
     get:
@@ -364,6 +487,129 @@ paths:
           required: true
           description: The permission id
 
+  /role/account/{id}:
+    get:
+      tags:
+        - Account
+      summary: Getting roles of an account
+      operationId: getRolesByAccountId
+      responses:
+        "201":
+          description: Successful retrieval of roles of account.
+          content:
+            permission/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleDTO'
+        "400":
+          description: Bad Request
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: accountId
+          required: true
+          description: The id
+  /role/account/{id}/role:
+    get:
+      tags:
+        - Account
+      summary: Give account role
+      operationId: giveAccountRole
+      requestBody:
+        required: true
+        content:
+          permission/json:
+            schema:
+              type: integer
+      responses:
+        "201":
+          description: Successful.
+        "400":
+          description: Bad Request
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: accountId
+          required: true
+          description: accountId
+  /role/account/{id}/delete:
+    get:
+      tags:
+        - Account
+      summary: Delete account role
+      operationId: deleteAccountRole
+      requestBody:
+        required: true
+        content:
+          permission/json:
+            schema:
+              type: integer
+      responses:
+        "201":
+          description: Successful.
+        "400":
+          description: Bad Request
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            permission/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: accountId
+          required: true
+          description: accountId
 components:
   schemas:
     ErrorDto:
