@@ -182,12 +182,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-      parameters:
-        - schema:
-            $ref: '#/components/schemas/EventDTO'
-          in: query
-          name: Updated event
-          required: true
   /event/create:
     post:
       tags:

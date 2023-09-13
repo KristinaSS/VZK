@@ -12,7 +12,7 @@ public interface PermissionMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
-    @Mapping(source = "isActive", target = "isActive")
+    @Mapping(source = "active", target = "isActive")
     PermissionDTO mapToDTO(Permission permission);
 
     @Mapping(source = "id", target = "id")

@@ -15,14 +15,14 @@ public interface EventMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "info", target = "info")
     @Mapping(source = "date", target = "date")
-    @Mapping(source = "isActive", target = "isActive")
+    @Mapping(source = "active", target = "isActive")
     EventDTO mapToDTO(Event event);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "info", target = "info")
     @Mapping(source = "date", target = "date")
-    @Mapping(source = "isActive", target = "isActive")
+    @Mapping(source = "isActive", target = "active")
     Event mapToModel(EventDTO eventDTO);
 
     @Mapping(source = "id", target = "id")

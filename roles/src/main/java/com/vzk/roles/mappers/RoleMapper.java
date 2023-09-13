@@ -12,7 +12,7 @@ public interface RoleMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
-    @Mapping(source = "isActive", target = "isActive")
+    @Mapping(source = "active", target = "isActive")
     RoleDTO mapToDTO(Role role);
 
     @Mapping(source = "id", target = "id")

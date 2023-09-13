@@ -86,6 +86,7 @@ public class AccountServiceImpl implements AccountService {
         //check if email available
         verifyEmailUnique(checkedAccount.getEmail());
 
+        account.setActive(true);
         accountRepository.save(account);
     }
 

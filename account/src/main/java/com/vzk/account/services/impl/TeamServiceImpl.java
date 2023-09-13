@@ -95,6 +95,7 @@ public class TeamServiceImpl implements TeamService {
         //check if name available
         verifyNameUnique(team.getName());
 
+        team.setActive(true);
         teamRepository.save(team);
     }
 

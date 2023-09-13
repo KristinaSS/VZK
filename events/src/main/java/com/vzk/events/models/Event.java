@@ -31,5 +31,5 @@ public class Event {
 
     @Basic
     @Column(name = "is_active")
-    private String isActive;
+    private boolean isActive;
 }
