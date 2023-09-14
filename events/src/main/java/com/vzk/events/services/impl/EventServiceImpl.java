@@ -1,5 +1,6 @@
 package com.vzk.events.services.impl;
 
+import com.vzk.events.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.events.exceptions.EntityNotFoundException;
 import com.vzk.events.models.Event;
 import com.vzk.events.repos.EventRepository;
@@ -34,6 +35,9 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEvent(int id) {
         Event event = eventRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ENTITY, "id", "" + id));
+
+        verifyIfArticleActive(event);
+
         event.setActive(false);
         eventRepository.save(event);
     }
@@ -80,5 +84,11 @@ public class EventServiceImpl implements EventService {
         LocalDateTime toTime = LocalDateTime.parse(dateDTO.getDateTo());
 
         return (eventTime.isEqual(fromTime) || eventTime.isAfter(fromTime)) && (eventTime.isEqual(toTime) || eventTime.isBefore(toTime));
+    }
+
+    private void verifyIfArticleActive(Event event) {
+        if (!event.isActive()) {
+            throw new EntityAlreadyDeactivatedException(ENTITY, event.getId());
+        }
     }
 }

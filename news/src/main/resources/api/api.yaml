@@ -182,12 +182,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-      parameters:
-        - schema:
-            $ref: '#/components/schemas/ArticleDTO'
-          in: query
-          name: Updated article
-          required: true
   /article/create:
     post:
       tags:

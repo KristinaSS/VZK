@@ -1,4 +1,4 @@
-package com.vzk.events.exceptions;
+package com.vzk.news.exceptions;
 
 import org.openapitools.model.ErrorDto;
 import org.springframework.http.HttpStatus;
