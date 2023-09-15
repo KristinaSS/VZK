@@ -106,8 +106,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: roleId
           required: true
@@ -178,8 +178,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: Article
           required: true
@@ -219,8 +219,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: roleId
           required: true
@@ -236,7 +236,8 @@ paths:
         content:
           permission/json:
             schema:
-              type: integer
+              type: string
+              format: uuid
       responses:
         "201":
           description: Successful.
@@ -260,8 +261,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: roleId
           required: true
@@ -277,7 +278,8 @@ paths:
         content:
           permission/json:
             schema:
-              type: integer
+              type: string
+              format: uuid
       responses:
         "201":
           description: Successful.
@@ -301,8 +303,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: roleId
           required: true
@@ -408,8 +410,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: permissionId
           required: true
@@ -480,8 +482,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: Permission
           required: true
@@ -522,8 +524,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: accountId
           required: true
@@ -539,7 +541,8 @@ paths:
         content:
           permission/json:
             schema:
-              type: integer
+              type: string
+              format: uuid
       responses:
         "201":
           description: Successful.
@@ -563,8 +566,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: accountId
           required: true
@@ -580,7 +583,8 @@ paths:
         content:
           permission/json:
             schema:
-              type: integer
+              type: string
+              format: uuid
       responses:
         "201":
           description: Successful.
@@ -604,8 +608,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: accountId
           required: true
@@ -624,7 +628,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
         name:
           type: string
         isActive:
@@ -633,7 +638,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
         name:
           type: string
         isActive:

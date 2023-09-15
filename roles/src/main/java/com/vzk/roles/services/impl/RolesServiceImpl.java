@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.roles.mappers.PermissionMapper.PERMISSION_MAPPER;
@@ -46,7 +47,7 @@ public class RolesServiceImpl implements RolesService {
     }
 
     @Override
-    public void deleteRole(int id) {
+    public void deleteRole(UUID id) {
         Role role = findRole(id);
 
         if (!role.isActive()) {
@@ -73,18 +74,18 @@ public class RolesServiceImpl implements RolesService {
     }
 
     @Override
-    public RoleDTO getRoleById(int id) {
+    public RoleDTO getRoleById(UUID id) {
         Role role = findRole(id);
         return ROLE_MAPPER.mapToDTO(role);
     }
 
     @Override
-    public void giveAccountRole(Integer roleId, Integer permissionsId) {
+    public void giveAccountRole(UUID roleId, UUID permissionsId) {
         rolePermissionRepository.save(buildRolePermission(roleId, permissionsId));
     }
 
     @Override
-    public List<PermissionDTO> getPermissionsByRoleId(Integer roleId) {
+    public List<PermissionDTO> getPermissionsByRoleId(UUID roleId) {
         return rolePermissionRepository.findAll().stream()
                 .filter(rolePermission -> rolePermission.getRolePermissionID().getRole().getId() == roleId)
                 .map(rolePermission -> PERMISSION_MAPPER.mapToDTO(rolePermission.getRolePermissionID().getPermission()))
@@ -92,11 +93,11 @@ public class RolesServiceImpl implements RolesService {
     }
 
     @Override
-    public void deletePermissionToRole(Integer roleId, Integer permissionId) {
+    public void deletePermissionToRole(UUID roleId, UUID permissionId) {
         rolePermissionRepository.delete(buildRolePermission(roleId, permissionId));
     }
 
-    private Role findRole(int id) {
+    private Role findRole(UUID id) {
         return roleRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }
@@ -111,7 +112,7 @@ public class RolesServiceImpl implements RolesService {
         );
     }
 
-    private RolePermission buildRolePermission(int roleId, int permissionId){
+    private RolePermission buildRolePermission(UUID roleId, UUID permissionId){
         Role role = findRole(roleId);
         PermissionDTO permissionDTO = permissionService.getPermissionById(permissionId);
         Permission permission = PERMISSION_MAPPER.mapToModel(permissionDTO);

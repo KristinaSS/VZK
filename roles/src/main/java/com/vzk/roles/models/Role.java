@@ -3,6 +3,8 @@ package com.vzk.roles.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
@@ -13,7 +15,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private UUID id;
 
     @Basic
     @Column(name = "name")

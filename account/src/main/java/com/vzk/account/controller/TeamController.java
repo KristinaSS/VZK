@@ -23,7 +23,7 @@ public class TeamController implements TeamApi {
     }
 
     @Override
-    public ResponseEntity<Void> deactivateTeam(Integer team) {
+    public ResponseEntity<Void> deactivateTeam(String team) {
         teamService.deactivateTeam(team);
         return ResponseEntity.ok(null);
     }
@@ -34,7 +34,7 @@ public class TeamController implements TeamApi {
     }
 
     @Override
-    public ResponseEntity<List<PlayerDTO>> getAllPlayersByTeam(Integer team) {
+    public ResponseEntity<List<PlayerDTO>> getAllPlayersByTeam(String team) {
         return ResponseEntity.ok(teamService.getAllPlayersByTeam(team));
     }
 
@@ -49,7 +49,7 @@ public class TeamController implements TeamApi {
     }
 
     @Override
-    public ResponseEntity<TeamDTO> getTeamById(Integer team) {
+    public ResponseEntity<TeamDTO> getTeamById(String team) {
         return ResponseEntity.ok(teamService.getTeamById(team));
     }
 

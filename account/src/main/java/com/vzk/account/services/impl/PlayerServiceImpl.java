@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.account.mapper.PlayerMapper.PLAYER_MAPPER;
@@ -48,7 +49,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void deletePlayer(int id) {
+    public void deletePlayer(String id) {
         AccountDetails accountDetails = findPlayer(id);
 
         //verify if deactivated
@@ -70,7 +71,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public PlayerDTO getPlayerById(int id) {
+    public PlayerDTO getPlayerById(String id) {
         AccountDetails accountDetails = findPlayer(id);
 
         return PLAYER_MAPPER.mapToDTO(accountDetails.getAccount(), accountDetails);
@@ -100,14 +101,14 @@ public class PlayerServiceImpl implements PlayerService {
         verifyAccountExists(linkedAccount, updatePlayerDTO.getEmail());
 
         //check no diff in email
-        verifyEmail(updatePlayerDTO.getEmail(), updatePlayerDTO.getId());
+        verifyEmail(updatePlayerDTO.getEmail(), updatePlayerDTO.getId().toString());
 
         accountDetailsRepository.save(updatedPlayer);
     }
 
-    private AccountDetails findPlayer(int id) {
-        return accountDetailsRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(ENTITY, "id", "" + id));
+    private AccountDetails findPlayer(String id) {
+        return accountDetailsRepository.findById(UUID.fromString(id)).orElseThrow(
+                () -> new EntityNotFoundException(ENTITY, "id", id));
     }
 
     private AccountDetails findPlayer(Account account, String email) {
@@ -126,11 +127,11 @@ public class PlayerServiceImpl implements PlayerService {
 
     private void verifyNoPlayerWithAccountExists(Account account) {
         if (accountDetailsRepository.existsAccountDetailsByAccount(account)) {
-            throw new PlayerAlreadyExists(account.getId());
+            throw new PlayerAlreadyExists(account.getId().toString());
         }
     }
 
-    private void verifyEmail(String email, int id) {
+    private void verifyEmail(String email, String id) {
         AccountDetails oldPlayer = findPlayer(id);
         if (!oldPlayer.getAccount().getEmail().equals(email)) {
             throw new InvalidUpdatePlayerException(email);
@@ -139,7 +140,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     private void verifyIfPlayerActive(AccountDetails accountDetails) {
         if (accountDetails.getTeam() == null) {
-            throw new EntityAlreadyDeactivatedException(ENTITY, accountDetails.getId());
+            throw new EntityAlreadyDeactivatedException(ENTITY, accountDetails.getId().toString());
         }
     }
 }

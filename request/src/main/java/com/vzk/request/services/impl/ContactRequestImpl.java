@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.request.mappers.ContactRequestMapper.CONTACT_REQUEST_MAPPER;
@@ -36,7 +37,7 @@ public class ContactRequestImpl implements ContactRequestService {
     }
 
     @Override
-    public ContactRequestDTO getContactRequestById(int id) {
+    public ContactRequestDTO getContactRequestById(UUID id) {
         ContactRequest contactRequest = contactRequestRepository.findById(id)
                 .orElseThrow(()-> new EntityNotFoundException(ENTITY, "id", ""+id));
 

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.account.mapper.PlayerMapper.PLAYER_MAPPER;
@@ -41,7 +42,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void deactivateTeam(int id) {
+    public void deactivateTeam(String id) {
         Team team = findTeam(id);
 
         //verify if deactivated
@@ -60,7 +61,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public List<PlayerDTO> getAllPlayersByTeam(int teamId) {
+    public List<PlayerDTO> getAllPlayersByTeam(String teamId) {
         Team team = findTeam(teamId);
         return team.getMembers().stream()
                 .map(player -> PLAYER_MAPPER.mapToDTO(player.getAccount(), player))
@@ -83,7 +84,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public TeamDTO getTeamById(int teamId) {
+    public TeamDTO getTeamById(String teamId) {
         Team team = findTeam(teamId);
         return TEAM_MAPPER.mapToDTO(team);
     }
@@ -105,14 +106,14 @@ public class TeamServiceImpl implements TeamService {
         }
     }
 
-    private Team findTeam(int id) {
-        return teamRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(ENTITY, "id", "" + id));
+    private Team findTeam(String id) {
+        return teamRepository.findById(UUID.fromString(id)).orElseThrow(
+                () -> new EntityNotFoundException(ENTITY, "id", id));
     }
 
     private void verifyIfTeamActive(Team team) {
         if (!team.isActive()) {
-            throw new EntityAlreadyDeactivatedException(ENTITY, team.getId());
+            throw new EntityAlreadyDeactivatedException(ENTITY, team.getId().toString());
         }
     }
 }

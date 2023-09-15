@@ -108,8 +108,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: Article
           required: true
@@ -143,8 +143,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: Article
           required: true
@@ -234,7 +234,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
         title:
           type: string
         date:
@@ -249,7 +250,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           required: true
         title:
           type: string

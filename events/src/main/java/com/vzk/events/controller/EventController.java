@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class EventController implements EventApi {
@@ -24,7 +25,7 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteEvent(Integer event) {
+    public ResponseEntity<Void> deleteEvent(UUID event) {
         eventService.deleteEvent(event);
         return ResponseEntity.ok(null);
     }
@@ -45,7 +46,7 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<EventDTO> getEventById(Integer event) {
+    public ResponseEntity<EventDTO> getEventById(UUID event) {
         return ResponseEntity.ok(eventService.getEventById(event));
     }
 

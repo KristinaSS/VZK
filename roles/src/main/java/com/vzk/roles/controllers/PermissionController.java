@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class PermissionController implements PermissionsApi {
@@ -19,7 +20,7 @@ public class PermissionController implements PermissionsApi {
     }
 
     @Override
-    public ResponseEntity<Void> deletePermission(Integer permission) {
+    public ResponseEntity<Void> deletePermission(UUID permission) {
         permissionService.deletePermission(permission);
         return ResponseEntity.ok(null);
     }
@@ -35,7 +36,7 @@ public class PermissionController implements PermissionsApi {
     }
 
     @Override
-    public ResponseEntity<PermissionDTO> getPermissionById(Integer permissionId) {
+    public ResponseEntity<PermissionDTO> getPermissionById(UUID permissionId) {
         return ResponseEntity.ok(permissionService.getPermissionById(permissionId));
     }
 }

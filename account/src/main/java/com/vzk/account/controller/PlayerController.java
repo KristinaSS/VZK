@@ -24,7 +24,7 @@ public class PlayerController implements PlayerApi {
     }
 
     @Override
-    public ResponseEntity<Void> deactivatePlayer(Integer player) {
+    public ResponseEntity<Void> deactivatePlayer(String player) {
         playerService.deletePlayer(player);
         return ResponseEntity.ok(null);
     }
@@ -45,7 +45,7 @@ public class PlayerController implements PlayerApi {
     }
 
     @Override
-    public ResponseEntity<PlayerDTO> getPlayerById(Integer player) {
+    public ResponseEntity<PlayerDTO> getPlayerById(String player) {
         return ResponseEntity.ok(playerService.getPlayerById(player));
     }
 

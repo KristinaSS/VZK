@@ -10,17 +10,17 @@ import java.util.List;
 public interface TeamService {
     TeamDTO createTeam(CreateTeamDTO createTeamDTO);
 
-    void deactivateTeam(int id);
+    void deactivateTeam(String id);
 
     List<TeamDTO> getAllActiveTeams();
 
-    List<PlayerDTO> getAllPlayersByTeam(int teamId);
+    List<PlayerDTO> getAllPlayersByTeam(String teamId);
 
     List<TeamDTO> getAllTeams();
 
     List<TeamDTO> getAllTeamsByGame(String game);
 
-    TeamDTO getTeamById(int teamId);
+    TeamDTO getTeamById(String teamId);
 
     void updateTeam(UpdateTeamDTO updateTeamDTO);
 }

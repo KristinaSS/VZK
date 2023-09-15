@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class RoleController implements RolesApi {
@@ -20,13 +21,13 @@ public class RoleController implements RolesApi {
     }
 
     @Override
-    public ResponseEntity<Void> deletePermissionToRole(Integer roleId, Integer permissionId) {
+    public ResponseEntity<Void> deletePermissionToRole(UUID roleId, UUID permissionId) {
         rolesService.deletePermissionToRole(roleId, permissionId);
         return ResponseEntity.ok(null);
     }
 
     @Override
-    public ResponseEntity<Void> deleteRole(Integer article) {
+    public ResponseEntity<Void> deleteRole(UUID article) {
         rolesService.deleteRole(article);
         return ResponseEntity.ok(null);
     }
@@ -42,17 +43,17 @@ public class RoleController implements RolesApi {
     }
 
     @Override
-    public ResponseEntity<List<PermissionDTO>> getPermissionsByRoleId(Integer roleId) {
+    public ResponseEntity<List<PermissionDTO>> getPermissionsByRoleId(UUID roleId) {
         return ResponseEntity.ok(rolesService.getPermissionsByRoleId(roleId));
     }
 
     @Override
-    public ResponseEntity<RoleDTO> getRoleById(Integer request) {
+    public ResponseEntity<RoleDTO> getRoleById(UUID request) {
         return ResponseEntity.ok(rolesService.getRoleById(request));
     }
 
     @Override
-    public ResponseEntity<Void> giveAccountRole(Integer roleId, Integer permissionsId) {
+    public ResponseEntity<Void> giveAccountRole(UUID roleId, UUID permissionsId) {
         rolesService.giveAccountRole(roleId, permissionsId);
         return ResponseEntity.ok(null);
     }

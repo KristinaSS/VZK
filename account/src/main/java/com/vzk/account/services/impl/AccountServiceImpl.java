@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.account.mapper.AccountMapper.ACCOUNT_MAPPER;
@@ -37,8 +38,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void deleteAccount(int accountId) {
-        Account account = findAccount(accountId);
+    public void deleteAccount(String accountId) {
+        Account account = findAccount(UUID.fromString(accountId));
 
         //verify if deactivated
         verifyIfAccountActive(account);
@@ -56,8 +57,8 @@ public class AccountServiceImpl implements AccountService {
         return ACCOUNT_MAPPER.mapToDTO(account);
     }
 
-    public AccountDTO getAccountById(int id) {
-        Account account = findAccount(id);
+    public AccountDTO getAccountById(String id) {
+        Account account = findAccount(UUID.fromString(id));
         return ACCOUNT_MAPPER.mapToDTO(account);
     }
 
@@ -90,7 +91,7 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
     }
 
-    private Account findAccount(int id) {
+    private Account findAccount(UUID id) {
         return accountRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }
@@ -103,7 +104,7 @@ public class AccountServiceImpl implements AccountService {
 
     private void verifyIfAccountActive(Account account) {
         if (!account.isActive()) {
-            throw new EntityAlreadyDeactivatedException(ENTITY, account.getId());
+            throw new EntityAlreadyDeactivatedException(ENTITY, account.getId().toString());
         }
     }
 }

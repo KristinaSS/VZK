@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.events.mappers.EventMapper.EVENT_MAPPER;
@@ -33,7 +34,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void deleteEvent(int id) {
+    public void deleteEvent(UUID id) {
         Event event = eventRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ENTITY, "id", "" + id));
 
         verifyIfArticleActive(event);
@@ -66,7 +67,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventDTO getEventById(int id) {
+    public EventDTO getEventById(UUID id) {
         Event event = eventRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ENTITY, "id", "" + id));
         return EVENT_MAPPER.mapToDTO(event);
     }

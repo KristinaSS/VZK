@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -27,7 +28,7 @@ public class ContactRequestController implements ContactRequestApi {
     }
 
     @Override
-    public ResponseEntity<ContactRequestDTO> getContactRequestById(Integer request) {
+    public ResponseEntity<ContactRequestDTO> getContactRequestById(UUID request) {
         return ResponseEntity.ok(contactRequestService.getContactRequestById(request));
     }
 }

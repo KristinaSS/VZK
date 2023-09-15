@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class ApplicationRequestController implements ApplicationRequestApi {
@@ -25,7 +26,7 @@ public class ApplicationRequestController implements ApplicationRequestApi {
     }
 
     @Override
-    public ResponseEntity<ApplicationRequestDTO> getApplicationRequestById(Integer request) {
+    public ResponseEntity<ApplicationRequestDTO> getApplicationRequestById(UUID request) {
         return ResponseEntity.ok(applicationRequestService.getApplicationRequestById(request));
     }
 }

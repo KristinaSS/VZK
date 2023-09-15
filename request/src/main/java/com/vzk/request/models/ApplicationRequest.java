@@ -1,7 +1,6 @@
 package com.vzk.request.models;
 
 import com.vzk.request.constants.Gender;
-import com.vzk.request.constants.Rank;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +9,7 @@ import lombok.Setter;
 import no.stelar7.api.r4j.basic.constants.types.lol.LaneType;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -20,7 +20,7 @@ public class ApplicationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private UUID id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_request", referencedColumnName = "id")

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.news.mappers.ArticleMapper.ARTICLE_MAPPER;
@@ -31,7 +32,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(Integer id) {
+    public void deleteArticle(UUID id) {
         Article article = findArticle(id);
 
         verifyIfArticleActive(article);
@@ -56,7 +57,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDTO getArticleById(Integer id) {
+    public ArticleDTO getArticleById(UUID id) {
         Article article = findArticle(id);
         return ARTICLE_MAPPER.mapToDTO(article);
     }
@@ -67,7 +68,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleRepository.save(article);
     }
 
-    private Article findArticle(int id){
+    private Article findArticle(UUID id){
         return articleRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(ENTITY, "id", ""+id));
     }
 

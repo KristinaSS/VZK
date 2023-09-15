@@ -3,11 +3,12 @@ package com.vzk.roles.services;
 import org.openapitools.model.RoleDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface AccountService {
-    void deleteAccountRole(int accountId, int roleId);
+    void deleteAccountRole(UUID accountId, UUID roleId);
 
-    List<RoleDTO> getRolesForAccount (int accID);
+    List<RoleDTO> getRolesForAccount (UUID accID);
 
-    void giveRoleToAccount(int accountId, int roleId);
+    void giveRoleToAccount(UUID accountId, UUID roleId);
 }

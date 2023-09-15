@@ -11,6 +11,8 @@ import org.mapstruct.factory.Mappers;
 import org.openapitools.model.ApplicationRequestDTO;
 import org.openapitools.model.CreateApplicationRequestDTO;
 
+import java.util.UUID;
+
 import static com.vzk.request.mappers.ContactRequestMapper.CONTACT_REQUEST_MAPPER;
 
 @Mapper
@@ -58,7 +60,7 @@ public interface ApplicationRequestMapper {
     ApplicationRequest mapToModel(CreateApplicationRequestDTO createApplicationRequestDTO);
 
     @Named("mapRequest")
-    default ContactRequest mapRequest(int requestId) {
+    default ContactRequest mapRequest(UUID requestId) {
         ContactRequestService contactRequestService = new ContactRequestImpl();
         return CONTACT_REQUEST_MAPPER.mapToModel(contactRequestService.getContactRequestById(requestId));
     }

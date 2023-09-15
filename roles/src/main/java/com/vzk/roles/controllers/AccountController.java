@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class AccountController implements AccountApi {
@@ -16,18 +17,18 @@ public class AccountController implements AccountApi {
     private AccountService accountService;
 
     @Override
-    public ResponseEntity<Void> deleteAccountRole(Integer accountId, Integer roleId) {
+    public ResponseEntity<Void> deleteAccountRole(UUID accountId, UUID roleId) {
         accountService.deleteAccountRole(accountId, roleId);
         return ResponseEntity.ok(null);
     }
 
     @Override
-    public ResponseEntity<List<RoleDTO>> getRolesByAccountId(Integer accountId) {
+    public ResponseEntity<List<RoleDTO>> getRolesByAccountId(UUID accountId) {
         return ResponseEntity.ok(accountService.getRolesForAccount(accountId));
     }
 
     @Override
-    public ResponseEntity<Void> giveAccountRole(Integer accountId, Integer roleId) {
+    public ResponseEntity<Void> giveAccountRole(UUID accountId, UUID roleId) {
         accountService.giveRoleToAccount(accountId, roleId);
         return ResponseEntity.ok(null);
     }

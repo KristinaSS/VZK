@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.request.mappers.ApplicationRequestMapper.APPLICATION_REQUEST_MAPPER;
@@ -36,7 +37,7 @@ public class ApplicationRequestServiceImpl implements ApplicationRequestService 
     }
 
     @Override
-    public ApplicationRequestDTO getApplicationRequestById(int id) {
+    public ApplicationRequestDTO getApplicationRequestById(UUID id) {
         ApplicationRequest applicationRequest = applicationRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(ENTITY, "id", "" + id));
 

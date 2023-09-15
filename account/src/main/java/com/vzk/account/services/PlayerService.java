@@ -7,11 +7,11 @@ import java.util.List;
 public interface PlayerService {
     PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO);
 
-    void deletePlayer(int id);
+    void deletePlayer(String id);
 
     PlayerDTO getPlayerByEmail(String email);
 
-    PlayerDTO getPlayerById(int id);
+    PlayerDTO getPlayerById(String id);
 
     List<PlayerDTO> getAllPlayers();
 

@@ -9,11 +9,11 @@ import java.util.List;
 public interface AccountService {
     AccountDTO createAccount(CreateAccountDTO createAccountDTO);
 
-    void deleteAccount(int id);
+    void deleteAccount(String id);
 
     AccountDTO getAccountByEmail(String email);
 
-    AccountDTO getAccountById(int id);
+    AccountDTO getAccountById(String id);
 
     List<AccountDTO> getAllAccounts();
 

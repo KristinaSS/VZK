@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,5 +19,5 @@ public class RoleAccountID  implements Serializable {
 
     @Basic
     @Column(name = "account_id")
-    private String accountId;
+    private UUID accountId;
 }

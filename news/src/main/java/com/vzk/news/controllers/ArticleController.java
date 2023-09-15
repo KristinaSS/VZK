@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -23,7 +24,7 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteArticle(Integer article) {
+    public ResponseEntity<Void> deleteArticle(UUID article) {
         articleService.deleteArticle(article);
         return ResponseEntity.ok(null);
     }
@@ -39,7 +40,7 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
-    public ResponseEntity<ArticleDTO> getArticleById(Integer article) {
+    public ResponseEntity<ArticleDTO> getArticleById(UUID article) {
         return ResponseEntity.ok(articleService.getArticleById(article));
     }
 

@@ -22,7 +22,7 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteAccount(Integer account) {
+    public ResponseEntity<Void> deleteAccount(String account) {
         accountService.deleteAccount(account);
         return ResponseEntity.ok(null);
     }
@@ -33,7 +33,7 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public ResponseEntity<AccountDTO> getAccountById(Integer account) {
+    public ResponseEntity<AccountDTO> getAccountById(String account) {
         return ResponseEntity.ok(accountService.getAccountById(account));
     }
 

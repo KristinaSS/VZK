@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.roles.mappers.PermissionMapper.PERMISSION_MAPPER;
@@ -33,7 +34,7 @@ public class PermissionsServiceImpl implements PermissionService {
     }
 
     @Override
-    public void deletePermission(int id) {
+    public void deletePermission(UUID id) {
         Permission permission = findPermission(id);
 
         if (!permission.isActive()) {
@@ -60,12 +61,12 @@ public class PermissionsServiceImpl implements PermissionService {
     }
 
     @Override
-    public PermissionDTO getPermissionById(int id) {
+    public PermissionDTO getPermissionById(UUID id) {
         Permission permission = findPermission(id);
         return PERMISSION_MAPPER.mapToDTO(permission);
     }
 
-    private Permission findPermission(int id){
+    private Permission findPermission(UUID id){
         return permissionRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }

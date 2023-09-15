@@ -2,7 +2,7 @@
 
 -- Changeset kristina:2023-08-13-create-contact_request-table
 CREATE TABLE `vzk_request`.`contact_request` (
-                                              `id` INT NOT NULL AUTO_INCREMENT,
+                                              `id` BINARY(16) NOT NULL,
                                               `email` VARCHAR(100) NOT NULL,
                                               `is_consent` TINYINT NOT NULL,
                                               `subject` VARCHAR(45) NOT NULL,
@@ -13,8 +13,8 @@ CREATE TABLE `vzk_request`.`contact_request` (
 
 -- Changeset kristina:2023-08-13-create-application_request-table
 CREATE TABLE `application_request` (
-                                       `id` INT NOT NULL AUTO_INCREMENT,
-                                       `contact_request` int NOT NULL,
+                                       `id` BINARY(16) NOT NULL,
+                                       `contact_request` BINARY(16) NOT NULL,
                                        `player_name` varchar(100) NOT NULL,
                                        `profile_url` varchar(200) NOT NULL,
                                        `max_rank` varchar(45) NOT NULL,

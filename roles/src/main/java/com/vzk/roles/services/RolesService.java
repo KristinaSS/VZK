@@ -4,21 +4,22 @@ import org.openapitools.model.PermissionDTO;
 import org.openapitools.model.RoleDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RolesService {
     RoleDTO createRole(String name);
 
-    void deleteRole(int id);
+    void deleteRole(UUID id);
 
     List<RoleDTO> getAllActiveRoles();
 
     List<RoleDTO> getAllRoles();
 
-    RoleDTO getRoleById(int id);
+    RoleDTO getRoleById(UUID id);
 
-    void giveAccountRole(Integer roleId, Integer permissionsId);
+    void giveAccountRole(UUID roleId, UUID permissionsId);
 
-    List<PermissionDTO> getPermissionsByRoleId(Integer roleId);
+    List<PermissionDTO> getPermissionsByRoleId(UUID roleId);
 
-    void deletePermissionToRole(Integer roleId, Integer permissionId);
+    void deletePermissionToRole(UUID roleId, UUID permissionId);
 }

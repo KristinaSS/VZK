@@ -18,7 +18,7 @@ spring:
     show-sql: true
 
   liquibase:
-    enabled: false
+    enabled: true
     change-log: changelog/changelog-master.xml
     default-schema: vzk_events
 

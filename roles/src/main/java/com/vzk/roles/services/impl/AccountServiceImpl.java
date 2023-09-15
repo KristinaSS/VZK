@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.roles.mappers.RoleMapper.ROLE_MAPPER;
@@ -30,24 +31,24 @@ public class AccountServiceImpl implements AccountService {
     RoleRepository roleRepository;
 
     @Override
-    public void deleteAccountRole(int accountId, int roleId) {
+    public void deleteAccountRole(UUID accountId, UUID roleId) {
         roleAccountRepository.delete(buildRoleAccount(roleId, accountId));
     }
 
     @Override
-    public List<RoleDTO> getRolesForAccount(int accID) {
+    public List<RoleDTO> getRolesForAccount(UUID accID) {
         return roleAccountRepository.findAll().stream()
-                .filter(roleAccount -> Integer.parseInt(roleAccount.getRoleAccountID().getAccountId()) == accID)
+                .filter(roleAccount -> roleAccount.getRoleAccountID().getAccountId().toString().equals(accID.toString()))
                 .map(roleAccount -> ROLE_MAPPER.mapToDTO(roleAccount.getRoleAccountID().getRole()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void giveRoleToAccount(int accountId, int roleId) {
+    public void giveRoleToAccount(UUID accountId, UUID roleId) {
         roleAccountRepository.save(buildRoleAccount(roleId, accountId));
     }
 
-    private Role findRole(int id) {
+    private Role findRole(UUID id) {
         return roleRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }
@@ -58,13 +59,13 @@ public class AccountServiceImpl implements AccountService {
                         ENTITY_COMB,
                         "account",
                         roleAccountID.getRole().getId(),
-                        Integer.parseInt(roleAccountID.getAccountId()))
+                        roleAccountID.getAccountId())
         );
     }
 
-    private RoleAccount buildRoleAccount(int roleId, int accId) {
+    private RoleAccount buildRoleAccount(UUID roleId, UUID accId) {
         Role role = findRole(roleId);
-        RoleAccountID roleAccountID = RoleAccountID.builder().role(role).accountId(String.valueOf(accId)).build();
+        RoleAccountID roleAccountID = RoleAccountID.builder().role(role).accountId(accId).build();
 
         verifyEntityIfExists(roleAccountID);
 

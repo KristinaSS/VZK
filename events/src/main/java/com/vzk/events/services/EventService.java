@@ -6,11 +6,12 @@ import org.openapitools.model.EventDateDTO;
 import org.openapitools.model.UpdateEventDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface EventService {
     EventDTO createEvent(CreateEventDTO createEventDTO);
 
-    void deleteEvent(int id);
+    void deleteEvent(UUID id);
 
     List<EventDTO> getAllActiveEvents();
 
@@ -18,7 +19,7 @@ public interface EventService {
 
     List<EventDTO> getAllEventsByDate(EventDateDTO dateDTO);
 
-    EventDTO getEventById(int event);
+    EventDTO getEventById(UUID event);
 
     void updateEvent(UpdateEventDTO updateEventDTO);
 }

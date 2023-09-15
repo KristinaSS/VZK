@@ -12,6 +12,8 @@ import org.openapitools.model.TeamDTO;
 import org.openapitools.model.UpdateTeamDTO;
 import org.openapitools.model.CreateTeamDTO;
 
+import java.util.UUID;
+
 import static com.vzk.account.mapper.AccountMapper.ACCOUNT_MAPPER;
 
 @Mapper
@@ -44,8 +46,8 @@ public interface TeamMapper {
     Team mapToModel(CreateTeamDTO createTeamDTO);
 
     @Named("mapCaptain")
-    default Account mapCaptain(int captainId) {
+    default Account mapCaptain(UUID captainId) {
         AccountService accountService = new AccountServiceImpl();
-        return ACCOUNT_MAPPER.mapToModel(accountService.getAccountById(captainId));
+        return ACCOUNT_MAPPER.mapToModel(accountService.getAccountById(captainId.toString()));
     }
 }

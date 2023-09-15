@@ -73,8 +73,9 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
+
           in: query
           name: Request
           required: true
@@ -184,8 +185,8 @@ paths:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
         - schema:
-            type: integer
-            minimum: 1
+            type: string
+            format: uuid
           in: query
           name: Request
           required: true
@@ -242,7 +243,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
         email:
           type: string
         isConsent:
@@ -274,9 +276,11 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
         contactRequestId:
-          type: integer
+          type: string
+          format: uuid
         playerName:
           type: string
         profileUrl:
@@ -303,7 +307,8 @@ components:
       type: object
       properties:
         contactRequestId:
-          type: integer
+          type: string
+          format: uuid
         playerName:
           type: string
         profileUrl:

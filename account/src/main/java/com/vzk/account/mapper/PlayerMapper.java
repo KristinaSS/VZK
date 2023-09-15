@@ -13,6 +13,8 @@ import org.openapitools.model.CreatePlayerDTO;
 import org.openapitools.model.PlayerDTO;
 import org.openapitools.model.UpdatePlayerDTO;
 
+import java.util.UUID;
+
 import static com.vzk.account.mapper.TeamMapper.TEAM_MAPPER;
 
 @Mapper
@@ -50,8 +52,8 @@ public interface PlayerMapper {
     AccountDetails mapToModel(UpdatePlayerDTO playerDTO);
 
     @Named("mapTeam")
-    default Team mapTeam(int teamId) {
+    default Team mapTeam(UUID teamId) {
         TeamService teamService = new TeamServiceImpl();
-        return TEAM_MAPPER.mapToModel(teamService.getTeamById(teamId));
+        return TEAM_MAPPER.mapToModel(teamService.getTeamById(teamId.toString()));
     }
 }
