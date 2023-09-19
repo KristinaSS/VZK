@@ -36,6 +36,7 @@ public class TeamServiceImpl implements TeamService {
 
         //check if name available
         verifyNameUnique(createdTeam.getName());
+        createdTeam.setId(UUID.randomUUID());
 
         Team savedTeam = teamRepository.save(createdTeam);
         return TEAM_MAPPER.mapToDTO(savedTeam);

@@ -29,6 +29,8 @@ public class PermissionsServiceImpl implements PermissionService {
                 .isActive(true)
                 .build();
 
+        permission.setId(UUID.randomUUID());
+
         Permission saved = permissionRepository.save(permission);
         return PERMISSION_MAPPER.mapToDTO(saved);
     }

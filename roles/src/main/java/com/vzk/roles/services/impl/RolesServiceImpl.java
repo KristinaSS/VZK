@@ -41,6 +41,7 @@ public class RolesServiceImpl implements RolesService {
                 .name(name)
                 .isActive(true)
                 .build();
+        role.setId(UUID.randomUUID());
 
         Role saved = roleRepository.save(role);
         return ROLE_MAPPER.mapToDTO(saved);

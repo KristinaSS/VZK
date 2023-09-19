@@ -27,6 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleDTO createArticle(CreateArticleDTO createArticleDTO) {
         Article article = ARTICLE_MAPPER.mapToModel(createArticleDTO);
+        article.setId(UUID.randomUUID());
         Article saved = articleRepository.save(article);
         return ARTICLE_MAPPER.mapToDTO(saved);
     }

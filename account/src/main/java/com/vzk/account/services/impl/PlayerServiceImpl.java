@@ -39,6 +39,7 @@ public class PlayerServiceImpl implements PlayerService {
 
         //check if account exists
         verifyAccountExists(linkedAccount, createPlayerDTO.getEmail());
+        createdPlayer.setId(UUID.randomUUID());
 
         //check if account available
         verifyNoPlayerWithAccountExists(linkedAccount);

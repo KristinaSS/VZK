@@ -12,7 +12,7 @@
 	<artifactId>security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>security</name>
-	<description>Security microservice for VZK esports applicaction</description>
+	<description>Security microservice for VZK esports application</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -53,6 +53,10 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.3.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

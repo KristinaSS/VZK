@@ -25,6 +25,8 @@ public class ContactRequestImpl implements ContactRequestService {
     @Override
     public ContactRequestDTO createContactRequest(CreateContactRequestDTO createContactRequestDTO) {
         ContactRequest contactRequest = CONTACT_REQUEST_MAPPER.mapToModel(createContactRequestDTO);
+        contactRequest.setId(UUID.randomUUID());
+
         ContactRequest saved = contactRequestRepository.save(contactRequest);
         return CONTACT_REQUEST_MAPPER.mapToDTO(saved);
     }

@@ -25,6 +25,8 @@ public class ApplicationRequestServiceImpl implements ApplicationRequestService 
     @Override
     public ApplicationRequestDTO createApplicationRequest(CreateApplicationRequestDTO createApplicationRequestDTO) {
         ApplicationRequest applicationRequest = APPLICATION_REQUEST_MAPPER.mapToModel(createApplicationRequestDTO);
+        applicationRequest.setId(UUID.randomUUID());
+
         ApplicationRequest saved = applicationRequestRepository.save(applicationRequest);
         return APPLICATION_REQUEST_MAPPER.mapToDTO(saved);
     }
