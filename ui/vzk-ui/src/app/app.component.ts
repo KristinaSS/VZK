@@ -4,9 +4,8 @@ import {HomeComponent} from "./homepage/homepage/home/home.component";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  imports: [HomeComponent]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'vzk-ui';
+  title = 'Verzik Esports';
 }
