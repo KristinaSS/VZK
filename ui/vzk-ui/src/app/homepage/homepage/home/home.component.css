@@ -1,0 +1,95 @@
+.site-wrapper{
+  color: black;
+  background-image: url("/ui/vzk-ui/src/assets/imgs/Very_Dark_Gray__45359.jpg");
+  background-repeat: no-repeat;
+  background-color: black;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  font-weight: bold;
+}
+
+/*#home {
+  clip-path: url(#cache);
+}
+
+#black {
+  fill: none;
+  opacity: 0.45;
+  stroke: #000000;
+  stroke-width: 12;
+  stroke-miterlimit:10;
+  animation: show 4s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+#dark-red {
+  fill: none;
+  opacity: 0.65;
+  stroke: #260101;
+  stroke-width: 12;
+  stroke-miterlimit:10;
+  animation: show 4s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+#black {
+  fill: none;
+  opacity: 0.45;
+  stroke: #a60512;
+  stroke-width: 6;
+  stroke-miterlimit:10;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 800;
+  animation: draw 4s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+.bg{
+  color: black;
+  background-image: url("C:/Users/Nekozila/Desktop/VZK/ui/vzk-ui/src/assets/imgs/Very_Dark_Gray__45359.jpg");
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  justify-content: center;
+
+}
+.welcome-box {
+  position: absolute; !* Reposition logo from the natural layout *!
+  left: 75px;
+  top: 0px;
+  width: 300px;
+  height: 200px;
+  z-index: 2;
+}*/
+
+
+
