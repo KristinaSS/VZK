@@ -37,6 +37,7 @@ ul.nav-navbar li a:hover:not(.active) {
   height: 60px;
   overflow: hidden;
   border-radius: 50%;
+
 }
 
 .component-wrapper {
@@ -138,3 +139,21 @@ ul.nav-navbar li a:hover:not(.active) {
     color: white;
   }
 }
+
+@media (min-width: 768px) {
+  /* Your desktop-specific styles go here */
+  .desktop-logo {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 30vh;
+  }
+  .desktop-name {
+    padding-left: 2vh;
+    padding-right: 5vh;
+  }
+  .desktop-item{
+    top: 5px;
+    position: relative;
+  }
+}
+

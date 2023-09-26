@@ -2,19 +2,19 @@
 <div class="nav-navbar-wrapper component-wrapper">
   <div class="nav-navbar nav-navbar-wrapper navbar-mobile">
     <div id="menu-icon" (click)="toggleMobileMenu()">&#9776;</div>
-    <a id="vzk-logo" class="logo">
+    <a id="vzk-logo" class="logo desktop-logo">
       <div class="circular--portrait">
         <img src="assets/imgs/vzklogo.jpg" height="60px"/>
       </div>
     </a>
-    <a id="vzk-name" class="logo center">Verzik Esports</a>
+    <a id="vzk-name" class="logo center desktop-name">Verzik Esports</a>
   </div>
   <ul class="nav-navbar" [ngClass]="{'navbar': !isMobileMenuActive, 'active': isMobileMenuActive}">
     <!-- Rest of the navbar items -->
-    <li><a class="center nav-item">Teams</a></li>
-    <li><a class="center nav-item">News</a></li>
-    <li><a class="center nav-item">Schedule</a></li>
-    <li><a class="center nav-item">Contact</a></li>
-    <li><a class="center nav-item">About</a></li>
+    <li><a class="center nav-item desktop-item">Teams</a></li>
+    <li><a class="center nav-item desktop-item">News</a></li>
+    <li><a class="center nav-item desktop-item">Schedule</a></li>
+    <li><a class="center nav-item desktop-item">Contact</a></li>
+    <li><a class="center nav-item desktop-item">About</a></li>
   </ul>
 </div>
