@@ -5,7 +5,7 @@
   background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#6b0008",GradientType=1);
   min-height: 100vh;
-  margin: -18px -8px -20px;
+  margin: 0 -8px -20px;
 }
 
 #home {

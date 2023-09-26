@@ -1,0 +1,39 @@
+<!--
+<div class="component-wrapper">
+  <ul class="navbar center">
+    <li>
+      <a class="logo" href="#home">
+        <div class="circular&#45;&#45;portrait">
+          <img src="assets/imgs/vzklogo.jpg" height="60px"/>
+        </div>
+      </a>
+    </li>
+    <li><a class="logo center" href="#home">Verzik Esports</a></li>
+    <li><a href="#teams" class="center">Teams</a></li>
+    <li><a href="#news" class="center">News</a></li>
+    <li><a href="#schedule" class="center">Schedule</a></li>
+    <li><a href="#contact" class="center">Contact</a></li>
+    <li><a href="#about" class="center">About</a></li>
+  </ul>
+</div>
+-->
+<div class="component-wrapper">
+  <div class="navbar-mobile">
+    <div id="menu-icon" (click)="toggleMobileMenu()">&#9776;</div>
+    <a id="vzk-logo" class="logo" href="#home">
+      <div class="circular--portrait">
+        <img src="assets/imgs/vzklogo.jpg" height="60px" />
+      </div>
+    </a>
+    <a id="vzk-name" class="logo center" href="#home">Verzik Esports</a>
+  </div>
+  <ul [ngClass]="{'navbar': !isMobileMenuActive, 'active': isMobileMenuActive}">
+    <!-- Rest of the navbar items -->
+    <li><a href="#teams" class="center">Teams</a></li>
+    <li><a href="#news" class="center">News</a></li>
+    <li><a href="#schedule" class="center">Schedule</a></li>
+    <li><a href="#contact" class="center">Contact</a></li>
+    <li><a href="#about" class="center">About</a></li>
+  </ul>
+</div>
+
