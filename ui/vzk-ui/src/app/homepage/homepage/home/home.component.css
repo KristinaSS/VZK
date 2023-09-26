@@ -1,8 +1,11 @@
 .site-wrapper{
-  background-color: #2e2e2e;
-  height: 100%;
-  margin: -18px -8px -8px;
-  margin-bottom: -20px;
+  background: rgb(0,0,0);
+  background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#6b0008",GradientType=1);
+  min-height: 100vh;
+  margin: -18px -8px -20px;
 }
 
 #home {
@@ -73,6 +76,8 @@
   height: 200px;
   z-index: 2;
 }
+
+
 
 
 
