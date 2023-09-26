@@ -30,6 +30,7 @@ ul.navbar li a:hover:not(.active) {
   position: relative;
   right: 20px;
   text-decoration: none; /* Remove underline for the logo */
+  padding-right: 5vh;
 }
 
 .circular--portrait {
@@ -49,6 +50,23 @@ ul.navbar li a:hover:not(.active) {
 .center {
   display: flex;
   align-items: center;
+}
+
+.nav-navbar-wrapper {
+  display: flex;
+}
+
+.navbar {
+  box-sizing: border-box;
+}
+
+#vzk-name {
+  font-family: Impact, serif; /* Set the font to Impact */
+  color: white; /* Make the text white */
+  flex-grow: 1; /* Allow vzk-name to grow and take up remaining space */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  font-size: 30px; /* Adjust the font size for vzk-name */
 }
 
 /* Mobile styles for viewport size < 768x1024 */
@@ -106,10 +124,17 @@ ul.navbar li a:hover:not(.active) {
   ul.navbar.active {
     /* Show the navbar items when .active is added to ul.navbar */
     display: flex;
+    position: relative;
+    top: 30px;
   }
 
   ul.navbar li {
     margin: 5px 0;
     font-size: 16px; /* Adjust the font size for mobile */
+  }
+
+  .nav-item {
+    font-family: Impact, serif;
+    color: white;
   }
 }

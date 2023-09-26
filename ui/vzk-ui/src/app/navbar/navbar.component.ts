@@ -7,14 +7,8 @@ import {Component, HostListener} from '@angular/core';
 })
 export class NavbarComponent {
   isMobileMenuActive = false;
-  isDesktopView = window.innerWidth > 768 && window.innerHeight > 1024;
 
   toggleMobileMenu() {
     this.isMobileMenuActive = !this.isMobileMenuActive;
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.isDesktopView = window.innerWidth > 768 && window.innerHeight > 1024;
   }
 }
