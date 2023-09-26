@@ -1,19 +1,19 @@
 /* Common styles for both desktop and mobile */
-ul.navbar {
+ul.nav-navbar {
   list-style-type: none;
   padding: 0;
   margin: 0;
   font-family: Impact, serif;
 }
 
-ul.navbar li {
+ul.nav-navbar li {
   float: left;
   margin: 0;
   padding: 0;
   font-size: 25px; /* Default font size for desktop */
 }
 
-ul.navbar li a {
+ul.nav-navbar li a {
   display: block;
   color: white;
   text-align: center;
@@ -21,7 +21,7 @@ ul.navbar li a {
   text-decoration: none;
 }
 
-ul.navbar li a:hover:not(.active) {
+ul.nav-navbar li a:hover:not(.active) {
   background-color: #333;
   text-decoration: none; /* Remove underline on hover */
 }
@@ -30,7 +30,6 @@ ul.navbar li a:hover:not(.active) {
   position: relative;
   right: 20px;
   text-decoration: none; /* Remove underline for the logo */
-  padding-right: 5vh;
 }
 
 .circular--portrait {
@@ -56,7 +55,7 @@ ul.navbar li a:hover:not(.active) {
   display: flex;
 }
 
-.navbar {
+.nav-navbar {
   box-sizing: border-box;
 }
 
@@ -110,25 +109,26 @@ ul.navbar li a:hover:not(.active) {
     z-index: 2; /* Ensure the hamburger icon is on top */
   }
 
-  ul.navbar {
+  ul.nav-navbar {
     /* Hide the additional navbar items initially */
     display: none;
     flex-direction: column;
     align-items: center;
     background-color: black;
     position: absolute;
-    top: 50px; /* Adjust as needed based on your design */
+    top: 100%; /* Position it below the mobile navbar */
     width: 100%;
   }
 
-  ul.navbar.active {
-    /* Show the navbar items when .active is added to ul.navbar */
+  ul.nav-navbar.active {
+    /* Show the navbar items when .active is added to ul.nav-navbar */
     display: flex;
-    position: relative;
-    top: 30px;
+    position: fixed; /* Fixed position for the mobile navbar */
+    top: 70px;
+    z-index: 3; /* Ensure it's above the navbar-mobile */
   }
 
-  ul.navbar li {
+  ul.nav-navbar li {
     margin: 5px 0;
     font-size: 16px; /* Adjust the font size for mobile */
   }
