@@ -71,7 +71,7 @@
 .welcome-box {
   position: absolute; /* Reposition logo from the natural layout */
   left: 75px;
-  top: 0px;
+  top: 20vh;
   width: 300px;
   height: 200px;
   z-index: 2;
