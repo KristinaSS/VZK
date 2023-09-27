@@ -7,6 +7,7 @@ import { WelcomeBoxComponent } from './homepage/welcome-box/welcome-box.componen
 import { HomeComponent } from './homepage/home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LanguageBarComponent } from './language-bar/language-bar.component';
+import { DynamicBackgroundComponent } from './dynamic-background/dynamic-background.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LanguageBarComponent } from './language-bar/language-bar.component';
     WelcomeBoxComponent,
     HomeComponent,
     NavbarComponent,
-    LanguageBarComponent
+    LanguageBarComponent,
+    DynamicBackgroundComponent
   ],
   imports: [
     BrowserModule,

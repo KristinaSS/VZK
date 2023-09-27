@@ -6,15 +6,6 @@ import {DOCUMENT} from "@angular/common";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
-  screenWidth: number | undefined;
-  screenHeight: number | undefined;
+export class HomeComponent{
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
-
-  ngOnInit() {
-    // Get the current screen width and height
-    this.screenWidth = this.document.documentElement.clientWidth;
-    this.screenHeight = this.document.documentElement.clientHeight;
-  }
 }
