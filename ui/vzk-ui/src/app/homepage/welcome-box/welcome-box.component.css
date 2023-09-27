@@ -1,11 +1,45 @@
-.circular--portrait {
+/* Default styling for larger screens */
+.container {
   position: relative;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 50%;
-}
-.circular--portrait img {
-  width: 100%;
+  width: 100vw;
   height: auto;
+}
+
+.gif-size {
+  min-width: 100vw;
+}
+
+.title {
+  font-family: Impact, serif;
+/*  color: #d7b3b3;*/
+  color: white;
+  font-size: 200px;
+  position: absolute;
+  top: 0; /* Position the title at the top of the container */
+  padding-left: 30px;
+  width: calc(100% - 20px); /* Adjust width to account for left margin */
+  text-align: left; /* Center the title horizontally */
+  white-space: nowrap; /* Prevent title from wrapping */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+/* Media query to hide the image on screens less than 1500px wide */
+@media (max-width: 1100px) {
+  .gif-size {
+    display: none;
+  }
+
+  .title {
+    padding-top: 60px; /* Reset the top position to the default (beginning of the div) */
+    width: 100%; /* Reset the width to 100% */
+    text-align: left; /* Align the title to the left */
+    font-size: 100px;
+    margin-top: -10px;
+    white-space: normal; /* Allow title to wrap onto multiple lines */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  }
+
+  .mobile-title{
+    width: 30%; /* Reset the width to 30% */
+  }
 }

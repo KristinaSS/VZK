@@ -1,0 +1,159 @@
+/* Common styles for both desktop and mobile */
+ul.nav-navbar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-family: Impact, serif;
+}
+
+ul.nav-navbar li {
+  float: left;
+  margin: 0;
+  padding: 0;
+  font-size: 25px; /* Default font size for desktop */
+}
+
+ul.nav-navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.nav-navbar li a:hover:not(.active) {
+  background-color: #333;
+  text-decoration: none; /* Remove underline on hover */
+}
+
+.logo {
+  position: relative;
+  right: 20px;
+  text-decoration: none; /* Remove underline for the logo */
+}
+
+.circular--portrait {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+
+}
+
+.component-wrapper {
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+  margin: 0 -10px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
+.nav-navbar-wrapper {
+  display: flex;
+}
+
+.nav-navbar {
+  box-sizing: border-box;
+}
+
+#vzk-name {
+  font-family: Impact, serif; /* Set the font to Impact */
+  color: white; /* Make the text white */
+  flex-grow: 1; /* Allow vzk-name to grow and take up remaining space */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  font-size: 30px; /* Adjust the font size for vzk-name */
+}
+
+/* Mobile styles for viewport size < 912 */
+@media (max-width: 912px) {
+  .navbar-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px;
+    position: fixed; /* Fixed position for the mobile navbar */
+    width: 100%;
+    top: 0;
+    z-index: 1;
+  }
+
+  #vzk-name {
+    font-family: Impact, serif; /* Set the font to Impact */
+    color: white; /* Make the text white */
+    flex-grow: 1; /* Allow vzk-name to grow and take up remaining space */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Adjust the font size for vzk-name */
+  }
+
+  .logo {
+    padding-left: 20px; /* Add padding to the left of the icon */
+    position: relative;
+    right: 0;
+    text-decoration: none; /* Remove underline */
+  }
+
+  /* Hamburger menu icon styles */
+  #menu-icon {
+    display: block;
+    position: absolute;
+    right: 40px; /* Adjust the left margin as needed */
+    cursor: pointer;
+    color: white;
+    font-size: 30px;
+    z-index: 2; /* Ensure the hamburger icon is on top */
+  }
+
+  ul.nav-navbar {
+    /* Hide the additional navbar items initially */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    position: absolute;
+    top: 100%; /* Position it below the mobile navbar */
+    width: 100%;
+  }
+
+  ul.nav-navbar.active {
+    /* Show the navbar items when .active is added to ul.nav-navbar */
+    display: flex;
+    position: fixed; /* Fixed position for the mobile navbar */
+    top: 70px;
+    z-index: 3; /* Ensure it's above the navbar-mobile */
+  }
+
+  ul.nav-navbar li {
+    margin: 5px 0;
+    font-size: 16px; /* Adjust the font size for mobile */
+  }
+
+  .nav-item {
+    font-family: Impact, serif;
+    color: white;
+  }
+}
+
+@media (min-width: 912px) {
+  /* Your desktop-specific styles go here */
+  .desktop-logo {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 30vh;
+  }
+  .desktop-name {
+    padding-left: 2vh;
+    padding-right: 5vh;
+  }
+  .desktop-item{
+    top: 5px;
+    position: relative;
+  }
+}
+

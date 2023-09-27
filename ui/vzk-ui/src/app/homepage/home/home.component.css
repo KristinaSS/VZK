@@ -1,10 +1,11 @@
 .welcome-box {
-  position: absolute; /* Reposition logo from the natural layout */
-  left: 75px;
-  top: 20vh;
-  width: 300px;
-  height: 200px;
+  position: absolute;
+  left: 0;
+  top: 90px;
   z-index: 2;
+  width: 100%; /* Set the width to 100% of the viewport width */
+  box-sizing: border-box;
+
 }
 
 
