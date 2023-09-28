@@ -8,6 +8,7 @@ import { HomeComponent } from './homepage/home/home.component';
 import { NavbarComponent } from './general/navbar/navbar.component';
 import { LanguageBarComponent } from './general/language-bar/language-bar.component';
 import { DynamicBackgroundComponent } from './general/dynamic-background/dynamic-background.component';
+import {NewsBoxComponent} from "./homepage/news-box/news-box.component";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DynamicBackgroundComponent } from './general/dynamic-background/dynamic
     HomeComponent,
     NavbarComponent,
     LanguageBarComponent,
-    DynamicBackgroundComponent
+    DynamicBackgroundComponent,
+    NewsBoxComponent
   ],
   imports: [
     BrowserModule,

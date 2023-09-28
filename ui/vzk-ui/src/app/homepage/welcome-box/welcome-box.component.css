@@ -8,11 +8,27 @@
 .gif-size {
   min-width: 100vw;
 }
+.bottomTitle{
+  /*  color: #d7b3b3;*/
+  color: white;
+  font-size: 200px;
+  font-family: Impact, serif;
+  position: absolute;
+  bottom: 0; /* Position the title at the top of the container */
+  padding-left: 30px;
+  width: calc(100% - 20px); /* Adjust width to account for left margin */
+  text-align: left; /* Center the title horizontally */
+  white-space: nowrap; /* Prevent title from wrapping */
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+
 
 .title {
   font-family: Impact, serif;
 /*  color: #d7b3b3;*/
   color: white;
+  height: 200px;
   font-size: 200px;
   position: absolute;
   top: 0; /* Position the title at the top of the container */

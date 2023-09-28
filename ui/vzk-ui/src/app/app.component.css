@@ -1,0 +1,11 @@
+.nav-navbar {
+    position: fixed;
+    top: 20px;
+    z-index: 3;
+    width: 100%;
+    transition: top 0.3s ease; /* Adjust the transition duration and easing as needed */
+}
+
+.nav-navbar.scrolled {
+    top: 0;
+}
