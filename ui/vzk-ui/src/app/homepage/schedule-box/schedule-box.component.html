@@ -1,0 +1,6 @@
+<div *ngFor="let event of nextTwoEvents">
+  <h3>{{ event.game }}</h3>
+  <p>Date and Time: {{ event.datetime | date: 'medium' }}</p>
+  <p>{{ event.description }}</p>
+  <hr />
+</div>

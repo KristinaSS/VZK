@@ -5,10 +5,23 @@
   z-index: 2;
   width: 100%; /* Set the width to 100% of the viewport width */
   box-sizing: border-box;
-
 }
 
+.twitch-separator-top {
+  width: 0;
+  height: 0;
+  border-right: 100vw solid transparent;
+  border-bottom: 20vw solid white;
+}
 
+.twitch-separator-bottom {
+  width: 0;
+  height: 0;
+  border-right: 100vw solid white;
+  border-bottom: 20vw solid transparent;
+}
 
-
-
+.twitch-box {
+  background-color: white;
+  width: 100%;
+}

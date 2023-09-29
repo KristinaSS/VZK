@@ -1,20 +1,20 @@
-import {Component, Inject} from '@angular/core';
-import {DOCUMENT} from "@angular/common";
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-dynamic-background',
-  templateUrl: './dynamic-background.component.html',
-  styleUrls: ['./dynamic-background.component.css']
+    selector: 'app-dynamic-background',
+    templateUrl: './dynamic-background.component.html',
+    styleUrls: ['./dynamic-background.component.css']
 })
 export class DynamicBackgroundComponent {
-  screenWidth: number | undefined;
-  screenHeight: number | undefined;
+    screenWidth: number | undefined;
+    screenHeight: number | undefined;
 
-  constructor() {}
+    constructor() {
+    }
 
-  ngOnInit() {
-    // Get the current screen width and height
-    this.screenWidth = window.innerWidth;
-    this.screenHeight = window.innerHeight;
-  }
+    ngOnInit() {
+        // Get the current screen width and height
+        this.screenWidth = (window.innerWidth / 3) * 2;
+        this.screenHeight = (window.innerHeight / 3) * 2;
+    }
 }

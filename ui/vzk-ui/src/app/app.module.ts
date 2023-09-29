@@ -9,6 +9,8 @@ import { NavbarComponent } from './general/navbar/navbar.component';
 import { LanguageBarComponent } from './general/language-bar/language-bar.component';
 import { DynamicBackgroundComponent } from './general/dynamic-background/dynamic-background.component';
 import {NewsBoxComponent} from "./homepage/news-box/news-box.component";
+import { TwitchBoxComponent } from './homepage/twitch-box/twitch-box.component';
+import { ScheduleBoxComponent } from './homepage/schedule-box/schedule-box.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {NewsBoxComponent} from "./homepage/news-box/news-box.component";
     NavbarComponent,
     LanguageBarComponent,
     DynamicBackgroundComponent,
-    NewsBoxComponent
+    NewsBoxComponent,
+    TwitchBoxComponent,
+    ScheduleBoxComponent
   ],
   imports: [
     BrowserModule,
