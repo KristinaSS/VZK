@@ -9,10 +9,25 @@ import { Event } from 'src/app/models/event';
 })
 export class ScheduleBoxComponent implements OnInit{
   nextTwoEvents: Event[] = [];
+  currentContent: number = 1;
+  button1Disabled: boolean = true;
+  button2Disabled: boolean = false;
 
   constructor(private eventService: EventServiceService) {}
 
   ngOnInit(): void {
     this.nextTwoEvents = this.eventService.getNextTwoEvents();
+  }
+
+  showContent(contentNumber: number): void {
+    if (contentNumber === 1) {
+      this.currentContent = 1;
+      this.button1Disabled = true;
+      this.button2Disabled = false;
+    } else if (contentNumber === 2) {
+      this.currentContent = 2;
+      this.button1Disabled = false;
+      this.button2Disabled = true;
+    }
   }
 }
