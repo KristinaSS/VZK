@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { EventServiceService } from 'src/app/services/event-service.service';
 import { Event } from 'src/app/models/event';
+import {Result} from "../../models/result";
 
 @Component({
   selector: 'app-schedule-box',
@@ -9,6 +10,7 @@ import { Event } from 'src/app/models/event';
 })
 export class ScheduleBoxComponent implements OnInit{
   nextTwoEvents: Event[] = [];
+  nextTwoResults: Result[] = [];
   currentContent: number = 1;
   button1Disabled: boolean = true;
   button2Disabled: boolean = false;
@@ -17,6 +19,7 @@ export class ScheduleBoxComponent implements OnInit{
 
   ngOnInit(): void {
     this.nextTwoEvents = this.eventService.getNextTwoEvents();
+    this.nextTwoResults = this.eventService.getNextTwoResults();
   }
 
   showContent(contentNumber: number): void {
