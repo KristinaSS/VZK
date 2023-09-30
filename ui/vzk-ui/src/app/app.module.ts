@@ -11,6 +11,7 @@ import { DynamicBackgroundComponent } from './general/dynamic-background/dynamic
 import {NewsBoxComponent} from "./homepage/news-box/news-box.component";
 import { TwitchBoxComponent } from './homepage/twitch-box/twitch-box.component';
 import { ScheduleBoxComponent } from './homepage/schedule-box/schedule-box.component';
+import { FooterComponent } from './general/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ScheduleBoxComponent } from './homepage/schedule-box/schedule-box.compo
     DynamicBackgroundComponent,
     NewsBoxComponent,
     TwitchBoxComponent,
-    ScheduleBoxComponent
+    ScheduleBoxComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

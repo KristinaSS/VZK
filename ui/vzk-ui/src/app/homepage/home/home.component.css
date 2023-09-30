@@ -1,7 +1,6 @@
 .site-wrapper {
-  position: absolute;
+  position: relative;
   left: 0;
-  top: 90px;
   z-index: 2;
   width: 100%; /* Set the width to 100% of the viewport width */
   box-sizing: border-box;

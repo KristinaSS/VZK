@@ -4,14 +4,10 @@
   margin-top: -8px;
   margin-left: -8px;
   margin-right: -8px;
-  z-index: -1;
   height: 90px;
+  width: 100%;
+  z-index: 1;
+  position: relative;
 }
 
-.btn {
-  background: url("https://img.freepik.com/free-vector/illustration-uk-flag_53876-18166.jpg?size=626&ext=jpg");
-  border: none;
-  cursor: pointer;
-  width: 30px;
-  max-height: 100%;
-}
+

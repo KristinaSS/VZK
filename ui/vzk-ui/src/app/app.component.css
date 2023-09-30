@@ -1,3 +1,28 @@
+.app-wrapper {
+  background: rgb(0,0,0);
+  background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#6b0008",GradientType=1);
+  position: relative;
+  overflow: hidden;
+  z-index: -1; /* Behind other elements */
+  content: ''; /* Required for pseudo-elements */
+  margin: -10px -8px -20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Set z-index to a value lower than other children */
+  width: 100%;
+  height: 100%;
+}
+
 .nav-navbar {
     position: fixed;
     top: 20px;
@@ -9,3 +34,20 @@
 .nav-navbar.scrolled {
     top: 0;
 }
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  height: 150px;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.router{
+  margin: 0;
+}
+
+
