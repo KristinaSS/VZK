@@ -1,5 +1,5 @@
 .bg {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: -1; /* Set z-index to a value lower than other children */

@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-dynamic-background',
     templateUrl: './dynamic-background.component.html',
     styleUrls: ['./dynamic-background.component.css']
 })
-export class DynamicBackgroundComponent {
+export class DynamicBackgroundComponent implements OnInit{
     screenWidth: number | undefined;
     screenHeight: number | undefined;
 
