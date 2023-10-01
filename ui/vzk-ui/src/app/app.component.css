@@ -22,12 +22,13 @@
 .footer {
   background-color: black;
   color: #abb2b9;
-  height: 150px;
+  height: 300px;
   width: 100vw;
   position: relative;
   bottom: 0;
   margin-left: -10px;
-  margin-bottom: -10px;
+  margin-bottom: -15px;
+  margin-right: -30px;
 }
 
 

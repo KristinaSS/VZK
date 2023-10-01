@@ -1,4 +1,4 @@
-.container{
+.container {
   display: inline-block;
   width: 100vw;
   background-color: black;
@@ -10,19 +10,28 @@
   height: 60px;
   overflow: hidden;
   border-radius: 50%;
-}
-.event-divider {
-  border-top: 1px solid  #abb2b9 ;
-}
-.copyright-text{
-  position: relative;
+  padding: 50px;
 }
 
-.credit-text{
-  position: relative;
-  right: 20px;
+.event-divider {
+  border-top: 1px solid #abb2b9;
 }
-.copyright-credit-wrapper{
+
+.copyright-credit-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
+
+.copyright-text {
+  width: 50%;
+  position: relative;
+  left: 10px;
+}
+
+.credit-text {
+  width: 50%;
+  text-align: right;
+  position: relative;
+  right: 10px;
+}
+
