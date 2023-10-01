@@ -22,8 +22,9 @@ ul.nav-navbar li a {
 }
 
 ul.nav-navbar li a:hover:not(.active) {
-  background-color: #333;
+  color: rgba(255, 1, 60, 1);
   text-decoration: none; /* Remove underline on hover */
+  cursor: pointer;
 }
 
 .logo {

@@ -6,6 +6,26 @@
   width: 100vw;
   z-index: 1;
   position: relative;
+  display: flex;
+  justify-content: flex-end;
 }
 
+.sm-wrapper {
+  display: flex;
+}
 
+.social-icon {
+  display: inline-block;
+  margin: 0 10px;
+  transition: background 0.3s ease-in-out;
+  font-size: 15px;
+  text-align: center;
+  color: white;
+}
+
+.social-icon:hover {
+  background-color: black;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
