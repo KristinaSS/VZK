@@ -28,7 +28,7 @@
   color:      #aeb6bf   ;
 }
 
-.event-divider {
+.footer-divider {
   border-top: 1px solid #ccc;
 }
 
@@ -180,7 +180,7 @@ body {
 }
 
 .arrow-button:hover {
-  background-color: #000000;
+  background-color: #ffc7c7;
   color: #ff003c;
 }
 
