@@ -1,20 +1,4 @@
-.app-wrapper {
-  background: rgb(0,0,0);
-  background: -moz-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
-  background: -webkit-linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
-  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(107,0,8,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#6b0008",GradientType=1);
-  position: relative;
-  overflow: hidden;
-  z-index: -1; /* Behind other elements */
-  content: ''; /* Required for pseudo-elements */
-  margin: -10px -8px -20px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.bg{
+.bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -24,30 +8,26 @@
 }
 
 .nav-navbar {
-    position: fixed;
-    top: 20px;
-    z-index: 3;
-    width: 100%;
-    transition: top 0.3s ease; /* Adjust the transition duration and easing as needed */
+  position: fixed;
+  top: 20px;
+  z-index: 3;
+  width: 100%;
+  transition: top 0.3s ease; /* Adjust the transition duration and easing as needed */
 }
 
 .nav-navbar.scrolled {
-    top: 0;
+  top: 0;
 }
 
 .footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
+  background-color: black;
+  color: #abb2b9;
   height: 150px;
-  display: inline-block;
-  width: 100%;
+  width: 100vw;
   position: relative;
   bottom: 0;
-}
-
-.router{
-  margin: 0;
+  margin-left: -10px;
+  margin-bottom: -10px;
 }
 
 

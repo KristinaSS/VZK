@@ -1,12 +1,5 @@
-<div class="app-wrapper">
-  <app-language-bar></app-language-bar>
-  <app-navbar class="nav-navbar" [ngClass]="{'scrolled': isScrolled}"></app-navbar>
-  <app-dynamic-background class="bg"></app-dynamic-background>
-  <div class="content-container">
-    <router-outlet></router-outlet>
-  </div>
-  <app-footer class="footer"></app-footer>
-</div>
-
-
-
+<app-language-bar></app-language-bar>
+<app-navbar class="nav-navbar" [ngClass]="{'scrolled': isScrolled}"></app-navbar>
+<app-dynamic-background class="bg"></app-dynamic-background>
+<router-outlet></router-outlet>
+<app-footer class="footer"></app-footer>

@@ -1,0 +1,28 @@
+.container{
+  display: inline-block;
+  width: 100vw;
+  background-color: black;
+  color: #abb2b9;
+}
+
+.circular--portrait {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.event-divider {
+  border-top: 1px solid  #abb2b9 ;
+}
+.copyright-text{
+  position: relative;
+}
+
+.credit-text{
+  position: relative;
+  right: 20px;
+}
+.copyright-credit-wrapper{
+  display: flex;
+  flex-direction: column;
+}
