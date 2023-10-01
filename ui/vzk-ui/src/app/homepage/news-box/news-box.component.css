@@ -124,6 +124,7 @@
 .show-all-button:hover:after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
+  cursor: pointer;
 }
 
 @keyframes glitch {
