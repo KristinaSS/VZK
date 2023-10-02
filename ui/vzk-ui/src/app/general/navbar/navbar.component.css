@@ -50,14 +50,12 @@ ul.nav-navbar li a:hover:not(.active) {
   height: 60px;
   overflow: hidden;
   border-radius: 50%;
-
 }
 
 .component-wrapper {
   padding: 0;
   overflow: hidden;
   background-color: black;
-  margin: 0 -10px;
   width: 100vw;
 }
 
@@ -107,6 +105,10 @@ ul.nav-navbar li a:hover:not(.active) {
   text-align: center;
   text-decoration: none;
   font-size: 30px;
+}
+
+#menu-icon {
+  display: none;
 }
 
 @media (max-width: 912px) {

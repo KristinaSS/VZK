@@ -18,7 +18,10 @@
   </ul>
   <ul class="nav-dropdown">
     <li *ngIf="!loggedIn">
-      <a class="center nav-item desktop-item login-profile dropdown-item" (click)="login()">Login</a>
+      <a class="center nav-item desktop-item login-profile dropdown-item" (click)="login()">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        <div class="my-account"> Login </div>
+      </a>
     </li>
     <li *ngIf="loggedIn" class="dropdown">
       <a class="center nav-item desktop-item login-profile dropdown-btn" (mouseover)="toggleHiddenDiv(true)" (mouseout)="toggleHiddenDiv(false)">
@@ -26,13 +29,11 @@
         <div class="my-account"> {{username}} </div>
       </a>
       <div class="dropdown-content login-profile" [ngStyle]="{'display': isHidden ? 'flex' : 'none'}" (mouseover)="toggleHiddenDiv(true)" (mouseout)="toggleHiddenDiv(false)">
-        <!-- Dropdown items go here -->
         <a class="dropdown-item" (click)="navigateToProfile()">View Profile</a>
         <a class="dropdown-item">Option 1</a>
         <a class="dropdown-item">Option 2</a>
         <a class="dropdown-item">Option 3</a>
         <a class="dropdown-item" (click)="login()">Logout</a>
-        <!-- Add more items as needed -->
       </div>
     </li>
   </ul>
