@@ -9,12 +9,17 @@
     <a id="vzk-name" class="logo center desktop-name">Verzik Esports</a>
   </div>
   <ul class="nav-navbar" [ngClass]="{'navbar': !isMobileMenuActive, 'active': isMobileMenuActive}">
-    <!-- Rest of the navbar items -->
     <li><a class="center nav-item desktop-item">Teams</a></li>
     <li><a class="center nav-item desktop-item">News</a></li>
     <li><a class="center nav-item desktop-item">Schedule</a></li>
     <li><a class="center nav-item desktop-item">Contact</a></li>
     <li><a class="center nav-item desktop-item">About</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="!loggedIn" (click)="login()">Login</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn">View Profile</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 1</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 2</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 3</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn" (click)="login()">Logout</a></li>
   </ul>
   <ul class="nav-dropdown">
     <li *ngIf="!loggedIn">

@@ -52,6 +52,9 @@
   }
 
   .mobile-title{
-    width: 30%;
+    width: 100vw;
+    position: relative;
+    font-size: 130px;
+    white-space: normal;
   }
 }

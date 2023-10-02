@@ -54,7 +54,6 @@ ul.nav-navbar li a:hover:not(.active) {
 
 .component-wrapper {
   padding: 0;
-  overflow: hidden;
   background-color: black;
   width: 100vw;
 }
@@ -111,7 +110,7 @@ ul.nav-navbar li a:hover:not(.active) {
   display: none;
 }
 
-@media (max-width: 912px) {
+@media (max-width: 1280px) {
   .navbar-mobile {
     display: flex;
     justify-content: space-between;
@@ -178,7 +177,7 @@ ul.nav-navbar li a:hover:not(.active) {
   }
 }
 
-@media (min-width: 912px) {
+@media (min-width: 1280px) {
   .desktop-logo {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -191,6 +190,9 @@ ul.nav-navbar li a:hover:not(.active) {
   .desktop-item{
     top: 5px;
     position: relative;
+  }
+  .mobile-item{
+    display: none;
   }
 }
 
