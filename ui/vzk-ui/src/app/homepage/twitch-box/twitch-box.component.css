@@ -2,7 +2,7 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
+  align-items: center;
   text-align: center;
   background-image: url('src/assets/imgs/Untitled.jpg');
   background-repeat: repeat-y;
@@ -12,13 +12,12 @@
 .twitch-box {
   display: flex;
   flex-wrap: wrap;
-  gap: 10vw; /* Add some spacing between news items */
+  gap: 10vw;
   color: white;
   position: relative;
-  top: 30px; /* Position the title at the top of the container */
+  top: 30px;
   left: 10vw;
-/*  justify-content: center; !* Center content horizontally *!*/
-  align-items: center; /* Center content vertically */
+  align-items: center;
   width: 100%;
 }
 .title {

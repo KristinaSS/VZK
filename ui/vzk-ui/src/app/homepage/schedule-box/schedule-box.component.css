@@ -11,9 +11,6 @@
   background-color: #f2f4f4;
 }
 
-.event-details {
-}
-
 .event-time {
   color:  #784212;
   font-style: italic;
@@ -51,7 +48,7 @@ img {
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 10px; /* Adjust as needed for spacing between the images and text */
+  margin-right: 10px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -59,8 +56,8 @@ img {
   display: flex;
   width: 380px;
   gap: 10px;
-  --b: 5px;   /* the border thickness */
-  --h: 1.8em; /* the height */
+  --b: 5px;
+  --h: 1.8em;
   padding-bottom: 20px;
 }
 

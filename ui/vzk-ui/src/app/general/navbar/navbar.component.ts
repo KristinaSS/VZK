@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,8 +7,23 @@ import {Component, HostListener} from '@angular/core';
 })
 export class NavbarComponent {
   isMobileMenuActive = false;
+  loggedIn = false;
+  isHidden: boolean = false;
+  username = 'Axolotl'
 
   toggleMobileMenu() {
     this.isMobileMenuActive = !this.isMobileMenuActive;
+  }
+
+  login() {
+    this.loggedIn = !this.loggedIn;
+  }
+
+  navigateToProfile() {
+    // Implement navigation to the profile page
+  }
+
+  toggleHiddenDiv(value: boolean): void {
+    this.isHidden = value;
   }
 }

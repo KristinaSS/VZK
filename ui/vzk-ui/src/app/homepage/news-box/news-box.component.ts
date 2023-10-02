@@ -16,6 +16,5 @@ export class NewsBoxComponent {
     }
 
     showMore() {
-        this.visibleArticles += 3;
     }
 }

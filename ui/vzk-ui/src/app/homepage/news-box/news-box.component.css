@@ -3,7 +3,7 @@
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
+  align-items: center;
   text-align: center;
   width: 100vw;
 }
@@ -11,21 +11,20 @@
 .news-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Add some spacing between news items */
+  gap: 20px;
   color: white;
   position: relative;
-  top: 0; /* Position the title at the top of the container */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
+  top: 0;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-/* Style for individual news items */
 .news-item {
   background-color: #4c2323;
   padding: 10px;
   cursor: pointer;
-  width: 300px; /* Adjust the width to your preference */
+  width: 300px;
 }
 
 .news-item img {
@@ -34,17 +33,15 @@
 }
 
 .news-item h2 {
-  height: 21px; /* Adjust the height as needed */
+  height: 21px;
   overflow: hidden;
   font-size: 18px;
   margin-top: 10px;
-  text-overflow: ellipsis; /* Display an ellipsis (...) for overflow text */
+  text-overflow: ellipsis;
   max-width: 100%;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap;
 }
 
-
-/* Style for the "No news articles available" message */
 .no-articles-message {
   margin-top: 20px;
   font-size: 16px;
@@ -93,7 +90,7 @@
   border: 0;
   color: #fff;
   letter-spacing: 3px;
-  box-shadow: 6px 0px 0px #00E6F6;
+  box-shadow: 6px 0 0 #00E6F6;
   outline: transparent;
   position: relative;
   user-select: none;
@@ -117,7 +114,7 @@
   right: 0;
   bottom: 0;
   background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
-  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
+  text-shadow: -3px -3px 0 #F8F005, 3px 3px 0 #00E6F6;
   clip-path: var(--slice-0);
 }
 

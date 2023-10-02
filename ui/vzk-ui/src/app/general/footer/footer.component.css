@@ -5,6 +5,7 @@
   width: 100vw;
   background-color: black;
   color: #abb2b9;
+  margin-bottom: -10px;
 }
 
 /*Above divider*/
@@ -90,7 +91,7 @@
 .sm-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px; /* Adjust the gap as needed */
+  gap: 10px;
   height: 90px;
 }
 
@@ -103,7 +104,7 @@
 }
 
 .facebook:hover {
-  background: linear-gradient(to right, #3b5998, #2672cb); /* Facebook gradient */
+  background: linear-gradient(to right, #3b5998, #2672cb);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -111,7 +112,7 @@
 }
 
 .twitter:hover {
-  background: linear-gradient(to right, #1da1f2, #63a4ff); /* Twitter gradient */
+  background: linear-gradient(to right, #1da1f2, #63a4ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -119,7 +120,7 @@
 }
 
 .youtube:hover {
-  background: linear-gradient(to right, #ff0000, #ff5e5e); /* YouTube gradient */
+  background: linear-gradient(to right, #ff0000, #ff5e5e);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -135,7 +136,7 @@
 }
 
 .reddit:hover {
-  background: linear-gradient(to right, #ff4500, #ff7832); /* Reddit gradient */
+  background: linear-gradient(to right, #ff4500, #ff7832);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -143,7 +144,7 @@
 }
 
 .discord:hover {
-  background: linear-gradient(to right, #7289da, #5e6a90); /* Discord gradient */
+  background: linear-gradient(to right, #7289da, #5e6a90);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
