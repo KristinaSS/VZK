@@ -25,6 +25,7 @@
   padding: 10px;
   cursor: pointer;
   width: 300px;
+  font-family: "Calibri Light", serif;
 }
 
 .news-item img {
@@ -180,5 +181,25 @@
     width: 200px;
     height: 40px;
     line-height: 40px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .news-box{
+    background: none;
+    padding-top: 10vh;
+  }
+
+  .news-list {
+    width: 100%;
+  }
+}
+@media (max-width: 1100px) and (min-width: 600px){
+  .news-box{
+    background: none;
+    padding-top: 10vh;
+  }
+  .news-list {
+    width: 100%;
   }
 }

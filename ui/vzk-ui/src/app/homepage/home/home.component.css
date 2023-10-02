@@ -12,10 +12,23 @@
   height: 0;
   border-right: 100vw solid transparent;
   border-bottom: 20vw solid white;
-}
+}/*  background-color: #301717;*/
 
 .twitch-box {
   background-color: white;
   width: 100vw;
 
 }
+
+@media (max-width: 1100px) {
+  .twitch-separator-top {
+    width: 0;
+    height: 0;
+    border-right: 100vw solid #301717;
+    border-bottom: 20vw solid white;
+  }
+}
+@media (max-width: 1100px) and (min-width: 600px){
+
+}
+
