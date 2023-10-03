@@ -8,13 +8,37 @@ declare var Twitch: any; // Add this declaration
   styleUrls: ['./twitch-box.component.css']
 })
 export class TwitchBoxComponent implements AfterViewInit{
+  channelId = 'lolworldchampionship';
+  format= 'video';
+
   ngAfterViewInit() {
     // Initialize the Twitch Embed Player
-    new Twitch.Embed('twitch-embed', {
+    new Twitch.Embed('twitch-embed-L', {
       width: 800,
       height: 450,
-      channel: 'lolworldchampionship',
-      layout: 'video',
+      channel: this.channelId,
+      layout: this.format,
+    });
+
+    new Twitch.Embed('twitch-embed-M', {
+      width: 600,
+      height: 337,
+      channel: this.channelId,
+      layout: this.format,
+    });
+
+    new Twitch.Embed('twitch-embed-S', {
+      width: 400,
+      height: 225,
+      channel: this.channelId,
+      layout: this.format,
+    });
+
+    new Twitch.Embed('twitch-embed-XS', {
+      width: 300,
+      height: 169,
+      channel: this.channelId,
+      layout: this.format,
     });
   }
 }

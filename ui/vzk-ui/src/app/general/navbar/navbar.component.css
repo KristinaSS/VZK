@@ -175,6 +175,14 @@ ul.nav-navbar li a:hover:not(.active) {
     font-family: Impact, serif;
     color: white;
   }
+
+  .mobile-item{
+    color: rgba(255, 1, 60, 1);;
+  }
+
+  .mobile-item:hover{
+    color: white !important;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -193,6 +201,7 @@ ul.nav-navbar li a:hover:not(.active) {
   }
   .mobile-item{
     display: none;
+    color: rgba(255, 1, 60, 1);;
   }
 }
 
