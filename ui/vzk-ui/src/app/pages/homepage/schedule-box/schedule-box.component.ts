@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { EventServiceService } from 'src/app/services/event-service.service';
 import { Event } from 'src/app/models/event';
-import {Result} from "../../models/result";
+import {Result} from "../../../models/result";
 
 @Component({
   selector: 'app-schedule-box',
