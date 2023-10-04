@@ -62,6 +62,14 @@
   .tw-L{
     display: none;
   }
+
+  .twitch-box{
+    width: 100vw; /* Set parent width to 100% of the viewport width */
+    display: flex;
+    justify-content: center; /* Center the child horizontally */
+    align-items: center; /* Center the child vertically */
+    left: 0;
+  }
 }
 @media (max-width: 1700px) and (min-width: 750px){
   .title-wrapper{
@@ -100,4 +108,23 @@
     font-size: 70px;
     font-family: Impact, serif;
   }
+
+  .twitch-box{
+    width: 100vw; /* Set parent width to 100% of the viewport width */
+    display: flex;
+    justify-content: center; /* Center the child horizontally */
+    align-items: center; /* Center the child vertically */
+    left: 0;
+  }
 }
+
+@media (max-width: 1250px) and (min-width: 750px){
+  .twitch-box{
+    width: 100vw; /* Set parent width to 100% of the viewport width */
+    display: flex;
+    justify-content: center; /* Center the child horizontally */
+    align-items: center; /* Center the child vertically */
+    left: 0;
+  }
+}
+
