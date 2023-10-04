@@ -12,6 +12,8 @@ import {NewsBoxComponent} from "./pages/homepage/news-box/news-box.component";
 import { TwitchBoxComponent } from './pages/homepage/twitch-box/twitch-box.component';
 import { ScheduleBoxComponent } from './pages/homepage/schedule-box/schedule-box.component';
 import { FooterComponent } from './general/footer/footer.component';
+import { TeamPageComponent } from './pages/teamspage/team-page/team-page.component';
+import { TopTeamsBannerComponent } from './pages/teamspage/top-teams-banner/top-teams-banner.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { FooterComponent } from './general/footer/footer.component';
     NewsBoxComponent,
     TwitchBoxComponent,
     ScheduleBoxComponent,
-    FooterComponent
+    FooterComponent,
+    TeamPageComponent,
+    TopTeamsBannerComponent
   ],
   imports: [
     BrowserModule,
