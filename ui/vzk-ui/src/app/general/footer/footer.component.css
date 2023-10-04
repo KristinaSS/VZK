@@ -187,4 +187,52 @@
   position: relative;
   right: 10px;
 }
+@media (max-width: 1250px) and (min-width: 1089px){
+}
 
+@media (max-width: 950px){
+  .circular--portrait{
+    display: none;
+  }
+
+  .menu-wrapper{
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+
+}
+
+@media (max-width: 650px) {
+  .team-menu{
+    display: none;
+  }
+
+  .credit-text{
+    display: none;
+  }
+
+  .footer-divider{
+    display: none;
+  }
+
+  .copyright-text{
+    width: 100vw;
+  }
+}
+
+@media (max-width: 450px) {
+  .vzk-esports-menu{
+    display: none;
+  }
+
+  .menu-wrapper{
+    width: 100vw; /* Set parent width to 100% of the viewport width */
+    display: flex;
+    justify-content: center; /* Center the child horizontally */
+    align-items: center; /* Center the child vertically */
+    left: 0;
+  }
+
+
+}
