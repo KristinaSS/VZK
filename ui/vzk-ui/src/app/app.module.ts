@@ -16,6 +16,8 @@ import { TeamPageComponent } from './pages/teamspage/team-page/team-page.compone
 import { TopTeamsBannerComponent } from './pages/teamspage/top-teams-banner/top-teams-banner.component';
 import { GameBoxComponent } from './pages/teamspage/game-box/game-box.component';
 import { GameCardComponent } from './pages/teamspage/game-card/game-card.component';
+import { TeamsBoxComponent } from './pages/teamspage/teams-box/teams-box.component';
+import { PlayerBoxComponent } from './pages/teamspage/player-box/player-box.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { GameCardComponent } from './pages/teamspage/game-card/game-card.compone
     TeamPageComponent,
     TopTeamsBannerComponent,
     GameBoxComponent,
-    GameCardComponent
+    GameCardComponent,
+    TeamsBoxComponent,
+    PlayerBoxComponent
   ],
   imports: [
     BrowserModule,

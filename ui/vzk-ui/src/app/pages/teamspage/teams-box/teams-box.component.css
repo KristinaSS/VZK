@@ -1,0 +1,42 @@
+.container {
+  width: 100vw;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gradient {
+  background-image: linear-gradient(to top, rgb(52, 52, 52), rgba(0, 0, 0, 0));
+  height: 300px;
+  padding: 0;
+  margin-left: -8px;
+}
+
+.content {
+  padding: 0;
+  height: 80%;
+  width: 100vw;
+  margin-left: -8px;
+  background: rgb(52, 52, 52) url('src/assets/imgs/Square2.png') repeat-y;
+  background-size: 100vw;
+  background-position-x: right;
+  background-position-y: bottom;
+  background-blend-mode: lighten;
+}
+
+.logo-img{
+  width: 20vw;
+}
+
+/*
+
+.circular--portrait {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+*/
