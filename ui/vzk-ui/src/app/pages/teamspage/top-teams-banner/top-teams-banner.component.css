@@ -11,3 +11,15 @@
   width: 100vw;
   margin-left: -4px;
 }
+
+.title{
+  font-family: Impact, serif;
+  color: white;
+  font-size: 150px;
+}
+
+.title-position{
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+}

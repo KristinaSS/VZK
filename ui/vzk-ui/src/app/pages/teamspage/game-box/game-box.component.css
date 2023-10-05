@@ -1,0 +1,10 @@
+.game-box-container {
+  display: flex;
+  justify-content: center;
+}
+
+.game-card-wrapper {
+  width: 350px;
+  display: inline-block;
+  padding: 20px;
+}
