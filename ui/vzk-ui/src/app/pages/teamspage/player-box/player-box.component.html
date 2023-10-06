@@ -1,3 +1,5 @@
-<div *ngFor="let player of team?.players" class="all-players-wrapper">
-  <app-player-card [player]="player" class="player-card"></app-player-card>
+<div class="all-players-wrapper center">
+  <div *ngFor="let player of team?.players" class="player-card center">
+    <app-player-card [player]="player"></app-player-card>
+  </div>
 </div>

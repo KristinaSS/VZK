@@ -1,7 +1,19 @@
-.all-players-wrapper{
-  display: inline-block;
+.all-players-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 80vw;
+  box-sizing: border-box;
 }
 
-.player-card{
-  padding: 50px;
+.player-card {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
