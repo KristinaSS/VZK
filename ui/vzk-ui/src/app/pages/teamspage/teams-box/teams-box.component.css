@@ -4,8 +4,10 @@
 
 .center {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  width: 100vw;
 }
 
 .gradient {
@@ -25,7 +27,7 @@
   background-blend-mode: lighten;
 }
 
-.logo-img{
+.logo-img {
   width: 20vw;
 }
 

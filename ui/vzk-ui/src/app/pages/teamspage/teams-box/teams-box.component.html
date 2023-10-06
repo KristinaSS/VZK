@@ -1,7 +1,7 @@
 <div class="container">
   <div class="gradient"></div>
   <div class="content center">
-    <div *ngFor="let game of gameList">
+    <div *ngFor="let game of gameList" class="center">
       <img class="logo-img" [src]="game?.logo" alt="{{ game?.title }}"/>
       <div *ngFor="let team of teamList">
         <app-player-box *ngIf="team.game?.id === game.id" [team]="team"></app-player-box>
