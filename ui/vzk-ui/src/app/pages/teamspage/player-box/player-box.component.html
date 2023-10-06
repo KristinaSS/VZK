@@ -1,1 +1,3 @@
-<p>player-box works!</p>
+<div *ngFor="let player of team?.players" class="all-players-wrapper">
+  <app-player-card [player]="player" class="player-card"></app-player-card>
+</div>

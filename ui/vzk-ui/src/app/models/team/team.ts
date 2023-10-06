@@ -9,11 +9,11 @@ export class Team{
   description: string;
 
 
-  constructor(id: string, name: string, game: Game, players: Player[], discription: string) {
+  constructor(id: string, name: string, game: Game, players: Player[], description: string) {
     this.id = id;
     this.name = name;
     this.game = game;
     this.players = players;
-    this.description = discription;
+    this.description = description;
   }
 }

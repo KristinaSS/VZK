@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Team} from "../../../models/team/team";
 
 @Component({
   selector: 'app-player-box',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./player-box.component.css']
 })
 export class PlayerBoxComponent {
-
+  @Input() team: Team | undefined;
 }
