@@ -25,7 +25,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'Netherlands',
       twitch: 'https://www.twitch.tv/',
       role: 'Player, Top',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fiora_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Fiora_0.jpg'
     },
     {
       id: '2',
@@ -34,7 +34,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'UK',
       twitter: 'https://twitter.com/Goldy_Jgl',
       role: 'Player, Jungle',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Sejuani_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Sejuani_0.jpg'
     },
     {
       id: '3',
@@ -43,7 +43,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'UK',
       twitch: 'https://www.twitch.tv/',
       role: 'Player, Mid',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Xerath_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Xerath_0.jpg'
     },
     {
       id: '4',
@@ -54,7 +54,7 @@ export class TeamsBoxComponent implements OnChanges{
       twitch: 'https://www.twitch.tv/genotx',
       instagram: 'https://www.instagram.com/genoenchev/',
       role: 'Player, ADC',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aphelios_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aphelios_0.jpg'
     },
     {
       id: '5',
@@ -63,7 +63,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'UK',
       twitch: 'https://www.twitch.tv/',
       role: 'Player, Support',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Rakan_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Rakan_0.jpg'
     },
     {
       id: '6',
@@ -92,7 +92,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'Italy',
       twitch: 'https://www.twitch.tv/',
       role: 'Player, Top',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg'
     },
     {
       id: '2',
@@ -101,7 +101,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'Spain',
       twitter: 'https://twitter.com/',
       role: 'Player, Jungle',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Trundle_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Trundle_0.jpg'
     },
     {
       id: '3',
@@ -110,7 +110,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'UK',
       twitch: 'https://www.twitch.tv/',
       role: 'Player, Mid',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Malzahar_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Malzahar_0.jpg'
     },
     {
       id: '4',
@@ -119,7 +119,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'Germany',
       instagram: 'https://www.instagram.com/',
       role: 'Player, ADC',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Caitlyn_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Caitlyn_0.jpg'
     },
     {
       id: '5',
@@ -128,7 +128,7 @@ export class TeamsBoxComponent implements OnChanges{
       countryOrigin: 'Croatia',
       twitch: 'https://www.twitch.tv/',
       role: 'Player, Support',
-      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Morgana_0.jpg'
+      img: 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Morgana_0.jpg'
     },
     {
       id: '6',

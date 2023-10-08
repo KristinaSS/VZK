@@ -1,8 +1,22 @@
-<div class="container">
-  <img class="card" [src]="player?.img" alt="{{ player?.playerName }}"/>
-  <div class="overlay">
-    <div class="text">
-      Player info
+<div class="circle">
+  <div class="text">
+    <p>{{player?.playerName}}</p>
+  </div>
+
+  <div class="container">
+    <img class="card" [src]="player?.img" alt="{{ player?.playerName }}"/>
+    <div class="overlay">
+      <div class="text-t">
+        Player info
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  const text = document.querySelector('.text p');
+  text.innerHTML = text.innerHTML.split("").map(
+          (char, i) =>
+                  `<span style="transform:rotate(${i * 8}deg)">${char}</span>`
+  ).join("");
+</script>
