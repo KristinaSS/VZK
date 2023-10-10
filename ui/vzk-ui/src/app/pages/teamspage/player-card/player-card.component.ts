@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Player} from "../../../models/player/player";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-player-card',
@@ -10,7 +9,7 @@ import {Router} from "@angular/router";
 export class PlayerCardComponent {
   @Input() player: Player | undefined;
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   redirectTo(platform: string): void {
