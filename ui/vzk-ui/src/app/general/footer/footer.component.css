@@ -90,7 +90,7 @@
 
 .sm-wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   height: 90px;
 }
@@ -137,6 +137,14 @@
 
 .reddit:hover {
   background: linear-gradient(to right, #ff4500, #ff7832);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+}
+
+.twitch:hover {
+  background: linear-gradient(to right, #6441a5, #b9a3e3);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

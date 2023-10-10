@@ -4,8 +4,19 @@
       <img class="card" [src]="player?.img" alt="{{ player?.playerName }}"/>
     </div>
     <div class="c-preview__title cover">{{player?.playerName}}</div>
-    <div class="c-preview__title content">Player info </div>
+    <div class="c-preview__title content">
+      <div class="name">{{player?.playerName}}</div>
+      <div class="role">{{player?.role}}</div>
+      <div class="age-origin">{{player?.age}}, {{player?.countryOrigin}}</div>
+      <div class="social-icons-wrapper">
+        <hr class="divider"/>
+        <div class="rec-content">
+          <div class="social-icon twitch" *ngIf="player?.twitch"><i class="fab fa-twitch"></i></div>
+          <div class="social-icon twitter" *ngIf="player?.twitter"><i class="fab fa-twitter"></i></div>
+          <div class="social-icon youtube" *ngIf="player?.youtube"><i class="fab fa-youtube"></i></div>
+          <div class="social-icon instagram" *ngIf="player?.instagram"><i class="fab fa-instagram"></i></div>
+        </div>
+      </div>
+    </div>
   </a>
 </div>
-
-
