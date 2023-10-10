@@ -122,7 +122,6 @@
   display: inline-block;
   margin: 0 10px;
   transition: background 0.3s ease-in-out;
-  font-size: 40px;
   text-align: center;
 }
 
@@ -169,6 +168,20 @@
 /***************************************/
 
 .age-origin{
+  color: #ff95ab;
   padding-bottom: 10px;
 }
 
+.name{
+  font-size: 40px;
+}
+
+.role{
+  font-size: 25px;
+  color: #ff95ab;
+}
+
+.fab{
+  padding-top: 10px;
+  font-size: 40px;
+}
