@@ -17,3 +17,33 @@
   justify-content: center;
   align-items: center;
 }
+
+/********************************************/
+
+.team-name-wrapper{
+  padding-top: 50px;
+  color: white;
+  font-family: Impact, serif;
+  font-size: 80px;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-self: center;
+}
+
+.team-name{
+  color: #d34343;
+  font-family: Impact, serif;
+  font-size: 80px;
+}
+
+.team-description{
+  color: white;
+  font-family: Impact, serif;
+  font-size: 30px;
+  width: 50vw;
+  padding-left: 40px;
+  height: 80px;
+  margin-top: 10px;
+  text-align: right;
+}

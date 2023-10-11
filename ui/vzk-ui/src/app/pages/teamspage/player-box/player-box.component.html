@@ -1,3 +1,7 @@
+<div class="team-name-wrapper">Team
+  <div class="team-name"> {{team?.name}} </div>
+  <div class="team-description"> {{team?.description}} </div>
+</div>
 <div class="all-players-wrapper center">
   <div *ngFor="let player of team?.players" class="player-card center">
     <app-player-card [player]="player"></app-player-card>
