@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Player} from "../../../models/player/player";
 import {Team} from "../../../models/team/team";
 import {Game} from "../../../models/game/game";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-teams-box',
@@ -357,4 +358,6 @@ export class TeamsBoxComponent implements OnChanges{
       this.teamList = [this.lolTeam, this.lolCobaltTeam, this.valorantTeam, this.csgoTeam];
     }
   }
+
+  protected readonly first = first;
 }
