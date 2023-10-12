@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Game} from "../../../models/game/game";
+import {ScrollService} from "../../../services/scroll-service/scroll.service";
 
 @Component({
   selector: 'app-game-box',
@@ -8,4 +9,10 @@ import {Game} from "../../../models/game/game";
 })
 export class GameBoxComponent {
   @Input() gameList: Game[] | undefined;
+
+  constructor(private scrollService: ScrollService) {}
+
+  scrollToGameLogo(gameId: string) {
+    this.scrollService.scrollToElement(gameId);
+  }
 }

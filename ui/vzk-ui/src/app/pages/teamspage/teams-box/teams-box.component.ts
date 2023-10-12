@@ -1,15 +1,16 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Player} from "../../../models/player/player";
 import {Team} from "../../../models/team/team";
 import {Game} from "../../../models/game/game";
 import {first} from "rxjs";
+import {ScrollService} from "../../../services/scroll-service/scroll.service";
 
 @Component({
   selector: 'app-teams-box',
   templateUrl: './teams-box.component.html',
   styleUrls: ['./teams-box.component.css']
 })
-export class TeamsBoxComponent implements OnChanges{
+export class TeamsBoxComponent implements OnChanges, OnInit {
   @Input() gameList: Game[] | undefined;
   default: Game = {
     id: `0`,
@@ -288,7 +289,7 @@ export class TeamsBoxComponent implements OnChanges{
 
   teamList: Team[];
 
-  constructor() {
+  constructor(private scrollService: ScrollService, private el: ElementRef) {
     console.log(this.gameList);
     console.log(this.gameList?.length);
 
@@ -321,7 +322,7 @@ export class TeamsBoxComponent implements OnChanges{
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     };
 
-    this.teamList =[this.lolTeam, this.lolCobaltTeam, this.valorantTeam, this.csgoTeam];
+    this.teamList = [this.lolTeam, this.lolCobaltTeam, this.valorantTeam, this.csgoTeam];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -360,4 +361,13 @@ export class TeamsBoxComponent implements OnChanges{
   }
 
   protected readonly first = first;
+
+  ngOnInit(): void {
+    this.scrollService.scrollToElement$.subscribe((gameId: string) => {
+      const element = this.el.nativeElement.querySelector(`#gameLogo-${gameId}`);
+      if (element) {
+        element.scrollIntoView({behavior: 'smooth', block: 'center'});
+      }
+    });
+  }
 }

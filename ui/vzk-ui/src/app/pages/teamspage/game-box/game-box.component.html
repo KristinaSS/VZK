@@ -1,3 +1,4 @@
 <div class="game-box-container">
-  <app-game-card *ngFor="let game of gameList" [game]="game" class="game-card-wrapper"></app-game-card>
+  <app-game-card *ngFor="let game of gameList" [game]="game" class="game-card-wrapper"
+                 (click)="scrollToGameLogo(game.id)"></app-game-card>
 </div>

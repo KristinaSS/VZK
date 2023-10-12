@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/models/event/event';
-import {Result} from "../models/result/result";
+import {Result} from "../../models/result/result";
 
 @Injectable({
   providedIn: 'root'
