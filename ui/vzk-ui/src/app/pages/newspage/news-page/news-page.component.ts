@@ -21,6 +21,18 @@ export class NewsPageComponent implements OnInit {
     const article8 = new Article('4', '2023-09-30', 'Description 4', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT62AjFzFCrwzQhGKOKZglZG3hjgQ9nYaCiwg&usqp=CAU', 'Title 4');
 
     // Push the articles into the newsArticles array
-    this.newsArticles.push(article1, article2, article3, article4, article5, article6, article7, article8);
+    this.newsArticles.push(
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8,
+      article1, article2, article3, article4, article5, article6, article7, article8);
   }
 }
