@@ -22,7 +22,8 @@
 
 .team-name-wrapper{
   padding-left: 50px;
-  padding-top: 50px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   color: white;
   font-family: Impact, serif;
   font-size: 80px;

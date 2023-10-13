@@ -19,6 +19,7 @@ import { GameCardComponent } from './pages/teamspage/game-card/game-card.compone
 import { TeamsBoxComponent } from './pages/teamspage/teams-box/teams-box.component';
 import { PlayerBoxComponent } from './pages/teamspage/player-box/player-box.component';
 import { PlayerCardComponent } from './pages/teamspage/player-card/player-card.component';
+import { NewsPageComponent } from './pages/newspage/news-page/news-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PlayerCardComponent } from './pages/teamspage/player-card/player-card.c
     GameCardComponent,
     TeamsBoxComponent,
     PlayerBoxComponent,
-    PlayerCardComponent
+    PlayerCardComponent,
+    NewsPageComponent
   ],
   imports: [
     BrowserModule,
