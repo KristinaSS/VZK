@@ -21,6 +21,7 @@ import { PlayerBoxComponent } from './pages/teamspage/player-box/player-box.comp
 import { PlayerCardComponent } from './pages/teamspage/player-card/player-card.component';
 import { NewsPageComponent } from './pages/newspage/news-page/news-page.component';
 import { TopNewsBannerComponent } from './pages/newspage/top-news-banner/top-news-banner.component';
+import { NewsNewsBoxComponent } from './pages/newspage/news-news-box/news-news-box.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TopNewsBannerComponent } from './pages/newspage/top-news-banner/top-new
     PlayerBoxComponent,
     PlayerCardComponent,
     NewsPageComponent,
-    TopNewsBannerComponent
+    TopNewsBannerComponent,
+    NewsNewsBoxComponent
   ],
   imports: [
     BrowserModule,

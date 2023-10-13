@@ -1,0 +1,23 @@
+<div class="news-box">
+    <div class="news-box-container">
+
+        <div class="news-list">
+            <div *ngFor="let article of articles">
+                <div class="news-item">
+                    <img [src]="article.image" alt="{{ article.title }}"/>
+                    <h2>{{ article.title }}</h2>
+                </div>
+            </div>
+
+            <div *ngIf="articles.length === 0" class="no-articles-message">
+                No news articles available.
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="show-all-button"
+                    role="button">
+                Show All
+            </button>
+        </div>
+    </div>
+</div>
