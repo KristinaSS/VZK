@@ -20,6 +20,7 @@ import { TeamsBoxComponent } from './pages/teamspage/teams-box/teams-box.compone
 import { PlayerBoxComponent } from './pages/teamspage/player-box/player-box.component';
 import { PlayerCardComponent } from './pages/teamspage/player-card/player-card.component';
 import { NewsPageComponent } from './pages/newspage/news-page/news-page.component';
+import { TopNewsBannerComponent } from './pages/newspage/top-news-banner/top-news-banner.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NewsPageComponent } from './pages/newspage/news-page/news-page.componen
     TeamsBoxComponent,
     PlayerBoxComponent,
     PlayerCardComponent,
-    NewsPageComponent
+    NewsPageComponent,
+    TopNewsBannerComponent
   ],
   imports: [
     BrowserModule,
