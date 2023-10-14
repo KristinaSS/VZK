@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Article} from "../../models/article/article";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,15 +30,8 @@ export class NewsService {
     return this.newsArticles;
   }
 
-  getArticle(id: string ): Article | undefined {
-    let found = undefined;
-    for (const article of this.newsArticles){
-      console.log(article);
-      if(article.id == id){
-        found = article;
-        break;
-      }
-    }
-    return found;
+  getArticle(id: string | null| undefined): Observable<Article | undefined> {
+    const article1 = new Article('1', '2023-09-27', 'Description 1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT62AjFzFCrwzQhGKOKZglZG3hjgQ9nYaCiwg&usqp=CAU', 'Very long title 1 Very long title 1 Very long title 1 Very long title 1 ');
+    return of(article1);
   }
 }
