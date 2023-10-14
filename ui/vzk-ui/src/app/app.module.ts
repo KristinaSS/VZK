@@ -24,6 +24,7 @@ import { TopNewsBannerComponent } from './pages/newspage/top-news-banner/top-new
 import { NewsNewsBoxComponent } from './pages/newspage/news-news-box/news-news-box.component';
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import { VieArticlePageComponent } from './pages/viewarticlepage/vie-article-page/vie-article-page.component';
+import { VieArticlContentComponent } from './pages/viewarticlepage/vie-articl-content/vie-articl-content.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { VieArticlePageComponent } from './pages/viewarticlepage/vie-article-pag
     NewsPageComponent,
     TopNewsBannerComponent,
     NewsNewsBoxComponent,
-    VieArticlePageComponent
+    VieArticlePageComponent,
+    VieArticlContentComponent
   ],
   imports: [
     BrowserModule,

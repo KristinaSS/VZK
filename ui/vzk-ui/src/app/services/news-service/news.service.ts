@@ -33,6 +33,7 @@ export class NewsService {
   getArticle(id: string ): Article | undefined {
     let found = undefined;
     for (const article of this.newsArticles){
+      console.log(article);
       if(article.id == id){
         found = article;
         break;

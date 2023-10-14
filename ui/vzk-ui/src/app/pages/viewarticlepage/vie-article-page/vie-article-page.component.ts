@@ -17,7 +17,9 @@ export class VieArticlePageComponent implements OnInit{
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id != null) {
+      console.log(id);
       this.article = this.newsService.getArticle(id);
+      console.log(this.article);
     }
   }
 }
