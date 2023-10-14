@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class NewsService {
 
-  newsArticles: Article[] = []; // Initialize as an empty array of Article objects
+  newsArticles: Article[] = [];
 
   constructor() {}
 
@@ -28,5 +28,16 @@ export class NewsService {
     this.newsArticles.push(article1, article2, article3, article4, article5, article6, article7, article8);
 
     return this.newsArticles;
+  }
+
+  getArticle(id: string ): Article | undefined {
+    let found = undefined;
+    for (const article of this.newsArticles){
+      if(article.id == id){
+        found = article;
+        break;
+      }
+    }
+    return found;
   }
 }
