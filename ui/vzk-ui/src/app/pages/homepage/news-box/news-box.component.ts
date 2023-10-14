@@ -1,20 +1,28 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Article} from "../../../models/article/article";
+import {NewsService} from "../../../services/news-service/news.service";
 
 @Component({
-    selector: 'app-news-box',
-    templateUrl: './news-box.component.html',
-    styleUrls: ['./news-box.component.css']
+  selector: 'app-news-box',
+  templateUrl: './news-box.component.html',
+  styleUrls: ['./news-box.component.css']
 })
-export class NewsBoxComponent {
-    @Input() articles: Article[] = [];
-    visibleArticles: number = 3;
+export class NewsBoxComponent implements OnInit {
+  articles: Article[] = [];
+  visibleArticles: number = 3;
 
-    openArticle(article: any) {
-        // Implement logic to open the entire article here
-        console.log("Open article:", article);
-    }
+  constructor(private newsService: NewsService) {
+  }
 
-    showMore() {
-    }
+  openArticle(article: any) {
+    // Implement logic to open the entire article here
+    console.log("Open article:", article);
+  }
+
+  showMore() {
+  }
+
+  ngOnInit(): void {
+    this.articles = this.newsService.getMoreArticles();
+  }
 }
