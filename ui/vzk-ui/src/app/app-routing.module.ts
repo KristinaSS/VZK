@@ -4,6 +4,9 @@ import {HomeComponent} from "./pages/homepage/home/home.component";
 import {TeamPageComponent} from "./pages/teamspage/team-page/team-page.component";
 import {NewsPageComponent} from "./pages/newspage/news-page/news-page.component";
 import {VieArticlePageComponent} from "./pages/viewarticlepage/vie-article-page/vie-article-page.component";
+import {
+  ScheduleResultPageComponent
+} from "./pages/scheduleresultpage/schecule-result-page/schedule-result-page.component";
 
 const routes: Routes = [
   {
@@ -25,6 +28,10 @@ const routes: Routes = [
   {
     path: 'news/:id',
     component: VieArticlePageComponent
+  },
+  {
+    path: 'schedule',
+    component: ScheduleResultPageComponent
   },
   {
     path: '**',

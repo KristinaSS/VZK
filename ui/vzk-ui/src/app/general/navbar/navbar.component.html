@@ -11,7 +11,7 @@
   <ul class="nav-navbar" [ngClass]="{'navbar': !isMobileMenuActive, 'active': isMobileMenuActive}">
     <li><a class="center nav-item desktop-item" routerLink="teams">Teams</a></li>
     <li><a class="center nav-item desktop-item" routerLink="news">News</a></li>
-    <li><a class="center nav-item desktop-item">Schedule</a></li>
+    <li><a class="center nav-item desktop-item" routerLink="schedule">Schedule</a></li>
     <li><a class="center nav-item desktop-item">Contact</a></li>
     <li><a class="center nav-item desktop-item">About</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="!loggedIn" (click)="login()">Login</a></li>
