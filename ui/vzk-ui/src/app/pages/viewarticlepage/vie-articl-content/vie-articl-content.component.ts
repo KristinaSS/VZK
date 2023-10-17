@@ -32,4 +32,30 @@ export class VieArticlContentComponent implements OnInit {
       );
     }
   }
+
+  shareOnFacebook() {
+    const url = encodeURIComponent(window.location.href);
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    this.openShareWindow(facebookShareUrl);
+  }
+
+  shareOnTwitter() {
+    const url = encodeURIComponent(window.location.href);
+    // @ts-ignore
+    const text = encodeURIComponent(this.article.title);
+    const twitterShareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+    this.openShareWindow(twitterShareUrl);
+  }
+
+  shareOnReddit() {
+    const url = encodeURIComponent(window.location.href);
+    // @ts-ignore
+    const title = encodeURIComponent(this.article.title);
+    const redditShareUrl = `https://www.reddit.com/submit?url=${url}&title=${title}`;
+    this.openShareWindow(redditShareUrl);
+  }
+
+  private openShareWindow(url: string) {
+    window.open(url, '_blank', 'width=600,height=400');
+  }
 }

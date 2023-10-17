@@ -1,7 +1,105 @@
 .content{
   width: 100vw;
+  margin-left: -8px;
 }
 
 .img-wrapper{
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.article-img{
+  width: 50%;
+}
+
+.separator-top {
+  z-index: -1;
+  width: 0;
+  height: 0;
+  border-right: 100vw solid transparent;
+  border-bottom: 20vw solid white;
+  position: absolute;
+  top: 246px;
+}
+
+.field{
+  background-color: white;
+  font-family: Impact, serif;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-wrapper{
+  padding-top: 50px;
+  width: 800px;
+  text-align: center;
+}
+
+.date-wrapper{
+  padding-top: 10px;
+}
+
+.date{
+  font-size: 20px;
+  color: darkred;
+}
+
+.title{
+  font-size: 40px;
+  color: red;
+}
+
+.content-wrapper{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 800px;
+  text-align: left;
+}
+
+.description{
+  font-family: Arial, sans-serif;
+}
+
+.social-wrapper{
+  padding-top: 10px;
+  font-family: Arial, sans-serif;
+  color: gray;
+}
+
+.social{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-icon{
+  padding-left: 10px;
+}
+
+.social-icon:hover{
+  background: darkred;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+}
+
+:host ::ng-deep p {
+  text-indent: 25px !important;
+}
+
+:host ::ng-deep .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+:host ::ng-deep .image-container img {
+  max-width: 100%;
+  height: auto;
 }

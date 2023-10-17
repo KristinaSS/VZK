@@ -1,5 +1,25 @@
 <div class="content">
   <div class="img-wrapper">
-    <img [src]="article?.image">
+    <img [src]="article?.image" class="article-img">
+  </div>
+  <div class="separator-top"></div>
+  <div class="field">
+    <div class="title-wrapper">
+      <div class="title"> {{article?.title}}</div>
+    </div>
+    <div class="date-wrapper">
+      <div class="date"> {{article?.date}}</div>
+    </div>
+    <div class="social-wrapper">
+      <div class="social">
+        Spread the news
+        <div class="social-icon" (click)="shareOnFacebook()"><i class="fab fa-facebook"></i></div>
+        <div class="social-icon" (click)="shareOnTwitter()"><i class="fab fa-twitter"></i></div>
+        <div class="social-icon" (click)="shareOnReddit()"><i class="fab fa-reddit"></i></div>
+      </div>
+      <div class="content-wrapper">
+        <div class="description" [innerHTML]="article?.description"></div>
+      </div>
+    </div>
   </div>
 </div>
