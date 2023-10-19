@@ -8,9 +8,14 @@
             </div>
         </div>
         <hr class="event-divider"/>
-        <div class="event-time">{{ event.datetime | date: 'h:mm a' }} BST</div>
-        <div class="event-date">{{ event.datetime | date: 'MMM d, YYYY' }}</div>
-        <div class="event-game">{{ event.game }}</div>
+        <div class="planned-time">
+            <div class="event-time">{{ event.datetime | date: 'h:mm a' }} BST</div>
+            <div class="event-date">{{ event.datetime | date: 'MMM d, YYYY' }}</div>
+        </div>
+        <div class="event-game">
+            <img class="game-logo" [src]="getGame(event.game).logo" alt="game-logo"/>
+        </div>
+        <hr class="event-divider"/>
         <div class="event-description">{{ event.description }}</div>
     </div>
 </div>

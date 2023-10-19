@@ -29,7 +29,7 @@ export class EventServiceService {
       game: 'League of Legends',
       datetime: new Date('2023-10-02T15:30:00'),
       description: 'Belfast Storm Game. UKEL Regular Split',
-      enemyLogoURL: 'https://scontent.fsof8-1.fna.fbcdn.net/v/t39.30808-6/327339028_3350462388604806_8503409016915163023_n.png?_nc_cat=106&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=2kX1mmHIwZMAX_ZscS0&_nc_ht=scontent.fsof8-1.fna&oh=00_AfCcb4mHWaS7rBg9S_Nuf6PjI0pl6rmfJIs4Jp19Z0Ot_Q&oe=651CA981',
+      enemyLogoURL: 'https://scontent.fsof8-1.fna.fbcdn.net/v/t39.30808-1/327339028_3350462388604806_8503409016915163023_n.png?stp=dst-png_p200x200&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=L_RzXKU4LLwAX_razjA&_nc_ht=scontent.fsof8-1.fna&oh=00_AfD8A5FA-gPr8ZGtyjAkRXQv-a7etiuiLSM91YuYbomQ6Q&oe=6532FFC3',
     },
     {
       id: `123`,
@@ -53,7 +53,7 @@ export class EventServiceService {
       game: 'League of Legends',
       datetime: new Date('2023-10-10T15:30:00'),
       description: 'Belfast Storm Game. UKEL Regular Split',
-      enemyLogoURL: 'https://scontent.fsof8-1.fna.fbcdn.net/v/t39.30808-6/327339028_3350462388604806_8503409016915163023_n.png?_nc_cat=106&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=2kX1mmHIwZMAX_ZscS0&_nc_ht=scontent.fsof8-1.fna&oh=00_AfCcb4mHWaS7rBg9S_Nuf6PjI0pl6rmfJIs4Jp19Z0Ot_Q&oe=651CA981',
+      enemyLogoURL: 'https://scontent.fsof8-1.fna.fbcdn.net/v/t39.30808-1/327339028_3350462388604806_8503409016915163023_n.png?stp=dst-png_p200x200&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=L_RzXKU4LLwAX_razjA&_nc_ht=scontent.fsof8-1.fna&oh=00_AfD8A5FA-gPr8ZGtyjAkRXQv-a7etiuiLSM91YuYbomQ6Q&oe=6532FFC3',
     },
   ];
 

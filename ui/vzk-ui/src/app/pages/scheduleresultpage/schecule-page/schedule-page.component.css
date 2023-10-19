@@ -1,49 +1,93 @@
 .event-container {
     margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #e5e8e8 ;
+    border: 1px solid #e5e8e8;
     border-radius: 2px;
     background-color: #f2f4f4;
 }
 
+.event-details {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.planned-time {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    width: 110px;
+}
+
 .event-time {
-    color:  #784212;
+    color: #784212;
     font-style: italic;
     font-size: 20px;
 }
 
 .event-description {
-    color:      #aeb6bf   ;
+    color: #8f969f;
+    padding: 10px;
+    width: 250px;
 }
 
 .event-game {
-    color:      #aeb6bf   ;
+    color: #aeb6bf;
 }
 
-.footer-divider {
-    border-top: 1px solid #ccc;
+.game-logo{
+    width: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.event-divider {
+    border: 0; /* Remove the default border */
+    border-left: 2px solid #ccc; /* Set the left border to create a vertical line */
+    height: 100px; /* Set the height of the vertical line */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
 }
 
 .event-title-wrapper {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    width: 100%;
+    padding-right: 10px;
+    width: 270px;
 }
 
 .event-title {
     color: #641e16;
     font-size: 30px;
     justify-items: center;
+    align-items: center;
+    display: flex;
     width: 100%;
 }
 
-img {
-    width: 50px;
-    height: 50px;
+.event-title img {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+/********************/
+.event-container {
+    position: relative; /* Add position relative to .event-container */
+}
+
+.event-description {
+    position: absolute;
+    right: 10px; /* Adjust the right position */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+    text-align: right;
 }

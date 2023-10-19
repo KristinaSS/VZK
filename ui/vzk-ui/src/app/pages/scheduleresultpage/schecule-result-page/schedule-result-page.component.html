@@ -5,10 +5,10 @@
       <button (click)="showContent(1)" [disabled]="button1Disabled">Upcoming</button>
       <button (click)="showContent(2)" [disabled]="button2Disabled">Results</button>
     </div>
-    <div *ngIf="currentContent === 1">
+    <div *ngIf="currentContent === 1" class="schedule-content">
       <app-schecule-page></app-schecule-page>
     </div>
-    <div *ngIf="currentContent === 2">
+    <div *ngIf="currentContent === 2" class="schedule-content">
       <app-result-page></app-result-page>
     </div>
   </div>

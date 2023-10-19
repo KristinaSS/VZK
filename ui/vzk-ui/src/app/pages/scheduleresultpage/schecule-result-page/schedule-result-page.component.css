@@ -8,14 +8,18 @@
 }
 
 .box{
-    width: 50%;
-    background-color: rgba(  48, 23, 23  , 0.8);
+    width: 60%;
+    background-color: rgba(  255, 255, 255  , 0.85);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding-top: 50px;
     padding-bottom: 40px;
+}
+
+.schedule-content{
+    width: 80%;
 }
 
 .buttons {
