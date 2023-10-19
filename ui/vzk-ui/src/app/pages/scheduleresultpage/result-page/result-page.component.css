@@ -1,147 +1,108 @@
 .event-container {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #e5e8e8;
-    border-radius: 2px;
-    background-color: #f2f4f4;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #e5e8e8;
+  border-radius: 2px;
+  background-color: #f2f4f4;
 }
 
 .event-details {
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .planned-time {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-    width: 110px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  width: 110px;
 }
 
 .event-time {
-    color: #784212;
-    font-style: italic;
-    font-size: 20px;
+  color: #784212;
+  font-style: italic;
+  font-size: 20px;
 }
 
 .event-description {
-    color: #8f969f;
-    padding: 10px;
-    width: 250px;
+  color: #8f969f;
+  padding: 10px;
+  width: 250px;
+  position: relative;
+  left: 20px;
 }
 
 .event-game {
-    color: #aeb6bf;
+  color: #aeb6bf;
 }
 
-.game-logo{
-    width: 100px;
-    object-fit: cover;
-    margin-right: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+.game-logo {
+  width: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .event-divider {
-    border: 0; /* Remove the default border */
-    border-left: 2px solid #ccc; /* Set the left border to create a vertical line */
-    height: 100px; /* Set the height of the vertical line */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+  border: 0; /* Remove the default border */
+  border-left: 2px solid #ccc; /* Set the left border to create a vertical line */
+  height: 100px; /* Set the height of the vertical line */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
 }
 
 .event-title-wrapper {
-    padding-right: 10px;
-    width: 270px;
+  padding-right: 10px;
+  width: 270px;
 }
 
 .event-title {
-    color: #641e16;
-    font-size: 30px;
-    justify-items: center;
-    align-items: center;
-    display: flex;
-    width: 100%;
+  color: #641e16;
+  font-size: 30px;
+  justify-items: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
 }
 
 .event-title img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-
-/********************/
-.event-container {
-    position: relative; /* Add position relative to .event-container */
-}
-
-.arrow-btn {
-    position: absolute;
-    right: 10px; /* Adjust the right position */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Center vertically */
-}
-
-* {
-    box-sizing: border-box;
-}
+/***************/
 
 .arrow {
-    cursor: pointer;
-    position: relative;
-    display: block;
-    right: 10px;
-    width: 50px;
-    height: 50px;
-    border: solid 6px #4b0b18;
-    border-radius: 100%;
-    z-index: 1;
-    transition: all .2s linear;
+  border: solid black;
+  border-width: 0 6px 6px 0;
+  display: inline-block;
+  padding: 3px;
+}
 
-    &:before, &:after {
-        content: "";
-        position: absolute;
-        width: 35%;
-        height: 10%;
-        top: 41%;
-        left: 55%;
-        background: #4b0b18;
-        z-index: 2;
-        transform: translate(-50%, -50%) rotate(45deg);
-        transition: all .2s linear;
-    }
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
 
-    &:after {
-        z-index: 3;
-        top: 59%;
-        left: 55%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-    }
+.arrow-btn{
+  padding: 10px;
+  cursor: pointer;
+}
 
-    &:hover {
-        border: solid 8px #ff013c;
-
-        &:after, &:before {
-            background: #ff013c;
-        }
-    }
-
-    &:active {
-        border: solid 8px #111;
-
-        &:after, &:before {
-            background: #111;
-        }
-    }
+.arrow:hover{
+  border: solid red;
+  border-width: 0 6px 6px 0;
+  display: inline-block;
 }
 
