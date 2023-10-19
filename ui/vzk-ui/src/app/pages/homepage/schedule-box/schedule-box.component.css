@@ -62,7 +62,7 @@ img {
 }
 
 .buttons button {
-  --_c: #ff013c;
+  --_c: #4b0b18;
   flex: calc(1.25 + var(--_s,0));
   min-width: 0;
   font-size: 30px;
@@ -81,7 +81,7 @@ img {
   font-family: Impact, serif;
 }
 .buttons button + button {
-  --_c: #aeb6bf;
+  --_c: #ffd4d4;
   flex: calc(.75 + var(--_s,0));
   background:
     conic-gradient(from -90deg at calc(1.3*var(--b)) 100%,var(--_c) 119deg, #dcddde 121deg)
