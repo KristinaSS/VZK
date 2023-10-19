@@ -11,6 +11,8 @@ import {Game} from "../../../models/game/game";
 })
 export class SchedulePageComponent implements OnInit{
   futureEvents: Event[] = [];
+  scrollDistance = 2;
+  scrollUpDistance = 1;
   constructor(private eventService: EventServiceService, private gameService: GameService) {}
 
   ngOnInit(): void {
@@ -19,5 +21,13 @@ export class SchedulePageComponent implements OnInit{
 
   getGame(id: string): Game{
     return this.gameService.getGame();
+  }
+
+  loadData() {
+    console.log(this.futureEvents.length)
+    if(this.futureEvents.length < 30){
+      const newEvents = this.eventService.getEvents();
+      this.futureEvents = this.futureEvents.concat(newEvents);
+    }
   }
 }

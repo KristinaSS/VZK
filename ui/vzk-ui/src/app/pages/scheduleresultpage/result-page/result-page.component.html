@@ -1,24 +1,27 @@
-<div *ngFor="let event of futureEvents" class="event-container">
+<div class="result-box" infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadData()">
+  <div *ngFor="let event of futureEvents" class="event-container">
     <div class="event-details">
-        <div class="event-title-wrapper">
-            <div class="event-title">
-                <img src="assets/imgs/VZK.png" alt="vzk-logo">
-                VS
-                <img [src]="event.enemyLogoURL" alt="Image from URL">
-            </div>
+      <div class="event-title-wrapper">
+        <div class="event-title">
+          <img src="assets/imgs/VZK.png" alt="vzk-logo">
+          VS
+          <img [src]="event.enemyLogoURL" alt="Image from URL">
         </div>
-        <hr class="event-divider"/>
-        <div class="planned-time">
-            <div class="event-time">{{ event.datetime | date: 'h:mm a' }} BST</div>
-            <div class="event-date">{{ event.datetime | date: 'MMM d, YYYY' }}</div>
-        </div>
-        <div class="event-game">
-            <img class="game-logo" [src]="getGame(event.game).logo" alt="game-logo"/>
-        </div>
-        <hr class="event-divider"/>
-        <div class="event-description">{{ event.description }}</div>
-        <div class="arrow-btn">
-          <i class="arrow right"></i>
-        </div>
+      </div>
+      <hr class="event-divider"/>
+      <div class="planned-time">
+        <div class="event-time">{{ event.datetime | date: 'h:mm a' }} BST</div>
+        <div class="event-date">{{ event.datetime | date: 'MMM d, YYYY' }}</div>
+      </div>
+      <div class="event-game">
+        <img class="game-logo" [src]="getGame(event.game).logo" alt="game-logo"/>
+      </div>
+      <hr class="event-divider"/>
+      <div class="event-description">{{ event.description }}</div>
+      <div class="arrow-btn">
+        <i class="arrow right"></i>
+      </div>
     </div>
+  </div>
 </div>
+

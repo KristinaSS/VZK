@@ -15,7 +15,7 @@
     align-items: center;
     flex-direction: column;
     padding-top: 50px;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 
 .schedule-content{
@@ -80,5 +80,10 @@ button:disabled{
     justify-content: flex-end;
 }
 
+
+.instructions{
+  padding-bottom: 40px;
+  font-family: Arial, sans-serif;
+}
 
 
