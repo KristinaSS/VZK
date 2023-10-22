@@ -2,8 +2,8 @@
 <div class="schedule-box">
   <div class="box">
     <div class="buttons">
-      <button (click)="showContent(1)" [disabled]="button1Disabled">Results</button>
-      <button (click)="showContent(2)" [disabled]="button2Disabled">Upcoming</button>
+      <button (click)="showContent(1)" [disabled]="button1Disabled">Upcoming</button>
+      <button (click)="showContent(2)" [disabled]="button2Disabled">Results</button>
     </div>
     <div class="instructions"> Switch between past and future matches </div>
     <div *ngIf="currentContent === 1" class="schedule-content">

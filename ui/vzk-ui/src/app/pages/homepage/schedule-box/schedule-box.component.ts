@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { EventServiceService } from 'src/app/services/event-service/event-service.service';
 import { Event } from 'src/app/models/event/event';
 import {Result} from "../../../models/result/result";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-schedule-box',
@@ -15,7 +16,7 @@ export class ScheduleBoxComponent implements OnInit{
   button1Disabled: boolean = true;
   button2Disabled: boolean = false;
 
-  constructor(private eventService: EventServiceService) {}
+  constructor(private eventService: EventServiceService, private router: Router) {}
 
   ngOnInit(): void {
     this.nextTwoEvents = this.eventService.getNextTwoEvents();
@@ -31,6 +32,19 @@ export class ScheduleBoxComponent implements OnInit{
       this.currentContent = 2;
       this.button1Disabled = false;
       this.button2Disabled = true;
+    }
+  }
+
+  viewMore(number: number) {
+    if(number == 1) {
+      this.router.navigate(['/schedule']).then(r => {
+        window.scrollTo(0, 0);
+      });
+    }
+    if(number == 2) {
+      this.router.navigate(['/schedule']).then(r => {
+        window.scrollTo(0, 0);
+      });
     }
   }
 }
