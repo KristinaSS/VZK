@@ -30,6 +30,10 @@ import { SchedulePageComponent } from './pages/scheduleresultpage/schecule-page/
 import { ResultPageComponent } from './pages/scheduleresultpage/result-page/result-page.component';
 import { ScheculeResultHeaderComponent } from './pages/scheduleresultpage/schecule-result-header/schecule-result-header.component';
 import { ContactPageComponent } from './pages/contactpage/contact-page/contact-page.component';
+import {FormsModule} from "@angular/forms";
+import { ContactHeaderComponent } from './pages/contactpage/contact-header/contact-header.component';
+import { ContactFormComponent } from './pages/contactpage/contact-form/contact-form.component';
+import { ContactDetailsComponent } from './pages/contactpage/contact-details/contact-details.component';
 
 @NgModule({
   declarations: [
@@ -59,12 +63,16 @@ import { ContactPageComponent } from './pages/contactpage/contact-page/contact-p
     SchedulePageComponent,
     ResultPageComponent,
     ScheculeResultHeaderComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    ContactHeaderComponent,
+    ContactFormComponent,
+    ContactDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+      FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
