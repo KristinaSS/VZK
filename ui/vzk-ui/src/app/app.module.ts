@@ -29,6 +29,7 @@ import { ScheduleResultPageComponent } from './pages/scheduleresultpage/schecule
 import { SchedulePageComponent } from './pages/scheduleresultpage/schecule-page/schedule-page.component';
 import { ResultPageComponent } from './pages/scheduleresultpage/result-page/result-page.component';
 import { ScheculeResultHeaderComponent } from './pages/scheduleresultpage/schecule-result-header/schecule-result-header.component';
+import { ContactPageComponent } from './pages/contactpage/contact-page/contact-page.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ScheculeResultHeaderComponent } from './pages/scheduleresultpage/schecu
     ScheduleResultPageComponent,
     SchedulePageComponent,
     ResultPageComponent,
-    ScheculeResultHeaderComponent
+    ScheculeResultHeaderComponent,
+    ContactPageComponent
   ],
   imports: [
     BrowserModule,
