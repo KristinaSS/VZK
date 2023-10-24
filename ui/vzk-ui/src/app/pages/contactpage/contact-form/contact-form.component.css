@@ -1,6 +1,24 @@
 .contact-container {
-  max-width: 400px;
-  margin: auto;
+  background-color: white;
+  padding: 50px;
+  margin: 50px;
+
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+}
+
+.name-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.max-text-input{
+  width: 50%;
+}
+
+.text-input{
+  padding: 10px;
+  margin: 0 5px 12px;
 }
 
 form {
@@ -10,6 +28,9 @@ form {
 
 label {
   margin-bottom: 8px;
+  margin-top: 8px;
+  font-size: 15px;
+  margin-left: 5px;
 }
 
 input {
@@ -28,3 +49,45 @@ button:disabled {
   background-color: #aaaaaa;
   cursor: not-allowed;
 }
+
+.name-form{
+  display: flex;
+  flex-direction: row;
+}
+
+.submit-btn{
+  margin-top: 20px;
+}
+
+.consent-checkbox{
+  align-self: flex-start;
+}
+
+.consent-box{
+  display: inline-flex;
+}
+
+.policy-link{
+  color: #ff013c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.policy-link:hover{
+  text-decoration: underline;
+}
+
+.consent-text{
+  margin-left: 10px;
+}
+
+.area{
+  max-width: 490px;
+  height: 90px;
+}
+
+.required-star {
+  color: #ff003c;
+  margin-left: 3px; /* Adjust the spacing as needed */
+}
+

@@ -1,15 +1,126 @@
 <div class="contact-container">
-  <h2>Contact Us</h2>
+  <h2>Request</h2>
   <form (ngSubmit)="submitForm()" #contactForm="ngForm">
     <!-- Your form fields go here -->
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
+    <div class="name-form">
+      <div class="name-wrapper max-text-input">
+        <label for="firstName">FIRST NAME <span *ngIf="formData.fName==''" class="required-star">*</span></label>
+        <input type="text" class="text-input" id="firstName" name="firstName" [(ngModel)]="formData.fName" required>
+      </div>
+      <div class="name-wrapper max-text-input">
+        <label for="lastName">LAST NAME <span *ngIf="formData.lName==''"class="required-star">*</span></label>
+        <input type="text" class="text-input" id="lastName" name="lastName" [(ngModel)]="formData.lName" required>
+      </div>
+    </div>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
+    <label for="email">EMAIL <span *ngIf="formData.email==''" class="required-star">*</span></label>
+    <input type="email" class="text-input" id="email" name="email" [(ngModel)]="formData.email" required>
 
-    <!-- Add more form fields as needed -->
+    <label for="topic">TOPIC <span *ngIf="formData.topic==''" class="required-star">*</span></label>
+    <select type="text" class="text-input" id="topic" name="topic" [(ngModel)]="formData.topic" required>
+      <option value="" disabled selected hidden>Choose a topic</option>
+      <option value="generalInquiry">General Inquiry</option>
+      <option value="application">Application Request</option>
+      <option value="partnership">Partnership</option>
+      <option value="other">Other</option>
+    </select>
 
-    <button type="submit" [disabled]="contactForm.invalid">Submit</button>
+    <label *ngIf="formData.topic != 'application'" for="comment">COMMENTS/QUESTIONS
+      <span *ngIf="formData.comments==''" class="required-star">*</span></label>
+    <textarea *ngIf="formData.topic != 'application'" type="text" class="text-input area" id="comment" name="comment"
+              [(ngModel)]="formData.comments" required></textarea>
+    <!---------------------------------------------------------------------------------------------------------------->
+    <label *ngIf="formData.topic == 'application'" for="game">APPLIED GAME <span *ngIf="formData.game==''" class="required-star">*</span></label>
+    <select *ngIf="formData.topic == 'application'" type="text" class="text-input" id="game" name="game"
+            [(ngModel)]="formData.game" (ngModelChange)="onGameChange()" required>
+      <option value="" disabled selected hidden>Choose a game</option>
+      <option *ngFor="let game of games" [value]="game.id">{{game.title}}</option>
+    </select>
+
+    <!---------------------------------------------------------------------------------------------------------------->
+
+    <label *ngIf="formData.topic == 'application'" for="applicationType">APPLICATION TYPE
+      <span *ngIf="formData.applicationType==''" class="required-star">*</span></label>
+    <select type="text" class="text-input" id="applicationType" name="applicationType"
+            [(ngModel)]="formData.applicationType" *ngIf="formData.topic == 'application'" required>
+      <option value="" disabled selected hidden>Choose an application type</option>
+      <option value="player">Player</option>
+      <option value="manager">Manager</option>
+      <option value="coach">Coach</option>
+      <option value="caster">Caster</option>
+      <option value="other">Other</option>
+    </select>
+    <!---------------------------------------------------------------------------------------------------------------->
+
+    <label for="profileURL" *ngIf="formData.topic == 'application' && formData.applicationType == 'player'">
+      PROFILE URL <span *ngIf="formData.profileURL==''" class="required-star">*</span></label>
+    <input *ngIf="formData.topic == 'application' && formData.applicationType == 'player'"
+           type="url" class="text-input" id="profileURL" name="profileURL"
+           [(ngModel)]="formData.profileURL" [disabled]="!formData.game || !formData.applicationType" required>
+
+    <label *ngIf="formData.topic == 'application' && formData.applicationType == 'player'" for="role">APPLIED ROLE
+      <span *ngIf="formData.role==''" class="required-star">*</span></label>
+    <select *ngIf="formData.topic == 'application' && formData.applicationType == 'player'"
+            type="text" class="text-input" id="role" name="role"
+            [(ngModel)]="formData.role" [disabled]="!formData.game || !formData.applicationType" required>
+      <option value="" disabled selected hidden>Choose a role</option>
+      <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+    </select>
+
+    <label *ngIf="formData.topic == 'application' && formData.applicationType == 'player'" for="maxRank">MAX RANK
+      <span *ngIf="formData.maxRank==''" class="required-star">*</span></label>
+    <select *ngIf="formData.topic == 'application' && formData.applicationType == 'player'"
+            type="text" class="text-input" id="maxRank" name="maxRank"
+            [(ngModel)]="formData.maxRank" [disabled]="!formData.game || !formData.applicationType" required>
+      <option value="" disabled selected hidden>Choose a rank</option>
+      <option *ngFor="let rank of ranks" [value]="rank">{{rank}}</option>
+    </select>
+
+    <!---------------------------------------------------------------------------------------------------------------->
+
+    <label *ngIf="formData.topic == 'application'" for="gender">GENDER
+      <span *ngIf="formData.gender ==''" class="required-star">*</span></label>
+    <select *ngIf="formData.topic == 'application'" type="text" class="text-input" id="gender" name="gender"
+            [(ngModel)]="formData.gender" [disabled]="!formData.game || !formData.applicationType" required>
+      <option value="" disabled selected hidden>Choose a gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label *ngIf="formData.topic == 'application'" for="birthday">BIRTHDAY
+      <span *ngIf="formData.birthday==''" class="required-star">*</span></label>
+    <input *ngIf="formData.topic == 'application'"
+           type="date" class="text-input" id="birthday" name="birthday"
+           [(ngModel)]="formData.birthday" [disabled]="!formData.game || !formData.applicationType" required>
+
+    <label *ngIf="formData.topic == 'application'" for="country">COUNTRY ORIGIN
+      <span *ngIf="formData.country==''" class="required-star">*</span></label>
+    <select *ngIf="formData.topic == 'application'" type="text" class="text-input" id="country" name="country"
+            [(ngModel)]="formData.country" [disabled]="!formData.game || !formData.applicationType" required>
+      <option value="" disabled selected hidden>Choose a country</option>
+      <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
+    </select>
+
+    <label *ngIf="formData.topic == 'application'" for="description">WHY YOU?
+      <span *ngIf="formData.description==''" class="required-star">*</span></label>
+    <textarea *ngIf="formData.topic == 'application'"
+              type="text" class="text-input area" id="description" name="description"
+              [(ngModel)]="formData.description" [disabled]="!formData.game || !formData.applicationType"
+              placeholder="&bull; What are your strengths?&#10;&bull; What makes you different from others in your position?&#10;&bull; How do you play your role in this position?&#10;&bull; What are your best agents/champions/etc if you are a player?"
+              required></textarea>
+
+    <label for="consent">DATA PROCESSING CONSENT
+      <span *ngIf="formData.consent==''" class="required-star">*</span></label>
+    <div class="consent-box">
+      <input type="checkbox" class="text-input consent-checkbox" id="consent" name="consent"
+             [(ngModel)]="formData.consent" required>
+      <div class="consent-text">
+        By using this form you agree with the storage and handling of your data by this website according to our
+        <a class="policy-link">Privacy policy</a>
+      </div>
+    </div>
+
+    <button class="submit-btn" type="submit" [disabled]="contactForm.invalid">Submit</button>
   </form>
 </div>
