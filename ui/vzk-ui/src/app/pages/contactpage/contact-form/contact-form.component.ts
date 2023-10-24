@@ -1,62 +1,74 @@
-import {Component} from '@angular/core';
-import {Game} from "../../../models/game/game";
-import {GameService} from "../../../services/game-service/game.service";
-import {CountryService} from "../../../services/country-service/country.service";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Game} from '../../../models/game/game';
+import {GameService} from '../../../services/game-service/game.service';
+import {CountryService} from '../../../services/country-service/country.service';
 
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
-  styleUrls: ['./contact-form.component.css']
+  styleUrls: ['./contact-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
-export class ContactFormComponent {
+export class ContactFormComponent implements OnInit {
   games: Game[] = [];
   roles: String[] = [];
   ranks: String[] = [];
   countries: any[] = [];
 
+  contactForm!: FormGroup;
 
-  formData = {
-    fName: '',
-    lName: '',
-    email: '',
-    topic: '',
-    comments: '',
-    applicationType: '',
-    profileURL: '',
-    game: '',
-    role: '',
-    maxRank: '',
-    gender: '',
-    birthday: '',
-    country: '',
-    description: '',
-    consent: '',
-  };
-
-
-  constructor(private gameService: GameService, private countryService: CountryService) {
-    this.games = gameService.getGames();
+  constructor(
+    private fb: FormBuilder,
+    private gameService: GameService,
+    private countryService: CountryService,
+    private cd: ChangeDetectorRef,
+    ) {
   }
 
-  getRoles(gameId: string){
+  ngOnInit(): void {
+    this.games = this.gameService.getGames();
+
+    this.contactForm = this.fb.group({
+      fName: ['', Validators.required],
+      lName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      topic: ['', Validators.required],
+      comments: ['', Validators.required],
+      applicationType: ['', Validators.required],
+      profileURL: ['', Validators.required],
+      game: ['', Validators.required],
+      role: ['', Validators.required],
+      maxRank: ['', Validators.required],
+      gender: ['', Validators.required],
+      birthday: ['', Validators.required],
+      country: ['', Validators.required],
+      description: ['', Validators.required],
+      consent: ['', Validators.required],
+    });
+  }
+
+  getRoles(gameId: string) {
     return this.gameService.getGameRoles(gameId);
   }
 
-  getRanks(gameId: string){
+  getRanks(gameId: string) {
     return this.gameService.getGameRanks(gameId);
   }
 
   submitForm() {
     // Add logic to handle form submission (e.g., send data to a server)
-    console.log('Form submitted:', this.formData);
+    console.log('Form submitted:', this.contactForm.value);
   }
 
   onGameChange() {
-    this.roles = this.getRoles(this.formData.game);
-    this.ranks = this.getRanks(this.formData.game);
+    console.log('Game changed:', this.contactForm.value.game);
+    this.roles = this.getRoles(this.contactForm.value.game);
+    this.ranks = this.getRanks(this.contactForm.value.game);
 
     this.countryService.getCountries().subscribe((data) => {
       this.countries = data.sort((a, b) => a.name.localeCompare(b.name));
     });
+    this.cd.detectChanges();
   }
 }

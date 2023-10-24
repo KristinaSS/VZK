@@ -18,7 +18,7 @@
 
 .text-input{
   padding: 10px;
-  margin: 0 5px 12px;
+  margin: 0 5px;
 }
 
 form {
@@ -28,7 +28,7 @@ form {
 
 label {
   margin-bottom: 8px;
-  margin-top: 8px;
+  margin-top: 22px;
   font-size: 15px;
   margin-left: 5px;
 }
@@ -89,5 +89,12 @@ button:disabled {
 .required-star {
   color: #ff003c;
   margin-left: 3px; /* Adjust the spacing as needed */
+}
+
+.validation-error{
+  color: #ff003c;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  margin-left: 5px;
 }
 
