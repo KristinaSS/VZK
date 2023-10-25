@@ -1,5 +1,7 @@
 <div class="contact-container">
-  <h2>Request</h2>
+  <div class="title-wrapper">
+    <div class="title">Request</div>
+  </div>
   <form (ngSubmit)="submitForm()" [formGroup]="contactForm">
     <div class="name-form">
       <!-- First Name -->
@@ -172,7 +174,7 @@
       Profile URL is required.
     </div>
     <div *ngIf="contactForm.get('profileURL')?.hasError('invalidUrl') && contactForm.get('profileURL')!.touched"
-      class="validation-error">
+         class="validation-error">
       Not a valid URL.
     </div>
 
@@ -344,7 +346,8 @@
     <!-- consent -->
     <label for="consent">DATA PROCESSING CONSENT<span
       class="required-star">*</span></label>
-    <div *ngIf="contactForm.get('consent')?.value == false && contactForm.get('consent')?.touched" class="validation-error">
+    <div *ngIf="contactForm.get('consent')?.value == false && contactForm.get('consent')?.touched"
+         class="validation-error">
       Consent is required.
     </div>
     <div class="consent-box">

@@ -1,7 +1,6 @@
 .contact-box{
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100vw;
   margin-left: -8px;
   background-image: linear-gradient(to top, rgba(255, 201, 201, 0.4), rgba(0, 0, 0, 0))
