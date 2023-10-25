@@ -13,6 +13,18 @@
              class="validation-error">
           First Name is required.
         </div>
+        <div *ngIf="contactForm.get('fName')!.hasError('minlength') && contactForm.get('fName')!.touched"
+             class="validation-error">
+          Needs to be at least 3 characters long.
+        </div>
+        <div *ngIf="contactForm.get('fName')!.hasError('maxlength') && contactForm.get('fName')!.touched"
+             class="validation-error">
+          Needs to be less than 50 characters long.
+        </div>
+        <div *ngIf="contactForm.get('fName')!.hasError('firstLetterUppercase') && contactForm.get('fName')!.touched"
+             class="validation-error">
+          The first letter must be uppercase.
+        </div>
       </div>
 
       <!-- Last Name -->
@@ -26,6 +38,18 @@
         <div *ngIf="contactForm.get('lName')!.hasError('required') && contactForm.get('lName')!.touched"
              class="validation-error">
           Last Name is required.
+        </div>
+        <div *ngIf="contactForm.get('lName')!.hasError('minlength') && contactForm.get('lName')!.touched"
+             class="validation-error">
+          Needs to be at least 3 characters long.
+        </div>
+        <div *ngIf="contactForm.get('lName')!.hasError('maxlength') && contactForm.get('lName')!.touched"
+             class="validation-error">
+          Needs to be less than 50 characters long.
+        </div>
+        <div *ngIf="contactForm.get('lName')!.hasError('firstLetterUppercase') && contactForm.get('lName')!.touched"
+             class="validation-error">
+          The first letter must be uppercase.
         </div>
       </div>
     </div>
@@ -43,12 +67,17 @@
          class="validation-error">
       Please enter a valid email address.
     </div>
+    <div *ngIf="contactForm.get('email')!.hasError('maxlength') && contactForm.get('email')!.touched"
+         class="validation-error">
+      Needs to be less than 100 characters long.
+    </div>
 
     <!-- Topic -->
     <label for="topic">TOPIC <span
       *ngIf="contactForm.get('topic')?.hasError('required') && contactForm.get('topic')!.touched"
       class="required-star">*</span></label>
-    <select class="text-input" id="topic" name="topic" formControlName="topic">
+    <select class="text-input" id="topic" name="topic" formControlName="topic"
+            (change)="onTopicChange()">
       <option value="" disabled selected hidden>Choose a topic</option>
       <option value="generalInquiry">General Inquiry</option>
       <option value="application">Application Request</option>
@@ -70,8 +99,12 @@
     <textarea
       *ngIf="contactForm.get('topic')?.value !== 'application'"
       type="text" class="text-input area" id="comments" name="comments"
-      formControlName="comments">
+      formControlName="comments"
+      (input)="onInput($event, 'comments')">
     </textarea>
+    <div *ngIf="contactForm.get('topic')?.value !== 'application'" class="character-count">
+      {{ characterCount }}/512
+    </div>
     <div *ngIf="contactForm.get('comments')?.hasError('required') && contactForm.get('comments')!.touched"
          class="validation-error">
       This field is required.
@@ -100,7 +133,8 @@
     </label>
     <select *ngIf="contactForm.get('topic')?.value == 'application'" class="text-input" id="applicationType"
             name="applicationType"
-            formControlName="applicationType">
+            formControlName="applicationType"
+            (change)="onApplicationTypeChange()">
       <option value="" disabled selected hidden>Choose an application type</option>
       <option value="player">Player</option>
       <option value="manager">Manager</option>
@@ -116,33 +150,51 @@
 
     <!-- Profile URL  -->
     <label
-      *ngIf="contactForm.get('topic')?.value == 'application' && contactForm.get('applicationType')?.value == 'player'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value == 'player' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       for="profileURL"> PROFILE URL <span
       *ngIf="contactForm.get('profileURL')!.hasError('required') && contactForm.get('profileURL')!.touched"
       class="required-star">*</span>
     </label>
     <input
-      *ngIf="contactForm.get('topic')?.value == 'application' && contactForm.get('applicationType')?.value == 'player'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value == 'player' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       type="url" class="text-input" id="profileURL" name="profileURL"
-      formControlName="profileURL"
-      [disabled]="!contactForm.get('game') || !contactForm.get('applicationType')">
+      formControlName="profileURL">
     <div *ngIf="contactForm.get('profileURL')?.hasError('required') && contactForm.get('profileURL')!.touched"
          class="validation-error">
       Profile URL is required.
     </div>
+    <div *ngIf="contactForm.get('profileURL')?.hasError('invalidUrl') && contactForm.get('profileURL')!.touched"
+      class="validation-error">
+      Not a valid URL.
+    </div>
 
     <!-- Role -->
     <label
-      *ngIf="contactForm.get('topic')?.value == 'application' && contactForm.get('applicationType')?.value == 'player'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value == 'player' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       for="role"> ROLE <span
       *ngIf="contactForm.get('role')!.hasError('required') && contactForm.get('role')!.touched"
       class="required-star">*</span>
     </label>
     <select
-      *ngIf="contactForm.get('topic')?.value == 'application' && contactForm.get('applicationType')?.value == 'player'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value == 'player' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       class="text-input" id="role" name="role"
-      formControlName="role"
-      [disabled]="!contactForm.get('game') || !contactForm.get('applicationType')">
+      formControlName="role">
       <option value="" disabled selected hidden>Choose a role</option>
       <option *ngFor="let role of roles" [value]="role">{{role}}</option>
     </select>
@@ -153,16 +205,23 @@
 
     <!-- maxRank -->
     <label
-      *ngIf="contactForm.get('topic')?.value == 'application' && contactForm.get('applicationType')?.value == 'player'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value == 'player' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       for="maxRank"> MAX RANK <span
       *ngIf="contactForm.get('maxRank')!.hasError('required') && contactForm.get('maxRank')!.touched"
       class="required-star">*</span>
     </label>
     <select
-      *ngIf="contactForm.get('topic')?.value == 'application' && contactForm.get('applicationType')?.value == 'player'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value == 'player' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       class="text-input" id="maxRank" name="maxRank"
-      formControlName="maxRank"
-      [disabled]="!contactForm.get('game') || !contactForm.get('applicationType')">
+      formControlName="maxRank">
       <option value="" disabled selected hidden>Choose a rank</option>
       <option *ngFor="let rank of ranks" [value]="rank">{{rank}}</option>
     </select>
@@ -173,16 +232,21 @@
 
     <!-- gender -->
     <label
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       for="gender"> GENDER <span
       *ngIf="contactForm.get('gender')!.hasError('required') && contactForm.get('gender')!.touched"
       class="required-star">*</span>
     </label>
     <select
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       class="text-input" id="gender" name="gender"
-      formControlName="gender"
-      [attr.disabled]="!contactForm.get('game')?.value || !contactForm.get('applicationType')?.value">
+      formControlName="gender">
       <option value="" disabled selected hidden>Choose a gender</option>
       <option value="male">Male</option>
       <option value="female">Female</option>
@@ -196,33 +260,47 @@
 
     <!-- birthday -->
     <label
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       for="birthday"> BIRTHDAY <span
       *ngIf="contactForm.get('birthday')!.hasError('required') && contactForm.get('birthday')!.touched"
       class="required-star">*</span>
     </label>
     <input
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       type="date" class="text-input" id="birthday" name="birthday"
-      formControlName="birthday"
-      [disabled]="!contactForm.get('game') || !contactForm.get('applicationType')">
+      formControlName="birthday">
     <div *ngIf="contactForm.get('birthday')?.hasError('required') && contactForm.get('birthday')!.touched"
          class="validation-error">
       Birthday is required.
     </div>
+    <div *ngIf="contactForm.get('birthday')?.hasError('minAge') && contactForm.get('birthday')!.touched"
+         class="validation-error">
+      You must be at least 16 years old to apply.
+    </div>
 
     <!-- country -->
     <label
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       for="country"> COUNTRY <span
       *ngIf="contactForm.get('country')!.hasError('required') && contactForm.get('country')!.touched"
       class="required-star">*</span>
     </label>
     <select
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       class="text-input" id="country" name="country"
-      formControlName="country"
-      [attr.disabled]="!contactForm.get('game')?.value || !contactForm.get('applicationType')?.value">
+      formControlName="country">
       <option value="" disabled selected hidden>Choose a country</option>
       <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
     </select>
@@ -233,18 +311,31 @@
 
     <!-- description -->
     <label
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       for="description"> WHY YOU? <span
-      *ngIf="contactForm.get('description')!.hasError('required') && contactForm.get('description')!.touched"
+      *ngIf="
+      contactForm.get('description')!.hasError('required') && contactForm.get('description')!.touched"
       class="required-star">*</span>
     </label>
     <textarea
-      *ngIf="contactForm.get('topic')?.value == 'application'"
+      *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value"
       type="text" class="text-input area" id="description" name="description"
       formControlName="description"
-      [attr.disabled]="!contactForm.get('game')?.value || !contactForm.get('applicationType')?.value"
+      (input)="onInput($event, 'description')"
       placeholder="&bull; What are your strengths?&#10;&bull; What makes you different from others in your position?&#10;&bull; How do you play your role in this position?&#10;&bull; What are your best agents/champions/etc if you are a player?">
     </textarea>
+    <div *ngIf="
+      contactForm.get('topic')?.value == 'application' &&
+      contactForm.get('applicationType')?.value &&
+      contactForm.get('game')?.value" class="character-count">
+      {{ characterCount }}/512
+    </div>
     <div *ngIf="contactForm.get('description')?.hasError('required') && contactForm.get('description')!.touched"
          class="validation-error">
       This field is required.
@@ -253,6 +344,9 @@
     <!-- consent -->
     <label for="consent">DATA PROCESSING CONSENT<span
       class="required-star">*</span></label>
+    <div *ngIf="contactForm.get('consent')?.value == false && contactForm.get('consent')?.touched" class="validation-error">
+      Consent is required.
+    </div>
     <div class="consent-box">
       <input
         type="checkbox" class="text-input consent-checkbox" id="consent" name="consent"
@@ -263,6 +357,6 @@
       </div>
     </div>
 
-    <button class="submit-btn" type="submit" [disabled]="contactForm.invalid">Submit</button>
+    <button class="submit-btn" type="submit" [disabled]="isSubmitDisabled">Submit</button>
   </form>
 </div>

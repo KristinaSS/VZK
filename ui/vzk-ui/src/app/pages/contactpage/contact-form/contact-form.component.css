@@ -98,3 +98,12 @@ button:disabled {
   margin-left: 5px;
 }
 
+.character-count {
+  color: #434649;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  align-self: flex-end;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
