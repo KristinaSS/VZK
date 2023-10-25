@@ -40,6 +40,9 @@ import {ContactFormComponent} from './pages/contactpage/contact-form/contact-for
 import {ContactDetailsComponent} from './pages/contactpage/contact-details/contact-details.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CountryService} from "./services/country-service/country.service";
+import { PrivacyPolicyPageComponent } from './pages/privacypolicypage/privacy-policy-page/privacy-policy-page.component';
+import { PrivacyPolicyContentComponent } from './pages/privacypolicypage/privacy-policy-content/privacy-policy-content.component';
+import { PrivacyPolicyBannerComponent } from './pages/privacypolicypage/privacy-policy-banner/privacy-policy-banner.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import {CountryService} from "./services/country-service/country.service";
     ContactPageComponent,
     ContactHeaderComponent,
     ContactFormComponent,
-    ContactDetailsComponent
+    ContactDetailsComponent,
+    PrivacyPolicyPageComponent,
+    PrivacyPolicyContentComponent,
+    PrivacyPolicyBannerComponent
   ],
   imports: [
     BrowserModule,

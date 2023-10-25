@@ -8,6 +8,7 @@ import {
   ScheduleResultPageComponent
 } from "./pages/scheduleresultpage/schecule-result-page/schedule-result-page.component";
 import {ContactPageComponent} from "./pages/contactpage/contact-page/contact-page.component";
+import {PrivacyPolicyPageComponent} from "./pages/privacypolicypage/privacy-policy-page/privacy-policy-page.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactPageComponent
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyPageComponent
   },
   {
     path: '**',
