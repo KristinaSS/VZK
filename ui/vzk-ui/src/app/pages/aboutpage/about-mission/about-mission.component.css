@@ -1,0 +1,50 @@
+.content {
+  font-family: Impact, serif;
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  margin-left: -8px;
+  background-color: #252525;
+}
+
+.mission-title-wrapper {
+  font-size: 50px;
+  color: #f5b4b4;
+  padding-top: 100px;
+  position: relative;
+  z-index: 2;
+}
+
+.mission-content-wrapper {
+  font-size: 100px;
+  width: 70%;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 100px;
+}
+
+.bg {
+  filter: blur(5px) grayscale(1);
+  overflow: hidden;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c-preview__img {
+  position: absolute;
+  filter: blur(2px) grayscale(1);
+  height: 100%; /* Set height to 100% to fill the container */
+  width: 100%;
+  z-index: 1;
+}
+
+.content-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
