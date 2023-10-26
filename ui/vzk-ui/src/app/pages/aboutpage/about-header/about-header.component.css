@@ -1,0 +1,22 @@
+.img-wrapper{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+}
+
+.about-img{
+  width: 50%;
+}
+
+.separator-top {
+  z-index: -1;
+  width: 0;
+  height: 0;
+  border-right: 100vw solid transparent;
+  border-bottom: 20vw solid white;
+  position: absolute;
+  top: 246px;
+  margin-left: -8px;
+}

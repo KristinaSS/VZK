@@ -1,0 +1,41 @@
+.field{
+  background-color: white;
+  font-family: Impact, serif;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+  margin-left: -8px;
+}
+
+.title-wrapper{
+  padding-top: 50px;
+  width: 800px;
+  text-align: center;
+}
+
+.title {
+  font-size: 100px;
+  color: red;
+}
+
+.sub{
+  font-size: 70px;
+  color: #4b0b18;
+}
+
+.content-wrapper{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 800px;
+  text-align: left;
+}
+
+.description{
+  font-family: Arial, sans-serif;
+}
+
+p {
+  text-indent: 25px
+}

@@ -102,7 +102,8 @@
       *ngIf="contactForm.get('topic')?.value !== 'application'"
       type="text" class="text-input area" id="comments" name="comments"
       formControlName="comments"
-      (input)="onInput($event, 'comments')">
+      (input)="onInput($event, 'comments')"
+      placeholder="What can we help you with?">
     </textarea>
     <div *ngIf="contactForm.get('topic')?.value !== 'application'" class="character-count">
       {{ characterCount }}/512

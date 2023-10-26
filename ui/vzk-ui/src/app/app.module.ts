@@ -43,6 +43,13 @@ import {CountryService} from "./services/country-service/country.service";
 import { PrivacyPolicyPageComponent } from './pages/privacypolicypage/privacy-policy-page/privacy-policy-page.component';
 import { PrivacyPolicyContentComponent } from './pages/privacypolicypage/privacy-policy-content/privacy-policy-content.component';
 import { PrivacyPolicyBannerComponent } from './pages/privacypolicypage/privacy-policy-banner/privacy-policy-banner.component';
+import { AboutPageComponent } from './pages/aboutpage/about-page/about-page.component';
+import { AboutHeaderComponent } from './pages/aboutpage/about-header/about-header.component';
+import { AboutContentComponent } from './pages/aboutpage/about-content/about-content.component';
+import { AboutPartnersComponent } from './pages/aboutpage/about-partners/about-partners.component';
+import { AboutInterstedComponent } from './pages/aboutpage/about-intersted/about-intersted.component';
+import { AboutAchievmentsComponent } from './pages/aboutpage/about-achievments/about-achievments.component';
+import { AboutMissionComponent } from './pages/aboutpage/about-mission/about-mission.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +85,14 @@ import { PrivacyPolicyBannerComponent } from './pages/privacypolicypage/privacy-
     ContactDetailsComponent,
     PrivacyPolicyPageComponent,
     PrivacyPolicyContentComponent,
-    PrivacyPolicyBannerComponent
+    PrivacyPolicyBannerComponent,
+    AboutPageComponent,
+    AboutHeaderComponent,
+    AboutContentComponent,
+    AboutPartnersComponent,
+    AboutInterstedComponent,
+    AboutAchievmentsComponent,
+    AboutMissionComponent
   ],
   imports: [
     BrowserModule,
