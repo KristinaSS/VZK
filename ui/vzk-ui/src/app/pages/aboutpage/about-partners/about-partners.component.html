@@ -1,1 +1,20 @@
-<p>about-partners works!</p>
+<div class="container">
+  <div class="thanks">
+    <div class="subtitle">Special Thanks to Our</div>
+    <div class="title">Partners</div>
+    <p>{{paragraphText}}</p>
+  </div>
+
+  <div class="partners">
+    <div class="partner-logos">
+      <div *ngFor="let partner of partners">
+        <img
+          [src]="partner.imageUrl"
+          alt="Partner 1"
+          class="partner-logo"
+          (click)="redirectToPartnerWebsite(partner.websiteUrl)"
+        />
+      </div>
+    </div>
+  </div>
+</div>

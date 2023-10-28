@@ -48,8 +48,8 @@ import { AboutHeaderComponent } from './pages/aboutpage/about-header/about-heade
 import { AboutContentComponent } from './pages/aboutpage/about-content/about-content.component';
 import { AboutPartnersComponent } from './pages/aboutpage/about-partners/about-partners.component';
 import { AboutInterstedComponent } from './pages/aboutpage/about-intersted/about-intersted.component';
-import { AboutAchievmentsComponent } from './pages/aboutpage/about-achievments/about-achievments.component';
 import { AboutMissionComponent } from './pages/aboutpage/about-mission/about-mission.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -91,7 +91,6 @@ import { AboutMissionComponent } from './pages/aboutpage/about-mission/about-mis
     AboutContentComponent,
     AboutPartnersComponent,
     AboutInterstedComponent,
-    AboutAchievmentsComponent,
     AboutMissionComponent
   ],
   imports: [
@@ -101,6 +100,7 @@ import { AboutMissionComponent } from './pages/aboutpage/about-mission/about-mis
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgbModule
   ],
   providers: [CountryService],
   bootstrap: [AppComponent]

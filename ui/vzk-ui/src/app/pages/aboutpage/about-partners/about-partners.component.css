@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%; /* Adjust as needed */
+  margin: 50px auto 0;
+  padding: 30px 70px;
+
+  font-family: Arial, sans-serif;
+
+  background-color: rgba(  255, 255, 255  , 0.85);
+}
+
+.thanks {
+  flex: 1;
+  text-align: left;
+}
+
+.subtitle{
+  font-size: 30px;
+  font-family: Impact, serif;
+}
+
+.title {
+  font-size: 80px;
+  color: red;
+  margin-bottom: 10px;
+  font-family: Impact, serif;
+}
+
+.partners {
+  flex: 2;
+  text-align: left;
+  padding: 0 20px 0 40px;
+}
+
+.partner-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: center;
+  justify-items: center;
+}
+
+.partner-logo {
+  width: 100%;
+  max-width: 100%;
+  cursor: pointer;
+}
