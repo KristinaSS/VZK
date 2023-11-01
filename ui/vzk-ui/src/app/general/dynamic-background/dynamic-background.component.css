@@ -1,4 +1,4 @@
-.site-wrapper{
+.site-wrapper {
   padding-top: 5px;
   background: rgb(0, 0, 0);
   background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(107, 0, 8, 1) 100%);
@@ -19,42 +19,36 @@
   clip-path: url(#cache);
 }
 
-#white {
+.animated-line {
   fill: none;
-  opacity: 0.45;
-  stroke: white;
-  stroke-width: 12;
-  stroke-miterlimit:10;
   animation: show 4s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
+}
+
+#white {
+  stroke: white;
+  opacity: 0.45;
+  stroke-width: 12;
+  stroke-miterlimit: 10;
 }
 
 #dark-red {
-  fill: none;
-  opacity: 0.65;
   stroke: #260101;
+  opacity: 0.65;
   stroke-width: 12;
-  stroke-miterlimit:10;
-  animation: show 4s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+  stroke-miterlimit: 10;
 }
 
 #red {
-  fill: none;
+  stroke: #ff003c;
   opacity: 0.45;
-  stroke: #a60512;
   stroke-width: 6;
-  stroke-miterlimit:10;
+  stroke-miterlimit: 10;
   stroke-dasharray: 200;
   stroke-dashoffset: 800;
   animation: draw 4s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
 }
 
 @keyframes draw {

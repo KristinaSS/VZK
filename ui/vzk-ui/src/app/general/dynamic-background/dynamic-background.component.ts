@@ -13,15 +13,13 @@ export class DynamicBackgroundComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Get the current screen width and height
     this.screenWidth = (window.innerWidth / 3) * 2;
     this.screenHeight = (window.innerHeight / 3) * 2;
   }
 
-  // Use HostListener to listen for window resize events
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.screenWidth = (event.target.innerWidth/3) *2;
-    this.screenHeight = (event.target.innerHeight/3) *2;
+    this.screenWidth = (event.target.innerWidth / 3) * 2;
+    this.screenHeight = (event.target.innerHeight / 3) * 2;
   }
 }
