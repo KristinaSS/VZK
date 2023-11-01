@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Translation} from "../../../models/translation/translation";
 
 @Component({
   selector: 'app-about-mission',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./about-mission.component.css']
 })
 export class AboutMissionComponent {
+  @Input() translationsAbout!: { [key: string]: Translation };
 
+  getTranslation(id: string){
+    return this.translationsAbout[id].content;
+  }
 }

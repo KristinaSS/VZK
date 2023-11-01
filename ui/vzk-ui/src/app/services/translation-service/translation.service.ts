@@ -131,9 +131,20 @@ export class TranslationService {
     '3': {
       id: '3',
       language: 'en',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vehicula ex. Etiam non semper est, a ultrices diam. Ut diam mi, mattis semper lacus at, luctus posuere libero. Duis sed viverra urna. Integer egestas arcu at pharetra vulputate. Sed efficitur imperdiet eros nec rhoncus. Nulla laoreet, velit sed vulputate auctor, ligula arcu egestas nibh, et eleifend mauris tellus vitae purus. Nulla eget urna at nibh volutpat eleifend id id tellus. Aenean eu fringilla dolor. Pellentesque auctor euismod lectus. Donec euismod elit ex, sit amet fringilla neque facilisis nec. Nunc quis semper arcu. Integer accumsan ornare venenatis. Proin eu mollis purus, ut viverra nulla. Donec nec pulvinar dolor.\n' +
-        '\n' +
-        'Quisque vitae nulla id ipsum scelerisque interdum non vitae est. Fusce ac sem nec ipsum tempus viverra non sed tortor. Quisque tincidunt mauris a massa commodo gravida. Vestibulum et libero ac eros finibus condimentum ac a ipsum. Etiam ultricies ipsum ut diam hendrerit tincidunt. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris at ex ante. '
+      content: '        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vehicula ex. Etiam non semper est, a ultrices\n' +
+        '          diam. Ut diam mi, mattis semper lacus at, luctus posuere libero. Duis sed viverra urna. Integer egestas arcu\n' +
+        '          at pharetra vulputate. Sed efficitur imperdiet eros nec rhoncus. Nulla laoreet, velit sed vulputate auctor,\n' +
+        '          ligula arcu egestas nibh, et eleifend mauris tellus vitae purus. Nulla eget urna at nibh volutpat eleifend\n' +
+        '          id id tellus. Aenean eu fringilla dolor. Pellentesque auctor euismod lectus. Donec euismod elit ex, sit amet\n' +
+        '          fringilla neque facilisis nec. Nunc quis semper arcu. Integer accumsan ornare venenatis. Proin eu mollis\n' +
+        '          purus, ut viverra nulla. Donec nec pulvinar dolor.\n' +
+        '        </p>\n' +
+        '        <p>\n' +
+        '        Quisque vitae nulla id ipsum scelerisque interdum non vitae est. Fusce ac sem nec ipsum tempus viverra non sed\n' +
+        '          tortor. Quisque tincidunt mauris a massa commodo gravida. Vestibulum et libero ac eros finibus condimentum ac\n' +
+        '          a ipsum. Etiam ultricies ipsum ut diam hendrerit tincidunt. Orci varius natoque penatibus et magnis dis\n' +
+        '          parturient montes, nascetur ridiculus mus. Mauris at ex ante.\n' +
+        '        </p>'
     },
     '4': {id: '4', language: 'en', content: 'Special Thanks to Our'},
     '5': {id: '5', language: 'en', content: 'Partners'},
@@ -145,6 +156,8 @@ export class TranslationService {
     '7': {id: '7', language: 'en', content: 'Got you interested?'},
     '8': {id: '8', language: 'en', content: 'Apply for a position through the contact page:'},
     '9': {id: '9', language: 'en', content: 'Apply'},
+    '10': {id: '10', language: 'en', content: 'Our mission'},
+    '11': {id: '11', language: 'en', content: 'To become the top UK E-Sports organization'},
   };
 
 

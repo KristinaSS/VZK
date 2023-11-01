@@ -1,5 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
+import {Translation} from "../../../models/translation/translation";
+import {TranslationService} from "../../../services/translation-service/translation.service";
 
 @Component({
   selector: 'app-about-page',
@@ -7,11 +9,14 @@ import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
   styleUrls: ['./about-page.component.css']
 })
 export class AboutPageComponent implements OnInit {
+  translationsAbout: { [key: string]: Translation };
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private el: ElementRef
+    private el: ElementRef,
+    private translationService: TranslationService
   ) {
+    this.translationsAbout = translationService.translationsAbout;
   }
 
   ngOnInit() {

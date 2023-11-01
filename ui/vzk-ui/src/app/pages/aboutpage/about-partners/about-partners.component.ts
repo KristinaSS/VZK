@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MiscService} from "../../../services/misc-service/misc.service";
+import {Translation} from "../../../models/translation/translation";
 
 @Component({
   selector: 'app-about-partners',
@@ -8,9 +9,10 @@ import {MiscService} from "../../../services/misc-service/misc.service";
 })
 export class AboutPartnersComponent implements OnInit{
   partners: any;
-  paragraphText: any;
 
-  constructor(private myscService: MiscService) {
+  @Input() translationsAbout!: { [key: string]: Translation };
+
+  constructor(private miscService: MiscService) {
   }
 
   redirectToPartnerWebsite(partnerUrl: string) {
@@ -18,7 +20,10 @@ export class AboutPartnersComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.partners = this.myscService.getPartners();
-    this.paragraphText = this.myscService.getPartnersText();
+    this.partners = this.miscService.getPartners();
+  }
+
+  getTranslation(id: string){
+    return this.translationsAbout[id].content;
   }
 }

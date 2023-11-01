@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
+import {Translation} from "../../../models/translation/translation";
+import {TranslationService} from "../../../services/translation-service/translation.service";
 
 @Component({
   selector: 'app-about-interested',
@@ -7,9 +9,12 @@ import {Router} from "@angular/router";
   styleUrls: ['./about-interested.component.css']
 })
 export class AboutInterestedComponent {
-  paragraphText = "Apply for a position through the contact page:";
+  @Input() translationsAbout!: { [key: string]: Translation };
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
+
+  getTranslation(id: string){
+    return this.translationsAbout[id].content;
   }
 
   openContact() {

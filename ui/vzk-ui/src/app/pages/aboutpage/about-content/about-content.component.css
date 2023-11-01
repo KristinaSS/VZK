@@ -36,6 +36,6 @@
   font-family: Arial, sans-serif;
 }
 
-p {
-  text-indent: 25px
+:host ::ng-deep p {
+  text-indent: 25px !important;
 }
