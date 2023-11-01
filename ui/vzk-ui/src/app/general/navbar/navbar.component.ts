@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import { Router, Scroll } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,7 +14,8 @@ export class NavbarComponent {
   isHidden: boolean = false;
   username = 'Axolotl'
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
 
   toggleMobileMenu() {
@@ -26,11 +27,10 @@ export class NavbarComponent {
   }
 
   navigateToPage(page: string) {
-    // Navigate to the selected page
     this.router.navigate([page]);
-
-    // Scroll to the top of the page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }, 100); // Adjust the delay as needed
   }
 
   navigateToProfile() {

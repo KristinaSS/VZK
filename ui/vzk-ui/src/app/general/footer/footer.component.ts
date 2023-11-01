@@ -11,10 +11,9 @@ export class FooterComponent {
   }
 
   navigateToPage(page: string) {
-    // Navigate to the selected page
     this.router.navigate([page]);
-
-    // Scroll to the top of the page
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100); // Adjust the delay as needed
   }
 }

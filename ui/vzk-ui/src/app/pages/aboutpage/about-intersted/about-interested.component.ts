@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./about-interested.component.css']
 })
 export class AboutInterestedComponent {
-  paragraphText = "Apply for a position through the career page:";
+  paragraphText = "Apply for a position through the contact page:";
 
   constructor(private router: Router) {
   }

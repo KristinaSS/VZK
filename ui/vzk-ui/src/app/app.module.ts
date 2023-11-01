@@ -50,6 +50,9 @@ import { AboutPartnersComponent } from './pages/aboutpage/about-partners/about-p
 import { AboutInterestedComponent } from './pages/aboutpage/about-intersted/about-interested.component';
 import { AboutMissionComponent } from './pages/aboutpage/about-mission/about-mission.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TermsPageComponent } from './pages/termspage/terms-page/terms-page.component';
+import { TermsHeaderComponent } from './pages/termspage/terms-header/terms-header.component';
+import { TermsContentComponent } from './pages/termspage/terms-content/terms-content.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +94,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AboutContentComponent,
     AboutPartnersComponent,
     AboutInterestedComponent,
-    AboutMissionComponent
+    AboutMissionComponent,
+    TermsPageComponent,
+    TermsHeaderComponent,
+    TermsContentComponent
   ],
   imports: [
     BrowserModule,
