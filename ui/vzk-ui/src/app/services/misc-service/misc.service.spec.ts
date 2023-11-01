@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MyscService } from './mysc.service';
+import { MiscService } from './misc.service';
 
 describe('MyscService', () => {
-  let service: MyscService;
+  let service: MiscService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MyscService);
+    service = TestBed.inject(MiscService);
   });
 
   it('should be created', () => {

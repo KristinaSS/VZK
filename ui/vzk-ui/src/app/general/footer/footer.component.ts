@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {ScrollService} from "../../services/scroll-service/scroll.service";
 
 @Component({
   selector: 'app-footer',
@@ -25,7 +24,7 @@ export class FooterComponent {
     this.router.navigate([page]);
     setTimeout(() => {
       window.scrollTo({top: 0, behavior: 'smooth'});
-    }, 100); // Adjust the delay as needed
+    }, 100);
   }
 
   navigateToExternalLink(url: string): void {

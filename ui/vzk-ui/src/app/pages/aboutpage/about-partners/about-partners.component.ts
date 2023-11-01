@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MyscService} from "../../../services/mysc-service/mysc.service";
+import {MiscService} from "../../../services/misc-service/misc.service";
 
 @Component({
   selector: 'app-about-partners',
@@ -10,7 +10,7 @@ export class AboutPartnersComponent implements OnInit{
   partners: any;
   paragraphText: any;
 
-  constructor(private myscService: MyscService) {
+  constructor(private myscService: MiscService) {
   }
 
   redirectToPartnerWebsite(partnerUrl: string) {

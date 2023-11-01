@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class MyscService {
+export class MiscService {
 
   private partners = [
     { name: 'Mercedes Benz', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/2048px-Mercedes-Logo.svg.png', websiteUrl: 'https://partner1.com' },
@@ -21,6 +21,4 @@ export class MyscService {
   getPartnersText(){
     return this.paragraphText;
   }
-
-  constructor() { }
 }
