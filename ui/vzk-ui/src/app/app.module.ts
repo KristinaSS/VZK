@@ -47,7 +47,7 @@ import { AboutPageComponent } from './pages/aboutpage/about-page/about-page.comp
 import { AboutHeaderComponent } from './pages/aboutpage/about-header/about-header.component';
 import { AboutContentComponent } from './pages/aboutpage/about-content/about-content.component';
 import { AboutPartnersComponent } from './pages/aboutpage/about-partners/about-partners.component';
-import { AboutInterstedComponent } from './pages/aboutpage/about-intersted/about-intersted.component';
+import { AboutInterestedComponent } from './pages/aboutpage/about-intersted/about-interested.component';
 import { AboutMissionComponent } from './pages/aboutpage/about-mission/about-mission.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -90,7 +90,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AboutHeaderComponent,
     AboutContentComponent,
     AboutPartnersComponent,
-    AboutInterstedComponent,
+    AboutInterestedComponent,
     AboutMissionComponent
   ],
   imports: [
