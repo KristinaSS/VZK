@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {ScrollService} from "../../services/scroll-service/scroll.service";
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  constructor(private router: Router) {
+  constructor(private router: Router, private scrollService: ScrollService) {
   }
 
   navigateToPage(page: string) {
@@ -15,5 +16,9 @@ export class FooterComponent {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100); // Adjust the delay as needed
+  }
+
+  scrollToGameLogo(gameId: string) {
+    this.scrollService.scrollToElement(gameId);
   }
 }

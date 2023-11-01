@@ -2,7 +2,7 @@
   <div class="gradient"></div>
   <div class="content center">
     <div *ngFor="let game of gameList; let first = first" class="center">
-      <img class="logo-img" [src]="game?.logo" alt="{{ game?.title }}" [attr.id]="'gameLogo-' + game.id"/>
+      <img id= "{{game.id}}" class="logo-img" [src]="game?.logo" alt="{{ game?.title }}" [attr.id]="'gameLogo-' + game.id"/>
       <ng-container *ngFor="let team of teamList; let first = first">
         <div class="player-box" [ngClass]="{'first-player': first}" *ngIf="team.game?.id === game.id">
           <app-player-box [team]="team"></app-player-box>

@@ -7,11 +7,10 @@
       </div>
       <div>
         <ul class="menu">
+          <li class="choice"><a (click)="navigateToPage('teams')" >Teams</a></li>
           <li class="choice"><a (click)="navigateToPage('news')" >News</a></li>
+          <li class="choice"><a (click)="navigateToPage('schedule')" >Schedule</a></li>
           <li class="choice"><a (click)="navigateToPage('contact')" >Contact</a></li>
-          <li class="choice"><a (click)="navigateToPage('about')">About</a></li>
-          <li class="choice"><a routerLink="about" fragment="partners">Partners</a></li>
-          <li class="choice"><a>Terms</a></li>
         </ul>
       </div>
     </div>
@@ -34,13 +33,14 @@
     </div>
     <div class="team-menu">
       <div class="title">
-        Teams
+        Information
       </div>
       <div>
         <ul class="menu">
-          <li class="choice"><a>League Of Legends</a></li>
-          <li class="choice"><a>Valorant</a></li>
-          <li class="choice"><a (click)="navigateToPage('teams')" >All Teams</a></li>
+          <li class="choice"><a (click)="navigateToPage('about')">About</a></li>
+          <li class="choice"><a routerLink="about" fragment="partners">Partners</a></li>
+          <li class="choice"><a (click)="navigateToPage('privacy-policy')">Privacy Policy</a></li>
+          <li class="choice"><a (click)="navigateToPage('terms')">Terms of Use</a></li>
         </ul>
       </div>
     </div>

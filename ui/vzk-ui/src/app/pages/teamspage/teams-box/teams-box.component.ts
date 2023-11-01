@@ -1,16 +1,17 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
 import {Player} from "../../../models/player/player";
 import {Team} from "../../../models/team/team";
 import {Game} from "../../../models/game/game";
 import {first} from "rxjs";
 import {ScrollService} from "../../../services/scroll-service/scroll.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-teams-box',
   templateUrl: './teams-box.component.html',
   styleUrls: ['./teams-box.component.css']
 })
-export class TeamsBoxComponent implements OnChanges, OnInit {
+export class TeamsBoxComponent implements OnChanges, OnInit, AfterViewInit {
   @Input() gameList: Game[] | undefined;
   default: Game = {
     id: `0`,
@@ -289,7 +290,12 @@ export class TeamsBoxComponent implements OnChanges, OnInit {
 
   teamList: Team[];
 
-  constructor(private scrollService: ScrollService, private el: ElementRef) {
+  constructor(
+    private scrollService: ScrollService,
+    private el: ElementRef,
+    private route: ActivatedRoute,
+    private renderer: Renderer2
+  ){
     console.log(this.gameList);
     console.log(this.gameList?.length);
 
@@ -363,11 +369,28 @@ export class TeamsBoxComponent implements OnChanges, OnInit {
   protected readonly first = first;
 
   ngOnInit(): void {
+    this.route.fragment.subscribe((fragment: string | null) => {
+      this.scrollIfNeeded(fragment);
+    });
+
     this.scrollService.scrollToElement$.subscribe((gameId: string) => {
+      this.scrollIfNeeded(gameId);
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.route.fragment.subscribe((fragment: string | null) => {
+      this.scrollIfNeeded(fragment);
+    });
+  }
+
+  private scrollIfNeeded(gameId: string | null): void {
+    if (gameId && this.gameList?.some(game => game.id === gameId)) {
       const element = this.el.nativeElement.querySelector(`#gameLogo-${gameId}`);
       if (element) {
-        element.scrollIntoView({behavior: 'smooth', block: 'center'});
+        // Use Renderer2 to trigger the scroll after the view has been initialized
+        this.renderer.setProperty(element, 'scrollTop', element.offsetTop);
       }
-    });
+    }
   }
 }
