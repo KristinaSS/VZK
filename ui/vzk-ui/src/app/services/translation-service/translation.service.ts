@@ -123,6 +123,14 @@ export class TranslationService {
     },
     '52': {id: '52', language: 'en', content: 'Privacy policy'},
     '53': {id: '53', language: 'en', content: 'Submit'},
+    '54': {id: '54', language: 'en', content: 'Contact us'},
+    '55': {id: '55', language: 'en', content: 'Other'},
+    '56': {id: '56', language: 'en', content: 'General Inquiry'},
+    '57': {id: '57', language: 'en', content: 'Application Request'},
+    '58': {id: '58', language: 'en', content: 'Partnership'},
+    '59': {id: '59', language: 'en', content: 'Choose a topic'},
+    '60': {id: '60', language: 'en', content: 'Male'},
+    '61': {id: '61', language: 'en', content: 'Female'},
   };
 
   translationsAbout: { [key: string]: Translation } = {
@@ -160,7 +168,4 @@ export class TranslationService {
     '11': {id: '11', language: 'en', content: 'To become the top UK E-Sports organization'},
   };
 
-
-  constructor() {
-  }
 }

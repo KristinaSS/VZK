@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Game} from '../../../models/game/game';
 import {GameService} from '../../../services/game-service/game.service';
@@ -8,6 +8,9 @@ import {
   firstLetterUppercaseValidator,
   urlValidator
 } from "../../../utils/validators/custom-contact-form-validators";
+import {Translation} from "../../../models/translation/translation";
+import {Role} from "../../../models/role/role";
+import {RoleService} from "../../../services/role-service/role.service";
 
 @Component({
   selector: 'app-contact-form',
@@ -17,26 +20,31 @@ import {
 })
 export class ContactFormComponent implements OnInit {
   games: Game[] = [];
-  roles: String[] = [];
+  gameRoles: String[] = [];
   ranks: String[] = [];
   countries: any[] = [];
+  orgRoles: Role[] = [];
 
   contactForm!: FormGroup;
 
   characterCount = 0;
   maxCharacterLimit = 512;
-  isSubmitDisabled = true; // Initially, the button is disabled
+  isSubmitDisabled = true;
+
+  @Input() translationsAbout!: { [key: string]: Translation };
 
   constructor(
     private fb: FormBuilder,
     private gameService: GameService,
     private countryService: CountryService,
     private cd: ChangeDetectorRef,
+    private roleService: RoleService,
   ) {
   }
 
   ngOnInit(): void {
     this.games = this.gameService.getGames();
+    this.orgRoles = this.roleService.getRoles();
 
     this.contactForm = this.fb.group({
       fName: ['', [Validators.required, Validators.minLength(3), firstLetterUppercaseValidator(), Validators.maxLength(50)]],
@@ -71,7 +79,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   onGameChange() {
-    this.roles = this.getRoles(this.contactForm.value.game);
+    this.gameRoles = this.getRoles(this.contactForm.value.game);
     this.ranks = this.getRanks(this.contactForm.value.game);
 
     this.countryService.getCountries().subscribe((data) => {
@@ -108,7 +116,6 @@ export class ContactFormComponent implements OnInit {
       this.characterCount = this.maxCharacterLimit;
     }
   }
-
 
   updateSubmitButtonState() {
     if (this.contactForm) {
@@ -153,11 +160,18 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-
-
   submitForm() {
     // Add logic to handle form submission (e.g., send data to a server)
     console.log('Form submitted:', this.contactForm.value);
+  }
+
+  scrollToTop() {
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
   }
 
   private clearFields(fieldsToClear: string[]) {
@@ -177,10 +191,5 @@ export class ContactFormComponent implements OnInit {
         control.updateValueAndValidity();
       }
     });
-  }
-
-  scrollToTop() {
-    // Scroll to the top of the page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

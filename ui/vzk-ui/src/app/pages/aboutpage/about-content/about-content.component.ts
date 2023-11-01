@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {TranslationService} from "../../../services/translation-service/translation.service";
 import {Translation} from "../../../models/translation/translation";
 
 @Component({
@@ -10,7 +9,7 @@ import {Translation} from "../../../models/translation/translation";
 export class AboutContentComponent {
   @Input() translationsAbout!: { [key: string]: Translation };
 
-  getTranslation(id: string){
+  getTranslation(id: string) {
     return this.translationsAbout[id].content;
   }
 }
