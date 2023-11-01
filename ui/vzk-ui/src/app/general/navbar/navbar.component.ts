@@ -1,4 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import { Router, Scroll } from '@angular/router';
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,12 +14,23 @@ export class NavbarComponent {
   isHidden: boolean = false;
   username = 'Axolotl'
 
+  constructor(private router: Router) { }
+
+
   toggleMobileMenu() {
     this.isMobileMenuActive = !this.isMobileMenuActive;
   }
 
   login() {
     this.loggedIn = !this.loggedIn;
+  }
+
+  navigateToPage(page: string) {
+    // Navigate to the selected page
+    this.router.navigate([page]);
+
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   navigateToProfile() {

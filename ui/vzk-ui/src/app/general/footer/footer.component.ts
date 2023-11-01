@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-footer',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
+  constructor(private router: Router) {
+  }
 
+  navigateToPage(page: string) {
+    // Navigate to the selected page
+    this.router.navigate([page]);
+
+    // Scroll to the top of the page
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 }

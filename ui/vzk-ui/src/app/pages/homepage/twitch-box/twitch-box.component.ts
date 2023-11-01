@@ -8,7 +8,7 @@ declare var Twitch: any; // Add this declaration
   styleUrls: ['./twitch-box.component.css']
 })
 export class TwitchBoxComponent implements AfterViewInit{
-  channelId = 'lolworldchampionship';
+  channelId = 'riotgames';
   format= 'video';
 
   ngAfterViewInit() {
