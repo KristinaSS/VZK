@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Event} from "../../../models/event/event";
 import {EventServiceService} from "../../../services/event-service/event-service.service";
 import {GameService} from "../../../services/game-service/game.service";
 import {Game} from "../../../models/game/game";
@@ -28,13 +27,13 @@ export class ResultPageComponent implements OnInit {
 
   loadData() {
     console.log(this.results.length)
-    if(this.results.length < 30){
+    if (this.results.length < 30) {
       const newEvents = this.eventService.getResults();
       this.results = this.results.concat(newEvents);
     }
   }
 
-  openReplay(url: string){
+  openReplay(url: string) {
     window.open(url, '_blank');
   }
 

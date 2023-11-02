@@ -9,6 +9,7 @@ export class ScrollService {
   scrollToElement$ = this.scrollToElementSource.asObservable();
 
   scrollToElement(elementId: string) {
+    console.log("scrolling to element "+ elementId);
     this.scrollToElementSource.next(elementId);
   }
 }

@@ -1,6 +1,5 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {Translation} from "../../../models/translation/translation";
-import {ActivatedRoute, Router} from "@angular/router";
 import {TranslationService} from "../../../services/translation-service/translation.service";
 
 @Component({
@@ -10,6 +9,7 @@ import {TranslationService} from "../../../services/translation-service/translat
 })
 export class ContactPageComponent {
   translationsAbout: { [key: string]: Translation };
+
   constructor(
     private translationService: TranslationService
   ) {
