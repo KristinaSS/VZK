@@ -16,6 +16,7 @@ import {ScheduleResultModule} from "./pages/scheduleresultpage/schedule-result.m
 import {TeamModule} from "./pages/teamspage/team.module";
 import {TermsModule} from "./pages/termspage/terms.module";
 import {ViewArticleModule} from "./pages/viewarticlepage/view-article.module";
+import {SecurityModule} from "./security/security.module";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ViewArticleModule} from "./pages/viewarticlepage/view-article.module";
     ScheduleResultModule,
     TeamModule,
     TermsModule,
-    ViewArticleModule
+    ViewArticleModule,
+    SecurityModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

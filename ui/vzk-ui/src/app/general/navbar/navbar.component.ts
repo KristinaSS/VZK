@@ -2,6 +2,8 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {Translation} from "../../models/translation/translation";
 import {TranslationService} from "../../services/translation-service/translation.service";
+import {LoginDialogComponent} from "../../security/login-dialog/login-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -21,7 +23,8 @@ export class NavbarComponent {
 
   constructor(
     private translationService: TranslationService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.translationsAbout = translationService.translationsNavbar;
   }
@@ -35,7 +38,8 @@ export class NavbarComponent {
   }
 
   login() {
-    this.loggedIn = !this.loggedIn;
+    //this.loggedIn = !this.loggedIn;
+    this.openLoginDialog()
   }
 
   navigateToPage(page: string) {
@@ -51,5 +55,15 @@ export class NavbarComponent {
 
   toggleHiddenDiv(value: boolean): void {
     this.isHidden = value;
+  }
+
+  openLoginDialog(): void {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
