@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Article } from "../../../models/article/article";
 import { NewsService } from "../../../services/news-service/news.service";
 import { ActivatedRoute } from "@angular/router";
+import {Translation} from "../../../models/translation/translation";
 
 @Component({
   selector: 'app-vie-articl-content',
@@ -11,6 +12,12 @@ import { ActivatedRoute } from "@angular/router";
 export class VieArticlContentComponent implements OnInit {
   id!: string | null;
   article: Article | undefined;
+
+  @Input() translationsAbout!: { [key: string]: Translation };
+
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
+  }
 
   constructor(private newsService: NewsService, private route: ActivatedRoute) {
   }

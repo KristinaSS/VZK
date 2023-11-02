@@ -1,6 +1,7 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, Input} from '@angular/core';
+import {Translation} from "../../../models/translation/translation";
 
-declare var Twitch: any; // Add this declaration
+declare var Twitch: any;
 
 @Component({
   selector: 'app-twitch-box',
@@ -10,6 +11,12 @@ declare var Twitch: any; // Add this declaration
 export class TwitchBoxComponent implements AfterViewInit{
   channelId = 'riotgames';
   format= 'video';
+
+  @Input() translationsAbout!: { [key: string]: Translation };
+
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
+  }
 
   ngAfterViewInit() {
     // Initialize the Twitch Embed Player

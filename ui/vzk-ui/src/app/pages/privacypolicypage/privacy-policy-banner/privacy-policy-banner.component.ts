@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Translation} from "../../../models/translation/translation";
 
 @Component({
   selector: 'app-privacy-policy-banner',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./privacy-policy-banner.component.css']
 })
 export class PrivacyPolicyBannerComponent {
+  @Input() translationsAbout!: { [key: string]: Translation };
 
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
+  }
 }

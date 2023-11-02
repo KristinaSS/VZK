@@ -1,5 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
+import {Translation} from "../../models/translation/translation";
+import {TranslationService} from "../../services/translation-service/translation.service";
 
 
 @Component({
@@ -12,11 +14,21 @@ export class NavbarComponent {
   isMobileMenuActive = false;
   loggedIn = false;
   isHidden: boolean = false;
-  username = 'Axolotl'
+  username = 'Axolotl';
 
-  constructor(private router: Router) {
+
+  translationsAbout: { [key: string]: Translation };
+
+  constructor(
+    private translationService: TranslationService,
+    private router: Router
+  ) {
+    this.translationsAbout = translationService.translationsNavbar;
   }
 
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
+  }
 
   toggleMobileMenu() {
     this.isMobileMenuActive = !this.isMobileMenuActive;

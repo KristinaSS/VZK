@@ -1,22 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import { EventServiceService } from 'src/app/services/event-service/event-service.service';
-import { Event } from 'src/app/models/event/event';
+import {Component, Input, OnInit} from '@angular/core';
+import {EventServiceService} from 'src/app/services/event-service/event-service.service';
+import {Event} from 'src/app/models/event/event';
 import {Result} from "../../../models/result/result";
 import {Router} from "@angular/router";
+import {Translation} from "../../../models/translation/translation";
 
 @Component({
   selector: 'app-schedule-box',
   templateUrl: './schedule-box.component.html',
   styleUrls: ['./schedule-box.component.css']
 })
-export class ScheduleBoxComponent implements OnInit{
+export class ScheduleBoxComponent implements OnInit {
   nextTwoEvents: Event[] = [];
   nextTwoResults: Result[] = [];
   currentContent: number = 1;
   button1Disabled: boolean = true;
   button2Disabled: boolean = false;
 
-  constructor(private eventService: EventServiceService, private router: Router) {}
+  @Input() translationsAbout!: { [key: string]: Translation };
+
+  constructor(private eventService: EventServiceService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.nextTwoEvents = this.eventService.getNextTwoEvents();
@@ -36,15 +40,19 @@ export class ScheduleBoxComponent implements OnInit{
   }
 
   viewMore(number: number) {
-    if(number == 1) {
+    if (number == 1) {
       this.router.navigate(['/schedule']).then(r => {
         window.scrollTo(0, 0);
       });
     }
-    if(number == 2) {
+    if (number == 2) {
       this.router.navigate(['/schedule']).then(r => {
         window.scrollTo(0, 0);
       });
     }
+  }
+
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
   }
 }

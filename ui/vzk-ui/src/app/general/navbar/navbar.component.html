@@ -9,23 +9,23 @@
     <a id="vzk-name" class="logo center desktop-name" routerLink="home">Verzik Esports</a>
   </div>
   <ul class="nav-navbar" [ngClass]="{'navbar': !isMobileMenuActive, 'active': isMobileMenuActive}">
-    <li><a class="center nav-item desktop-item" (click)="navigateToPage('teams')" >Teams</a></li>
-    <li><a class="center nav-item desktop-item" (click)="navigateToPage('news')" >News</a></li>
-    <li><a class="center nav-item desktop-item" (click)="navigateToPage('schedule')">Schedule</a></li>
-    <li><a class="center nav-item desktop-item" (click)="navigateToPage('contact')" >Contact</a></li>
-    <li><a class="center nav-item desktop-item" (click)="navigateToPage('about')" >About</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="!loggedIn" (click)="login()">Login</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn">View Profile</a></li>
+    <li><a class="center nav-item desktop-item" (click)="navigateToPage('teams')" >{{getTranslation('1')}}</a></li>
+    <li><a class="center nav-item desktop-item" (click)="navigateToPage('news')" >{{getTranslation('2')}}</a></li>
+    <li><a class="center nav-item desktop-item" (click)="navigateToPage('schedule')">{{getTranslation('3')}}</a></li>
+    <li><a class="center nav-item desktop-item" (click)="navigateToPage('contact')" >{{getTranslation('4')}}</a></li>
+    <li><a class="center nav-item desktop-item" (click)="navigateToPage('about')" >{{getTranslation('5')}}</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="!loggedIn" (click)="login()">{{getTranslation('6')}}</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn">{{getTranslation('7')}}</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 1</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 2</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 3</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn" (click)="login()">Logout</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn" (click)="login()">{{getTranslation('8')}}</a></li>
   </ul>
   <ul class="nav-dropdown">
     <li *ngIf="!loggedIn">
       <a class="center nav-item desktop-item login-profile dropdown-item" (click)="login()">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
-        <div class="my-account"> Login </div>
+        <div class="my-account"> {{getTranslation('6')}} </div>
       </a>
     </li>
     <li *ngIf="loggedIn" class="dropdown">
@@ -34,11 +34,11 @@
         <div class="my-account"> {{username}} </div>
       </a>
       <div class="dropdown-content login-profile" [ngStyle]="{'display': isHidden ? 'flex' : 'none'}" (mouseover)="toggleHiddenDiv(true)" (mouseout)="toggleHiddenDiv(false)">
-        <a class="dropdown-item" (click)="navigateToProfile()">View Profile</a>
+        <a class="dropdown-item" (click)="navigateToProfile()">{{getTranslation('7')}}</a>
         <a class="dropdown-item">Option 1</a>
         <a class="dropdown-item">Option 2</a>
         <a class="dropdown-item">Option 3</a>
-        <a class="dropdown-item" (click)="login()">Logout</a>
+        <a class="dropdown-item" (click)="login()">{{getTranslation('8')}}</a>
       </div>
     </li>
   </ul>

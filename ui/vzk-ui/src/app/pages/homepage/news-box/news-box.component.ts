@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Article} from "../../../models/article/article";
 import {NewsService} from "../../../services/news-service/news.service";
 import {Router} from "@angular/router";
+import {Translation} from "../../../models/translation/translation";
 
 @Component({
   selector: 'app-news-box',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
 export class NewsBoxComponent implements OnInit {
   articles: Article[] = [];
   visibleArticles: number = 3;
+  @Input() translationsAbout!: { [key: string]: Translation };
 
   constructor(private newsService: NewsService, private router: Router) {
   }
@@ -30,5 +32,9 @@ export class NewsBoxComponent implements OnInit {
 
   ngOnInit(): void {
     this.articles = this.newsService.getMoreArticles();
+  }
+
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
   }
 }

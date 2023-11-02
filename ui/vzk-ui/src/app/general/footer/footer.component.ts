@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {Translation} from "../../models/translation/translation";
+import {TranslationService} from "../../services/translation-service/translation.service";
 
 @Component({
   selector: 'app-footer',
@@ -17,7 +19,17 @@ export class FooterComponent {
     discord: 'https://discord.gg/EbWEGUMtfY',
   };
 
-  constructor(private router: Router) {
+  translationsAbout: { [key: string]: Translation };
+
+  constructor(
+    private translationService: TranslationService,
+    private router: Router
+  ) {
+    this.translationsAbout = translationService.translationsFooter;
+  }
+
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
   }
 
   navigateToPage(page: string) {

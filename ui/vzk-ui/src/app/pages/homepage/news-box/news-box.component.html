@@ -1,8 +1,8 @@
 <div class="news-box">
     <div class="news-box-container">
         <div>
-            <div class="news-title padding-title">LATEST NEWS</div>
-            <div class="news-subtitle padding-title">Come and support us!</div>
+            <div class="news-title padding-title">{{getTranslation('2').toUpperCase()}}</div>
+            <div class="news-subtitle padding-title">{{getTranslation('8')}}</div>
         </div>
         <div class="news-list">
             <div *ngFor="let article of articles.slice(0, visibleArticles)">
@@ -13,13 +13,13 @@
             </div>
 
             <div *ngIf="articles.length === 0" class="no-articles-message">
-                No news articles available.
+              {{getTranslation('9')}}
             </div>
         </div>
         <div class="button-container">
             <button *ngIf="visibleArticles < articles.length" (click)="showMore()" class="show-all-button"
                     role="button">
-                Show All
+              {{getTranslation('3')}}
             </button>
         </div>
     </div>

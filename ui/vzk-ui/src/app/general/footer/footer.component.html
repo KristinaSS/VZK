@@ -7,10 +7,10 @@
       </div>
       <div>
         <ul class="menu">
-          <li class="choice"><a (click)="navigateToPage('teams')" >Teams</a></li>
-          <li class="choice"><a (click)="navigateToPage('news')" >News</a></li>
-          <li class="choice"><a (click)="navigateToPage('schedule')" >Schedule</a></li>
-          <li class="choice"><a (click)="navigateToPage('contact')" >Contact</a></li>
+          <li class="choice"><a (click)="navigateToPage('teams')" >{{getTranslation('1')}}</a></li>
+          <li class="choice"><a (click)="navigateToPage('news')" >{{getTranslation('2')}}</a></li>
+          <li class="choice"><a (click)="navigateToPage('schedule')" >{{getTranslation('3')}}</a></li>
+          <li class="choice"><a (click)="navigateToPage('contact')" >{{getTranslation('4')}}</a></li>
         </ul>
       </div>
     </div>
@@ -19,7 +19,7 @@
         <img src="../../../assets/imgs/VZK.png" height="150px"/>
       </div>
       <div class="social-media-icons child-middle">
-        <div class="sm-title"> Join us </div>
+        <div class="sm-title"> {{getTranslation('9')}} </div>
         <div class="sm-wrapper">
           <div class="social-icon twitch" (click)="navigateToExternalLink('twitch')"><i class="fab fa-twitch"></i></div>
           <div class="social-icon facebook" (click)="navigateToExternalLink('facebook')"><i class="fab fa-facebook"></i></div>
@@ -33,14 +33,14 @@
     </div>
     <div class="team-menu">
       <div class="title">
-        Information
+        {{getTranslation('10')}}
       </div>
       <div>
         <ul class="menu">
-          <li class="choice"><a (click)="navigateToPage('about')">About</a></li>
-          <li class="choice"><a routerLink="about" fragment="partners">Partners</a></li>
-          <li class="choice"><a (click)="navigateToPage('privacy-policy')">Privacy Policy</a></li>
-          <li class="choice"><a (click)="navigateToPage('terms')">Terms of Use</a></li>
+          <li class="choice"><a (click)="navigateToPage('about')">{{getTranslation('5')}}</a></li>
+          <li class="choice"><a routerLink="about" fragment="partners">{{getTranslation('6')}}</a></li>
+          <li class="choice"><a (click)="navigateToPage('privacy-policy')">{{getTranslation('7')}}</a></li>
+          <li class="choice"><a (click)="navigateToPage('terms')">{{getTranslation('8')}}</a></li>
         </ul>
       </div>
     </div>

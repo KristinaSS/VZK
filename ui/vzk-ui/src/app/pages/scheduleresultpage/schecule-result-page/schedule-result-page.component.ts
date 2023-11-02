@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {Translation} from "../../../models/translation/translation";
+import {TranslationService} from "../../../services/translation-service/translation.service";
 
 @Component({
   selector: 'app-schecule-result-page',
@@ -10,7 +12,12 @@ export class ScheduleResultPageComponent {
   button1Disabled: boolean = true;
   button2Disabled: boolean = false;
 
-  constructor() {
+  translationsAbout: { [key: string]: Translation };
+
+  constructor(
+    private translationService: TranslationService
+  ) {
+    this.translationsAbout = translationService.translationsSchedule;
   }
 
   showContent(contentNumber: number): void {
@@ -23,5 +30,9 @@ export class ScheduleResultPageComponent {
       this.button1Disabled = false;
       this.button2Disabled = true;
     }
+  }
+
+  getTranslation(id: string) {
+    return this.translationsAbout[id].content;
   }
 }

@@ -1,7 +1,7 @@
 <div class="site-wrapper">
   <div class="title-wrapper">
     <div class="title">
-      SCHEDULE AND STREAM
+      {{getTranslation('4').toUpperCase()}}
     </div>
   </div>
   <div class="twitch-box">
@@ -9,6 +9,6 @@
     <div class="tw-M" id="twitch-embed-M"></div>
     <div class="tw-S" id="twitch-embed-S"></div>
     <div class="tw-XS" id="twitch-embed-XS"></div>
-    <app-schedule-box></app-schedule-box>
+    <app-schedule-box [translationsAbout]="translationsAbout"></app-schedule-box>
   </div>
 </div>
