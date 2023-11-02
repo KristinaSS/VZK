@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class AccountController implements AccountApi {
@@ -22,8 +23,8 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteAccount(String account) {
-        accountService.deleteAccount(account);
+    public ResponseEntity<Void> deleteAccount(UUID account) {
+        accountService.deleteAccount(account.toString());
         return ResponseEntity.ok(null);
     }
 
@@ -33,8 +34,8 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public ResponseEntity<AccountDTO> getAccountById(String account) {
-        return ResponseEntity.ok(accountService.getAccountById(account));
+    public ResponseEntity<AccountDTO> getAccountById(UUID account) {
+        return ResponseEntity.ok(accountService.getAccountById(account.toString()));
     }
 
     @Override

@@ -1,132 +1,47 @@
-openapi: 3.0.3
+openapi: 3.0.0
 info:
+  title: Authentication API
   version: 1.0.0
-  title: Security Service
-  description: API for managing security.
-servers:
-  - url: 'http:/localhost:8080/api'
+  description: API for user authentication
 paths:
-  /authentication/login:
-    get:
+  /auth/login:
+    post:
+      summary: Authenticate a user
       tags:
-        - Authentication
-      summary: Login
-      operationId: login
+        - authentication
+      requestBody:
+        description: User credentials for authentication
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
       responses:
-        302:
-          description: Found
-  /authentication/logout:
-    get:
-      tags:
-        - Authentication
-      summary: Logout
-      operationId: logout
-      responses:
-        302:
-          description: Found
-  /authentication/userInfo:
-    get:
-      tags:
-        - Authentication
-      summary: UserInfo
-      operationId: getUserInfo
-      responses:
-        200:
-          description: OK
+        '200':
+          description: Successful authentication
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserInfoDTO"
-  /token/access:
-    get:
-      tags:
-        - Token
-      summary: Access token
-      operationId: access
-      responses:
-        200:
-          description: OK
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: JWT access token
+        '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
-                type: string
-  /token/id:
-    get:
-      tags:
-        - Token
-      summary: Id token
-      operationId: accessId
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-  /token/payload:
-    get:
-      tags:
-        - Token
-      summary: Payload token
-      operationId: payload
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-  /authorization/authorize:
-    get:
-      tags:
-        - Authorization
-      summary: Your GET endpoint
-      operationId: authorize
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: destination
-          required: true
-          description: destination,
-components:
-  schemas:
-    ErrorDto:
-      title: Error
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    UserInfoDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
-        isActive:
-          type: boolean
-    PermissionDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        isActive:
-          type: boolean
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized

@@ -12,7 +12,6 @@
   top: 20px;
   z-index: 3;
   transition: top 0.3s ease; /* Adjust the transition duration and easing as needed */
-  margin-left: -8px;
 }
 
 .nav-navbar.scrolled {
@@ -26,7 +25,6 @@
   width: 100vw;
   position: relative;
   bottom: 0;
-  margin-left: -8px;
   margin-bottom: -15px;
 }
 

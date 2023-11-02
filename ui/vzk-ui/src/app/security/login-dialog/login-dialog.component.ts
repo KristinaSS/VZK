@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import {AuthenticationService} from "../../services/authentication-service/authentication.service";
 
 @Component({
   selector: 'app-login-dialog',
@@ -7,20 +8,24 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./login-dialog.component.css']
 })
 export class LoginDialogComponent {
-  username: string = ''; // Initialize with an empty string
-  password: string = ''; // Initialize with an empty string
+  username: string = '';
+  password: string = '';
 
 
-  constructor(public dialogRef: MatDialogRef<LoginDialogComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<LoginDialogComponent>,
+    private authenticationService: AuthenticationService
+  ) {}
 
   onLogin(): void {
     // Handle login logic here
     console.log('Login clicked');
+    let user = this.authenticationService.authenticate(this.username, this.password);
+
     this.dialogRef.close();
   }
 
   onSignUp(): void {
-    // Handle sign-up logic here
     console.log('Sign Up clicked');
     this.dialogRef.close();
   }

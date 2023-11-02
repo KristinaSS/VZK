@@ -21,6 +21,8 @@
     "@angular/platform-browser": "^16.2.11",
     "@angular/platform-browser-dynamic": "^16.2.11",
     "@angular/router": "^16.2.11",
+    "@auth0/angular-jwt": "^5.2.0",
+    "@auth0/auth0-angular": "^2.2.1",
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
     "ngx-infinite-scroll": "^16.0.0",
     "npm": "^10.1.0",

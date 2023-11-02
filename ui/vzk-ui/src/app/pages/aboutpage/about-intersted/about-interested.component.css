@@ -4,14 +4,12 @@
   height: 0;
   border-right: 100vw solid transparent;
   border-bottom: 10vw solid black;
-  margin-left: -8px;
 
 }
 
 .container{
   background-color: black;
   color: white;
-  margin-left: -8px;
   position: relative;
   width: 100vw;
   align-items: center;

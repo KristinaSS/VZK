@@ -38,7 +38,6 @@ export class NavbarComponent {
   }
 
   login() {
-    //this.loggedIn = !this.loggedIn;
     this.openLoginDialog()
   }
 
@@ -57,7 +56,7 @@ export class NavbarComponent {
     this.isHidden = value;
   }
 
-  openLoginDialog(): void {
+  private openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '300px',
     });
