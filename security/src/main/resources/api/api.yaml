@@ -45,6 +45,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /auth/signup:
+    post:
+      summary: Create a user
+      tags:
+        - authentication
+      requestBody:
+        description: User credentials for authentication
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAccountDTO"
+      responses:
+        '200':
+          description: Successful creation of user
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -98,3 +131,18 @@ components:
           type: string
         isActive:
           type: boolean
+    CreateAccountDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          required: false
+        email:
+          type: string
+          required: false
+        username:
+          type: string
+          required: false
+        password:
+          type: string
+          required: false
