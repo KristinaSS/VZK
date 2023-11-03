@@ -1,3 +1,4 @@
+/*
 package com.vzk.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 // jsr250Enabled = true,
 // prePostEnabled = true) // by default
 public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
-   /* @Autowired
+   */
+/* @Autowired
     UserDetailsServiceImpl userDetailsService;
 
     @Autowired
@@ -66,6 +68,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();*/
+        return http.build();*//*
+
     //}
-}
+}*/
