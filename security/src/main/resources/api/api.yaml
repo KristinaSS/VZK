@@ -15,15 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-              required:
-                - username
-                - password
+              $ref: "#/components/schemas/CredentialsDTO"
       responses:
         '200':
           description: Successful authentication
@@ -35,13 +27,54 @@ paths:
                   accessToken:
                     type: string
                     description: JWT access token
-        '401':
-          description: Unauthorized
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: Unauthorized
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+components:
+  schemas:
+    ErrorDto:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    AccountDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        isActive:
+          type: boolean
+    CredentialsDTO:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string

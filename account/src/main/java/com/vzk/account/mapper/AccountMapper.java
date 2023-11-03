@@ -14,6 +14,7 @@ public interface AccountMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "active", target = "isActive")
     AccountDTO mapToDTO(Account account);
@@ -21,6 +22,7 @@ public interface AccountMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "isActive", target = "isActive")
     Account mapToModel(AccountDTO accountDTO);
@@ -28,11 +30,13 @@ public interface AccountMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     Account mapToModel(UpdateAccountDTO accountDTO);
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     Account mapToModel(CreateAccountDTO accountDTO);
 }

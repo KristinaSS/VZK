@@ -1,1 +1,13 @@
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
 
+server:
+  port: 8081
+
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false

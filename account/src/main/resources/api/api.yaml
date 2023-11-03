@@ -149,7 +149,7 @@ paths:
           name: Account
           required: true
           description: The account id
-  /account/{email}:
+  /account/email/{email}:
     get:
       tags:
         - Account
@@ -828,6 +828,8 @@ components:
           type: string
         email:
           type: string
+        username:
+          type: string
         password:
           type: string
         isActive:
@@ -855,6 +857,8 @@ components:
         name:
           type: string
         email:
+          type: string
+        username:
           type: string
         password:
           type: string
@@ -892,6 +896,9 @@ components:
         email:
           type: string
           required: false
+        username:
+          type: string
+          required: false
         password:
           type: string
           required: false
@@ -902,6 +909,9 @@ components:
           type: string
           required: false
         email:
+          type: string
+          required: false
+        username:
           type: string
           required: false
         password:
@@ -918,6 +928,9 @@ components:
           type: string
           required: false
         email:
+          type: string
+          required: false
+        username:
           type: string
           required: false
         password:
@@ -950,6 +963,9 @@ components:
       type: object
       properties:
         email:
+          type: string
+          required: true
+        username:
           type: string
           required: true
         team:

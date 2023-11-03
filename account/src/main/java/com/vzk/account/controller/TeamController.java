@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -23,8 +24,8 @@ public class TeamController implements TeamApi {
     }
 
     @Override
-    public ResponseEntity<Void> deactivateTeam(String team) {
-        teamService.deactivateTeam(team);
+    public ResponseEntity<Void> deactivateTeam(UUID team) {
+        teamService.deactivateTeam(team.toString());
         return ResponseEntity.ok(null);
     }
 
@@ -34,8 +35,8 @@ public class TeamController implements TeamApi {
     }
 
     @Override
-    public ResponseEntity<List<PlayerDTO>> getAllPlayersByTeam(String team) {
-        return ResponseEntity.ok(teamService.getAllPlayersByTeam(team));
+    public ResponseEntity<List<PlayerDTO>> getAllPlayersByTeam(UUID team) {
+        return ResponseEntity.ok(teamService.getAllPlayersByTeam(team.toString()));
     }
 
     @Override
@@ -49,8 +50,8 @@ public class TeamController implements TeamApi {
     }
 
     @Override
-    public ResponseEntity<TeamDTO> getTeamById(String team) {
-        return ResponseEntity.ok(teamService.getTeamById(team));
+    public ResponseEntity<TeamDTO> getTeamById(UUID team) {
+        return ResponseEntity.ok(teamService.getTeamById(team.toString()));
     }
 
     @Override

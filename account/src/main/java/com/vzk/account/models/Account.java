@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity(name = "account")
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private UUID id;
 
@@ -24,6 +23,10 @@ public class Account {
     @Basic
     @Column(name = "email")
     private String email;
+
+    @Basic
+    @Column(name = "username")
+    private String username;
 
     @Basic
     @Column(name = "password")

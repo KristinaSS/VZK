@@ -24,6 +24,7 @@ public interface PlayerMapper {
     @Mapping(source = "accountDetails.id", target = "id")
     @Mapping(source = "account.name", target = "name")
     @Mapping(source = "account.email", target = "email")
+    @Mapping(source = "account.username", target = "username")
     @Mapping(source = "account.password", target = "password")
     @Mapping(source = "account.active", target = "isActive")
     @Mapping(source = "accountDetails.team.id", target = "team")

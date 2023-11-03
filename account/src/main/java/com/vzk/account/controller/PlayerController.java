@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -24,10 +25,11 @@ public class PlayerController implements PlayerApi {
     }
 
     @Override
-    public ResponseEntity<Void> deactivatePlayer(String player) {
-        playerService.deletePlayer(player);
+    public ResponseEntity<Void> deactivatePlayer(UUID player) {
+        playerService.deletePlayer(String.valueOf(player));
         return ResponseEntity.ok(null);
     }
+
 
     @Override
     public ResponseEntity<List<PlayerDTO>> getAllActivePlayers() {
@@ -44,9 +46,10 @@ public class PlayerController implements PlayerApi {
         return ResponseEntity.ok(playerService.getPlayerByEmail(player));
     }
 
+
     @Override
-    public ResponseEntity<PlayerDTO> getPlayerById(String player) {
-        return ResponseEntity.ok(playerService.getPlayerById(player));
+    public ResponseEntity<PlayerDTO> getPlayerById(UUID player) {
+        return ResponseEntity.ok(playerService.getPlayerById(player.toString()));
     }
 
     @Override
