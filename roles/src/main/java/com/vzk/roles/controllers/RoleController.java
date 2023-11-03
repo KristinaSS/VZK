@@ -15,7 +15,7 @@ import java.util.UUID;
 public class RoleController implements RolesApi {
     @Autowired
     private RolesService rolesService;
-    @Override
+    @Override //works
     public ResponseEntity<RoleDTO> createRole(String body) {
         return ResponseEntity.ok(rolesService.createRole(body));
     }
@@ -32,29 +32,29 @@ public class RoleController implements RolesApi {
         return ResponseEntity.ok(null);
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<RoleDTO>> getAllActiveRoles() {
         return ResponseEntity.ok(rolesService.getAllActiveRoles());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<RoleDTO>> getAllRoles() {
         return ResponseEntity.ok(rolesService.getAllRoles());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<PermissionDTO>> getPermissionsByRoleId(UUID roleId) {
         return ResponseEntity.ok(rolesService.getPermissionsByRoleId(roleId));
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<RoleDTO> getRoleById(UUID request) {
         return ResponseEntity.ok(rolesService.getRoleById(request));
     }
 
-    @Override
-    public ResponseEntity<Void> giveAccountRole(UUID roleId, UUID permissionsId) {
-        rolesService.giveAccountRole(roleId, permissionsId);
+    @Override //works
+    public ResponseEntity<Void> giveRolePermission(UUID roleId, UUID permissionsId) {
+        rolesService.giveRolePermission(roleId, permissionsId);
         return ResponseEntity.ok(null);
     }
 }

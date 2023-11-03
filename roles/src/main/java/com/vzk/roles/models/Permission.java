@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity(name = "permissions")
 public class Permission {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private UUID id;
 

@@ -1,9 +1,12 @@
 package com.vzk.roles.services.impl;
 
 import com.vzk.roles.exceptions.EntityAlreadyDeactivatedException;
-import com.vzk.roles.exceptions.EntityNotFoundException;
 import com.vzk.roles.exceptions.EntityAlreadyExists;
-import com.vzk.roles.models.*;
+import com.vzk.roles.exceptions.EntityNotFoundException;
+import com.vzk.roles.models.Permission;
+import com.vzk.roles.models.Role;
+import com.vzk.roles.models.RolePermission;
+import com.vzk.roles.models.RolePermissionID;
 import com.vzk.roles.repos.RolePermissionRepository;
 import com.vzk.roles.repos.RoleRepository;
 import com.vzk.roles.services.PermissionService;
@@ -81,14 +84,14 @@ public class RolesServiceImpl implements RolesService {
     }
 
     @Override
-    public void giveAccountRole(UUID roleId, UUID permissionsId) {
+    public void giveRolePermission(UUID roleId, UUID permissionsId) {
         rolePermissionRepository.save(buildRolePermission(roleId, permissionsId));
     }
 
     @Override
     public List<PermissionDTO> getPermissionsByRoleId(UUID roleId) {
         return rolePermissionRepository.findAll().stream()
-                .filter(rolePermission -> rolePermission.getRolePermissionID().getRole().getId() == roleId)
+                .filter(rolePermission -> rolePermission.getRolePermissionID().getRole().getId().toString().equals(roleId.toString()))
                 .map(rolePermission -> PERMISSION_MAPPER.mapToDTO(rolePermission.getRolePermissionID().getPermission()))
                 .collect(Collectors.toList());
     }
@@ -103,17 +106,18 @@ public class RolesServiceImpl implements RolesService {
                 () -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }
 
-    private void verifyEntityIfExists(RolePermissionID rolePermissionID){
-        rolePermissionRepository.findById(rolePermissionID).orElseThrow(() ->
-                new EntityAlreadyExists(
-                        ENTITY_COMB,
-                        "permission",
-                        rolePermissionID.getRole().getId(),
-                        rolePermissionID.getPermission().getId())
-        );
+    private void verifyEntityIfExists(RolePermissionID rolePermissionID) {
+        RolePermission id = rolePermissionRepository.findById(rolePermissionID).orElse(null);
+        if (id != null) {
+            throw new EntityAlreadyExists(
+                    ENTITY_COMB,
+                    "permission",
+                    rolePermissionID.getRole().getId(),
+                    rolePermissionID.getPermission().getId());
+        }
     }
 
-    private RolePermission buildRolePermission(UUID roleId, UUID permissionId){
+    private RolePermission buildRolePermission(UUID roleId, UUID permissionId) {
         Role role = findRole(roleId);
         PermissionDTO permissionDTO = permissionService.getPermissionById(permissionId);
         Permission permission = PERMISSION_MAPPER.mapToModel(permissionDTO);

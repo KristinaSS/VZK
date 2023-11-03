@@ -3,8 +3,6 @@ info:
   version: 1.0.0
   title: Roles Service
   description: API for managing roles and permissions.
-servers:
-  - url: 'http:/localhost:8080/api'
 paths:
   /roles/all:
     get:
@@ -13,10 +11,10 @@ paths:
       summary: Getting all roles
       operationId: getAllRoles
       responses:
-        "201":
+        "200":
           description: Successful retrieval of all roles.
           content:
-            permission/json:
+            application/json:
               schema:
                 type: array
                 items:
@@ -24,19 +22,19 @@ paths:
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /roles/all/active:
@@ -46,10 +44,10 @@ paths:
       summary: Getting all active roles
       operationId: getAllActiveRoles
       responses:
-        "201":
+        "200":
           description: Successful retrieval of all roles.
           content:
-            permission/json:
+            application/json:
               schema:
                 type: array
                 items:
@@ -57,19 +55,19 @@ paths:
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /role/{id}:
@@ -79,29 +77,29 @@ paths:
       summary: Getting single role by id
       operationId: getRoleById
       responses:
-        "201":
+        "200":
           description: Successful retrieval of role.
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/RoleDTO'
 
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
@@ -121,32 +119,32 @@ paths:
       requestBody:
         required: true
         content:
-          permission/json:
+          application/json:
             schema:
               type: string
       responses:
-        "201":
+        "200":
           description: Successful creation of role.
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/RoleDTO'
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /role/{id}/delete:
@@ -156,7 +154,7 @@ paths:
       summary: Deleting single role by id
       operationId: deleteRole
       responses:
-        "201":
+        "200":
           description: Successful deletion of role.
         "400":
           description: Bad Request
@@ -191,10 +189,10 @@ paths:
       summary: Getting permissions by id
       operationId: getPermissionsByRoleId
       responses:
-        "201":
+        "200":
           description: Successful retrieval of all roles.
           content:
-            permission/json:
+            application/json:
               schema:
                 type: array
                 items:
@@ -202,19 +200,19 @@ paths:
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
@@ -225,38 +223,31 @@ paths:
           name: roleId
           required: true
           description: The id
-  /role/{id}/addPermission:
-    get:
+  /role/{roleId}/addPermission/{permId}:
+    post:
       tags:
         - Roles
       summary: Give account role
-      operationId: giveAccountRole
-      requestBody:
-        required: true
-        content:
-          permission/json:
-            schema:
-              type: string
-              format: uuid
+      operationId: giveRolePermission
       responses:
-        "201":
+        "200":
           description: Successful.
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
@@ -267,6 +258,13 @@ paths:
           name: roleId
           required: true
           description: roleId
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: permId
+          required: true
+          description: permissionId
   /role/{id}/deletePermission:
     get:
       tags:
@@ -276,29 +274,29 @@ paths:
       requestBody:
         required: true
         content:
-          permission/json:
+          application/json:
             schema:
               type: string
               format: uuid
       responses:
-        "201":
+        "200":
           description: Successful.
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
@@ -317,10 +315,10 @@ paths:
       summary: Getting all permissions
       operationId: getAllPermissions
       responses:
-        "201":
+        "200":
           description: Successful retrieval of all permissions.
           content:
-            permission/json:
+            application/json:
               schema:
                 type: array
                 items:
@@ -328,19 +326,19 @@ paths:
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /permission/all/active:
@@ -350,10 +348,10 @@ paths:
       summary: Getting all active permissions
       operationId: getAllActivePermissions
       responses:
-        "201":
+        "200":
           description: Successful retrieval of all active permissions.
           content:
-            permission/json:
+            application/json:
               schema:
                 type: array
                 items:
@@ -361,19 +359,19 @@ paths:
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /permission/{id}:
@@ -383,29 +381,29 @@ paths:
       summary: Getting single permission by id
       operationId: getPermissionById
       responses:
-        "201":
+        "200":
           description: Successful retrieval of permission.
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/PermissionDTO'
 
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
@@ -425,32 +423,32 @@ paths:
       requestBody:
         required: true
         content:
-          permission/json:
+          application/json:
             schema:
               type: string
       responses:
-        "201":
+        "200":
           description: Successful creation of permission.
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/PermissionDTO'
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /permission/{id}/delete:
@@ -460,7 +458,7 @@ paths:
       summary: Deleting single permission by id
       operationId: deletePermission
       responses:
-        "201":
+        "200":
           description: Successful deletion of permission.
         "400":
           description: Bad Request
@@ -496,10 +494,10 @@ paths:
       summary: Getting roles of an account
       operationId: getRolesByAccountId
       responses:
-        "201":
+        "200":
           description: Successful retrieval of roles of account.
           content:
-            permission/json:
+            application/json:
               schema:
                 type: array
                 items:
@@ -507,19 +505,19 @@ paths:
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
@@ -530,38 +528,31 @@ paths:
           name: accountId
           required: true
           description: The id
-  /role/account/{id}/role:
+  /role/account/{acc_id}/role/{role_id}:
     get:
       tags:
         - Account
       summary: Give account role
       operationId: giveAccountRole
-      requestBody:
-        required: true
-        content:
-          permission/json:
-            schema:
-              type: string
-              format: uuid
       responses:
-        "201":
+        "200":
           description: Successful.
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:
@@ -569,9 +560,16 @@ paths:
             type: string
             format: uuid
           in: query
-          name: accountId
+          name: acc_id
           required: true
-          description: accountId
+          description: acc_id
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: role_id
+          required: true
+          description: role_id
   /role/account/{id}/delete:
     get:
       tags:
@@ -581,29 +579,29 @@ paths:
       requestBody:
         required: true
         content:
-          permission/json:
+          application/json:
             schema:
               type: string
               format: uuid
       responses:
-        "201":
+        "200":
           description: Successful.
         "400":
           description: Bad Request
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "404":
           description: Not Found
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
         "500":
           description: Internal Server Error
           content:
-            permission/json:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
       parameters:

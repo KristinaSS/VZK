@@ -54,13 +54,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private void verifyEntityIfExists(RoleAccountID roleAccountID) {
-        roleAccountRepository.findById(roleAccountID).orElseThrow(() ->
-                new EntityAlreadyExists(
-                        ENTITY_COMB,
-                        "account",
-                        roleAccountID.getRole().getId(),
-                        roleAccountID.getAccountId())
-        );
+        RoleAccount id = roleAccountRepository.findById(roleAccountID).orElse(null);
+        if (id != null) {
+            throw new EntityAlreadyExists(
+                    ENTITY_COMB,
+                    "account",
+                    roleAccountID.getRole().getId(),
+                    roleAccountID.getAccountId());
+        }
     }
 
     private RoleAccount buildRoleAccount(UUID roleId, UUID accId) {

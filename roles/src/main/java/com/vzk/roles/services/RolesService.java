@@ -17,7 +17,7 @@ public interface RolesService {
 
     RoleDTO getRoleById(UUID id);
 
-    void giveAccountRole(UUID roleId, UUID permissionsId);
+    void giveRolePermission(UUID roleId, UUID permissionsId);
 
     List<PermissionDTO> getPermissionsByRoleId(UUID roleId);
 

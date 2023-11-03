@@ -14,7 +14,7 @@ import java.util.UUID;
 public class PermissionController implements PermissionsApi {
     @Autowired
     private PermissionService permissionService;
-    @Override
+    @Override //works
     public ResponseEntity<PermissionDTO> createPermission(String body) {
         return ResponseEntity.ok(permissionService.createPermission(body));
     }
@@ -25,17 +25,17 @@ public class PermissionController implements PermissionsApi {
         return ResponseEntity.ok(null);
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<PermissionDTO>> getAllActivePermissions() {
         return ResponseEntity.ok(permissionService.getAllActivePermissions());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<PermissionDTO>> getAllPermissions() {
         return ResponseEntity.ok(permissionService.getAllPermissions());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<PermissionDTO> getPermissionById(UUID permissionId) {
         return ResponseEntity.ok(permissionService.getPermissionById(permissionId));
     }

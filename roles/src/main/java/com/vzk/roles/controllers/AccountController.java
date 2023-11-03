@@ -27,7 +27,7 @@ public class AccountController implements AccountApi {
         return ResponseEntity.ok(accountService.getRolesForAccount(accountId));
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<Void> giveAccountRole(UUID accountId, UUID roleId) {
         accountService.giveRoleToAccount(accountId, roleId);
         return ResponseEntity.ok(null);

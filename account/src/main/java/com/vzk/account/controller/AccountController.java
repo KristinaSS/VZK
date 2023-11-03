@@ -17,7 +17,7 @@ public class AccountController implements AccountApi {
     @Autowired
     private AccountService accountService;
 
-    @Override
+    @Override //works
     public ResponseEntity<AccountDTO> createAccount(CreateAccountDTO createAccountDTO) {
         return ResponseEntity.ok(accountService.createAccount(createAccountDTO));
     }
@@ -28,22 +28,22 @@ public class AccountController implements AccountApi {
         return ResponseEntity.ok(null);
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<AccountDTO> getAccountByEmail(String account) {
         return ResponseEntity.ok(accountService.getAccountByEmail(account));
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<AccountDTO> getAccountById(UUID account) {
         return ResponseEntity.ok(accountService.getAccountById(account.toString()));
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<AccountDTO>> getAllAccounts() {
         return ResponseEntity.ok(accountService.getAllAccounts());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<AccountDTO>> getAllActiveAccounts() {
         return ResponseEntity.ok(accountService.getAllActiveAccounts());
     }
