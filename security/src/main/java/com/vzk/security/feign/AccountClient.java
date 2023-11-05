@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "account-service", url = "http://localhost:8080")
+import static com.vzk.security.utils.Constants.*;
+
+@FeignClient(name = ACCOUNT_SERVICE_NAME, url = ACCOUNT_SERVICE_BASE_URL)
 public interface AccountClient {
 
-    @GetMapping("/account/email/{email}")
+    @GetMapping(ACCOUNT_GET_ACCOUNT_BY_EMAIL_URL)
     ResponseEntity<AccountDTO> getAccountByEmail(
             @RequestParam("Account") String account,
             @RequestParam("email") String email
     );
 
-    @PostMapping("/account/create")
+    @PostMapping(ACCOUNT_CREATE_ACCOUNT_URL)
     ResponseEntity<AccountDTO> createAccount(@RequestBody CreateAccountDTO createAccountDTO);
 }
 

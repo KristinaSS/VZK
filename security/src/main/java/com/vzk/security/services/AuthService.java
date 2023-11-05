@@ -1,9 +1,11 @@
 package com.vzk.security.services;
 
 import org.openapitools.model.CreateAccountDTO;
+import org.openapitools.model.CredentialsDTO;
+import org.openapitools.model.JwtAuthenticationResponse;
 
 public interface AuthService {
-    String authenticate(String email, String password);
+    JwtAuthenticationResponse signUp(CreateAccountDTO request);
 
-    void signUpUser(CreateAccountDTO createAccountDTO);
+    JwtAuthenticationResponse signIn(CredentialsDTO request);
 }

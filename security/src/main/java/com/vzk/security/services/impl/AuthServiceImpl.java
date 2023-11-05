@@ -2,51 +2,77 @@ package com.vzk.security.services.impl;
 
 import com.vzk.security.feign.AccountClient;
 import com.vzk.security.feign.RolesClient;
+import com.vzk.security.models.Account;
 import com.vzk.security.services.AuthService;
-import org.openapitools.model.AccountDTO;
-import org.openapitools.model.CreateAccountDTO;
-import org.openapitools.model.PermissionDTO;
-import org.openapitools.model.RoleDTO;
+import com.vzk.security.services.JwtGeneratorInterface;
+import feign.FeignException;
+import lombok.RequiredArgsConstructor;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AuthorizationServiceException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
+
+import static com.vzk.security.utils.Constants.DEFAULT_USER_ROLE_UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    private static final UUID USER_ROLE_UUID = UUID.fromString("ca182baf-017d-4c4f-9769-1d82fac073d8");
+    @Autowired
+    private JwtGeneratorInterface jwtService;
 
-    @Qualifier("com.vzk.security.feign.AccountClient")
     @Autowired
     private AccountClient accountClient;
 
     @Autowired
     private RolesClient rolesClient;
 
+
     @Override
-    public String authenticate(String email, String password) {
-        ResponseEntity<AccountDTO> account = accountClient.getAccountByEmail(email, email);
+    public JwtAuthenticationResponse signUp(CreateAccountDTO request) {
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        request.setPassword(encodedPassword);
+        AccountDTO acc = accountClient.createAccount(request).getBody();
 
-        if (account != null) {
-            // Process the account information
+        assert acc != null;
+        Account user = getSecurityAccount(acc);
 
-            RoleDTO role = rolesClient.getRolesByAccountId(account.getBody().getId().toString(), account.getBody().getId().toString()).get(0);
-            List<PermissionDTO> permissionDTOList = rolesClient.getPermissionsByRoleId(role.getId().toString(), role.getId().toString());
-            return "Authentication successful "  + account.getBody().getUsername();
-        } else {
-            // Handle the case where the response is null
-            return "Account not found";
-        }
+        String jwt = jwtService.generateToken(user);
+        return JwtAuthenticationResponse.builder().token(jwt).build();
     }
 
     @Override
-    public void signUpUser(CreateAccountDTO createAccountDTO) {
-        ResponseEntity<AccountDTO> createdAccount = accountClient.createAccount(createAccountDTO);
-        rolesClient.giveAccountRole(createdAccount.getBody().getId(), USER_ROLE_UUID,createdAccount.getBody().getId(), USER_ROLE_UUID);
+    public JwtAuthenticationResponse signIn(CredentialsDTO request) {
+        AccountDTO acc;
+
+        try {
+            acc = accountClient.getAccountByEmail(request.getEmail(), request.getEmail()).getBody();
+        } catch (FeignException.FeignClientException e) {
+            throw new AuthorizationServiceException("Access Denied for user");
+        }
+
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        assert acc != null;
+
+        if (!encodedPassword.equals(acc.getPassword())) {
+            throw new AuthorizationServiceException("Access Denied for user");
+        }
+        Account user = getSecurityAccount(acc);
+
+        String jwt = jwtService.generateToken(user);
+        return JwtAuthenticationResponse.builder().token(jwt).build();
+    }
+
+    private Account getSecurityAccount(AccountDTO acc){
+        rolesClient.giveAccountRole(acc.getId(), DEFAULT_USER_ROLE_UUID, acc.getId(), DEFAULT_USER_ROLE_UUID);
+
+        List<RoleDTO> roles = rolesClient.getRolesByAccountId(acc.getId().toString(), acc.getId().toString());
+        return Account.builder().accountDTO(acc).roles(roles).build();
     }
 }
 

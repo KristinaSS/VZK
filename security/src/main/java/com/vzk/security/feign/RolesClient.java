@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "roles-service", url = "http://localhost:8084")
+import static com.vzk.security.utils.Constants.*;
+
+@FeignClient(name = ROLES_SERVICE_NAME, url = ROLES_SERVICE_BASE_URL)
 public interface RolesClient {
-    @GetMapping("/role/account/{id}")
+    @GetMapping(ROLES_GET_ROLES_BY_ACC_ID_URL)
     List<RoleDTO> getRolesByAccountId(@PathVariable("id") String id, @RequestParam("accountId") String accountId);
 
-    @GetMapping("/role/{id}/permissions")
+    @GetMapping(ROLES_GET_PERMISSION_BY_ROLE_ID_URL)
     List<PermissionDTO> getPermissionsByRoleId(@PathVariable("id") String id, @RequestParam("roleId") String roleId);
 
-    @GetMapping("/role/account/{acc_id}/role/{role_id}")
+    @GetMapping(ROLES_GIVE_ACCOUNT_ROLE_URL)
     void giveAccountRole(
-            @PathVariable("acc_id")UUID accountId,
-            @PathVariable("role_id")UUID roleId,
-            @RequestParam("acc_id")UUID accountId2,
-            @RequestParam("role_id")UUID roleId2
+            @PathVariable("acc_id") UUID accountId,
+            @PathVariable("role_id") UUID roleId,
+            @RequestParam("acc_id") UUID accountId2,
+            @RequestParam("role_id") UUID roleId2
     );
 }
 

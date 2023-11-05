@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API for user authentication
 paths:
-  /auth/login:
+  /api/v1/auth/login:
     post:
       summary: Authenticate a user
       tags:
@@ -22,11 +22,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  accessToken:
-                    type: string
-                    description: JWT access token
+                $ref: "#/components/schemas/JwtAuthenticationResponse"
         "400":
           description: Bad Request
           content:
@@ -45,7 +41,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-  /auth/signup:
+  /api/v1/auth/signup:
     post:
       summary: Create a user
       tags:
@@ -60,6 +56,10 @@ paths:
       responses:
         '200':
           description: Successful creation of user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JwtAuthenticationResponse"
         "400":
           description: Bad Request
           content:
@@ -146,3 +146,8 @@ components:
         password:
           type: string
           required: false
+    JwtAuthenticationResponse:
+      type: object
+      properties:
+        token:
+          type: string
