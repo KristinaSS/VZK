@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.model.AccountDTO;
 import org.openapitools.model.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -30,25 +29,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                AccountDTO accountDTO = accountClient.getAccountByEmail(username, username).getBody();
-                assert accountDTO != null;
-                try {
-                    return getSecurityAccount(accountDTO);
-                } catch (FeignException.FeignClientException e) {
-                    throw new UsernameNotFoundException("User not found");
-                }
-
+        return username -> {
+            AccountDTO accountDTO = accountClient.getAccountByEmail(username, username).getBody();
+            assert accountDTO != null;
+            try {
+                return getSecurityAccount(accountDTO);
+            } catch (FeignException.FeignClientException e) {
+                throw new UsernameNotFoundException("User not found");
             }
+
         };
     }
 
     private Account getSecurityAccount(AccountDTO acc) {
-        rolesClient.giveAccountRole(acc.getId(), DEFAULT_USER_ROLE_UUID, acc.getId(), DEFAULT_USER_ROLE_UUID);
-
-        List<RoleDTO> roles = rolesClient.getRolesByAccountId(acc.getId().toString(), acc.getId().toString());
+        List<RoleDTO> roles = rolesClient.getRolesByAccountId(acc.getId(), acc.getId());
         return Account.builder().accountDTO(acc).roles(roles).build();
     }
 }

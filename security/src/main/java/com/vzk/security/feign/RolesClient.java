@@ -15,7 +15,7 @@ import static com.vzk.security.utils.Constants.*;
 @FeignClient(name = ROLES_SERVICE_NAME, url = ROLES_SERVICE_BASE_URL)
 public interface RolesClient {
     @GetMapping(ROLES_GET_ROLES_BY_ACC_ID_URL)
-    List<RoleDTO> getRolesByAccountId(@PathVariable("id") String id, @RequestParam("accountId") String accountId);
+    List<RoleDTO> getRolesByAccountId(@PathVariable("id") UUID id, @RequestParam("accountId") UUID accountId);
 
     @GetMapping(ROLES_GET_PERMISSION_BY_ROLE_ID_URL)
     List<PermissionDTO> getPermissionsByRoleId(@PathVariable("id") String id, @RequestParam("roleId") String roleId);

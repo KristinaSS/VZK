@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
         AccountDTO acc = accountClient.createAccount(request).getBody();
 
         assert acc != null;
-        Account user = getSecurityAccount(acc);
+        Account user = getSecurityAccount(acc, true);
 
         String jwt = jwtService.generateToken(user);
         return JwtAuthenticationResponse.builder().token(jwt).build();
@@ -56,22 +56,21 @@ public class AuthServiceImpl implements AuthService {
             throw new AuthorizationServiceException("Access Denied for user");
         }
 
-        String encodedPassword = passwordEncoder.encode(request.getPassword());
-        assert acc != null;
-
-        if (!encodedPassword.equals(acc.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), acc.getPassword())) {
             throw new AuthorizationServiceException("Access Denied for user");
         }
-        Account user = getSecurityAccount(acc);
+        Account user = getSecurityAccount(acc, false);
 
         String jwt = jwtService.generateToken(user);
         return JwtAuthenticationResponse.builder().token(jwt).build();
     }
 
-    private Account getSecurityAccount(AccountDTO acc){
-        rolesClient.giveAccountRole(acc.getId(), DEFAULT_USER_ROLE_UUID, acc.getId(), DEFAULT_USER_ROLE_UUID);
+    private Account getSecurityAccount(AccountDTO acc, boolean isNew){
+        if (isNew) {
+            rolesClient.giveAccountRole(acc.getId(), DEFAULT_USER_ROLE_UUID, acc.getId(), DEFAULT_USER_ROLE_UUID);
+        }
 
-        List<RoleDTO> roles = rolesClient.getRolesByAccountId(acc.getId().toString(), acc.getId().toString());
+        List<RoleDTO> roles = rolesClient.getRolesByAccountId(acc.getId(), acc.getId());
         return Account.builder().accountDTO(acc).roles(roles).build();
     }
 }
