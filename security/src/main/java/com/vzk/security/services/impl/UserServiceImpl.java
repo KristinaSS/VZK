@@ -9,11 +9,15 @@ import lombok.RequiredArgsConstructor;
 import org.openapitools.model.AccountDTO;
 import org.openapitools.model.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.vzk.security.utils.Constants.DEFAULT_USER_ROLE_UUID;
 
@@ -43,6 +47,12 @@ public class UserServiceImpl implements UserService {
 
     private Account getSecurityAccount(AccountDTO acc) {
         List<RoleDTO> roles = rolesClient.getRolesByAccountId(acc.getId(), acc.getId());
-        return Account.builder().accountDTO(acc).roles(roles).build();
+        Set<String> permissions = new HashSet<>();
+
+        roles.forEach(role ->
+                rolesClient.getPermissionsByRoleId(role.getId().toString(), role.getId().toString())
+                        .forEach(permission -> permissions.add(permission.getName())));
+
+        return Account.builder().accountDTO(acc).permissions(permissions).build();
     }
 }

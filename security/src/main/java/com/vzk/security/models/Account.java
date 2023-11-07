@@ -6,13 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.openapitools.model.AccountDTO;
-import org.openapitools.model.RoleDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Builder
@@ -21,14 +20,13 @@ import java.util.stream.Collectors;
 public class Account implements UserDetails {
     private AccountDTO accountDTO;
     @Enumerated(EnumType.STRING)
-    private List<RoleDTO> roles;
+    private Set<String> permissions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+        return permissions.stream()
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-
     }
 
     @Override

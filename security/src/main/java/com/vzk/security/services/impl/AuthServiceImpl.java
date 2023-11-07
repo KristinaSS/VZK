@@ -13,7 +13,9 @@ import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.vzk.security.utils.Constants.DEFAULT_USER_ROLE_UUID;
 
@@ -71,7 +73,13 @@ public class AuthServiceImpl implements AuthService {
         }
 
         List<RoleDTO> roles = rolesClient.getRolesByAccountId(acc.getId(), acc.getId());
-        return Account.builder().accountDTO(acc).roles(roles).build();
+        Set<String> permissions = new HashSet<>();
+
+        roles.forEach(role ->
+                rolesClient.getPermissionsByRoleId(role.getId().toString(), role.getId().toString())
+                        .forEach(permission -> permissions.add(permission.getName())));
+
+        return Account.builder().accountDTO(acc).permissions(permissions).build();
     }
 }
 

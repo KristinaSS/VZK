@@ -3,12 +3,15 @@ info:
   title: Authentication API
   version: 1.0.0
   description: API for user authentication
+servers:
+  - url: 'http:/localhost:8081/api/v1'
 paths:
-  /api/v1/auth/login:
+  /authentication/login:
     post:
       summary: Authenticate a user
+      operationId: login
       tags:
-        - authentication
+        - Authentication
       requestBody:
         description: User credentials for authentication
         required: true
@@ -41,11 +44,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
-  /api/v1/auth/signup:
+  /authentication/signup:
     post:
       summary: Create a user
+      operationId: signUp
       tags:
-        - authentication
+        - Authentication
       requestBody:
         description: User credentials for authentication
         required: true
@@ -78,6 +82,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /authentication/logout:
+    get:
+      tags:
+        - Authentication
+      summary: Logout
+      operationId: logout
+      responses:
+        302:
+          description: Found
+  /authentication/userInfo:
+    get:
+      tags:
+        - Authentication
+      summary: UserInfo
+      operationId: getUserInfo
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfoDTO"
+  /authorization/authorize:
+    get:
+      tags:
+        - Authorization
+      summary: Your GET endpoint
+      operationId: authorize
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: destination
+          required: true
+          description: destination,
 components:
   schemas:
     ErrorDto:
@@ -151,3 +197,16 @@ components:
       properties:
         token:
           type: string
+    UserInfoDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        isActive:
+          type: boolean
