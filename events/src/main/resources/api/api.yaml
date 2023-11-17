@@ -4,7 +4,7 @@ info:
   title: Event Service
   description: API for managing events.
 servers:
-  - url: 'http:/localhost:8080/api'
+  - url: 'http:/localhost:8084/api'
 paths:
   /event/all:
     get:

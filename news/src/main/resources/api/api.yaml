@@ -4,7 +4,7 @@ info:
   title: News Service
   description: API for managing articles.
 servers:
-  - url: 'http:/localhost:8080/api'
+  - url: 'http:/localhost:8085/api'
 paths:
   /article/all:
     get:

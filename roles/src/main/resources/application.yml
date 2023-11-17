@@ -29,7 +29,7 @@ springdoc:
     enabled: true
 
 server:
-  port: 8084
+  port: 8083
 
 logging:
   level:
