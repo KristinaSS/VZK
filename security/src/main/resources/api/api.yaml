@@ -80,6 +80,44 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /api/v1/auth/validateToken:
+    get:
+      summary: Validate a JWT token
+      operationId: validateToken
+      tags:
+        - authorization
+      parameters:
+        - name: Authorization
+          in: header
+          description: The JWT token to validate
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Token is valid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JwtAuthorizationResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -153,3 +191,8 @@ components:
       properties:
         token:
           type: string
+    JwtAuthorizationResponse:
+      type: object
+      properties:
+        isValid:
+          type: boolean

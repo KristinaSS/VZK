@@ -25,7 +25,7 @@ public class JwtGeneratorImpl implements JwtGeneratorInterface {
 
     @Override
     public String extractUserName(String token) {
-        return extractClaim(token, Claims::getSubject);
+        return extractClaim(token, claims -> claims.get("username", String.class));
     }
 
     @Override
