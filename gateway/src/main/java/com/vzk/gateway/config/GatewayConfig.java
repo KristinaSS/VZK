@@ -2,6 +2,8 @@ package com.vzk.gateway.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vzk.gateway.feign.SecurityClient;
+import com.vzk.gateway.model.JwtAuthorizationRequest;
+import com.vzk.gateway.model.JwtAuthorizationResponse;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import feign.jackson.JacksonDecoder;
@@ -14,6 +16,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Configuration
@@ -35,8 +38,7 @@ public class GatewayConfig {
                         .path("/account/**")
                         .filters(f -> f.modifyRequestBody(String.class, String.class,
                                 (exchange, isValid) -> {
-                                    String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwicGVybWlzc2lvbnMiOiJbY2hhbmdlLXBsYXllci1waWN0dXJlLCB2aWV3LXVzZXItcHJvZmlsZSwgY2hhbmdlLXBsYXllci1pbmZvLCBndWVzdC1wZXJtaXNzaW9uc10iLCJzdWIiOiJ1c2VyIiwiaWF0IjoxNzAwMjYyNDY0LCJleHAiOjE3MDAyNjYwNjR9.Anuu1VSBFYeSPv6OKOmfxkcapC985QFhZECDwg44_Qw";
-                                    isValid = securityClient.validateToken("Bearer " + token).getIsValid().toString();
+                                    isValid = String.valueOf(isRequestValid(exchange));
                                     if (!Boolean.parseBoolean(isValid)) {
                                         return Mono.error(new RuntimeException("Invalid token"));
                                     }
@@ -44,6 +46,16 @@ public class GatewayConfig {
                                 }))
                         .uri("http://localhost:8082"))
                 .build();
+    }
+
+    private boolean isRequestValid(ServerWebExchange exchange) {
+        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        String path = exchange.getRequest().getPath().value();
+
+        boolean isValid = securityClient.validateToken(token).getIsValid();
+        boolean isAuthorized = securityClient.authorizeRequest(token, new JwtAuthorizationRequest(path)).getIsValid();
+
+        return isValid && isAuthorized;
     }
 
     @Bean

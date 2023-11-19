@@ -118,6 +118,51 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /api/v1/auth/authorize:
+    post:
+      summary: Authorize a user based on the request path
+      operationId: authorize
+      tags:
+        - authorization
+      parameters:
+        - name: Authorization
+          in: header
+          description: The JWT token to authorize
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Request path for authorization
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JwtAuthorizationRequest"
+      responses:
+        '200':
+          description: Authorization successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JwtAuthorizationResponse"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -196,3 +241,8 @@ components:
       properties:
         isValid:
           type: boolean
+    JwtAuthorizationRequest:
+      type: object
+      properties:
+        path:
+          type: string
