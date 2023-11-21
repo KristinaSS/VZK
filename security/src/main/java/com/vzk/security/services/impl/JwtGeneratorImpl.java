@@ -47,7 +47,6 @@ public class JwtGeneratorImpl implements JwtGeneratorInterface {
     private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder()
                 .claim("username", userDetails.getUsername())
-                .claim("permissions", userDetails.getAuthorities().toString())
                 .setSubject("user")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS)))
