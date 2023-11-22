@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {PlayerService} from "../player-service/player.service";
 import {Game} from "../../models/game/game";
 import {GameService} from "../game-service/game.service";
@@ -14,7 +14,7 @@ export class TeamService {
     logo: 'https://esportbetweb.com/wp-content/uploads/2019/07/csgo-moreorange2.png'
   };
 
-  private gameList = this.gameService.getGames();
+  private gameList: Game[] = [];
 
   private lolTeam = {
     id: '1',
@@ -46,6 +46,14 @@ export class TeamService {
   };
 
   constructor(private playerService: PlayerService, private gameService: GameService) {
+    this.gameService.getGames().subscribe(
+      (data: Game[]) => {
+        this.gameList = data;
+      },
+      (error) => {
+        console.error('Error fetching games:', error);
+      }
+    );
   }
 
   getTeams(){

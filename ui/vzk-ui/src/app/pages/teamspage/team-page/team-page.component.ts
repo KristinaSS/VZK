@@ -19,6 +19,13 @@ export class TeamPageComponent implements OnInit {
     this.translationsAbout = translationService.translationsTeams;
   }
   ngOnInit(): void {
-    this.gameList = this.gameService.getGames();
+    this.gameService.getGames().subscribe(
+      (data: Game[]) => {
+        this.gameList = data;
+      },
+      (error) => {
+        console.error('Error fetching games:', error);
+      }
+    );
   }
 }

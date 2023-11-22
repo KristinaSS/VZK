@@ -43,7 +43,15 @@ export class ContactFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.games = this.gameService.getGames();
+    this.gameService.getGames().subscribe(
+      (data: Game[]) => {
+        this.games = data;
+      },
+      (error) => {
+        console.error('Error fetching games:', error);
+      }
+    );
+
     this.orgRoles = this.roleService.getRoles();
 
     this.contactForm = this.fb.group({

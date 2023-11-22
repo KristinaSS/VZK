@@ -45,6 +45,17 @@ public class GatewayConfig {
                                     return Mono.just(isValid);
                                 }))
                         .uri("http://localhost:8082"))
+                .route("GAME-SERVICE", r -> r
+                        .path("/game/**")
+                        .filters(f -> f.modifyRequestBody(String.class, String.class,
+                                (exchange, isValid) -> {
+                                    isValid = String.valueOf(isRequestValid(exchange));
+                                    if (!Boolean.parseBoolean(isValid)) {
+                                        return Mono.error(new RuntimeException("Invalid token"));
+                                    }
+                                    return Mono.just(isValid);
+                                }))
+                        .uri("http://localhost:8082"))
                 .build();
     }
 
