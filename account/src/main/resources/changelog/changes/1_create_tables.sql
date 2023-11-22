@@ -66,3 +66,20 @@ ALTER TABLE `vzk_accounts`.`account_details`
     ADD CONSTRAINT `ac_de_tm_fk`
         FOREIGN KEY (`team`)
             REFERENCES `vzk_accounts`.`teams` (`id`);
+
+-- Changeset kristina:2023-11-22-create-table-game
+CREATE TABLE IF NOT EXISTS `vzk_accounts`.`game` (
+                                                     `id` BINARY(16) NOT NULL,
+                                                     `title` VARCHAR(100) NOT NULL,
+                                                     `img` VARCHAR(512) NOT NULL,
+                                                     `logo` VARCHAR(512) NOT NULL,
+                                                     PRIMARY KEY (`id`));
+-- Changeset kristina:2023-11-22-alter_teams_game-type
+alter table teams
+    modify game binary(16) not null;
+
+-- Changeset kristina:2023-11-22-alter_teams_game-fk
+alter table teams
+    add constraint tm_gm_fk
+        foreign key (game) references game (id);
+

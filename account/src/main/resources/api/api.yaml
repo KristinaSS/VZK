@@ -808,6 +808,112 @@ paths:
           name: game
           required: true
           description: The game name
+
+
+  /game/all:
+    get:
+      tags:
+        - Game
+      summary: Getting all games
+      operationId: getAllGames
+      responses:
+        "201":
+          description: Successful retrieval of all games.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /game/update:
+    post:
+      tags:
+        - Game
+      summary: Update game
+      operationId: updateGame
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GameUpdatedDTO"
+      responses:
+        "201":
+          description: Successful update of team.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /game/create:
+    post:
+      tags:
+        - Game
+      summary: Create game
+      operationId: createGame
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGameDTO'
+      responses:
+        "201":
+          description: Successful creation of team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -1019,5 +1125,45 @@ components:
           format: uuid
           required: false
         game:
+          type: string
+          required: false
+    CreateGameDTO:
+      type: object
+      properties:
+        title:
+          type: string
+          required: false
+        image:
+          type: string
+          required: false
+        logo:
+          type: string
+          required: false
+    GameDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        image:
+          type: string
+        logo:
+          type: string
+    GameUpdatedDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          required: true
+          format: uuid
+        title:
+          type: string
+          required: false
+        image:
+          type: string
+          required: false
+        logo:
           type: string
           required: false

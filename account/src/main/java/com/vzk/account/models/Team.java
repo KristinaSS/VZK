@@ -1,6 +1,5 @@
 package com.vzk.account.models;
 
-import com.vzk.account.constants.Game;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,8 +25,8 @@ public class Team {
     @JoinColumn(name = "captain", referencedColumnName = "id")
     private Account captain;
 
-    @Basic
-    @Column(name = "game")
+    @ManyToOne
+    @JoinColumn(name = "game")
     private Game game;
 
     @Basic

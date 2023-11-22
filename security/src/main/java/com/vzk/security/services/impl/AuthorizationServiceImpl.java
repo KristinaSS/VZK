@@ -38,7 +38,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             final List<String> permissions = getPermissions(userDetails);
 
             if (permissions.contains(PATHS_PERMISSIONS_MAP.get(jwtAuthorizationRequest.getPath()))) {
-                return new JwtAuthorizationResponse(false);
+                return new JwtAuthorizationResponse(true);
             }
         }
 

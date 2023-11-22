@@ -1,11 +1,12 @@
 package com.vzk.account.services.impl;
 
-import com.vzk.account.constants.Game;
 import com.vzk.account.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.account.exceptions.EntityNotFoundException;
 import com.vzk.account.exceptions.TeamNameUnavailableException;
+import com.vzk.account.models.Game;
 import com.vzk.account.models.Team;
 import com.vzk.account.repos.TeamRepository;
+import com.vzk.account.services.GameService;
 import com.vzk.account.services.TeamService;
 import org.openapitools.model.CreateTeamDTO;
 import org.openapitools.model.PlayerDTO;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.vzk.account.mapper.GameMapper.GAME_MAPPER;
 import static com.vzk.account.mapper.PlayerMapper.PLAYER_MAPPER;
 import static com.vzk.account.mapper.TeamMapper.TEAM_MAPPER;
 
@@ -26,6 +28,9 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private TeamRepository teamRepository;
+
+    @Autowired
+    private GameService gameService;
 
     private static final String ENTITY = "team";
 
@@ -78,7 +83,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<TeamDTO> getAllTeamsByGame(String game) {
-        Game filter = Game.findGame(game);
+        Game filter = GAME_MAPPER.mapToModel(gameService.getGameByID(game));
         return teamRepository.findAllByGame(filter).stream()
                 .map(TEAM_MAPPER::mapToDTO)
                 .collect(Collectors.toList());
