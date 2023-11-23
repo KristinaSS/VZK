@@ -1,7 +1,7 @@
 package com.vzk.security.config;
 
-import com.vzk.security.services.UserService;
 import com.vzk.security.services.JwtGeneratorInterface;
+import com.vzk.security.services.UserService;
 import io.micrometer.common.lang.NonNull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -43,6 +43,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
+        if (StringUtils.isNotEmpty(authHeader) && authHeader.startsWith("Bearer anonymous")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUserName(jwt);
 
@@ -62,5 +67,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
-
 }

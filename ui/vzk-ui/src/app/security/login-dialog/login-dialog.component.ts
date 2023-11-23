@@ -22,6 +22,10 @@ export class LoginDialogComponent {
     console.log('Login clicked');
     let user = this.authenticationService.authenticate(this.username, this.password);
 
+    if(user != null){
+      sessionStorage.setItem("username", user.username)
+      sessionStorage.setItem("token", user.token)
+    }
     this.dialogRef.close();
   }
 

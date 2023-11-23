@@ -30,6 +30,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public JwtAuthorizationResponse authorize(String authorization, JwtAuthorizationRequest jwtAuthorizationRequest) {
         final String jwt = getJwt(authorization);
+
+        if (checkIfAnonymous(jwt, jwtAuthorizationRequest.getPath())) {
+            return new JwtAuthorizationResponse(true);
+        }
+
         final String userEmail = jwtService.extractUserName(jwt);
         final Account authAcc = (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -76,5 +81,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         }
 
         return token.substring(7);
+    }
+
+    private boolean checkIfAnonymous(String jwt, String path){
+        if (jwt.equals("anonymous")){
+            return PATHS_PERMISSIONS_MAP.get(path).equals("guest-permissions");
+        }
+        return false;
     }
 }

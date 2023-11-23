@@ -12,14 +12,15 @@ export class GameService {
 
   getGames(): Observable<Game[]> {
     console.log("getting games");
+    let token = sessionStorage.getItem("token");
     return this.http.get<Game[]>(`/server/game/all`, {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imx1bmFAZ21haWwuY29tIiwic3ViIjoidXNlciIsImlhdCI6MTcwMDY5NjQxMywiZXhwIjoxNzAwNzAwMDEzfQ.-MbcPoxQ4YPGU2LRBYp514qXQSUXwp3UymbUepG1oNw'
+        'Authorization': 'Bearer ' + token
       })
     });
   }
 
-  getGame(): Game {
+  getGame(id: string): Game {
     return {
       id: `1`,
       title: 'League of Legends',

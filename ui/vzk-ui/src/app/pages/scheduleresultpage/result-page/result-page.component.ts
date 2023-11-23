@@ -22,7 +22,7 @@ export class ResultPageComponent implements OnInit {
   }
 
   getGame(id: string): Game {
-    return this.gameService.getGame();
+    return this.gameService.getGame(id);
   }
 
   loadData() {
