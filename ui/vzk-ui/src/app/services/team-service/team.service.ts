@@ -10,7 +10,7 @@ export class TeamService {
   default: Game = {
     id: `0`,
     title: 'NaN',
-    img: 'https://wallpapers.com/images/hd/hd-counter-strike-global-offensive-background-sp8pzwi24m2hz0vb.jpg',
+    image: 'https://wallpapers.com/images/hd/hd-counter-strike-global-offensive-background-sp8pzwi24m2hz0vb.jpg',
     logo: 'https://esportbetweb.com/wp-content/uploads/2019/07/csgo-moreorange2.png'
   };
 

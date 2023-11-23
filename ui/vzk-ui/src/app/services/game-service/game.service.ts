@@ -14,7 +14,7 @@ export class GameService {
     console.log("getting games");
     return this.http.get<Game[]>(`/server/game/all`, {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imx1bmFAZ21haWwuY29tIiwic3ViIjoidXNlciIsImlhdCI6MTcwMDY5MjQwNSwiZXhwIjoxNzAwNjk2MDA1fQ.5r7YX9dhNVwzeolyMFLC9zP_z5RJf8tTDEzT2LxK8LY'
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imx1bmFAZ21haWwuY29tIiwic3ViIjoidXNlciIsImlhdCI6MTcwMDY5NjQxMywiZXhwIjoxNzAwNzAwMDEzfQ.-MbcPoxQ4YPGU2LRBYp514qXQSUXwp3UymbUepG1oNw'
       })
     });
   }
@@ -23,7 +23,7 @@ export class GameService {
     return {
       id: `1`,
       title: 'League of Legends',
-      img: 'https://i.pinimg.com/originals/50/05/7d/50057dc2df5e0503d5de6f55b6a6df0b.jpg',
+      image: 'https://i.pinimg.com/originals/50/05/7d/50057dc2df5e0503d5de6f55b6a6df0b.jpg',
       logo: 'https://ww2.freelogovectors.net/svg06/league-of-legends-logo-lol.svg'
     };
   }
