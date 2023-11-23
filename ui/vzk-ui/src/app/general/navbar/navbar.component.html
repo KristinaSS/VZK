@@ -19,7 +19,7 @@
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 1</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 2</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 3</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn" (click)="login()">{{getTranslation('8')}}</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn" (click)="logout()">{{getTranslation('8')}}</a></li>
   </ul>
   <ul class="nav-dropdown">
     <li *ngIf="!loggedIn">
@@ -38,7 +38,7 @@
         <a class="dropdown-item">Option 1</a>
         <a class="dropdown-item">Option 2</a>
         <a class="dropdown-item">Option 3</a>
-        <a class="dropdown-item" (click)="login()">{{getTranslation('8')}}</a>
+        <a class="dropdown-item" (click)="logout()">{{getTranslation('8')}}</a>
       </div>
     </li>
   </ul>

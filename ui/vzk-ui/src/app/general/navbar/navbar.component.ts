@@ -16,7 +16,7 @@ export class NavbarComponent {
   isMobileMenuActive = false;
   loggedIn = false;
   isHidden: boolean = false;
-  username = 'Axolotl';
+  username = sessionStorage.getItem("username");
 
 
   translationsAbout: { [key: string]: Translation };
@@ -62,7 +62,20 @@ export class NavbarComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.loggedIn = sessionStorage.getItem("logged") == "true";
       console.log('The dialog was closed');
     });
+  }
+
+  logout() {
+    this.loggedIn = false;
+    sessionStorage.setItem("token", "anonymous")
+    sessionStorage.setItem("logged", "false")
+
+    this.refreshPage();
+  }
+
+  refreshPage() {
+    window.location.reload();
   }
 }

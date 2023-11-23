@@ -9,7 +9,7 @@ export class AuthenticationService {
   authenticate(username: string, password: string){
     let u = "foo";
     let p = "poo";
-    let token  = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imx1bmFAZ21haWwuY29tIiwic3ViIjoidXNlciIsImlhdCI6MTcwMDc0NzA3NSwiZXhwIjoxNzAwNzUwNjc1fQ.JwYf0D-CoRKaIyELFWe9z7F66dnEiyqpx7bmWWuxpNQ";
+    let token  = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imx1bmFAZ21haWwuY29tIiwic3ViIjoidXNlciIsImlhdCI6MTcwMDc1MDQ1MCwiZXhwIjoxNzAwNzU0MDUwfQ.0ufnLOy4DkfDUR3GcheZ1FN-WxgDgHipwxdY3dEHBiA";
 
     let user: User = {
       id: '123',

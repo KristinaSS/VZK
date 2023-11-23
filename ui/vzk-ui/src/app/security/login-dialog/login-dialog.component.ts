@@ -25,6 +25,7 @@ export class LoginDialogComponent {
     if(user != null){
       sessionStorage.setItem("username", user.username)
       sessionStorage.setItem("token", user.token)
+      sessionStorage.setItem("logged", "true")
     }
     this.dialogRef.close();
   }
