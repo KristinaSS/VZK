@@ -162,7 +162,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountDTO'
-
         "400":
           description: Bad Request
           content:
