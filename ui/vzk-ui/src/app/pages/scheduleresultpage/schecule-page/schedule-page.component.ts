@@ -24,7 +24,6 @@ export class SchedulePageComponent implements OnInit{
   }
 
   loadData() {
-    console.log(this.futureEvents.length)
     if(this.futureEvents.length < 30){
       const newEvents = this.eventService.getEvents();
       this.futureEvents = this.futureEvents.concat(newEvents);

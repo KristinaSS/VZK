@@ -26,12 +26,9 @@ export class VieArticlContentComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
 
     if (this.id != null) {
-      console.log(this.id);
-
       this.newsService.getArticle(this.id).subscribe(
         (result: Article | undefined) => {
           this.article = result;
-          console.log(this.article);
         },
         error => {
           console.error('Error fetching article:', error);

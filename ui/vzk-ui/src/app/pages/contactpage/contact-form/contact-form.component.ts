@@ -170,7 +170,6 @@ export class ContactFormComponent implements OnInit {
 
   submitForm() {
     // Add logic to handle form submission (e.g., send data to a server)
-    console.log('Form submitted:', this.contactForm.value);
   }
 
   scrollToTop() {

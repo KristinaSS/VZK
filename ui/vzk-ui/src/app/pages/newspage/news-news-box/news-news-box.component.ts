@@ -24,14 +24,12 @@ export class NewsNewsBoxComponent implements OnInit {
   }
 
   loadData() {
-    console.log(this.articles.length)
     if (this.articles.length < 64) {
       this.newsService.getMoreArticles();
     }
   }
 
   openArticle(article: any) {
-    console.log("Open article:", article);
     this.router.navigate(['/news', article.id]).then(r => {
       window.scrollTo(0, 0);
     });

@@ -13,8 +13,5 @@ export class AppComponent implements OnInit {
     this.isScrolled = window.scrollY > 20;
   }
 
-  ngOnInit(): void {
-    sessionStorage.setItem("token", "anonymous")
-    sessionStorage.setItem("logged", "false")
-  }
+  ngOnInit(): void {}
 }

@@ -11,8 +11,10 @@ export class GameService {
   }
 
   getGames(): Observable<Game[]> {
-    console.log("getting games");
+
     let token = sessionStorage.getItem("token");
+    token = token || 'anonymous';
+
     return this.http.get<Game[]>('/server/game/all', {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token

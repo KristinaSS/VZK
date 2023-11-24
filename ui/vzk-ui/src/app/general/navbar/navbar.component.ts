@@ -27,31 +27,33 @@ export class NavbarComponent {
     public dialog: MatDialog
   ) {
     this.translationsAbout = translationService.translationsNavbar;
+    this.loggedIn = sessionStorage.getItem("logged") == "true";
   }
-
   getTranslation(id: string) {
     return this.translationsAbout[id].content;
   }
-
   toggleMobileMenu() {
     this.isMobileMenuActive = !this.isMobileMenuActive;
   }
-
   login() {
     this.openLoginDialog()
   }
+  logout() {
+    this.loggedIn = false;
+    sessionStorage.removeItem("token")
+    sessionStorage.setItem("logged", "false")
+    this.loggedIn = false;
 
+    this.refreshPage();
+  }
   navigateToPage(page: string) {
     this.router.navigate([page]);
     setTimeout(() => {
       window.scrollTo({top: 0, behavior: 'smooth'});
-    }, 100); // Adjust the delay as needed
+    }, 100);
   }
-
   navigateToProfile() {
-    // Implement navigation to the profile page
   }
-
   toggleHiddenDiv(value: boolean): void {
     this.isHidden = value;
   }
@@ -61,21 +63,11 @@ export class NavbarComponent {
       width: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.loggedIn = sessionStorage.getItem("logged") == "true";
-      console.log('The dialog was closed');
     });
   }
-
-  logout() {
-    this.loggedIn = false;
-    sessionStorage.setItem("token", "anonymous")
-    sessionStorage.setItem("logged", "false")
-
-    this.refreshPage();
-  }
-
-  refreshPage() {
+  private refreshPage() {
     window.location.reload();
   }
 }

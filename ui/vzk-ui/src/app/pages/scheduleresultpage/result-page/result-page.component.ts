@@ -26,7 +26,6 @@ export class ResultPageComponent implements OnInit {
   }
 
   loadData() {
-    console.log(this.results.length)
     if (this.results.length < 30) {
       const newEvents = this.eventService.getResults();
       this.results = this.results.concat(newEvents);

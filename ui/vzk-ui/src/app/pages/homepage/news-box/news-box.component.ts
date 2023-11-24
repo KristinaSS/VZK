@@ -18,7 +18,6 @@ export class NewsBoxComponent implements OnInit {
   }
 
   openArticle(article: any) {
-    console.log("Open article:", article);
     this.router.navigate(['/news', article.id]).then(r => {
       window.scrollTo(0, 0);
     });
