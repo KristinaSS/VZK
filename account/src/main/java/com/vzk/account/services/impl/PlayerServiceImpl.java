@@ -6,8 +6,12 @@ import com.vzk.account.exceptions.InvalidUpdatePlayerException;
 import com.vzk.account.exceptions.PlayerAlreadyExists;
 import com.vzk.account.models.Account;
 import com.vzk.account.models.AccountDetails;
+import com.vzk.account.models.Game;
+import com.vzk.account.models.Team;
 import com.vzk.account.repos.AccountDetailsRepository;
 import com.vzk.account.repos.AccountRepository;
+import com.vzk.account.repos.GameRepository;
+import com.vzk.account.repos.TeamRepository;
 import com.vzk.account.services.PlayerService;
 import org.openapitools.model.CreatePlayerDTO;
 import org.openapitools.model.PlayerDTO;
@@ -31,14 +35,17 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private TeamRepository teamRepository;
+
     @Override
     public PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO) {
-        AccountDetails createdPlayer = PLAYER_MAPPER.mapToModel(createPlayerDTO, null);
+        Team team = findTeam(createPlayerDTO.getTeam());
         Account linkedAccount = accountRepository.findAccountByEmail(createPlayerDTO.getEmail());
-        linkedAccount.setActive(true);
 
         //check if account exists
         verifyAccountExists(linkedAccount, createPlayerDTO.getEmail());
+        AccountDetails createdPlayer = PLAYER_MAPPER.mapToModel(createPlayerDTO, team, linkedAccount);
 
         //check if account available
         verifyNoPlayerWithAccountExists(linkedAccount);
@@ -94,7 +101,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void updatePlayer(UpdatePlayerDTO updatePlayerDTO) {
-        AccountDetails updatedPlayer = PLAYER_MAPPER.mapToModel(updatePlayerDTO, null);
+        AccountDetails updatedPlayer = PLAYER_MAPPER.mapToModel(updatePlayerDTO, null, null);
         Account linkedAccount = accountRepository.findAccountByEmail(updatePlayerDTO.getEmail());
 
         //check if account exists
@@ -142,5 +149,10 @@ public class PlayerServiceImpl implements PlayerService {
         if (accountDetails.getTeam() == null) {
             throw new EntityAlreadyDeactivatedException(ENTITY, accountDetails.getId().toString());
         }
+    }
+
+    private Team findTeam(UUID team) {
+        return teamRepository.findById(team).orElseThrow(
+                () -> new EntityNotFoundException("Team", "id", team.toString()));
     }
 }

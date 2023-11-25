@@ -39,7 +39,7 @@ public class TeamController implements TeamApi {
         return ResponseEntity.ok(teamService.getAllPlayersByTeam(team.toString()));
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<TeamDTO>> getAllTeams() {
         return ResponseEntity.ok(teamService.getAllTeams());
     }

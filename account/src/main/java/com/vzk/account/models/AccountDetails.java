@@ -14,7 +14,6 @@ import java.util.UUID;
 @Entity(name = "account_details")
 public class AccountDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private UUID id;
 
@@ -40,7 +39,7 @@ public class AccountDetails{
 
     @Basic
     @Column(name = "player_name")
-    private Gender playerName;
+    private String playerName;
 
     @Basic
     @Column(name = "image")

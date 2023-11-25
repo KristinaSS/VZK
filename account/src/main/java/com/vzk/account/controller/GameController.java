@@ -16,12 +16,12 @@ public class GameController implements GameApi {
     @Autowired
     private GameService gameService;
 
-    @Override
+    @Override //works
     public ResponseEntity<GameDTO> createGame(CreateGameDTO createGameDTO) {
         return ResponseEntity.ok(gameService.createGame(createGameDTO));
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<GameDTO>> getAllGames() {
         return ResponseEntity.ok(gameService.getAllGames());
     }

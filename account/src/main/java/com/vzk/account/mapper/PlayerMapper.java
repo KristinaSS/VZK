@@ -3,19 +3,12 @@ package com.vzk.account.mapper;
 import com.vzk.account.models.Account;
 import com.vzk.account.models.AccountDetails;
 import com.vzk.account.models.Team;
-import com.vzk.account.services.TeamService;
-import com.vzk.account.services.impl.TeamServiceImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import org.openapitools.model.CreatePlayerDTO;
 import org.openapitools.model.PlayerDTO;
 import org.openapitools.model.UpdatePlayerDTO;
-
-import java.util.UUID;
-
-import static com.vzk.account.mapper.TeamMapper.TEAM_MAPPER;
 
 @Mapper
 public interface PlayerMapper {
@@ -35,14 +28,14 @@ public interface PlayerMapper {
     @Mapping(source = "accountDetails.playerName", target = "playerName")
     PlayerDTO mapToDTO(Account account, AccountDetails accountDetails);
 
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     @Mapping(source = "team", target = "team")
     @Mapping(source = "playerDTO.birthday", target = "birthday")
     @Mapping(source = "playerDTO.countryOrigin", target = "countryOrigin")
     @Mapping(source = "playerDTO.image", target = "image")
-    @Mapping(source = "playerDTO.gender", target = "gender")
     @Mapping(source = "playerDTO.playerName", target = "playerName")
-    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
-    AccountDetails mapToModel(CreatePlayerDTO playerDTO, Team team);
+    @Mapping(source = "linkedAccount", target = "account")
+    AccountDetails mapToModel(CreatePlayerDTO playerDTO, Team team, Account linkedAccount);
 
     @Mapping(source = "playerDTO.id", target = "id")
     @Mapping(source = "team", target = "team")
@@ -51,5 +44,6 @@ public interface PlayerMapper {
     @Mapping(source = "playerDTO.image", target = "image")
     @Mapping(source = "playerDTO.gender", target = "gender")
     @Mapping(source = "playerDTO.playerName", target = "playerName")
-    AccountDetails mapToModel(UpdatePlayerDTO playerDTO, Team team);
+    @Mapping(source = "linkedAccount", target = "account")
+    AccountDetails mapToModel(UpdatePlayerDTO playerDTO, Team team, Account linkedAccount);
 }

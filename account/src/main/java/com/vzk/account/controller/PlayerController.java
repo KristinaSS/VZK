@@ -19,7 +19,7 @@ public class PlayerController implements PlayerApi {
     @Autowired
     private PlayerService playerService;
 
-    @Override
+    @Override //works
     public ResponseEntity<PlayerDTO> createPlayer(CreatePlayerDTO createPlayerDTO) {
         return ResponseEntity.ok(playerService.createPlayer(createPlayerDTO));
     }
