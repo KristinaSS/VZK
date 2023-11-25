@@ -29,7 +29,6 @@ public class EventServiceImpl implements EventService {
     public EventDTO createEvent(CreateEventDTO createEventDTO) {
         Event event = EVENT_MAPPER.mapToModel(createEventDTO);
         event.setActive(true);
-        event.setId(UUID.randomUUID());
         Event saved = eventRepository.save(event);
         return EVENT_MAPPER.mapToDTO(saved);
     }

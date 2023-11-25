@@ -3,8 +3,11 @@ package com.vzk.account.services.impl;
 import com.vzk.account.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.account.exceptions.EntityNotFoundException;
 import com.vzk.account.exceptions.TeamNameUnavailableException;
+import com.vzk.account.models.Account;
 import com.vzk.account.models.Game;
 import com.vzk.account.models.Team;
+import com.vzk.account.repos.AccountRepository;
+import com.vzk.account.repos.GameRepository;
 import com.vzk.account.repos.TeamRepository;
 import com.vzk.account.services.GameService;
 import com.vzk.account.services.TeamService;
@@ -30,18 +33,26 @@ public class TeamServiceImpl implements TeamService {
     private TeamRepository teamRepository;
 
     @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private GameRepository gameRepository;
+
+    @Autowired
     private GameService gameService;
 
     private static final String ENTITY = "team";
 
     @Override
     public TeamDTO createTeam(CreateTeamDTO createTeamDTO) {
-        Team createdTeam = TEAM_MAPPER.mapToModel(createTeamDTO);
+        Account captain = findCaptain(createTeamDTO.getCaptain());
+        Game game = findGame(createTeamDTO.getGame());
+
+        Team createdTeam = TEAM_MAPPER.mapToModel(createTeamDTO, captain, game);
         createdTeam.setActive(true);
 
         //check if name available
         verifyNameUnique(createdTeam.getName());
-        createdTeam.setId(UUID.randomUUID());
 
         Team savedTeam = teamRepository.save(createdTeam);
         return TEAM_MAPPER.mapToDTO(savedTeam);
@@ -97,7 +108,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void updateTeam(UpdateTeamDTO updateTeamDTO) {
-        Team team = TEAM_MAPPER.mapToModel(updateTeamDTO);
+        Team team = TEAM_MAPPER.mapToModel(updateTeamDTO, null, null);
 
         //check if name available
         verifyNameUnique(team.getName());
@@ -121,5 +132,15 @@ public class TeamServiceImpl implements TeamService {
         if (!team.isActive()) {
             throw new EntityAlreadyDeactivatedException(ENTITY, team.getId().toString());
         }
+    }
+
+    private Account findCaptain(UUID captain){
+        return accountRepository.findById(captain).orElseThrow(
+                () -> new EntityNotFoundException("Account", "id", captain.toString()));
+    }
+
+    private Game findGame(UUID game) {
+        return gameRepository.findById(game).orElseThrow(
+                () -> new EntityNotFoundException("Game", "id", game.toString()));
     }
 }

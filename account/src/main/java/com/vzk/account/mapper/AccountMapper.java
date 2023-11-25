@@ -38,5 +38,6 @@ public interface AccountMapper {
     @Mapping(source = "email", target = "email")
     @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     Account mapToModel(CreateAccountDTO accountDTO);
 }

@@ -57,6 +57,7 @@ public interface ApplicationRequestMapper {
     @Mapping(source = "appliedRole", target = "appliedRole")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "gender", target = "gender")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     ApplicationRequest mapToModel(CreateApplicationRequestDTO createApplicationRequestDTO);
 
     @Named("mapRequest")

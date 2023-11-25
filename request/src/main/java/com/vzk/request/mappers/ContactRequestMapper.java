@@ -35,5 +35,6 @@ public interface ContactRequestMapper {
     @Mapping(source = "message", target = "message")
     @Mapping(source = "isApplicationRequest", target = "isApplicationRequest")
     @Mapping(source = "timeCreated", target = "timeCreated")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     ContactRequest mapToModel(CreateContactRequestDTO createContactRequestDTO);
 }

@@ -27,7 +27,6 @@ public class GameServiceImpl implements GameService {
     @Override
     public GameDTO createGame(CreateGameDTO createGameDTO) {
         Game createdGame = GAME_MAPPER.mapToModel(createGameDTO);
-        createdGame.setId(UUID.randomUUID());
 
         Game savedGame = gameRepository.save(createdGame);
         return GAME_MAPPER.mapToDTO(savedGame);

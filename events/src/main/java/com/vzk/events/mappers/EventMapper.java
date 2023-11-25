@@ -34,5 +34,6 @@ public interface EventMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "info", target = "info")
     @Mapping(source = "date", target = "date")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     Event mapToModel(CreateEventDTO createEventDTO);
 }

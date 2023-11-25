@@ -31,33 +31,23 @@ public interface TeamMapper {
     @Mapping(source = "active", target = "isActive")
     TeamDTO mapToDTO(Team team);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "captain", target = "captain", qualifiedByName = "mapCaptain")
-    @Mapping(source = "game", target = "game", qualifiedByName = "mapGame")
-    @Mapping(source = "isActive", target = "isActive")
-    Team mapToModel(TeamDTO teamDTO);
+    @Mapping(source = "teamDTO.id", target = "id")
+    @Mapping(source = "teamDTO.name", target = "name")
+    @Mapping(source = "captain", target = "captain")
+    @Mapping(source = "game", target = "game")
+    @Mapping(source = "teamDTO.isActive", target = "isActive")
+    Team mapToModel(TeamDTO teamDTO, Account captain, Game game);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "captain", target = "captain", qualifiedByName = "mapCaptain")
-    @Mapping(source = "game", target = "game", qualifiedByName = "mapGame")
-    Team mapToModel(UpdateTeamDTO updateTeamDTO);
+    @Mapping(source = "updateTeamDTO.id", target = "id")
+    @Mapping(source = "updateTeamDTO.name", target = "name")
+    @Mapping(source = "captain", target = "captain")
+    @Mapping(source = "game", target = "game")
+    Team mapToModel(UpdateTeamDTO updateTeamDTO, Account captain, Game game);
 
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "captain", target = "captain", qualifiedByName = "mapCaptain")
-    @Mapping(source = "game", target = "game", qualifiedByName = "mapGame")
-    Team mapToModel(CreateTeamDTO createTeamDTO);
+    @Mapping(source = "createTeamDTO.name", target = "name")
+    @Mapping(source = "captain", target = "captain")
+    @Mapping(source = "game", target = "game")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
+    Team mapToModel(CreateTeamDTO createTeamDTO, Account captain, Game game);
 
-    @Named("mapCaptain")
-    default Account mapCaptain(UUID captainId) {
-        AccountService accountService = new AccountServiceImpl();
-        return ACCOUNT_MAPPER.mapToModel(accountService.getAccountById(captainId.toString()));
-    }
-
-    @Named("mapGame")
-    default Game mapGame(UUID gameId) {
-        GameService gameService = new GameServiceImpl();
-        return GAME_MAPPER.mapToModel(gameService.getGameByID(gameId.toString()));
-    }
 }

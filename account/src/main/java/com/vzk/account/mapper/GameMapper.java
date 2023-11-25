@@ -33,5 +33,6 @@ public interface GameMapper {
     @Mapping(source = "title", target = "title")
     @Mapping(source = "image", target = "image")
     @Mapping(source = "logo", target = "logo")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     Game mapToModel(CreateGameDTO createGameDTO);
 }

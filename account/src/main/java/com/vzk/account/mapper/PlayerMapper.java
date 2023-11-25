@@ -35,26 +35,21 @@ public interface PlayerMapper {
     @Mapping(source = "accountDetails.playerName", target = "playerName")
     PlayerDTO mapToDTO(Account account, AccountDetails accountDetails);
 
-    @Mapping(source = "team", target = "team", qualifiedByName = "mapTeam")
-    @Mapping(source = "birthday", target = "birthday")
-    @Mapping(source = "countryOrigin", target = "countryOrigin")
-    @Mapping(source = "image", target = "image")
-    @Mapping(source = "gender", target = "gender")
-    @Mapping(source = "playerName", target = "playerName")
-    AccountDetails mapToModel(CreatePlayerDTO playerDTO);
+    @Mapping(source = "team", target = "team")
+    @Mapping(source = "playerDTO.birthday", target = "birthday")
+    @Mapping(source = "playerDTO.countryOrigin", target = "countryOrigin")
+    @Mapping(source = "playerDTO.image", target = "image")
+    @Mapping(source = "playerDTO.gender", target = "gender")
+    @Mapping(source = "playerDTO.playerName", target = "playerName")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
+    AccountDetails mapToModel(CreatePlayerDTO playerDTO, Team team);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "team", target = "team", qualifiedByName = "mapTeam")
-    @Mapping(source = "birthday", target = "birthday")
-    @Mapping(source = "countryOrigin", target = "countryOrigin")
-    @Mapping(source = "image", target = "image")
-    @Mapping(source = "gender", target = "gender")
-    @Mapping(source = "playerName", target = "playerName")
-    AccountDetails mapToModel(UpdatePlayerDTO playerDTO);
-
-    @Named("mapTeam")
-    default Team mapTeam(UUID teamId) {
-        TeamService teamService = new TeamServiceImpl();
-        return TEAM_MAPPER.mapToModel(teamService.getTeamById(teamId.toString()));
-    }
+    @Mapping(source = "playerDTO.id", target = "id")
+    @Mapping(source = "team", target = "team")
+    @Mapping(source = "playerDTO.birthday", target = "birthday")
+    @Mapping(source = "playerDTO.countryOrigin", target = "countryOrigin")
+    @Mapping(source = "playerDTO.image", target = "image")
+    @Mapping(source = "playerDTO.gender", target = "gender")
+    @Mapping(source = "playerDTO.playerName", target = "playerName")
+    AccountDetails mapToModel(UpdatePlayerDTO playerDTO, Team team);
 }

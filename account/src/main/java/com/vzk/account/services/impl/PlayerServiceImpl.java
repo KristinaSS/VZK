@@ -33,13 +33,12 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO) {
-        AccountDetails createdPlayer = PLAYER_MAPPER.mapToModel(createPlayerDTO);
+        AccountDetails createdPlayer = PLAYER_MAPPER.mapToModel(createPlayerDTO, null);
         Account linkedAccount = accountRepository.findAccountByEmail(createPlayerDTO.getEmail());
         linkedAccount.setActive(true);
 
         //check if account exists
         verifyAccountExists(linkedAccount, createPlayerDTO.getEmail());
-        createdPlayer.setId(UUID.randomUUID());
 
         //check if account available
         verifyNoPlayerWithAccountExists(linkedAccount);
@@ -95,7 +94,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void updatePlayer(UpdatePlayerDTO updatePlayerDTO) {
-        AccountDetails updatedPlayer = PLAYER_MAPPER.mapToModel(updatePlayerDTO);
+        AccountDetails updatedPlayer = PLAYER_MAPPER.mapToModel(updatePlayerDTO, null);
         Account linkedAccount = accountRepository.findAccountByEmail(updatePlayerDTO.getEmail());
 
         //check if account exists

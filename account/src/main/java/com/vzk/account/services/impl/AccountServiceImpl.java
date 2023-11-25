@@ -32,7 +32,6 @@ public class AccountServiceImpl implements AccountService {
 
         //check if email available
         verifyEmailUnique(createdAccount.getEmail());
-        createdAccount.setId(UUID.randomUUID());
 
         Account savedAccount = accountRepository.save(createdAccount);
         return ACCOUNT_MAPPER.mapToDTO(savedAccount);

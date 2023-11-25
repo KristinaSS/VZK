@@ -806,7 +806,7 @@ paths:
           in: query
           name: game
           required: true
-          description: The game name
+          description: The game id
 
 
   /game/all:
@@ -951,6 +951,7 @@ components:
           format: uuid
         game:
           type: string
+          format: uuid
         isActive:
           type: boolean
     PlayerDTO:
@@ -1112,6 +1113,7 @@ components:
           required: false
         game:
           type: string
+          format: uuid
           required: false
     CreateTeamDTO:
       type: object
@@ -1125,6 +1127,7 @@ components:
           required: false
         game:
           type: string
+          format: uuid
           required: false
     CreateGameDTO:
       type: object

@@ -36,5 +36,6 @@ public interface ArticleMapper {
     @Mapping(source = "date", target = "date")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "image", target = "image")
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     Article mapToModel(CreateArticleDTO createArticleDTO);
 }
