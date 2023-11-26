@@ -236,6 +236,8 @@ components:
       properties:
         token:
           type: string
+        username:
+          type: string
     JwtAuthorizationResponse:
       type: object
       properties:

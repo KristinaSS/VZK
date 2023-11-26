@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
         Account user = getSecurityAccount(acc, true);
 
         String jwt = jwtService.generateToken(user);
-        return JwtAuthenticationResponse.builder().token(jwt).build();
+        return JwtAuthenticationResponse.builder().token(jwt).username(acc.getUsername()).build();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AuthServiceImpl implements AuthService {
         Account user = getSecurityAccount(acc, false);
 
         String jwt = jwtService.generateToken(user);
-        return JwtAuthenticationResponse.builder().token(jwt).build();
+        return JwtAuthenticationResponse.builder().token(jwt).username(acc.getUsername()).build();
     }
 
     private Account getSecurityAccount(AccountDTO acc, boolean isNew){

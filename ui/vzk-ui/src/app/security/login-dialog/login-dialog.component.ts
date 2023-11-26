@@ -20,22 +20,13 @@ export class LoginDialogComponent {
   ) {}
 
   async onLogin() {
-    let user: User = {
-      id: '123',
-      username: 'Axolotl',
-      email: 'axolotl@gmail.com',
-      token: sessionStorage.getItem("token") || 'anonymous'
-    };
     try {
       const data: JwtResponse | undefined = await (await this.authenticationService.authenticate(this.username, this.password)).toPromise();
       // @ts-ignore
       sessionStorage.setItem("token", data.token);
-      sessionStorage.setItem("username", user.username)
-      sessionStorage.setItem("logged", "true");
-
       // @ts-ignore
-      user.token = sessionStorage.getItem("token");
-
+      sessionStorage.setItem("username", data.username)
+      sessionStorage.setItem("logged", "true");
     } catch (error) {
       console.error('Error logging in:', error);
     }
