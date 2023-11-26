@@ -67,10 +67,19 @@ public class GatewayConfig {
     private boolean isRequestValid(ServerWebExchange exchange) {
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
         String path = exchange.getRequest().getPath().value();
+        JwtAuthorizationRequest jwtAuthorizationRequest = new JwtAuthorizationRequest();
+
+        jwtAuthorizationRequest.setPath(path);
+        jwtAuthorizationRequest.setId(
+                exchange.getRequest().getQueryParams().containsKey("id")
+                        ? exchange.getRequest().getQueryParams().get("id").get(0) : null);
+        jwtAuthorizationRequest.setEmail(
+                exchange.getRequest().getQueryParams().containsKey("email")
+                        ? exchange.getRequest().getQueryParams().get("email").get(0) : null);
 
         assert token != null;
         boolean isValid = token.substring(7).equals("anonymous") || securityClient.validateToken(token).getIsValid();
-        boolean isAuthorized = securityClient.authorizeRequest(token, new JwtAuthorizationRequest(path)).getIsValid();
+        boolean isAuthorized = securityClient.authorizeRequest(token, jwtAuthorizationRequest).getIsValid();
 
         return isValid && isAuthorized;
     }

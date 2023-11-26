@@ -111,7 +111,7 @@ paths:
             type: string
             format: uuid
           in: query
-          name: Account
+          name: id
           required: true
           description: The account id
   /account/{id}/delete:
@@ -146,7 +146,7 @@ paths:
             type: string
             format: uuid
           in: query
-          name: Account
+          name: id
           required: true
           description: The account id
   /account/email/{email}:
@@ -184,7 +184,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: Account
+          name: email
           required: true
           description: Unique account email
   /account/update:
@@ -363,7 +363,7 @@ paths:
             type: string
             format: uuid
           in: query
-          name: Player
+          name: id
           required: true
           description: The player id
   /player/{id}/deactivate:
@@ -398,7 +398,7 @@ paths:
             type: string
             format: uuid
           in: query
-          name: Player
+          name: id
           required: true
           description: The player id
   /player/{email}:
@@ -437,7 +437,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: Player
+          name: email
           required: true
           description: Unique player email
   /player/update:
@@ -616,7 +616,7 @@ paths:
             type: string
             format: uuid
           in: query
-          name: team
+          name: id
           required: true
           description: The team id
   /team/{id}/deactivate:
@@ -651,7 +651,7 @@ paths:
             type: string
             format: uuid
           in: query
-          name: team
+          name: id
           required: true
           description: The team id
   /team/update:
@@ -763,7 +763,7 @@ paths:
             type: string
             format: uuid
           in: query
-          name: team
+          name: id
           required: true
           description: The team id
   /team/all/game/{name}:
@@ -804,7 +804,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: game
+          name: id
           required: true
           description: The game id
 

@@ -246,3 +246,7 @@ components:
       properties:
         path:
           type: string
+        email:
+          type: string
+        id:
+          type: string
