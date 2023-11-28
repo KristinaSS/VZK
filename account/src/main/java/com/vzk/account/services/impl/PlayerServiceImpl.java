@@ -4,17 +4,17 @@ import com.vzk.account.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.account.exceptions.EntityNotFoundException;
 import com.vzk.account.exceptions.InvalidUpdatePlayerException;
 import com.vzk.account.exceptions.PlayerAlreadyExists;
+import com.vzk.account.feign.RolesClient;
 import com.vzk.account.models.Account;
 import com.vzk.account.models.AccountDetails;
-import com.vzk.account.models.Game;
 import com.vzk.account.models.Team;
 import com.vzk.account.repos.AccountDetailsRepository;
 import com.vzk.account.repos.AccountRepository;
-import com.vzk.account.repos.GameRepository;
 import com.vzk.account.repos.TeamRepository;
 import com.vzk.account.services.PlayerService;
 import org.openapitools.model.CreatePlayerDTO;
 import org.openapitools.model.PlayerDTO;
+import org.openapitools.model.RoleDTO;
 import org.openapitools.model.UpdatePlayerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.vzk.account.constants.Constants.DEFAULT_USER_ROLE_UUID;
 import static com.vzk.account.mapper.PlayerMapper.PLAYER_MAPPER;
 
 @Service
@@ -38,9 +39,22 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private TeamRepository teamRepository;
 
+    @Autowired
+    private RolesClient rolesClient;
+
     @Override
     public PlayerDTO createPlayer(CreatePlayerDTO createPlayerDTO) {
         Team team = findTeam(createPlayerDTO.getTeam());
+        List<RoleDTO> roleDTOS = rolesClient.getRolesAllActive();
+
+        //check if role correct
+        RoleDTO role = roleDTOS.stream()
+                .filter(roleDTO -> roleDTO.getName().equals(createPlayerDTO.getRole()))
+                .findFirst()
+                .orElseThrow(
+                        () -> new EntityNotFoundException("Role", "name", createPlayerDTO.getRole())
+                );
+
         Account linkedAccount = accountRepository.findAccountByEmail(createPlayerDTO.getEmail());
 
         //check if account exists
@@ -49,6 +63,10 @@ public class PlayerServiceImpl implements PlayerService {
 
         //check if account available
         verifyNoPlayerWithAccountExists(linkedAccount);
+
+        //todo throws error 415
+        rolesClient.deleteAccountRole(linkedAccount.getId(), DEFAULT_USER_ROLE_UUID, linkedAccount.getId(), DEFAULT_USER_ROLE_UUID);
+        rolesClient.giveAccountRole(linkedAccount.getId(), role.getId(), linkedAccount.getId(), role.getId());
 
         accountDetailsRepository.save(createdPlayer);
 

@@ -973,14 +973,22 @@ components:
         team:
           type: string
           format: uuid
-          required: false
         birthday:
           type: string
         countryOrigin:
           type: string
         playerName:
           type: string
-          required: true
+        role:
+          type: string
+        twitter:
+          type: string
+        twitch:
+          type: string
+        youtube:
+          type: string
+        instagram:
+          type: string
         image:
           type: string
         gender:
@@ -1065,6 +1073,21 @@ components:
             - MALE
             - FEMALE
             - OTHER
+        role:
+          type: string
+          required: false
+        twitter:
+          type: string
+          required: false
+        twitch:
+          type: string
+          required: false
+        youtube:
+          type: string
+          required: false
+        instagram:
+          type: string
+          required: false
     CreatePlayerDTO:
       type: object
       properties:
@@ -1097,6 +1120,21 @@ components:
             - MALE
             - FEMALE
             - OTHER
+        role:
+          type: string
+          required: false
+        twitter:
+          type: string
+          required: false
+        twitch:
+          type: string
+          required: false
+        youtube:
+          type: string
+          required: false
+        instagram:
+          type: string
+          required: false
     UpdateTeamDTO:
       type: object
       properties:
@@ -1169,3 +1207,14 @@ components:
         logo:
           type: string
           required: false
+    RoleDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        isActive:
+          type: boolean
+

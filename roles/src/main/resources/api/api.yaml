@@ -570,19 +570,12 @@ paths:
           name: role_id
           required: true
           description: role_id
-  /role/account/{id}/delete:
+  /role/account/{acc_id}/delete/{role_id}:
     get:
       tags:
         - Account
       summary: Delete account role
       operationId: deleteAccountRole
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: string
-              format: uuid
       responses:
         "200":
           description: Successful.
@@ -609,9 +602,16 @@ paths:
             type: string
             format: uuid
           in: query
-          name: accountId
+          name: acc_id
           required: true
-          description: accountId
+          description: acc_id
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: role_id
+          required: true
+          description: role_id
 components:
   schemas:
     ErrorDto:

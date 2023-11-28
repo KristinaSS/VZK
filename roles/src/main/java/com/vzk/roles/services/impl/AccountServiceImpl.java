@@ -32,7 +32,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deleteAccountRole(UUID accountId, UUID roleId) {
-        roleAccountRepository.delete(buildRoleAccount(roleId, accountId));
+        roleAccountRepository.delete(buildRoleAccount(roleId, accountId, true));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void giveRoleToAccount(UUID accountId, UUID roleId) {
-        roleAccountRepository.save(buildRoleAccount(roleId, accountId));
+        roleAccountRepository.save(buildRoleAccount(roleId, accountId, false));
     }
 
     private Role findRole(UUID id) {
@@ -53,9 +53,14 @@ public class AccountServiceImpl implements AccountService {
                 () -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }
 
-    private void verifyEntityIfExists(RoleAccountID roleAccountID) {
+    private void verifyEntityIfExists(RoleAccountID roleAccountID, boolean isDelete) {
         RoleAccount id = roleAccountRepository.findById(roleAccountID).orElse(null);
-        if (id != null) {
+        if (id == null && isDelete){
+            throw new EntityNotFoundException(
+                    ENTITY_COMB,
+                    "account",
+                    "role: " + roleAccountID.getRole().getId() + " account:" + roleAccountID.getAccountId());
+        } else if (id != null && !isDelete) {
             throw new EntityAlreadyExists(
                     ENTITY_COMB,
                     "account",
@@ -64,11 +69,11 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-    private RoleAccount buildRoleAccount(UUID roleId, UUID accId) {
+    private RoleAccount buildRoleAccount(UUID roleId, UUID accId, boolean isDelete) {
         Role role = findRole(roleId);
         RoleAccountID roleAccountID = RoleAccountID.builder().role(role).accountId(accId).build();
 
-        verifyEntityIfExists(roleAccountID);
+        verifyEntityIfExists(roleAccountID, isDelete);
 
         return RoleAccount.builder().roleAccountID(roleAccountID).build();
     }

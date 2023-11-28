@@ -49,7 +49,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         if (authAcc.getUsername().equals(userEmail) && StringUtils.isNotEmpty(userEmail)) {
             UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
             if (hasPermissionForPath(jwtAuthorizationRequest, userDetails)
-                    && hasPermission(userDetails, jwtAuthorizationRequest.getPath())) {
+                    || hasPermission(userDetails, jwtAuthorizationRequest.getPath())) {
                 return new JwtAuthorizationResponse(true);
             }
         }

@@ -17,8 +17,8 @@ public class AccountController implements AccountApi {
     private AccountService accountService;
 
     @Override
-    public ResponseEntity<Void> deleteAccountRole(UUID accountId, UUID roleId) {
-        accountService.deleteAccountRole(accountId, roleId);
+    public ResponseEntity<Void> deleteAccountRole(UUID accId, UUID roleId) {
+        accountService.deleteAccountRole(accId, roleId);
         return ResponseEntity.ok(null);
     }
 

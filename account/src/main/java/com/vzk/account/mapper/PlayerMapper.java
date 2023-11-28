@@ -26,6 +26,11 @@ public interface PlayerMapper {
     @Mapping(source = "accountDetails.image", target = "image")
     @Mapping(source = "accountDetails.gender", target = "gender")
     @Mapping(source = "accountDetails.playerName", target = "playerName")
+    @Mapping(source = "accountDetails.role", target = "role")
+    @Mapping(source = "accountDetails.twitter", target = "twitter")
+    @Mapping(source = "accountDetails.twitch", target = "twitch")
+    @Mapping(source = "accountDetails.youtube", target = "youtube")
+    @Mapping(source = "accountDetails.instagram", target = "instagram")
     PlayerDTO mapToDTO(Account account, AccountDetails accountDetails);
 
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
@@ -35,6 +40,11 @@ public interface PlayerMapper {
     @Mapping(source = "playerDTO.image", target = "image")
     @Mapping(source = "playerDTO.playerName", target = "playerName")
     @Mapping(source = "linkedAccount", target = "account")
+    @Mapping(source = "playerDTO.role", target = "role")
+    @Mapping(source = "playerDTO.twitter", target = "twitter")
+    @Mapping(source = "playerDTO.twitch", target = "twitch")
+    @Mapping(source = "playerDTO.youtube", target = "youtube")
+    @Mapping(source = "playerDTO.instagram", target = "instagram")
     AccountDetails mapToModel(CreatePlayerDTO playerDTO, Team team, Account linkedAccount);
 
     @Mapping(source = "playerDTO.id", target = "id")
@@ -45,5 +55,10 @@ public interface PlayerMapper {
     @Mapping(source = "playerDTO.gender", target = "gender")
     @Mapping(source = "playerDTO.playerName", target = "playerName")
     @Mapping(source = "linkedAccount", target = "account")
+    @Mapping(source = "playerDTO.role", target = "role")
+    @Mapping(source = "playerDTO.twitter", target = "twitter")
+    @Mapping(source = "playerDTO.twitch", target = "twitch")
+    @Mapping(source = "playerDTO.youtube", target = "youtube")
+    @Mapping(source = "playerDTO.instagram", target = "instagram")
     AccountDetails mapToModel(UpdatePlayerDTO playerDTO, Team team, Account linkedAccount);
 }

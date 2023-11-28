@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "account_details")
-public class AccountDetails{
+public class AccountDetails {
     @Id
     @Column(name = "id")
     private UUID id;
@@ -44,4 +44,24 @@ public class AccountDetails{
     @Basic
     @Column(name = "image")
     private String image;
+
+    @Basic
+    @Column(name = "role")
+    private String role;
+
+    @Basic
+    @Column(name = "twitch")
+    private String twitch;
+
+    @Basic
+    @Column(name = "twitter")
+    private String twitter;
+
+    @Basic
+    @Column(name = "youtube")
+    private String youtube;
+
+    @Basic
+    @Column(name = "instagram")
+    private String instagram;
 }
