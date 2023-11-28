@@ -38,6 +38,7 @@ public class GatewayConfig {
                 .route("SECURITY-SERVICE-LOGIN", r -> r
                         .path("/api/v1/auth/login")
                         .uri("http://localhost:8081"))
+
                 .route("SECURITY-SERVICE-SIGNUP", r -> r
                         .path("/api/v1/auth/signup")
                         .uri("http://localhost:8081"))
@@ -48,10 +49,17 @@ public class GatewayConfig {
                         .filters(f -> f.modifyRequestBody(String.class, String.class,
                                 (exchange, isValid) -> validateRequest(exchange)))
                         .uri("http://localhost:8082"))
+
                 .route("GAME-SERVICE", r -> r
                         .path("/game/**")
                         .filters(f -> f.modifyRequestBody(String.class, String.class,
                                 (exchange1, isValid1) -> validateRequest(exchange1)))
+                        .uri("http://localhost:8082"))
+
+                .route("PLAYER-SERVICE", r -> r
+                        .path("/player/**")
+                        .filters(f -> f.modifyRequestBody(String.class, String.class,
+                                (exchange, isValid) -> validateRequest(exchange)))
                         .uri("http://localhost:8082"))
                 .build();
     }
