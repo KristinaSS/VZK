@@ -29,7 +29,7 @@ public class TeamController implements TeamApi {
         return ResponseEntity.ok(null);
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<TeamDTO>> getAllActiveTeams() {
         return ResponseEntity.ok(teamService.getAllActiveTeams());
     }

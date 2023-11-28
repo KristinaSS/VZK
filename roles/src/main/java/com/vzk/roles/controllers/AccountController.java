@@ -16,13 +16,13 @@ public class AccountController implements AccountApi {
     @Autowired
     private AccountService accountService;
 
-    @Override
+    @Override  //works
     public ResponseEntity<Void> deleteAccountRole(UUID accId, UUID roleId) {
         accountService.deleteAccountRole(accId, roleId);
         return ResponseEntity.ok(null);
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<RoleDTO>> getRolesByAccountId(UUID accountId) {
         return ResponseEntity.ok(accountService.getRolesForAccount(accountId));
     }

@@ -32,7 +32,4 @@ public class Team {
     @Basic
     @Column(name = "is_active")
     private boolean isActive;
-
-    @OneToMany(mappedBy = "team")
-    private List<AccountDetails> members;
 }

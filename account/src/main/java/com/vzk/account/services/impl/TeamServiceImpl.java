@@ -4,8 +4,10 @@ import com.vzk.account.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.account.exceptions.EntityNotFoundException;
 import com.vzk.account.exceptions.TeamNameUnavailableException;
 import com.vzk.account.models.Account;
+import com.vzk.account.models.AccountDetails;
 import com.vzk.account.models.Game;
 import com.vzk.account.models.Team;
+import com.vzk.account.repos.AccountDetailsRepository;
 import com.vzk.account.repos.AccountRepository;
 import com.vzk.account.repos.GameRepository;
 import com.vzk.account.repos.TeamRepository;
@@ -34,6 +36,9 @@ public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountDetailsRepository accountDetailsRepository;
 
     @Autowired
     private GameRepository gameRepository;
@@ -80,7 +85,10 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List<PlayerDTO> getAllPlayersByTeam(String teamId) {
         Team team = findTeam(teamId);
-        return team.getMembers().stream()
+
+        List<AccountDetails> players = accountDetailsRepository.findAccountDetailsByTeam(team);
+
+        return players.stream()
                 .map(player -> PLAYER_MAPPER.mapToDTO(player.getAccount(), player))
                 .collect(Collectors.toList());
     }

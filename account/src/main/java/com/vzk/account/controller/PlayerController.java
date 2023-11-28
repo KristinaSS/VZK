@@ -31,12 +31,12 @@ public class PlayerController implements PlayerApi {
     }
 
 
-    @Override
+    @Override //works
     public ResponseEntity<List<PlayerDTO>> getAllActivePlayers() {
         return ResponseEntity.ok(playerService.getAllActivePlayers());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
         return ResponseEntity.ok(playerService.getAllPlayers());
     }
