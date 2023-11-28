@@ -952,6 +952,8 @@ components:
         game:
           type: string
           format: uuid
+        description:
+          type: string
         isActive:
           type: boolean
     PlayerDTO:
@@ -1153,6 +1155,9 @@ components:
           type: string
           format: uuid
           required: false
+        description:
+          type: string
+          required: false
     CreateTeamDTO:
       type: object
       properties:
@@ -1166,6 +1171,9 @@ components:
         game:
           type: string
           format: uuid
+          required: false
+        description:
+          type: string
           required: false
     CreateGameDTO:
       type: object

@@ -30,6 +30,10 @@ public class Team {
     private Game game;
 
     @Basic
+    @Column(name = "description")
+    private String description;
+
+    @Basic
     @Column(name = "is_active")
     private boolean isActive;
 }

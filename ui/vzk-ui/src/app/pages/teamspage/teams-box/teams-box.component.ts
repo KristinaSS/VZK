@@ -4,6 +4,8 @@ import {Game} from "../../../models/game/game";
 import {ScrollService} from "../../../services/scroll-service/scroll.service";
 import {ActivatedRoute} from "@angular/router";
 import {TeamService} from "../../../services/team-service/team.service";
+import {Player} from "../../../models/player/player";
+import {GameService} from "../../../services/game-service/game.service";
 
 @Component({
   selector: 'app-teams-box',
@@ -11,21 +13,23 @@ import {TeamService} from "../../../services/team-service/team.service";
   styleUrls: ['./teams-box.component.css']
 })
 export class TeamsBoxComponent implements OnChanges, OnInit, AfterViewInit {
-  @Input() gameList: Game[] | undefined;
+  @Input() gameList!: Game[];
   teamList: Team[];
 
   constructor(
     private scrollService: ScrollService,
     private el: ElementRef,
     private route: ActivatedRoute,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private gameService: GameService
   ) {
-    this.teamList = teamService.getTeams();
+    this.teamList = [];
+    this.setTeamList();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('gameList' in changes) {
-      this.teamList = this.teamService.getTeams();
+      this.setTeamList();
     }
   }
 
@@ -53,4 +57,36 @@ export class TeamsBoxComponent implements OnChanges, OnInit, AfterViewInit {
       }
     }
   }
+
+  private setTeamList() {
+    this.teamService.getTeams().subscribe(
+      (data: Team[]) => {
+        this.teamList = data;
+        this.setPlayersForTeam();
+      },
+      (error) => {
+        console.error('Error fetching teams:', error);
+      }
+    );
+  }
+
+  private setPlayersForTeam() {
+    for (let team of this.teamList) {
+      this.teamService.getPlayersByTeam(team.id).subscribe(
+        (players: Player[]) => {
+          team.players = players;
+          this.setGameForTeam(team);
+        },
+        (error) => {
+          console.error('Error fetching players:', error);
+        }
+      );
+    }
+  }
+
+  private setGameForTeam(team: Team) {
+    let gameId = team.game.toString();
+    team.game = this.gameService.getGame(gameId);
+  }
+
 }

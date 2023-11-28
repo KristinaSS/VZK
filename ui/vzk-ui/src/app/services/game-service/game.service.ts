@@ -7,7 +7,9 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class GameService {
+  gameList: Game[] = [];
   constructor(private http: HttpClient) {
+    this.setGameList();
   }
 
   getGames(): Observable<Game[]> {
@@ -26,12 +28,12 @@ export class GameService {
 
 
   getGame(id: string): Game {
-    return {
-      id: `1`,
-      title: 'League of Legends',
-      image: 'https://i.pinimg.com/originals/50/05/7d/50057dc2df5e0503d5de6f55b6a6df0b.jpg',
-      logo: 'https://ww2.freelogovectors.net/svg06/league-of-legends-logo-lol.svg'
-    };
+    for (let game of this.gameList) {
+      if (id === game.id) {
+        return game;
+      }
+    }
+    return new Game(``, ``, ``, ``);
   }
 
   getGameRanks(id: String): String[] {
@@ -41,7 +43,7 @@ export class GameService {
 
       let combinedArray = [];
 
-      for (let i = 0; i < lolRanks.length-3; i++) {
+      for (let i = 0; i < lolRanks.length - 3; i++) {
         for (let j = 0; j < lolDivisions.length; j++) {
           let combinedRankDivision = lolRanks[i] + ' ' + lolDivisions[j];
           combinedArray.push(combinedRankDivision);
@@ -61,7 +63,7 @@ export class GameService {
 
       let combinedArray = [];
 
-      for (let i = 0; i < valorantRanks.length-1; i++) {
+      for (let i = 0; i < valorantRanks.length - 1; i++) {
         for (let j = 0; j < valorantDivisions.length; j++) {
           let combinedRankDivision = valorantRanks[i] + ' ' + valorantDivisions[j];
           combinedArray.push(combinedRankDivision);
@@ -96,5 +98,16 @@ export class GameService {
       return ['Entry Fragger', 'Support', 'In Game Leader', 'Lurk', 'AWPer'];
     }
     return []
+  }
+
+  private setGameList(){
+    this.getGames().subscribe(
+      (data: Game[]) => {
+        this.gameList = data;
+      },
+      (error) => {
+        console.error('Error fetching games:', error);
+      }
+    );
   }
 }

@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS `vzk_accounts`.`teams` (
                                                       `name` VARCHAR(45) NOT NULL,
                                                       `captain` BINARY(16) NOT NULL,
                                                       `game` VARCHAR(45) NOT NULL,
+                                                      `description` varchar(512) null,
+                                                      `is_active` TINYINT NOT NULL,
                                                       PRIMARY KEY (`id`));
 
 -- Changeset kristina:2023-08-13-create-account-details-table

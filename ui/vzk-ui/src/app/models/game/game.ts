@@ -10,4 +10,6 @@ export class Game {
     this.image = image;
     this.logo = logo;
   }
+
+
 }

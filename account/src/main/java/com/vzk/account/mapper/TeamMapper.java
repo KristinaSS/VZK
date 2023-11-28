@@ -29,6 +29,7 @@ public interface TeamMapper {
     @Mapping(source = "captain.id", target = "captain")
     @Mapping(source = "game.id", target = "game")
     @Mapping(source = "active", target = "isActive")
+    @Mapping(source = "description", target = "description")
     TeamDTO mapToDTO(Team team);
 
     @Mapping(source = "teamDTO.id", target = "id")
@@ -36,18 +37,21 @@ public interface TeamMapper {
     @Mapping(source = "captain", target = "captain")
     @Mapping(source = "game", target = "game")
     @Mapping(source = "teamDTO.isActive", target = "isActive")
+    @Mapping(source = "teamDTO.description", target = "description")
     Team mapToModel(TeamDTO teamDTO, Account captain, Game game);
 
     @Mapping(source = "updateTeamDTO.id", target = "id")
     @Mapping(source = "updateTeamDTO.name", target = "name")
     @Mapping(source = "captain", target = "captain")
     @Mapping(source = "game", target = "game")
+    @Mapping(source = "updateTeamDTO.description", target = "description")
     Team mapToModel(UpdateTeamDTO updateTeamDTO, Account captain, Game game);
 
     @Mapping(source = "createTeamDTO.name", target = "name")
     @Mapping(source = "captain", target = "captain")
     @Mapping(source = "game", target = "game")
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
+    @Mapping(source = "createTeamDTO.description", target = "description")
     Team mapToModel(CreateTeamDTO createTeamDTO, Account captain, Game game);
 
 }
