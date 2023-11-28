@@ -13,4 +13,6 @@ public interface TeamRepository extends JpaRepository<Team, UUID> {
     boolean existsByName(String name);
 
     List<Team> findAllByGame(Game games);
+
+    boolean existsByGame(Game game);
 }

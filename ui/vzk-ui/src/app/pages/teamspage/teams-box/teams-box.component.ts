@@ -74,7 +74,10 @@ export class TeamsBoxComponent implements OnChanges, OnInit, AfterViewInit {
     for (let team of this.teamList) {
       this.teamService.getPlayersByTeam(team.id).subscribe(
         (players: Player[]) => {
-          team.players = players;
+          team.players = players.map(player => {
+            player.age = this.calculateAge(player.birthday);
+            return player;
+          });
           this.setGameForTeam(team);
         },
         (error) => {
@@ -89,4 +92,18 @@ export class TeamsBoxComponent implements OnChanges, OnInit, AfterViewInit {
     team.game = this.gameService.getGame(gameId);
   }
 
+  private calculateAge(birthday: string): number {
+    const birthdate = new Date(birthday);
+    const today = new Date();
+    const age = today.getFullYear() - birthdate.getFullYear();
+
+    if (
+      today.getMonth() < birthdate.getMonth() ||
+      (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate())
+    ) {
+      return age - 1;
+    } else {
+      return age;
+    }
+  }
 }

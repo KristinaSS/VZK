@@ -3,6 +3,7 @@ package com.vzk.account.services.impl;
 import com.vzk.account.exceptions.EntityNotFoundException;
 import com.vzk.account.models.Game;
 import com.vzk.account.repos.GameRepository;
+import com.vzk.account.repos.TeamRepository;
 import com.vzk.account.services.GameService;
 import org.openapitools.model.CreateGameDTO;
 import org.openapitools.model.GameDTO;
@@ -24,6 +25,9 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private GameRepository gameRepository;
 
+    @Autowired
+    private TeamRepository teamRepository;
+
     @Override
     public GameDTO createGame(CreateGameDTO createGameDTO) {
         Game createdGame = GAME_MAPPER.mapToModel(createGameDTO);
@@ -35,6 +39,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<GameDTO> getAllGames() {
         return gameRepository.findAll().stream()
+                .filter(game -> teamRepository.existsByGame(game))
                 .map(GAME_MAPPER::mapToDTO)
                 .collect(Collectors.toList());
     }
