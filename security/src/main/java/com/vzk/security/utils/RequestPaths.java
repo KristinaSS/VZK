@@ -21,6 +21,7 @@ public class RequestPaths {
     public static final String PLAYER_GET_ALL_ACTIVE = "/player/all/active";
     public static final String TEAM_GET_ALL_PL_BY_TEAM = "/team/%7Bid%7D/players";
     public static final String NEWS_GET_ALL_ACTIVE_ARTICLES = "/article/all/active";
+    public static final String NEWS_GET_ACTIVE_ARTICLE_BY_ID = "/article/%7Bid%7D";
     public static final String TEAM_GET_ALL_ACTIVE_TEAMS = "/team/all/active";
 
     //ADMIN
@@ -51,6 +52,7 @@ public class RequestPaths {
         tempPathPermissionMap.put(TEAM_GET_ALL_PL_BY_TEAM, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(TEAM_GET_ALL_ACTIVE_TEAMS, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(NEWS_GET_ALL_ACTIVE_ARTICLES, Collections.singletonList("guest-permissions"));
+        tempPathPermissionMap.put(NEWS_GET_ACTIVE_ARTICLE_BY_ID, Collections.singletonList("guest-permissions"));
 
         //user permissions
         tempPathPermissionMap.put(ACCOUNT_UPDATE_USER, Collections.singletonList("edit-user-profile")); //todo to be added

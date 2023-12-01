@@ -19,7 +19,7 @@ public class ArticleController implements ArticleApi {
     @Autowired
     ArticleService articleService;
 
-    @Override
+    @Override //works
     public ResponseEntity<ArticleDTO> createArticle(CreateArticleDTO createArticleDTO) {
         return ResponseEntity.ok(articleService.createArticle(createArticleDTO));
     }
@@ -30,7 +30,7 @@ public class ArticleController implements ArticleApi {
         return ResponseEntity.ok(null);
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<ArticleDTO>> getAllActiveArticles(Integer page) {
         int pageSize = 8;
         PageRequest pageRequest = PageRequest.of(page, pageSize);
@@ -38,12 +38,12 @@ public class ArticleController implements ArticleApi {
     }
 
 
-    @Override
+    @Override //works
     public ResponseEntity<List<ArticleDTO>> getAllArticles() {
         return ResponseEntity.ok(articleService.getAllArticles());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<ArticleDTO> getArticleById(UUID article) {
         return ResponseEntity.ok(articleService.getArticleById(article));
     }

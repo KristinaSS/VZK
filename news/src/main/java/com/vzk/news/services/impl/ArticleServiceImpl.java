@@ -75,7 +75,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleDTO getArticleById(UUID id) {
         Article article = findArticle(id);
-        return ARTICLE_MAPPER.mapToDTO(article);
+        return article.isActive() ? ARTICLE_MAPPER.mapToDTO(article) : null;
     }
 
     @Override

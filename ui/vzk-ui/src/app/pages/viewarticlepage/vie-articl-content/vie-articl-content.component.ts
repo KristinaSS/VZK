@@ -27,7 +27,7 @@ export class VieArticlContentComponent implements OnInit {
 
     if (this.id != null) {
       this.newsService.getArticle(this.id).subscribe(
-        (result: Article | undefined) => {
+        (result) => {
           this.article = result;
         },
         error => {
