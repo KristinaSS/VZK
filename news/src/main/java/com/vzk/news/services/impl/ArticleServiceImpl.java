@@ -9,8 +9,12 @@ import org.openapitools.model.ArticleDTO;
 import org.openapitools.model.CreateArticleDTO;
 import org.openapitools.model.UpdateArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -27,6 +31,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleDTO createArticle(CreateArticleDTO createArticleDTO) {
         Article article = ARTICLE_MAPPER.mapToModel(createArticleDTO);
+        article.setActive(true);
         Article saved = articleRepository.save(article);
         return ARTICLE_MAPPER.mapToDTO(saved);
     }
@@ -42,11 +47,22 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> getAllActiveArticles() {
-        return articleRepository.findAll().stream()
+    public Page<ArticleDTO> getAllActiveArticles(PageRequest pageRequest) {
+        List<ArticleDTO> activeArticles = articleRepository.findAll().stream()
                 .filter(Article::isActive)
                 .map(ARTICLE_MAPPER::mapToDTO)
+                .sorted((a1, a2) -> a2.getDate().compareTo(a1.getDate()))
                 .collect(Collectors.toList());
+
+        int pageSize = pageRequest.getPageSize();
+        int start = (int) pageRequest.getOffset();
+        int end = Math.min((start + pageSize), activeArticles.size());
+
+        if (start >= activeArticles.size()) {
+            return new PageImpl<>(Collections.emptyList(), pageRequest, 0);
+        }
+
+        return new PageImpl<>(activeArticles.subList(start, end), pageRequest, activeArticles.size());
     }
 
     @Override
@@ -68,8 +84,8 @@ public class ArticleServiceImpl implements ArticleService {
         articleRepository.save(article);
     }
 
-    private Article findArticle(UUID id){
-        return articleRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(ENTITY, "id", ""+id));
+    private Article findArticle(UUID id) {
+        return articleRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }
 
     private void verifyIfArticleActive(Article article) {

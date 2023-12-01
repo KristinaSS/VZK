@@ -78,6 +78,7 @@ export class TeamsBoxComponent implements OnChanges, OnInit, AfterViewInit {
             player.age = this.calculateAge(player.birthday);
             return player;
           });
+          team.players.sort((a, b) => b.role.localeCompare(a.role));
           this.setGameForTeam(team);
         },
         (error) => {

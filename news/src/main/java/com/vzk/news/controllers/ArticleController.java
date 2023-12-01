@@ -6,6 +6,7 @@ import org.openapitools.model.ArticleDTO;
 import org.openapitools.model.CreateArticleDTO;
 import org.openapitools.model.UpdateArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,9 +31,12 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
-    public ResponseEntity<List<ArticleDTO>> getAllActiveArticles() {
-        return ResponseEntity.ok(articleService.getAllActiveArticles());
+    public ResponseEntity<List<ArticleDTO>> getAllActiveArticles(Integer page) {
+        int pageSize = 8;
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        return ResponseEntity.ok(articleService.getAllActiveArticles(pageRequest).getContent());
     }
+
 
     @Override
     public ResponseEntity<List<ArticleDTO>> getAllArticles() {

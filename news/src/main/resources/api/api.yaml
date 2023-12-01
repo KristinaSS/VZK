@@ -46,16 +46,23 @@ paths:
         - Article
       summary: Getting all active articles
       operationId: getAllActiveArticles
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            default: 0
       responses:
-        "201":
-          description: Successful retrieval of all articles.
+        "200":
+          description: Successful retrieval of all active articles.
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ArticleDTO'
-
         "400":
           description: Bad Request
           content:
@@ -74,6 +81,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+
   /article/{id}:
     get:
       tags:

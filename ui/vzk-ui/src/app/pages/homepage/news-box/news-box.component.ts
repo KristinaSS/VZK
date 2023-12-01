@@ -12,25 +12,33 @@ import {Translation} from "../../../models/translation/translation";
 export class NewsBoxComponent implements OnInit {
   articles: Article[] = [];
   visibleArticles: number = 3;
+
   @Input() translationsAbout!: { [key: string]: Translation };
 
   constructor(private newsService: NewsService, private router: Router) {
   }
 
   openArticle(article: any) {
-    this.router.navigate(['/news', article.id]).then(r => {
+    this.router.navigate(['/news', article.id]).then(() => {
       window.scrollTo(0, 0);
     });
   }
 
   showMore() {
-    this.router.navigate(['/news']).then(r => {
+    this.router.navigate(['/news']).then(() => {
       window.scrollTo(0, 0);
     });
   }
 
   ngOnInit(): void {
-    this.articles = this.newsService.getMoreArticles();
+    this.newsService.getMoreArticles(0).subscribe(
+      (data) => {
+        this.articles = data;
+      },
+      (error) => {
+        console.error('Error fetching articles:', error);
+      }
+    );
   }
 
   getTranslation(id: string) {

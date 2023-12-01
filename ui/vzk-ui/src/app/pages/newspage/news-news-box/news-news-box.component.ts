@@ -14,23 +14,45 @@ export class NewsNewsBoxComponent implements OnInit {
   scrollDistance = 2;
   scrollUpDistance = 1;
 
+  page = 0;
+  isEndOfPage = false;
+
   @Input() translationsAbout!: { [key: string]: Translation };
 
   constructor(private newsService: NewsService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.articles = this.newsService.getMoreArticles();
+    this.newsService.getMoreArticles(this.page).subscribe(
+      (data) => {
+        this.articles = data;
+        if (data.length == 0) {
+          this.isEndOfPage = true;
+        }
+        this.page++;
+      },
+      (error) => {
+        console.error('Error fetching articles:', error);
+      }
+    );
   }
 
   loadData() {
-    if (this.articles.length < 64) {
-      this.newsService.getMoreArticles();
+    if (!this.isEndOfPage) {
+      this.newsService.getMoreArticles(this.page).subscribe(
+        (data) => {
+          this.articles = [...this.articles, ...data];
+          if (data.length == 0) {
+            this.isEndOfPage = true;
+          }
+          this.page++;
+        }
+      );
     }
   }
 
   openArticle(article: any) {
-    this.router.navigate(['/news', article.id]).then(r => {
+    this.router.navigate(['/news', article.id]).then(() => {
       window.scrollTo(0, 0);
     });
   }
