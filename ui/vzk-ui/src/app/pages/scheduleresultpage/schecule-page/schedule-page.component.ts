@@ -9,24 +9,47 @@ import {Game} from "../../../models/game/game";
   templateUrl: './schedule-page.component.html',
   styleUrls: ['./schedule-page.component.css']
 })
-export class SchedulePageComponent implements OnInit{
+export class SchedulePageComponent implements OnInit {
   futureEvents: Event[] = [];
   scrollDistance = 2;
   scrollUpDistance = 1;
-  constructor(private eventService: EventServiceService, private gameService: GameService) {}
 
-  ngOnInit(): void {
-    this.futureEvents = this.eventService.getEvents();
+  page = 0;
+  isEndOfPage = false;
+
+  constructor(private eventService: EventServiceService, private gameService: GameService) {
   }
 
-  getGame(id: string): Game{
+  ngOnInit(): void {
+    this.eventService.getEvents(this.page).subscribe(
+      (data) => {
+        this.futureEvents = data;
+        if (data.length == 0) {
+          this.isEndOfPage = true;
+        }
+        this.page++;
+      },
+      (error) => {
+        console.error('Error fetching events:', error);
+      }
+    );
+  }
+
+  getGame(id: string): Game {
     return this.gameService.getGame(id);
   }
 
   loadData() {
-    if(this.futureEvents.length < 30){
-      const newEvents = this.eventService.getEvents();
-      this.futureEvents = this.futureEvents.concat(newEvents);
+    if (!this.isEndOfPage) {
+      this.eventService.getEvents(this.page).subscribe(
+        (data) => {
+          this.futureEvents = [...this.futureEvents, ...data];
+          if (data.length == 0) {
+            this.isEndOfPage = true;
+          }
+          this.page++;
+        }
+      );
     }
   }
 }

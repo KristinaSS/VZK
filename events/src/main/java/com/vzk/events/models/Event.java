@@ -15,7 +15,6 @@ import java.util.UUID;
 @Entity(name = "events")
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private UUID id;
 
@@ -34,4 +33,12 @@ public class Event {
     @Basic
     @Column(name = "is_active")
     private boolean isActive;
+
+    @Basic
+    @Column(name = "game")
+    private UUID game;
+
+    @Basic
+    @Column(name = "enemy_logo")
+    private String enemyLogo;
 }

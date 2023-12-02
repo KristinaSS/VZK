@@ -23,6 +23,8 @@ public class RequestPaths {
     public static final String NEWS_GET_ALL_ACTIVE_ARTICLES = "/article/all/active";
     public static final String NEWS_GET_ACTIVE_ARTICLE_BY_ID = "/article/%7Bid%7D";
     public static final String TEAM_GET_ALL_ACTIVE_TEAMS = "/team/all/active";
+    public static final String EVENTS_GET_ALL_ACTIVE_EVENTS = "/event/all/active";
+    public static final String RESULT_GET_ALL_ACTIVE_RESULTS = "/result/all/active";
 
     //ADMIN
     public static final String ACCOUNT_GET_ALL_ACCOUNTS = "/account/all";
@@ -42,7 +44,6 @@ public class RequestPaths {
         tempCheckPathsList.add(ACCOUNT_GET_BY_ID);
 
 
-
         Map<String, List<String>> tempPathPermissionMap = new HashMap<>();
         //guest permissions
         tempPathPermissionMap.put(GAME_GET_ALL_GAMES, Collections.singletonList("guest-permissions"));
@@ -53,6 +54,8 @@ public class RequestPaths {
         tempPathPermissionMap.put(TEAM_GET_ALL_ACTIVE_TEAMS, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(NEWS_GET_ALL_ACTIVE_ARTICLES, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(NEWS_GET_ACTIVE_ARTICLE_BY_ID, Collections.singletonList("guest-permissions"));
+        tempPathPermissionMap.put(EVENTS_GET_ALL_ACTIVE_EVENTS, Collections.singletonList("guest-permissions"));
+        tempPathPermissionMap.put(RESULT_GET_ALL_ACTIVE_RESULTS, Collections.singletonList("guest-permissions"));
 
         //user permissions
         tempPathPermissionMap.put(ACCOUNT_UPDATE_USER, Collections.singletonList("edit-user-profile")); //todo to be added

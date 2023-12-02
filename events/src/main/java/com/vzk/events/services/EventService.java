@@ -4,6 +4,8 @@ import org.openapitools.model.CreateEventDTO;
 import org.openapitools.model.EventDTO;
 import org.openapitools.model.EventDateDTO;
 import org.openapitools.model.UpdateEventDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,9 +15,9 @@ public interface EventService {
 
     void deleteEvent(UUID id);
 
-    List<EventDTO> getAllActiveEvents();
+    Page<EventDTO> getAllActiveEvents(PageRequest pageRequest);
 
-    List<EventDTO> getALlEvents();
+    List<EventDTO> getAllEvents();
 
     List<EventDTO> getAllEventsByDate(EventDateDTO dateDTO);
 

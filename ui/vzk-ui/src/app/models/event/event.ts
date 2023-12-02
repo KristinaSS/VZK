@@ -1,17 +1,17 @@
 export class Event {
   id: string;
-  title: string;
+  name: string;
   game: string;
-  datetime: Date;
-  description: string;
-  enemyLogoURL: string;
+  date: Date;
+  info: string;
+  enemyLogo: string;
 
   constructor(id: string, title: string, datetime: Date, description: string, game: string, enemyURL: string) {
     this.id = id;
-    this.title = title;
-    this.datetime = datetime;
-    this.description = description;
+    this.name = title;
+    this.date = datetime;
+    this.info = description;
     this.game = game;
-    this.enemyLogoURL = enemyURL;
+    this.enemyLogo = enemyURL;
   }
 }

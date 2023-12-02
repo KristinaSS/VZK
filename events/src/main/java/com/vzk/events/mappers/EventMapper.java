@@ -11,29 +11,29 @@ import org.openapitools.model.UpdateEventDTO;
 @Mapper
 public interface EventMapper {
     EventMapper EVENT_MAPPER = Mappers.getMapper(EventMapper.class);
+
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "info", target = "info")
     @Mapping(source = "date", target = "date")
     @Mapping(source = "active", target = "isActive")
+    @Mapping(source = "game", target = "game")
+    @Mapping(source = "enemyLogo", target = "enemyLogo")
     EventDTO mapToDTO(Event event);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "info", target = "info")
     @Mapping(source = "date", target = "date")
-    @Mapping(source = "isActive", target = "active")
-    Event mapToModel(EventDTO eventDTO);
-
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "info", target = "info")
-    @Mapping(source = "date", target = "date")
+    @Mapping(source = "game", target = "game")
+    @Mapping(source = "enemyLogo", target = "enemyLogo")
     Event mapToModel(UpdateEventDTO updateEventDTO);
 
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "info", target = "info")
     @Mapping(source = "date", target = "date")
-    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
+    @Mapping(source = "game", target = "game")
+    @Mapping(source = "enemyLogo", target = "enemyLogo")
     Event mapToModel(CreateEventDTO createEventDTO);
 }

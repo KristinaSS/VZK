@@ -74,6 +74,19 @@ public class GatewayConfig {
                         .filters(f -> f.modifyRequestBody(String.class, String.class,
                                 (exchange, isValid) -> validateRequest(exchange)))
                         .uri("http://localhost:8085"))
+
+                //EVENTS SERVICE
+                .route(" EVENTS-SERVICE", r -> r
+                        .path("/event/**")
+                        .filters(f -> f.modifyRequestBody(String.class, String.class,
+                                (exchange, isValid) -> validateRequest(exchange)))
+                        .uri("http://localhost:8084"))
+
+                .route(" RESULT-SERVICE", r -> r
+                        .path("/result/**")
+                        .filters(f -> f.modifyRequestBody(String.class, String.class,
+                                (exchange, isValid) -> validateRequest(exchange)))
+                        .uri("http://localhost:8084"))
                 .build();
     }
 

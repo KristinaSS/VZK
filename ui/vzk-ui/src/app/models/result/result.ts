@@ -2,7 +2,7 @@ export class Result {
   id: string;
   title: string;
   game: string;
-  datetime: Date;
+  dateTime: Date;
   description: string;
   enemyLogoURL: string;
   enemyResult: string;
@@ -12,7 +12,7 @@ export class Result {
   constructor(id: string, title: string, datetime: Date, description: string, game: string, enemyURL: string, enemyResult: string, teamResult: string,   replayURL: string) {
     this.id = id;
     this.title = title;
-    this.datetime = datetime;
+    this.dateTime = datetime;
     this.description = description;
     this.game = game;
     this.enemyLogoURL = enemyURL

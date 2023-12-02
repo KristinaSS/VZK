@@ -5,25 +5,40 @@ import com.vzk.events.exceptions.EntityNotFoundException;
 import com.vzk.events.models.Event;
 import com.vzk.events.repos.EventRepository;
 import com.vzk.events.services.EventService;
-import org.openapitools.model.CreateEventDTO;
-import org.openapitools.model.EventDTO;
-import org.openapitools.model.EventDateDTO;
-import org.openapitools.model.UpdateEventDTO;
+import com.vzk.events.services.ResultService;
+import lombok.RequiredArgsConstructor;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.vzk.events.mappers.EventMapper.EVENT_MAPPER;
 
+@RequiredArgsConstructor
 @Service
 public class EventServiceImpl implements EventService {
     private static final String ENTITY = "Event";
-    @Autowired
+
     private EventRepository eventRepository;
+    private ResultService resultService;
+
+    @Autowired
+    public EventServiceImpl(@Lazy EventRepository eventRepository, @Lazy ResultService resultService) {
+        this.eventRepository = eventRepository;
+        this.resultService = resultService;
+    }
 
     @Override
     public EventDTO createEvent(CreateEventDTO createEventDTO) {
@@ -44,15 +59,36 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventDTO> getAllActiveEvents() {
-        return eventRepository.findAll().stream()
-                .filter(Event::isActive)
+    public Page<EventDTO> getAllActiveEvents(PageRequest pageRequest) {
+        LocalDateTime today = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+        List<EventDTO> activeEvents = eventRepository.findAll().stream()
+                .filter(event -> {
+                    LocalDateTime eventDate = LocalDateTime.parse(event.getDate(), formatter);
+                    LocalDateTime todayPast = today.minusHours(2);
+                    createResultIfEventEnded(eventDate, todayPast, event);
+
+                    return event.isActive() && (eventDate.isAfter(todayPast));
+                })
                 .map(EVENT_MAPPER::mapToDTO)
+                .sorted(Comparator.comparing(EventDTO::getDate))
                 .collect(Collectors.toList());
+
+        int pageSize = pageRequest.getPageSize();
+        int start = (int) pageRequest.getOffset();
+        int end = Math.min((start + pageSize), activeEvents.size());
+
+        if (start >= activeEvents.size()) {
+            return new PageImpl<>(Collections.emptyList(), pageRequest, 0);
+        }
+
+        return new PageImpl<>(activeEvents.subList(start, end), pageRequest, activeEvents.size());
     }
 
     @Override
-    public List<EventDTO> getALlEvents() {
+    public List<EventDTO> getAllEvents() {
         return eventRepository.findAll().stream()
                 .map(EVENT_MAPPER::mapToDTO)
                 .collect(Collectors.toList());
@@ -90,6 +126,17 @@ public class EventServiceImpl implements EventService {
     private void verifyIfArticleActive(Event event) {
         if (!event.isActive()) {
             throw new EntityAlreadyDeactivatedException(ENTITY, event.getId());
+        }
+    }
+
+    private void createResultIfEventEnded(LocalDateTime eventStartTime, LocalDateTime now, Event event) {
+        if (eventStartTime.isBefore(now) && !resultService.existsResultWithId(event.getId())) {
+            resultService.createResult(CreatedResultDTO.builder()
+                    .enemyResult("?")
+                    .teamResult("?")
+                    .replayURL("?")
+                    .eventId(event.getId())
+                    .build());
         }
     }
 }

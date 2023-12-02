@@ -4,6 +4,8 @@ import {Event} from 'src/app/models/event/event';
 import {Result} from "../../../models/result/result";
 import {Router} from "@angular/router";
 import {Translation} from "../../../models/translation/translation";
+import {Game} from "../../../models/game/game";
+import {GameService} from "../../../services/game-service/game.service";
 
 @Component({
   selector: 'app-schedule-box',
@@ -19,12 +21,31 @@ export class ScheduleBoxComponent implements OnInit {
 
   @Input() translationsAbout!: { [key: string]: Translation };
 
-  constructor(private eventService: EventServiceService, private router: Router) {
+  constructor(
+    private eventService: EventServiceService,
+    private router: Router,
+    private gameService: GameService
+  ) {
   }
 
   ngOnInit(): void {
-    this.nextTwoEvents = this.eventService.getNextTwoEvents();
-    this.nextTwoResults = this.eventService.getNextTwoResults();
+    this.eventService.getEvents(0).subscribe(
+      (data) => {
+        this.nextTwoEvents = data.slice(0, 2);
+      },
+      (error) => {
+        console.error('Error fetching events:', error);
+      }
+    );
+
+    this.eventService.getResults(0).subscribe(
+      (data) => {
+        this.nextTwoResults = data.slice(0, 2);
+      },
+      (error) => {
+        console.error('Error fetching events:', error);
+      }
+    )
   }
 
   showContent(contentNumber: number): void {
@@ -54,5 +75,9 @@ export class ScheduleBoxComponent implements OnInit {
 
   getTranslation(id: string) {
     return this.translationsAbout[id].content;
+  }
+
+  getGame(id: string): Game {
+    return this.gameService.getGame(id);
   }
 }

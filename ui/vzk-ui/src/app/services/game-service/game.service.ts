@@ -26,7 +26,6 @@ export class GameService {
     });
   }
 
-
   getGame(id: string): Game {
     for (let game of this.gameList) {
       if (id === game.id) {
@@ -36,6 +35,18 @@ export class GameService {
     return new Game(``, ``, ``, ``);
   }
 
+  private setGameList(){
+    this.getGames().subscribe(
+      (data: Game[]) => {
+        this.gameList = data;
+      },
+      (error) => {
+        console.error('Error fetching games:', error);
+      }
+    );
+  }
+
+  /*------------------------------------------*/
   getGameRanks(id: String): String[] {
     if (id === '1') {
       let lolRanks = ['Iron', 'Bronze', 'Silver', 'Gold', 'Platinum', 'Emerald', 'Diamond', 'Master', 'Grandmaster', 'Challenger'];
@@ -98,16 +109,5 @@ export class GameService {
       return ['Entry Fragger', 'Support', 'In Game Leader', 'Lurk', 'AWPer'];
     }
     return []
-  }
-
-  private setGameList(){
-    this.getGames().subscribe(
-      (data: Game[]) => {
-        this.gameList = data;
-      },
-      (error) => {
-        console.error('Error fetching games:', error);
-      }
-    );
   }
 }

@@ -14,11 +14,25 @@ export class ResultPageComponent implements OnInit {
   scrollDistance = 2;
   scrollUpDistance = 1;
 
+  page = 0;
+  isEndOfPage = false;
+
   constructor(private eventService: EventServiceService, private gameService: GameService) {
   }
 
   ngOnInit(): void {
-    this.results = this.eventService.getResults();
+    this.eventService.getResults(this.page).subscribe(
+      (data) => {
+        this.results = data;
+        if (data.length == 0) {
+          this.isEndOfPage = true;
+        }
+        this.page++;
+      },
+      (error) => {
+        console.error('Error fetching results:', error);
+      }
+    );
   }
 
   getGame(id: string): Game {
@@ -26,9 +40,16 @@ export class ResultPageComponent implements OnInit {
   }
 
   loadData() {
-    if (this.results.length < 30) {
-      const newEvents = this.eventService.getResults();
-      this.results = this.results.concat(newEvents);
+    if (!this.isEndOfPage) {
+      this.eventService.getResults(this.page).subscribe(
+        (data) => {
+          this.results = [...this.results, ...data];
+          if (data.length == 0) {
+            this.isEndOfPage = true;
+          }
+          this.page++;
+        }
+      );
     }
   }
 

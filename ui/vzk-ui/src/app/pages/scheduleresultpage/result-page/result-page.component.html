@@ -12,8 +12,8 @@
       </div>
       <hr class="event-divider"/>
       <div class="planned-time">
-        <div class="event-time">{{ result.datetime | date: 'h:mm a' }} BST</div>
-        <div class="event-date">{{ result.datetime | date: 'MMM d, YYYY' }}</div>
+        <div class="event-time">{{ result.dateTime | date: 'h:mm a' }} BST</div>
+        <div class="event-date">{{ result.dateTime | date: 'MMM d, YYYY' }}</div>
       </div>
       <div class="event-game">
         <img class="game-logo" [src]="getGame(result.game).logo" alt="game-logo"/>

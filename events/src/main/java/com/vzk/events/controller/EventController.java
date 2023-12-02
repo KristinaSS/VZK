@@ -7,6 +7,7 @@ import org.openapitools.model.EventDTO;
 import org.openapitools.model.EventDateDTO;
 import org.openapitools.model.UpdateEventDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class EventController implements EventApi {
     @Autowired
     private EventService eventService;
 
-    @Override
+    @Override //works
     public ResponseEntity<EventDTO> createEvent(CreateEventDTO createEventDTO) {
         return ResponseEntity.ok(eventService.createEvent(createEventDTO));
     }
@@ -30,14 +31,16 @@ public class EventController implements EventApi {
         return ResponseEntity.ok(null);
     }
 
-    @Override
-    public ResponseEntity<List<EventDTO>> getAllActiveEvents() {
-        return ResponseEntity.ok(eventService.getAllActiveEvents());
+    @Override //works
+    public ResponseEntity<List<EventDTO>> getAllActiveEvents(Integer page) {
+        int pageSize = 8;
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        return ResponseEntity.ok(eventService.getAllActiveEvents(pageRequest).getContent());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<List<EventDTO>> getAllEvents() {
-        return ResponseEntity.ok(eventService.getALlEvents());
+        return ResponseEntity.ok(eventService.getAllEvents());
     }
 
     @Override

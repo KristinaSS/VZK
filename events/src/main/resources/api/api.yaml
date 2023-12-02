@@ -46,6 +46,14 @@ paths:
         - Event
       summary: Getting all active events
       operationId: getAllActiveEvents
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            default: 0
       responses:
         "201":
           description: Successful retrieval of all events.
@@ -260,6 +268,85 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
 
+  /result/create:
+    post:
+      tags:
+        - Result
+      summary: Create result
+      operationId: createResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatedResultDTO"
+      responses:
+        "201":
+          description: Successful creation of event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /result/all/active:
+    get:
+      tags:
+        - Result
+      summary: Getting all active results
+      operationId: getAllActiveEvents
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        "201":
+          description: Successful retrieval of all results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResultDTO'
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -276,11 +363,41 @@ components:
         id:
           type: string
           format: uuid
+        name:
+          type: string
+        game:
+          type: string
+          format: uuid
         date:
           type: string
         info:
           type: string
-        name:
+        isActive:
+          type: boolean
+        enemyLogo:
+          type: string
+    ResultDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        dateTime:
+          type: string
+        game:
+          type: string
+          format: uuid
+        enemyLogoURL:
+          type: string
+        enemyResult:
+          type: string
+        teamResult:
+          type: string
+        replayURL:
+          type: string
+        description:
           type: string
         isActive:
           type: boolean
@@ -300,6 +417,13 @@ components:
         name:
           type: string
           required: false
+        game:
+          type: string
+          format: uuid
+          required: false
+        enemyLogo:
+          type: string
+          required: false
     CreateEventDTO:
       type: object
       properties:
@@ -310,6 +434,29 @@ components:
           type: string
           required: true
         name:
+          type: string
+          required: true
+        game:
+          type: string
+          format: uuid
+          required: true
+        enemyLogo:
+          type: string
+          required: true
+    CreatedResultDTO:
+      type: object
+      properties:
+        eventId:
+          type: string
+          format: UUID
+          required: true
+        enemyResult:
+          type: string
+          required: true
+        teamResult:
+          type: string
+          required: true
+        replayURL:
           type: string
           required: true
     EventDateDTO:
