@@ -9,6 +9,7 @@ import org.openapitools.model.CreateContactRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,9 +26,10 @@ public class ContactRequestImpl implements ContactRequestService {
     @Override
     public ContactRequestDTO createContactRequest(CreateContactRequestDTO createContactRequestDTO) {
         ContactRequest contactRequest = CONTACT_REQUEST_MAPPER.mapToModel(createContactRequestDTO);
-        contactRequest.setId(UUID.randomUUID());
 
+        contactRequest.setTimeCreated(LocalDateTime.now());
         ContactRequest saved = contactRequestRepository.save(contactRequest);
+
         return CONTACT_REQUEST_MAPPER.mapToDTO(saved);
     }
 

@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface ApplicationRequestRepository extends JpaRepository<ApplicationRequest, UUID> {
+
+    boolean existsByContactRequest_Id(UUID contactRequestId);
 }

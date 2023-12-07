@@ -141,7 +141,7 @@
             formControlName="applicationType"
             (change)="onApplicationTypeChange()">
       <option value="" disabled selected hidden>{{getTranslation('27')}}</option>
-      <option *ngFor="let role of orgRoles" [value]="role.id">{{role.name}}</option>
+      <option *ngFor="let role of orgRoles" [value]="role.name">{{role.name}}</option>
     </select>
     <div
       *ngIf="contactForm.get('applicationType')?.hasError('required') && contactForm.get('applicationType')!.touched"
@@ -249,9 +249,9 @@
       class="text-input" id="gender" name="gender"
       formControlName="gender">
       <option value="" disabled selected hidden>{{getTranslation('39')}}</option>
-      <option value="male">{{getTranslation('60')}}</option>
-      <option value="female">{{getTranslation('61')}}</option>
-      <option value="other">{{getTranslation('55')}}</option>
+      <option value="MALE">{{getTranslation('60')}}</option>
+      <option value="FEMALE">{{getTranslation('61')}}</option>
+      <option value="OTHER">{{getTranslation('55')}}</option>
     </select>
     <div *ngIf="contactForm.get('gender')?.hasError('required') && contactForm.get('gender')!.touched"
          class="validation-error">

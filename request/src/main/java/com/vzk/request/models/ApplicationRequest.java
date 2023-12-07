@@ -6,9 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import no.stelar7.api.r4j.basic.constants.types.lol.LaneType;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -18,7 +16,6 @@ import java.util.UUID;
 @Entity(name = "application_request")
 public class ApplicationRequest {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private UUID id;
 
@@ -27,8 +24,8 @@ public class ApplicationRequest {
     private ContactRequest contactRequest;
 
     @Basic
-    @Column(name = "player_name")
-    private String playerName;
+    @Column(name = "application_type")
+    private String applicationType;
 
     @Basic
     @Column(name = "profile_url")
@@ -44,7 +41,7 @@ public class ApplicationRequest {
 
     @Basic
     @Column(name = "birthday")
-    private Date birthday;
+    private String birthday;
 
     @Basic
     @Column(name = "country_origin")
@@ -52,11 +49,11 @@ public class ApplicationRequest {
 
     @Basic
     @Column(name = "applied_role")
-    private LaneType appliedRole;
+    private String appliedRole;
 
     @Basic
     @Column(name = "applied_game")
-    private String appliedGame;
+    private UUID appliedGame;
 
     @Basic
     @Column(name = "description")

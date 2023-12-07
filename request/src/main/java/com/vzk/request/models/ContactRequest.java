@@ -14,9 +14,12 @@ import java.util.UUID;
 @Entity(name = "contact_request")
 public class ContactRequest {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private UUID id;
+
+    @Basic
+    @Column(name = "name")
+    private String name;
 
     @Basic
     @Column(name = "email")
@@ -33,10 +36,6 @@ public class ContactRequest {
     @Basic
     @Column(name = "message")
     private String message;
-
-    @Basic
-    @Column(name = "is_application_request")
-    private boolean isApplicationRequest;
 
     @Basic
     @Column(name = "date_created")

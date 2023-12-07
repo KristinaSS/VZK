@@ -1,6 +1,9 @@
 package com.vzk.gateway.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.vzk.gateway.feign.SecurityClient;
 import com.vzk.gateway.model.JwtAuthorizationRequest;
 import feign.codec.Decoder;
@@ -16,6 +19,8 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -87,6 +92,33 @@ public class GatewayConfig {
                         .filters(f -> f.modifyRequestBody(String.class, String.class,
                                 (exchange, isValid) -> validateRequest(exchange)))
                         .uri("http://localhost:8084"))
+
+                //REQUEST SERVICE
+                .route(" REQUEST-SERVICE", r -> r
+                        .path("/request/**")
+                        .filters(f -> f.modifyRequestBody(String.class, String.class,
+                                (exchange, modifiedBody) -> {
+                                    HttpHeaders headers = exchange.getRequest().getHeaders();
+                                    MediaType contentType = headers.getContentType();
+
+                                    if (contentType != null && contentType.isCompatibleWith(MediaType.APPLICATION_JSON)) {
+                                        // Modify the JSON body as needed
+                                        String modifiedJsonBody = modifyJsonBody(modifiedBody);
+
+                                        // Validate the request
+                                        String isValid = String.valueOf(isRequestValid(exchange));
+                                        if (!Boolean.parseBoolean(isValid)) {
+                                            return Mono.error(new RuntimeException("Invalid token"));
+                                        }
+
+                                        return Mono.just(modifiedJsonBody);
+                                    } else {
+                                        // If the content type is not JSON, leave it unchanged
+                                        return Mono.just(modifiedBody);
+                                    }
+                                }))
+
+                        .uri("http://localhost:8086"))
                 .build();
     }
 
@@ -117,6 +149,21 @@ public class GatewayConfig {
 
         return isValid && isAuthorized;
     }
+
+    private String modifyJsonBody(String originalJsonBody) {
+        // Example: Add a new field to the JSON body
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            JsonNode jsonNode = objectMapper.readTree(originalJsonBody);
+            ((ObjectNode) jsonNode).put("newField", "modifiedValue");
+            return objectMapper.writeValueAsString(jsonNode);
+        } catch (JsonProcessingException e) {
+            // Handle JSON processing exception
+            e.printStackTrace();
+            return originalJsonBody; // Return the original body if modification fails
+        }
+    }
+
 
     @Bean
     public Decoder decoder(ObjectMapper objectMapper) {

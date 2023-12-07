@@ -247,19 +247,21 @@ components:
           format: uuid
         email:
           type: string
+        name:
+          type: string
         isConsent:
           type: boolean
         subject:
           type: string
         message:
           type: string
-        isApplicationRequest:
-          type: boolean
         timeCreated:
           type: string
     CreateContactRequestDTO:
       type: object
       properties:
+        name:
+          type: string
         email:
           type: string
         isConsent:
@@ -267,10 +269,6 @@ components:
         subject:
           type: string
         message:
-          type: string
-        isApplicationRequest:
-          type: boolean
-        timeCreated:
           type: string
     ApplicationRequestDTO:
       type: object
@@ -281,20 +279,24 @@ components:
         contactRequestId:
           type: string
           format: uuid
-        playerName:
+        applicationType:
           type: string
         profileUrl:
           type: string
+          required: false
         maxRank:
           type: string
+          required: false
+        appliedRole:
+          type: string
+          required: false
         birthday:
           type: string
         countryOrigin:
           type: string
         appliedGame:
           type: string
-        appliedRole:
-          type: string
+          format: uuid
         description:
           type: string
         gender:
@@ -309,20 +311,24 @@ components:
         contactRequestId:
           type: string
           format: uuid
-        playerName:
+        applicationType:
           type: string
         profileUrl:
           type: string
+          required: false
         maxRank:
           type: string
+          required: false
+        appliedRole:
+          type: string
+          required: false
         birthday:
           type: string
         countryOrigin:
           type: string
         appliedGame:
           type: string
-        appliedRole:
-          type: string
+          format: uuid
         description:
           type: string
         gender:

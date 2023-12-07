@@ -47,8 +47,10 @@ export class GameService {
   }
 
   /*------------------------------------------*/
-  getGameRanks(id: String): String[] {
-    if (id === '1') {
+  getGameRanks(id: string): String[] {
+    let game = this.getGame(id);
+
+    if (game.title === 'League of Legends') {
       let lolRanks = ['Iron', 'Bronze', 'Silver', 'Gold', 'Platinum', 'Emerald', 'Diamond', 'Master', 'Grandmaster', 'Challenger'];
       let lolDivisions = ['IV', 'III', 'II', 'I'];
 
@@ -68,7 +70,7 @@ export class GameService {
       return combinedArray;
     }
 
-    if (id === '2') {
+    if (game.title === 'Valorant') {
       let valorantRanks: string[] = ['Iron', 'Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Immortal', 'Radiant'];
       let valorantDivisions: string[] = ['III', 'II', 'I'];
 
@@ -86,7 +88,7 @@ export class GameService {
       return combinedArray;
     }
 
-    if (id === '3') {
+    if (game.title === 'CS:GO') {
       return [
         'Silver I', 'Silver II', 'Silver III', 'Silver IV', 'Silver Elite', 'Silver Elite Master',
         'Gold Nova I', 'Gold Nova II', 'Gold Nova III', 'Gold Nova Master',
@@ -97,15 +99,16 @@ export class GameService {
   }
 
   getGameRoles(id: string) {
-    if (id === '1') {
+    let game = this.getGame(id);
+    if (game.title === 'League of Legends') {
       return ['Top', 'Jungle', 'Mid', 'ADC', 'Support'];
     }
 
-    if (id === '2') {
+    if (game.title === 'Valorant') {
       return ['Leader', 'Entry Fragger', 'Lurker', 'Recon', 'Crowd Control'];
     }
 
-    if (id === '3') {
+    if (game.title === 'CS:GO') {
       return ['Entry Fragger', 'Support', 'In Game Leader', 'Lurk', 'AWPer'];
     }
     return []

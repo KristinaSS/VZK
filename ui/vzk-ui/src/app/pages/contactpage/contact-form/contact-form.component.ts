@@ -11,6 +11,7 @@ import {
 import {Translation} from "../../../models/translation/translation";
 import {Role} from "../../../models/role/role";
 import {RoleService} from "../../../services/role-service/role.service";
+import {RequestService} from "../../../services/request-service/request.service";
 
 @Component({
   selector: 'app-contact-form',
@@ -24,6 +25,7 @@ export class ContactFormComponent implements OnInit {
   ranks: String[] = [];
   countries: any[] = [];
   orgRoles: Role[] = [];
+  formType: string = '';
 
   contactForm!: FormGroup;
 
@@ -39,6 +41,7 @@ export class ContactFormComponent implements OnInit {
     private countryService: CountryService,
     private cd: ChangeDetectorRef,
     private roleService: RoleService,
+    private requestService: RequestService
   ) {
   }
 
@@ -127,54 +130,83 @@ export class ContactFormComponent implements OnInit {
 
   updateSubmitButtonState() {
     if (this.contactForm) {
-      this.isSubmitDisabled = !((
-          this.contactForm.get('consent')?.value == true &&
-          this.contactForm.get('fName')?.valid &&
-          this.contactForm.get('lName')?.valid &&
-          this.contactForm.get('email')?.valid &&
-          this.contactForm.get('topic')?.valid &&
-          this.contactForm.get('comments')?.valid)
-        ||
-        (
-          this.contactForm.get('fName')?.valid &&
-          this.contactForm.get('lName')?.valid &&
-          this.contactForm.get('email')?.valid &&
-          this.contactForm.get('topic')?.valid &&
-          this.contactForm.get('game')?.valid &&
-          this.contactForm.get('applicationType')?.valid &&
-          this.contactForm.get('gender')?.valid &&
-          this.contactForm.get('birthday')?.valid &&
-          this.contactForm.get('country')?.valid &&
-          this.contactForm.get('description')?.valid &&
-          this.contactForm.get('consent')?.value == true
-        )
-        ||
-        (
-          this.contactForm.get('fName')?.valid &&
-          this.contactForm.get('lName')?.valid &&
-          this.contactForm.get('email')?.valid &&
-          this.contactForm.get('topic')?.valid &&
-          this.contactForm.get('game')?.valid &&
-          this.contactForm.get('applicationType')?.valid &&
-          this.contactForm.get('profileURL')?.valid &&
-          this.contactForm.get('role')?.valid &&
-          this.contactForm.get('maxRank')?.valid &&
-          this.contactForm.get('gender')?.valid &&
-          this.contactForm.get('birthday')?.valid &&
-          this.contactForm.get('country')?.valid &&
-          this.contactForm.get('description')?.valid &&
-          this.contactForm.get('consent')?.value == true
-        ));
+      if (
+        this.contactForm.get('consent')?.value == true &&
+        this.contactForm.get('fName')?.valid &&
+        this.contactForm.get('lName')?.valid &&
+        this.contactForm.get('email')?.valid &&
+        this.contactForm.get('topic')?.valid &&
+        this.contactForm.get('comments')?.valid
+      ) {
+        this.formType = 'contact';
+      } else if (
+        this.contactForm.get('fName')?.valid &&
+        this.contactForm.get('lName')?.valid &&
+        this.contactForm.get('email')?.valid &&
+        this.contactForm.get('topic')?.valid &&
+        this.contactForm.get('game')?.valid &&
+        this.contactForm.get('applicationType')?.valid &&
+        this.contactForm.get('gender')?.valid &&
+        this.contactForm.get('birthday')?.valid &&
+        this.contactForm.get('country')?.valid &&
+        this.contactForm.get('description')?.valid &&
+        this.contactForm.get('consent')?.value == true
+      ) {
+        this.formType = 'application';
+      } else if (
+        this.contactForm.get('fName')?.valid &&
+        this.contactForm.get('lName')?.valid &&
+        this.contactForm.get('email')?.valid &&
+        this.contactForm.get('topic')?.valid &&
+        this.contactForm.get('game')?.valid &&
+        this.contactForm.get('applicationType')?.valid &&
+        this.contactForm.get('profileURL')?.valid &&
+        this.contactForm.get('role')?.valid &&
+        this.contactForm.get('maxRank')?.valid &&
+        this.contactForm.get('gender')?.valid &&
+        this.contactForm.get('birthday')?.valid &&
+        this.contactForm.get('country')?.valid &&
+        this.contactForm.get('description')?.valid &&
+        this.contactForm.get('consent')?.value == true
+      ) {
+        this.formType = 'player';
+      } else {
+        this.formType = ''; // Reset formType if none of the conditions are met
+      }
+
+      this.isSubmitDisabled = !this.formType; // Disable submit button if formType is empty
     }
   }
 
+
   submitForm() {
     // Add logic to handle form submission (e.g., send data to a server)
+    this.requestService.submitForm(this.formType, this.contactForm).then((isSuccess) => {
+      const fieldsToClear = Object.keys(this.contactForm.controls);
+      this.clearFields(fieldsToClear);
+
+      if (isSuccess) {
+        this.showSuccessDialog();
+      } else {
+        this.showFailureDialog();
+      }
+    });
+  }
+
+  showSuccessDialog() {
+    alert("Request successfully submitted");
+  }
+
+  showFailureDialog() {
+    // Logic to open a dialog for failed form submission
+    // For example, using a library like Bootstrap, jQuery UI, or a custom dialog component
+    // You need to replace the following line with the appropriate code for your dialog implementation
+    alert("Request failed. Please contact support.");
   }
 
   scrollToTop() {
     // Scroll to the top of the page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   getTranslation(id: string) {
