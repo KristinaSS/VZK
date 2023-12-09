@@ -17,6 +17,8 @@ import {TeamModule} from "./pages/teamspage/team.module";
 import {TermsModule} from "./pages/termspage/terms.module";
 import {ViewArticleModule} from "./pages/viewarticlepage/view-article.module";
 import {SecurityModule} from "./security/security.module";
+import { CommonDialogComponent } from './utils/dialogs/common-dialog/common-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import {SecurityModule} from "./security/security.module";
     LanguageBarComponent,
     DynamicBackgroundComponent,
     FooterComponent,
+    CommonDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import {SecurityModule} from "./security/security.module";
     TermsModule,
     ViewArticleModule,
     SecurityModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

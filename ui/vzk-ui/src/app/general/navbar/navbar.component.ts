@@ -65,7 +65,6 @@ export class NavbarComponent {
 
     dialogRef.afterClosed().subscribe(() => {
       this.loggedIn = sessionStorage.getItem("logged") == "true";
-      window.location.reload();
     });
   }
   private refreshPage() {

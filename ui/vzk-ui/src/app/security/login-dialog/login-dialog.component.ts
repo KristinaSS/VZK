@@ -27,6 +27,7 @@ export class LoginDialogComponent {
       // @ts-ignore
       sessionStorage.setItem("username", data.username)
       sessionStorage.setItem("logged", "true");
+      window.location.reload();
     } catch (error) {
       console.error('Error logging in:', error);
     }

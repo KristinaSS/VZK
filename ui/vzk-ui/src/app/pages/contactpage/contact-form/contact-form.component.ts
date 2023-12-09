@@ -12,6 +12,8 @@ import {Translation} from "../../../models/translation/translation";
 import {Role} from "../../../models/role/role";
 import {RoleService} from "../../../services/role-service/role.service";
 import {RequestService} from "../../../services/request-service/request.service";
+import {CommonDialogComponent} from "../../../utils/dialogs/common-dialog/common-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-contact-form',
@@ -41,7 +43,8 @@ export class ContactFormComponent implements OnInit {
     private countryService: CountryService,
     private cd: ChangeDetectorRef,
     private roleService: RoleService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -194,14 +197,17 @@ export class ContactFormComponent implements OnInit {
   }
 
   showSuccessDialog() {
-    alert("Request successfully submitted");
+    this.dialog.open(CommonDialogComponent, {
+      width: '300px',
+      data: { message: "Request successfully submitted"}
+    });
   }
 
   showFailureDialog() {
-    // Logic to open a dialog for failed form submission
-    // For example, using a library like Bootstrap, jQuery UI, or a custom dialog component
-    // You need to replace the following line with the appropriate code for your dialog implementation
-    alert("Request failed. Please contact support.");
+    this.dialog.open(CommonDialogComponent, {
+      width: '300px',
+      data: { message: "Request failed. Please contact support." }
+    });
   }
 
   scrollToTop() {

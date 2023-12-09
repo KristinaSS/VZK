@@ -61,7 +61,7 @@ public class ResultServiceImpl implements ResultService {
                     return result.isActive() && (eventDate.isBefore(today));
                 })
                 .map(RESULT_MAPPER::mapToDTO)
-                .sorted(Comparator.comparing(ResultDTO::getDateTime))
+                .sorted(Comparator.comparing(ResultDTO::getDateTime).reversed())
                 .collect(Collectors.toList());
 
         int pageSize = pageRequest.getPageSize();
