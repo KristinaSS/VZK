@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtResponse} from "../../models/jwt-token/jwt-response";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,24 @@ export class AuthenticationService {
     token = token || 'anonymous';
     return this.http.post<JwtResponse>('/server/api/v1/auth/login',
       {email, password},
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + token
+        })
+      });
+  }
+
+  async signup(signupForm: FormGroup) {
+    let token = sessionStorage.getItem("token");
+    token = token || 'anonymous';
+
+    let email = signupForm.get('email')?.value;
+    let username = signupForm.get('username')?.value;
+    let password = signupForm.get('password')?.value;
+    let name = signupForm.get('name')?.value;
+
+    return this.http.post<JwtResponse>('/server/api/v1/auth/signup',
+      {name, email, username, password},
       {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + token

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {AuthenticationService} from "../../services/authentication-service/authentication.service";
 import {User} from "../../models/user/user";
 import {JwtResponse} from "../../models/jwt-token/jwt-response";
+import {SignupDialogComponent} from "../sign-up-dialog/signup-dialog.component";
+import {CommonDialogComponent} from "../../utils/dialogs/common-dialog/common-dialog.component";
 
 @Component({
   selector: 'app-login-dialog',
@@ -16,7 +18,8 @@ export class LoginDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public dialog: MatDialog
   ) {}
 
   async onLogin() {
@@ -28,14 +31,22 @@ export class LoginDialogComponent {
       sessionStorage.setItem("username", data.username)
       sessionStorage.setItem("logged", "true");
       window.location.reload();
+      this.dialogRef.close();
     } catch (error) {
       console.error('Error logging in:', error);
+      this.dialog.open(CommonDialogComponent, {
+        width: '300px',
+        data: { message: "Invalid email or password"}
+      });
     }
-
-    this.dialogRef.close();
   }
 
   onSignUp(): void {
     this.dialogRef.close();
+    const dialogRef = this.dialog.open(SignupDialogComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {});
   }
 }
