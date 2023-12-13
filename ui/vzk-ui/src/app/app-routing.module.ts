@@ -55,7 +55,7 @@ const routes: Routes = [
     component: TermsPageComponent
   },
   {
-    path: 'verify/:vToken',
+    path: 'verify/:email/:vToken',
     component: VerifyPageComponent
   },
   {

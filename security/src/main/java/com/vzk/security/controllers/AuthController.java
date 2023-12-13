@@ -2,9 +2,7 @@ package com.vzk.security.controllers;
 
 import com.vzk.security.services.AuthService;
 import org.openapitools.api.AuthenticationApi;
-import org.openapitools.model.CreateAccountDTO;
-import org.openapitools.model.CredentialsDTO;
-import org.openapitools.model.JwtAuthenticationResponse;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,5 +23,10 @@ public class AuthController implements AuthenticationApi {
     public ResponseEntity<Void> signUp(CreateAccountDTO createAccountDTO) {
         authService.signUp(createAccountDTO);
         return ResponseEntity.ok(null);
+    }
+
+    @Override
+    public ResponseEntity<VerificationResponse> verify(VerificationToken verificationToken) {
+        return ResponseEntity.ok(authService.verify(verificationToken.getvToken(), verificationToken.getEmail()));
     }
 }

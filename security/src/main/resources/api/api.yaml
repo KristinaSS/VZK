@@ -159,6 +159,44 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /api/v1/auth/verify:
+    post:
+      summary: Verify token
+      operationId: verify
+      tags:
+        - authentication
+      requestBody:
+        description: Token for verification
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerificationToken"
+      responses:
+        '200':
+          description: Successful verification
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerificationResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -247,4 +285,16 @@ components:
         email:
           type: string
         id:
+          type: string
+    VerificationToken:
+      type: object
+      properties:
+        vToken:
+          type: string
+        email:
+          type: string
+    VerificationResponse:
+      type: object
+      properties:
+        status:
           type: string

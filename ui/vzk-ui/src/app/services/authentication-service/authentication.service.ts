@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtResponse} from "../../models/jwt-token/jwt-response";
 import {FormGroup} from "@angular/forms";
 import {of} from "rxjs";
+import {VerifyToken} from "../../models/verificationToken/verify-token";
 
 @Injectable({
   providedIn: 'root'
@@ -43,17 +44,15 @@ export class AuthenticationService {
       });
   }
 
-  async verifyToken(vToken: string | null) {
+  async verifyToken(vToken: string | null, email: string | null) {
     let token = sessionStorage.getItem("token");
     token = token || 'anonymous';
-
-    return of('ooogga');
-/*    return this.http.post<String>('/server/api/v1/auth/verify',
-      {vToken},
+    return this.http.post<VerifyToken>('/server/api/v1/auth/verify',
+      {vToken, email},
       {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + token
         })
-      });*/
+      });
   }
 }

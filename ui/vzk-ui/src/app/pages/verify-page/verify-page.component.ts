@@ -11,15 +11,18 @@ export class VerifyPageComponent implements OnInit {
     verificationStatus!: String | undefined;
     message!: string;
     token!: string | null;
+    email!: string | null;
 
     constructor(private authenticationService: AuthenticationService, private route: ActivatedRoute) {
     }
 
     async ngOnInit() {
         this.token = this.route.snapshot.paramMap.get('vToken');
-
+        this.email = this.route.snapshot.paramMap.get('email');
+        console.log(this.token);
         try {
-            this.verificationStatus = await (await this.authenticationService.verifyToken(this.token)).toPromise();
+            let response = await (await this.authenticationService.verifyToken(this.token, this.email)).toPromise();
+            this.verificationStatus = response?.status;
             this.handleVerificationResponse();
         } catch (error) {
             // Handle errors here

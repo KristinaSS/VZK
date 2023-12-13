@@ -5,22 +5,23 @@ import com.vzk.security.feign.RolesClient;
 import com.vzk.security.models.Account;
 import com.vzk.security.services.AuthService;
 import com.vzk.security.services.JwtGeneratorInterface;
+import com.vzk.security.services.UserService;
 import feign.FeignException;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.access.AuthorizationServiceException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Properties;
 import java.util.Set;
 
 import static com.vzk.security.utils.Constants.DEFAULT_USER_ROLE_UUID;
@@ -43,9 +44,11 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private UserService userService;
+
     @Value("${spring.mail.username}")
     private String senderEmail;
-
 
     @Override
     public void signUp(CreateAccountDTO request) {
@@ -80,7 +83,37 @@ public class AuthServiceImpl implements AuthService {
         return JwtAuthenticationResponse.builder().token(jwt).username(acc.getUsername()).build();
     }
 
-    private Account getSecurityAccount(AccountDTO acc, boolean isNew){
+    @Override
+    public VerificationResponse verify(String token, String email) {
+        VerificationResponse status = VerificationResponse.builder().status("error").build();
+
+        try {
+            if (StringUtils.isNotEmpty(email)) {
+                UserDetails userDetails = userService.userDetailsService().loadUserByUsername(email);
+                status.setStatus(jwtService.isTokenValid(token, userDetails) ? "verified" : "expired");
+            }
+        } catch (ExpiredJwtException exception) {
+            status.setStatus("expired");
+        }
+
+        modifyUser(status.getStatus(), email);
+
+        return status;
+    }
+
+    private void modifyUser(String status, String userEmail) {
+        if (status.equals("verified") && userEmail != null) {
+            // Update and set isActive to true
+            // Example: userService.activateUser(userEmail);
+            System.out.println("updated");
+        } else if (status.equals("expired") && userEmail != null) {
+            // Delete account
+            // Example: userService.deleteUser(userEmail);
+            System.out.println("deleted");
+        }
+    }
+
+    private Account getSecurityAccount(AccountDTO acc, boolean isNew) {
         if (isNew) {
             rolesClient.giveAccountRole(acc.getId(), DEFAULT_USER_ROLE_UUID, acc.getId(), DEFAULT_USER_ROLE_UUID);
         }
@@ -100,7 +133,7 @@ public class AuthServiceImpl implements AuthService {
         message.setTo(to);
         message.setSubject("Account Verification");
         message.setText("Click the following link to verify your account: "
-                + "http://localhost:4200/verify?token=" + token);
+                + "http://localhost:4200/verify/"+ to +"/" + token);
         message.setFrom(senderEmail);
 
         mailSender.send(message);
