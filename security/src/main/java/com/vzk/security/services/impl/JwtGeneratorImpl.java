@@ -49,7 +49,7 @@ public class JwtGeneratorImpl implements JwtGeneratorInterface {
                 .claim("username", userDetails.getUsername())
                 .setSubject("user")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS)))
+                .setExpiration(Date.from(Instant.now().plus(20, ChronoUnit.MINUTES)))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 

@@ -19,6 +19,7 @@ import {ViewArticleModule} from "./pages/viewarticlepage/view-article.module";
 import {SecurityModule} from "./security/security.module";
 import { CommonDialogComponent } from './utils/dialogs/common-dialog/common-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { VerifyPageComponent } from './pages/verify-page/verify-page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     DynamicBackgroundComponent,
     FooterComponent,
     CommonDialogComponent,
+    VerifyPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%; /* Adjust as needed */
+    padding: 30px 70px;
+
+    font-family: Arial, sans-serif;
+
+    background-color: rgba(  255, 255, 255  , 0.85);
+    margin: 15vh auto;
+}
+
+.title {
+    font-size: 80px;
+    color: red;
+    margin-bottom: 10px;
+    font-family: Impact, serif;
+}

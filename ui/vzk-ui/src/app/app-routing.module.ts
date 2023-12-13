@@ -11,6 +11,7 @@ import {ContactPageComponent} from "./pages/contactpage/contact-page/contact-pag
 import {PrivacyPolicyPageComponent} from "./pages/privacypolicypage/privacy-policy-page/privacy-policy-page.component";
 import {AboutPageComponent} from "./pages/aboutpage/about-page/about-page.component";
 import {TermsPageComponent} from "./pages/termspage/terms-page/terms-page.component";
+import {VerifyPageComponent} from "./pages/verify-page/verify-page.component";
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path: 'terms',
     component: TermsPageComponent
+  },
+  {
+    path: 'verify/:vToken',
+    component: VerifyPageComponent
   },
   {
     path: '**',

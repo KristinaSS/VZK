@@ -8,11 +8,11 @@ import {TranslationService} from "../../../services/translation-service/translat
   styleUrls: ['./vie-article-page.component.css']
 })
 export class VieArticlePageComponent {
-  translationsAbout: { [key: string]: Translation };
+  translationsViewArticle: { [key: string]: Translation };
 
   constructor(
     private translationService: TranslationService
   ) {
-    this.translationsAbout = translationService.translationsViewArticle;
+    this.translationsViewArticle = translationService.translationsViewArticle;
   }
 }
