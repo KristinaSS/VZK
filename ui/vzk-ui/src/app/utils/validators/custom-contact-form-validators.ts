@@ -54,3 +54,15 @@ export function ageValidator(minAge: number): ValidatorFn {
     return age < minAge ? { 'minAge': true } : null;
   };
 }
+
+export function passwordValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,45}$/;
+
+    if (!control.value) {
+      return null; // If the control is empty, don't perform validation
+    }
+
+    return passwordRegex.test(control.value) ? null : { invalidPassword: true };
+  };
+}

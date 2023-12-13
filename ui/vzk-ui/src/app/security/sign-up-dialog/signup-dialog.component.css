@@ -48,3 +48,12 @@ button:disabled {
   padding: 1px; /* Adjust the padding as needed */
   box-sizing: border-box; /* Ensure padding is included in the total width */
 }
+
+.error-message ul {
+  list-style-type: disc; /* Use disc as the bullet style */
+  padding-left: 20px; /* Adjust the padding as needed */
+}
+
+.error-message li {
+  text-align: left; /* Align text to the left */
+}

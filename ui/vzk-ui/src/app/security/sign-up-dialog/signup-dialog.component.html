@@ -3,7 +3,10 @@
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div class="form-group-container">
       <mat-form-field class="form-group">
-        <input matInput placeholder="Name" formControlName="name" class="custom-mat-input" />
+        <input matInput placeholder="First Name" formControlName="fName" class="custom-mat-input" />
+      </mat-form-field>
+      <mat-form-field class="form-group">
+        <input matInput placeholder="Last Name" formControlName="lName" class="custom-mat-input" />
       </mat-form-field>
       <mat-form-field class="form-group">
         <input matInput placeholder="Email" formControlName="email" class="custom-mat-input" />
@@ -14,6 +17,16 @@
       <mat-form-field class="form-group">
         <input matInput placeholder="Password" type="password" formControlName="password" class="custom-mat-input" />
       </mat-form-field>
+      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error-message" style="color: red;">
+        <ul>
+          <li>Min 8 characters</li>
+          <li>Max 45 characters</li>
+          <li>At least 1 uppercase letter</li>
+          <li>At least 1 lowercase letter</li>
+          <li>At least 1 number</li>
+          <li>At least 1 special character</li>
+        </ul>
+      </div>
     </div>
     <div class="button-container">
       <button mat-raised-button type="submit" color="primary" [disabled]="!signupForm.valid">Sign Up</button>

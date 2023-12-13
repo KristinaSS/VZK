@@ -58,10 +58,6 @@ paths:
       responses:
         '200':
           description: Successful creation of user
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JwtAuthenticationResponse"
         "400":
           description: Bad Request
           content:

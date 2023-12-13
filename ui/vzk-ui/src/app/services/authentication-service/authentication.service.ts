@@ -31,9 +31,9 @@ export class AuthenticationService {
     let email = signupForm.get('email')?.value;
     let username = signupForm.get('username')?.value;
     let password = signupForm.get('password')?.value;
-    let name = signupForm.get('name')?.value;
+    let name = signupForm.get('fName')?.value + " " + signupForm.get('lName')?.value;
 
-    return this.http.post<JwtResponse>('/server/api/v1/auth/signup',
+    return this.http.post('/server/api/v1/auth/signup',
       {name, email, username, password},
       {
         headers: new HttpHeaders({

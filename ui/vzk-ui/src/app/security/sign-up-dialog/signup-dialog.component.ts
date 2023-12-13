@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CommonDialogComponent} from "../../utils/dialogs/common-dialog/common-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthenticationService} from "../../services/authentication-service/authentication.service";
+import {firstLetterUppercaseValidator, passwordValidator} from "../../utils/validators/custom-contact-form-validators";
 
 @Component({
   selector: 'app-signup-dialog',
@@ -19,10 +20,11 @@ export class SignupDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      fName: ['', [Validators.required, Validators.minLength(3), firstLetterUppercaseValidator(), Validators.maxLength(50)]],
+      lName: ['', [Validators.required, Validators.minLength(3), firstLetterUppercaseValidator(), Validators.maxLength(50)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, passwordValidator(), Validators.maxLength(45)]],
     });
   }
 

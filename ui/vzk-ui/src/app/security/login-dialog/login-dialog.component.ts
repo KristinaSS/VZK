@@ -44,6 +44,7 @@ export class LoginDialogComponent {
   onSignUp(): void {
     this.dialogRef.close();
     const dialogRef = this.dialog.open(SignupDialogComponent, {
+      disableClose: true,
       width: '300px',
     });
 

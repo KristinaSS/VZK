@@ -5,7 +5,7 @@ import org.openapitools.model.CredentialsDTO;
 import org.openapitools.model.JwtAuthenticationResponse;
 
 public interface AuthService {
-    JwtAuthenticationResponse signUp(CreateAccountDTO request);
+    void signUp(CreateAccountDTO request);
 
     JwtAuthenticationResponse signIn(CredentialsDTO request);
 }

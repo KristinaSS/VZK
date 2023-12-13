@@ -60,6 +60,7 @@ export class NavbarComponent {
 
   private openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
+      disableClose: true,
       width: '300px',
     });
 

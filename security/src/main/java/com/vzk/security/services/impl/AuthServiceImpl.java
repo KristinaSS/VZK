@@ -9,12 +9,18 @@ import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import static com.vzk.security.utils.Constants.DEFAULT_USER_ROLE_UUID;
@@ -34,9 +40,15 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private RolesClient rolesClient;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    private String senderEmail;
+
 
     @Override
-    public JwtAuthenticationResponse signUp(CreateAccountDTO request) {
+    public void signUp(CreateAccountDTO request) {
         String encodedPassword = passwordEncoder.encode(request.getPassword());
         request.setPassword(encodedPassword);
         AccountDTO acc = accountClient.createAccount(request).getBody();
@@ -45,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
         Account user = getSecurityAccount(acc, true);
 
         String jwt = jwtService.generateToken(user);
-        return JwtAuthenticationResponse.builder().token(jwt).username(acc.getUsername()).build();
+        sendVerificationEmail(acc.getEmail(), jwt);
     }
 
     @Override
@@ -58,12 +70,13 @@ public class AuthServiceImpl implements AuthService {
             throw new AuthorizationServiceException("Access Denied for user");
         }
 
-        if (!passwordEncoder.matches(request.getPassword(), acc.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), acc.getPassword()) || !acc.getIsActive()) {
             throw new AuthorizationServiceException("Access Denied for user");
         }
         Account user = getSecurityAccount(acc, false);
 
         String jwt = jwtService.generateToken(user);
+
         return JwtAuthenticationResponse.builder().token(jwt).username(acc.getUsername()).build();
     }
 
@@ -80,6 +93,17 @@ public class AuthServiceImpl implements AuthService {
                         .forEach(permission -> permissions.add(permission.getName())));
 
         return Account.builder().accountDTO(acc).permissions(permissions).build();
+    }
+
+    private void sendVerificationEmail(String to, String token) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject("Account Verification");
+        message.setText("Click the following link to verify your account: "
+                + "http://localhost:4200/verify?token=" + token);
+        message.setFrom(senderEmail);
+
+        mailSender.send(message);
     }
 }
 

@@ -22,7 +22,8 @@ public class AuthController implements AuthenticationApi {
     }
 
     @Override
-    public ResponseEntity<JwtAuthenticationResponse> signUp(CreateAccountDTO createAccountDTO) {
-        return ResponseEntity.ok(authService.signUp(createAccountDTO));
+    public ResponseEntity<Void> signUp(CreateAccountDTO createAccountDTO) {
+        authService.signUp(createAccountDTO);
+        return ResponseEntity.ok(null);
     }
 }
