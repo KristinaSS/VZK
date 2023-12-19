@@ -11,4 +11,6 @@ public interface AuthService {
     JwtAuthenticationResponse signIn(CredentialsDTO request);
 
     VerificationResponse verify(String token, String email);
+
+    void resend(String email);
 }

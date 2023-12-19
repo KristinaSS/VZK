@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtResponse} from "../../models/jwt-token/jwt-response";
 import {FormGroup} from "@angular/forms";
-import {of} from "rxjs";
 import {VerifyToken} from "../../models/verificationToken/verify-token";
 
 @Injectable({
@@ -49,6 +48,18 @@ export class AuthenticationService {
     token = token || 'anonymous';
     return this.http.post<VerifyToken>('/server/api/v1/auth/verify',
       {vToken, email},
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + token
+        })
+      });
+  }
+
+  async resend(email: string | null) {
+    let token = sessionStorage.getItem("token");
+    token = token || 'anonymous';
+    return this.http.post<VerifyToken>('/server/api/v1/auth/resend',
+      {email},
       {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + token

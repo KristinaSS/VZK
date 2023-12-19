@@ -20,6 +20,12 @@ public class AuthController implements AuthenticationApi {
     }
 
     @Override
+    public ResponseEntity<Void> resend(VerificationToken verificationToken) {
+        authService.resend(verificationToken.getEmail());
+        return ResponseEntity.ok(null);
+    }
+
+    @Override
     public ResponseEntity<Void> signUp(CreateAccountDTO createAccountDTO) {
         authService.signUp(createAccountDTO);
         return ResponseEntity.ok(null);

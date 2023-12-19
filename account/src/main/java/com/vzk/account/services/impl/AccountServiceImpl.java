@@ -30,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
         Account createdAccount = ACCOUNT_MAPPER.mapToModel(createAccountDTO);
 
         //check if email available
-        verifyEmailUnique(createdAccount.getEmail());
+        verifyEmailUnique(createdAccount.getEmail(), false);
 
         Account savedAccount = accountRepository.save(createdAccount);
         return ACCOUNT_MAPPER.mapToDTO(savedAccount);
@@ -84,10 +84,12 @@ public class AccountServiceImpl implements AccountService {
         Account checkedAccount = findAccount(account.getId());
 
         //check if email available
-        verifyEmailUnique(checkedAccount.getEmail());
+        verifyEmailUnique(checkedAccount.getEmail(), true);
 
-        account.setActive(true);
-        accountRepository.save(account);
+        Account updated = updateAccountFields(checkedAccount, account);
+        updated.setActive(true);
+
+        accountRepository.save(updated);
     }
 
     private Account findAccount(UUID id) {
@@ -95,8 +97,10 @@ public class AccountServiceImpl implements AccountService {
                 () -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }
 
-    private void verifyEmailUnique(String email) {
-        if (accountRepository.existsAccountByEmail(email)) {
+    private void verifyEmailUnique(String email, boolean isUpdate) {
+        if (isUpdate && !accountRepository.existsAccountByEmail(email)) {
+            throw new EntityNotFoundException(ENTITY, "email", email);
+        } else if (!isUpdate && accountRepository.existsAccountByEmail(email)) {
             throw new EmailUnavailableException(email);
         }
     }
@@ -105,5 +109,22 @@ public class AccountServiceImpl implements AccountService {
         if (!account.isActive()) {
             throw new EntityAlreadyDeactivatedException(ENTITY, account.getId().toString());
         }
+    }
+
+    private Account updateAccountFields(Account account, Account updated) {
+        if (updated.getName() != null) {
+            account.setName(updated.getName());
+        }
+        if (updated.getUsername() != null) {
+            account.setUsername(updated.getUsername());
+        }
+        if (updated.getEmail() != null) {
+            account.setEmail(updated.getEmail());
+        }
+        if (updated.getPassword() != null) {
+            account.setPassword(updated.getPassword());
+        }
+
+        return account;
     }
 }

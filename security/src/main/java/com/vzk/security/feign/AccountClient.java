@@ -2,6 +2,7 @@ package com.vzk.security.feign;
 
 import org.openapitools.model.AccountDTO;
 import org.openapitools.model.CreateAccountDTO;
+import org.openapitools.model.UpdateAccountDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +23,8 @@ public interface AccountClient {
 
     @PostMapping(ACCOUNT_CREATE_ACCOUNT_URL)
     ResponseEntity<AccountDTO> createAccount(@RequestBody CreateAccountDTO createAccountDTO);
+
+    @PostMapping(ACCOUNT_UPDATE_ACCOUNT_URL)
+    ResponseEntity<AccountDTO> updateAccount(@RequestBody UpdateAccountDTO updateAccountDTO);
 }
 

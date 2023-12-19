@@ -73,6 +73,7 @@ public class AuthServiceImpl implements AuthService {
             throw new AuthorizationServiceException("Access Denied for user");
         }
 
+        assert acc != null;
         if (!passwordEncoder.matches(request.getPassword(), acc.getPassword()) || !acc.getIsActive()) {
             throw new AuthorizationServiceException("Access Denied for user");
         }
@@ -101,15 +102,20 @@ public class AuthServiceImpl implements AuthService {
         return status;
     }
 
+    @Override
+    public void resend(String email) {
+        AccountDTO account = accountClient.getAccountByEmail(email, email).getBody();
+        Account user = getSecurityAccount(account, false);
+        String jwt = jwtService.generateToken(user);
+        assert account != null;
+        sendVerificationEmail(account.getEmail(), jwt);
+    }
+
     private void modifyUser(String status, String userEmail) {
+        AccountDTO account = accountClient.getAccountByEmail(userEmail, userEmail).getBody();
         if (status.equals("verified") && userEmail != null) {
-            // Update and set isActive to true
-            // Example: userService.activateUser(userEmail);
-            System.out.println("updated");
-        } else if (status.equals("expired") && userEmail != null) {
-            // Delete account
-            // Example: userService.deleteUser(userEmail);
-            System.out.println("deleted");
+            assert account != null;
+            accountClient.updateAccount(UpdateAccountDTO.builder().id(account.getId()).build());
         }
     }
 

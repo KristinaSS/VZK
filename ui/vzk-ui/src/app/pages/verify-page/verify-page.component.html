@@ -2,6 +2,7 @@
     <div class="thanks">
         <div class="title">
             <div [innerHTML]="message"></div>
+          <button *ngIf="verificationStatus=='expired' || verificationStatus=='error'" class="button" (click)="resend()">Resend Email</button>
         </div>
     </div>
 </div>

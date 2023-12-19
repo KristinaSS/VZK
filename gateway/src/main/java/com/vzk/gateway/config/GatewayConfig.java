@@ -52,6 +52,10 @@ public class GatewayConfig {
                         .path("/api/v1/auth/verify")
                         .uri("http://localhost:8081"))
 
+                .route("SECURITY-SERVICE-RESEND", r -> r
+                        .path("/api/v1/auth/resend")
+                        .uri("http://localhost:8081"))
+
                 //ACCOUNT SERVICE
                 .route("ACCOUNT-SERVICE", r -> r
                         .path("/account/**")
