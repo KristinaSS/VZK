@@ -1,4 +1,10 @@
 <div class="news-box">
+  <!-- Search form -->
+  <form class="form-inline md-form form-sm">
+    <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
+    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search"
+           mdbInput>
+  </form>
   <div class="news-box-container">
     <div class="news-list" infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadData()">
       <div *ngFor="let article of articles">

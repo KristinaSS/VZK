@@ -86,4 +86,7 @@ export class NewsNewsBoxComponent implements OnInit {
   getTranslation(id: string) {
     return this.translationsAbout[id].content;
   }
+
+  filterResults(value: string) {
+  }
 }
