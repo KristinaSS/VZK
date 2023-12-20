@@ -75,39 +75,51 @@
   color: white;
 }
 
-.active-pink-2 input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #f48fb1;
-  box-shadow: 0 1px 0 0 #f48fb1;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
 }
-.active-pink input[type=text] {
-  border-bottom: 1px solid #f48fb1;
-  box-shadow: 0 1px 0 0 #f48fb1;
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
 }
-.active-purple-2 input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #ce93d8;
-  box-shadow: 0 1px 0 0 #ce93d8;
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #ff013c;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
 }
-.active-purple input[type=text] {
-  border-bottom: 1px solid #ce93d8;
-  box-shadow: 0 1px 0 0 #ce93d8;
+
+.searchTerm:focus{
+  color: #ff013c;
 }
-.active-cyan-2 input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #4dd0e1;
-  box-shadow: 0 1px 0 0 #4dd0e1;
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #ff003c;
+  background: #ff013c;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
 }
-.active-cyan input[type=text] {
-  border-bottom: 1px solid #4dd0e1;
-  box-shadow: 0 1px 0 0 #4dd0e1;
-}
-.active-cyan .fa,
-.active-cyan-2 .fa {
-  color: #4dd0e1;
-}
-.active-purple .fa,
-.active-purple-2 .fa {
-  color: #ce93d8;
-}
-.active-pink .fa,
-.active-pink-2 .fa {
-  color: #f48fb1;
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

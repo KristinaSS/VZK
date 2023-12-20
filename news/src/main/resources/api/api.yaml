@@ -81,6 +81,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /article/all/filtered:
+    post:
+      tags:
+        - Article
+      summary: Getting all active filtered articles
+      operationId: getAllActiveFilteredArticles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterArticleDTO"
+      responses:
+        "200":
+          description: Successful retrieval of all active filtered articles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArticleDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 
   /article/{id}:
     get:
@@ -286,3 +325,8 @@ components:
         image:
           type: string
           required: true
+    FilterArticleDTO:
+      type: object
+      properties:
+        filter:
+          type: string

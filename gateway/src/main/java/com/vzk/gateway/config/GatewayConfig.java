@@ -85,7 +85,26 @@ public class GatewayConfig {
                 .route(" NEWS-SERVICE", r -> r
                         .path("/article/**")
                         .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, isValid) -> validateRequest(exchange)))
+                                (exchange, modifiedBody) -> {
+                                    HttpHeaders headers = exchange.getRequest().getHeaders();
+                                    MediaType contentType = headers.getContentType();
+
+                                    if (contentType != null && contentType.isCompatibleWith(MediaType.APPLICATION_JSON)) {
+                                        // Modify the JSON body as needed
+                                        String modifiedJsonBody = modifyJsonBody(modifiedBody);
+
+                                        // Validate the request
+                                        String isValid = String.valueOf(isRequestValid(exchange));
+                                        if (!Boolean.parseBoolean(isValid)) {
+                                            return Mono.error(new RuntimeException("Invalid token"));
+                                        }
+
+                                        return Mono.just(modifiedJsonBody);
+                                    } else {
+                                        // If the content type is not JSON, leave it unchanged
+                                        return Mono.just(modifiedBody);
+                                    }
+                                }))
                         .uri("http://localhost:8085"))
 
                 //EVENTS SERVICE

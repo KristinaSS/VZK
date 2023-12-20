@@ -4,6 +4,7 @@ import com.vzk.news.services.ArticleService;
 import org.openapitools.api.ArticleApi;
 import org.openapitools.model.ArticleDTO;
 import org.openapitools.model.CreateArticleDTO;
+import org.openapitools.model.FilterArticleDTO;
 import org.openapitools.model.UpdateArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +36,11 @@ public class ArticleController implements ArticleApi {
         int pageSize = 8;
         PageRequest pageRequest = PageRequest.of(page, pageSize);
         return ResponseEntity.ok(articleService.getAllActiveArticles(pageRequest).getContent());
+    }
+
+    @Override
+    public ResponseEntity<List<ArticleDTO>> getAllActiveFilteredArticles(FilterArticleDTO filterArticleDTO) {
+        return ResponseEntity.ok(articleService.getAllActiveFilteredArticles(filterArticleDTO.getFilter()));
     }
 
 

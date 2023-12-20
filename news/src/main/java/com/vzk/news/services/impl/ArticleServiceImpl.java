@@ -84,6 +84,16 @@ public class ArticleServiceImpl implements ArticleService {
         articleRepository.save(article);
     }
 
+    @Override
+    public List<ArticleDTO> getAllActiveFilteredArticles(String filter) {
+        return articleRepository.findAll().stream()
+                .filter(article -> article.isActive() &&
+                        article.getTitle().toLowerCase().contains(filter.toLowerCase().trim()))
+                .map(ARTICLE_MAPPER::mapToDTO)
+                .sorted((a1, a2) -> a2.getDate().compareTo(a1.getDate()))
+                .collect(Collectors.toList());
+    }
+
     private Article findArticle(UUID id) {
         return articleRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(ENTITY, "id", "" + id));
     }

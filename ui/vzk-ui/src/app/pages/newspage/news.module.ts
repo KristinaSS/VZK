@@ -4,7 +4,7 @@ import {NewsPageComponent} from "./news-page/news-page.component";
 import {TopNewsBannerComponent} from "./top-news-banner/top-news-banner.component";
 import {NewsNewsBoxComponent} from "./news-news-box/news-news-box.component";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
   imports: [
     CommonModule,
     InfiniteScrollModule,
-    MDBBootstrapModule.forRoot(),
+    FormsModule,
   ]
 })
 export class NewsModule {

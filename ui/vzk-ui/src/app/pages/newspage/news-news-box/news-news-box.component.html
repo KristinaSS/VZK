@@ -1,12 +1,16 @@
 <div class="news-box">
-  <!-- Search form -->
-  <form class="form-inline md-form form-sm">
-    <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
-    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search"
-           mdbInput>
-  </form>
+  <div class="wrap">
+    <div class="search">
+      <input type="text" class="searchTerm" placeholder="What are you looking for?" [(ngModel)]="search"
+             (input)="onInputChange($event)">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </div>
   <div class="news-box-container">
-    <div class="news-list" infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadData()">
+    <div *ngIf="!isFiltered" class="news-list" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+         [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadData()">
       <div *ngFor="let article of articles">
         <div class="news-item" (click)="openArticle(article)">
           <img [src]="article.image" alt="{{ article.title }}"/>
@@ -17,5 +21,17 @@
         {{getTranslation('3')}}
       </div>
     </div>
+    <div *ngIf="isFiltered" class="news-list">
+      <div *ngFor="let article of filteredArticles">
+        <div class="news-item" (click)="openArticle(article)">
+          <img [src]="article.image" alt="{{ article.title }}"/>
+          <h2>{{ article.title }}</h2>
+        </div>
+      </div>
+      <div *ngIf="filteredArticles?.length === 0" class="no-articles-message">
+        {{getTranslation('3')}}
+      </div>
+    </div>
   </div>
 </div>
+

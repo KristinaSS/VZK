@@ -21,4 +21,7 @@ public interface ArticleService {
     ArticleDTO getArticleById(UUID article);
 
     void updateArticle(UpdateArticleDTO updateArticleDTO);
+
+    List<ArticleDTO> getAllActiveFilteredArticles(String filter);
+
 }

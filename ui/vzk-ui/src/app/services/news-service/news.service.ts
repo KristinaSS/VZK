@@ -31,4 +31,16 @@ export class NewsService {
         })
       });
   }
+
+  getFilteredArticles(filter: String) {
+    let token = sessionStorage.getItem("token");
+    token = token || 'anonymous';
+    return this.http.post<Article>('/server/article/all/filtered',
+      {filter},
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + token
+        })
+      });
+  }
 }

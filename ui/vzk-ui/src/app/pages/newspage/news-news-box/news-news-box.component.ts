@@ -11,9 +11,15 @@ import {Translation} from "../../../models/translation/translation";
 })
 export class NewsNewsBoxComponent implements OnInit {
   articles: Article[] | undefined = [];
+  filteredArticles: Article [] = [];
+
+
   scrollDistance = 2;
   scrollUpDistance = 1;
   isLoading: boolean = false;
+
+  search: String = "";
+  isFiltered = false;
 
   page = 0;
   isEndOfPage = false;
@@ -75,8 +81,6 @@ export class NewsNewsBoxComponent implements OnInit {
     }
   }
 
-
-
   openArticle(article: any) {
     this.router.navigate(['/news', article.id]).then(() => {
       window.scrollTo(0, 0);
@@ -87,6 +91,26 @@ export class NewsNewsBoxComponent implements OnInit {
     return this.translationsAbout[id].content;
   }
 
-  filterResults(value: string) {
+  onInputChange(event: any): void {
+    const inputValue = event.target.value;
+
+    if (inputValue.length >= 2) {
+      this.filterItems();
+      this.isFiltered = true;
+    }else {
+      this.isFiltered = false;
+    }
+  }
+
+  private filterItems() {
+    this.newsService.getFilteredArticles(this.search).subscribe(
+      (data) => {
+        // @ts-ignore
+        this.filteredArticles = data;
+      },
+      (error) => {
+        console.error('Error fetching articles:', error);
+      }
+    )
   }
 }
