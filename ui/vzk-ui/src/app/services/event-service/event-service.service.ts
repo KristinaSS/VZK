@@ -10,7 +10,7 @@ export class EventServiceService {
   constructor(private http: HttpClient) {
   }
 
-  getEvents(page: number) {
+  async getEvents(page: number) {
     let token = sessionStorage.getItem("token");
     token = token || 'anonymous';
     return this.http.get<Event[]>('/server/event/all/active?page=' + page,
@@ -21,7 +21,7 @@ export class EventServiceService {
       });
   }
 
-  getResults(page: number) {
+  async getResults(page: number) {
     let token = sessionStorage.getItem("token");
     token = token || 'anonymous';
     return this.http.get<Result[]>('/server/result/all/active?page=' + page,

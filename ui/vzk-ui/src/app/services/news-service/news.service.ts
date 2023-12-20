@@ -10,7 +10,7 @@ export class NewsService {
   }
 
 
-  getMoreArticles(page: number) {
+  async getMoreArticles(page: number) {
     let token = sessionStorage.getItem("token");
     token = token || 'anonymous';
     return this.http.get<Article[]>('/server/article/all/active?page=' + page,

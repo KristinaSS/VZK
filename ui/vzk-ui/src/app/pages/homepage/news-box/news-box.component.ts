@@ -3,6 +3,7 @@ import {Article} from "../../../models/article/article";
 import {NewsService} from "../../../services/news-service/news.service";
 import {Router} from "@angular/router";
 import {Translation} from "../../../models/translation/translation";
+import {CommonDialogComponent} from "../../../utils/dialogs/common-dialog/common-dialog.component";
 
 @Component({
   selector: 'app-news-box',
@@ -10,7 +11,7 @@ import {Translation} from "../../../models/translation/translation";
   styleUrls: ['./news-box.component.css']
 })
 export class NewsBoxComponent implements OnInit {
-  articles: Article[] = [];
+  articles: Article[] | undefined = [];
   visibleArticles: number = 3;
 
   @Input() translationsAbout!: { [key: string]: Translation };
@@ -30,15 +31,12 @@ export class NewsBoxComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.newsService.getMoreArticles(0).subscribe(
-      (data) => {
-        this.articles = data;
-      },
-      (error) => {
-        console.error('Error fetching articles:', error);
-      }
-    );
+  async ngOnInit() {
+    try {
+      this.articles = await (await this.newsService.getMoreArticles(0)).toPromise();
+    }catch (error) {
+      console.error('Error fetching articles:', error);
+    }
   }
 
   getTranslation(id: string) {

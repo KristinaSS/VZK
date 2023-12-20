@@ -10,9 +10,10 @@ import {Game} from "../../../models/game/game";
   styleUrls: ['./schedule-page.component.css']
 })
 export class SchedulePageComponent implements OnInit {
-  futureEvents: Event[] = [];
+  futureEvents: Event[] | undefined = [];
   scrollDistance = 2;
   scrollUpDistance = 1;
+  private ngOnInitCalled = false;
 
   page = 0;
   isEndOfPage = false;
@@ -20,36 +21,50 @@ export class SchedulePageComponent implements OnInit {
   constructor(private eventService: EventServiceService, private gameService: GameService) {
   }
 
-  ngOnInit(): void {
-    this.eventService.getEvents(this.page).subscribe(
-      (data) => {
-        this.futureEvents = data;
-        if (data.length == 0) {
-          this.isEndOfPage = true;
-        }
-        this.page++;
-      },
-      (error) => {
-        console.error('Error fetching events:', error);
+  // @ts-ignore
+  private ngOnInitPromise: Promise<void>;
+  // @ts-ignore
+  private ngOnInitResolve: () => void;
+
+  async ngOnInit() {
+    if (!this.ngOnInitPromise) {
+      this.ngOnInitPromise = new Promise<void>((resolve) => {
+        this.ngOnInitResolve = resolve;
+      });
+    }
+
+    try {
+      this.futureEvents = await (await this.eventService.getEvents(0)).toPromise();
+      if (this.futureEvents?.length === 0) {
+        this.isEndOfPage = true;
       }
-    );
+      this.page++;
+      this.ngOnInitResolve(); // Resolve the promise to signal that ngOnInit has completed
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
   }
+
+  async loadData() {
+    // Ensure that ngOnInit has completed before proceeding
+    await this.ngOnInitPromise;
+
+    try {
+      let data = await (await this.eventService.getEvents(this.page)).toPromise();
+      // @ts-ignore
+      this.futureEvents = [...this.futureEvents, ...data];
+
+      if (data?.length === 0) {
+        this.isEndOfPage = true;
+      }
+      this.page++;
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  }
+
 
   getGame(id: string): Game {
     return this.gameService.getGame(id);
-  }
-
-  loadData() {
-    if (!this.isEndOfPage) {
-      this.eventService.getEvents(this.page).subscribe(
-        (data) => {
-          this.futureEvents = [...this.futureEvents, ...data];
-          if (data.length == 0) {
-            this.isEndOfPage = true;
-          }
-          this.page++;
-        }
-      );
-    }
   }
 }

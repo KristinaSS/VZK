@@ -66,3 +66,11 @@
   background-color: rgba(  48, 23, 23  , 0.8);
   padding: 20px;
 }
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust as needed */
+  color: white;
+}

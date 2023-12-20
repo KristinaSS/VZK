@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {Translation} from "../../../models/translation/translation";
 import {Game} from "../../../models/game/game";
 import {GameService} from "../../../services/game-service/game.service";
+import {CommonDialogComponent} from "../../../utils/dialogs/common-dialog/common-dialog.component";
 
 @Component({
   selector: 'app-schedule-box',
@@ -13,8 +14,8 @@ import {GameService} from "../../../services/game-service/game.service";
   styleUrls: ['./schedule-box.component.css']
 })
 export class ScheduleBoxComponent implements OnInit {
-  nextTwoEvents: Event[] = [];
-  nextTwoResults: Result[] = [];
+  nextTwoEvents: Event[] | undefined = [];
+  nextTwoResults: Result[] | undefined = [];
   currentContent: number = 1;
   button1Disabled: boolean = true;
   button2Disabled: boolean = false;
@@ -28,24 +29,20 @@ export class ScheduleBoxComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    this.eventService.getEvents(0).subscribe(
-      (data) => {
-        this.nextTwoEvents = data.slice(0, 2);
-      },
-      (error) => {
-        console.error('Error fetching events:', error);
-      }
-    );
+  async ngOnInit() {
+    try {
+      this.nextTwoEvents = await (await this.eventService.getEvents(0)).toPromise();
+      this.nextTwoEvents =  this.nextTwoEvents?.slice(0,2);
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
 
-    this.eventService.getResults(0).subscribe(
-      (data) => {
-        this.nextTwoResults = data.slice(0, 2);
-      },
-      (error) => {
-        console.error('Error fetching events:', error);
-      }
-    )
+    try {
+      this.nextTwoResults = await (await this.eventService.getResults(0)).toPromise();
+      this.nextTwoResults =  this.nextTwoResults?.slice(0,2);
+    } catch (error) {
+      console.error('Error fetching results:', error);
+    }
   }
 
   showContent(contentNumber: number): void {

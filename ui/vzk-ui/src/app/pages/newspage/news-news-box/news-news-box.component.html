@@ -7,8 +7,7 @@
           <h2>{{ article.title }}</h2>
         </div>
       </div>
-
-      <div *ngIf="articles.length === 0" class="no-articles-message">
+      <div *ngIf="articles?.length === 0" class="no-articles-message">
         {{getTranslation('3')}}
       </div>
     </div>
