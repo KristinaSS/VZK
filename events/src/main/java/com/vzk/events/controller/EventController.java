@@ -2,10 +2,7 @@ package com.vzk.events.controller;
 
 import com.vzk.events.services.EventService;
 import org.openapitools.api.EventApi;
-import org.openapitools.model.CreateEventDTO;
-import org.openapitools.model.EventDTO;
-import org.openapitools.model.EventDateDTO;
-import org.openapitools.model.UpdateEventDTO;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +28,11 @@ public class EventController implements EventApi {
         return ResponseEntity.ok(null);
     }
 
-    @Override //works
-    public ResponseEntity<List<EventDTO>> getAllActiveEvents(Integer page) {
+    @Override
+    public ResponseEntity<List<EventDTO>> getAllActiveEvents(FilterDTO filterDTO, Integer page) {
         int pageSize = 8;
         PageRequest pageRequest = PageRequest.of(page, pageSize);
-        return ResponseEntity.ok(eventService.getAllActiveEvents(pageRequest).getContent());
+        return ResponseEntity.ok(eventService.getAllActiveEvents(pageRequest, filterDTO.getFilter()).getContent());
     }
 
     @Override //works

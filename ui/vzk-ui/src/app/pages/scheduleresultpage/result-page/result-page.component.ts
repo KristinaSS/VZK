@@ -15,8 +15,8 @@ export class ResultPageComponent implements OnInit {
   scrollUpDistance = 1;
 
   page = 0;
+  selectedSortOption: string = 'latest'; // Default value
   isEndOfPage = false;
-  private ngOnInitCalled = false;
 
   constructor(private eventService: EventServiceService, private gameService: GameService) {
   }
@@ -34,14 +34,14 @@ export class ResultPageComponent implements OnInit {
     }
 
     try {
-      this.results = await (await this.eventService.getResults(0)).toPromise();
+      this.results = await (await this.eventService.getResults(0, this.selectedSortOption)).toPromise();
       if (this.results?.length === 0) {
         this.isEndOfPage = true;
       }
       this.page++;
       this.ngOnInitResolve(); // Resolve the promise to signal that ngOnInit has completed
     } catch (error) {
-      console.error('Error fetching events:', error);
+      console.error('Error fetching results:', error);
     }
   }
 
@@ -50,7 +50,7 @@ export class ResultPageComponent implements OnInit {
     await this.ngOnInitPromise;
 
     try {
-      let data = await (await this.eventService.getResults(this.page)).toPromise();
+      let data = await (await this.eventService.getResults(this.page, this.selectedSortOption)).toPromise();
       // @ts-ignore
       this.results = [...this.results, ...data];
 
@@ -70,6 +70,20 @@ export class ResultPageComponent implements OnInit {
 
   openReplay(url: string) {
     window.open(url, '_blank');
+  }
+
+  async onSortOptionChange() {
+    console.log('Selected sort option:', this.selectedSortOption);
+    this.page = 0;
+    try {
+      this.results = await (await this.eventService.getResults(0, this.selectedSortOption)).toPromise();
+      if (this.results?.length === 0) {
+        this.isEndOfPage = true;
+      }
+      this.page++;
+    } catch (error) {
+      console.error('Error fetching results:', error);
+    }
   }
 
 }

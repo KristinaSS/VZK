@@ -13,13 +13,17 @@ import feign.jackson.JacksonEncoder;
 import lombok.RequiredArgsConstructor;
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.Buildable;
+import org.springframework.cloud.gateway.route.builder.PredicateSpec;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -39,122 +43,49 @@ public class GatewayConfig {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
-                //SECURITY SERVICE
-                .route("SECURITY-SERVICE-LOGIN", r -> r
-                        .path("/api/v1/auth/login")
-                        .uri("http://localhost:8081"))
-
-                .route("SECURITY-SERVICE-SIGNUP", r -> r
-                        .path("/api/v1/auth/signup")
-                        .uri("http://localhost:8081"))
-
-                .route("SECURITY-SERVICE-VERIFY", r -> r
-                        .path("/api/v1/auth/verify")
-                        .uri("http://localhost:8081"))
-
-                .route("SECURITY-SERVICE-RESEND", r -> r
-                        .path("/api/v1/auth/resend")
-                        .uri("http://localhost:8081"))
-
-                //ACCOUNT SERVICE
-                .route("ACCOUNT-SERVICE", r -> r
-                        .path("/account/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, isValid) -> validateRequest(exchange)))
-                        .uri("http://localhost:8082"))
-
-                .route("GAME-SERVICE", r -> r
-                        .path("/game/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange1, isValid1) -> validateRequest(exchange1)))
-                        .uri("http://localhost:8082"))
-
-                .route("PLAYER-SERVICE", r -> r
-                        .path("/player/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, isValid) -> validateRequest(exchange)))
-                        .uri("http://localhost:8082"))
-
-                .route("TEAM-SERVICE", r -> r
-                        .path("/team/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, isValid) -> validateRequest(exchange)))
-                        .uri("http://localhost:8082"))
-
-                //NEWS SERVICE
-                .route(" NEWS-SERVICE", r -> r
-                        .path("/article/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, modifiedBody) -> {
-                                    HttpHeaders headers = exchange.getRequest().getHeaders();
-                                    MediaType contentType = headers.getContentType();
-
-                                    if (contentType != null && contentType.isCompatibleWith(MediaType.APPLICATION_JSON)) {
-                                        // Modify the JSON body as needed
-                                        String modifiedJsonBody = modifyJsonBody(modifiedBody);
-
-                                        // Validate the request
-                                        String isValid = String.valueOf(isRequestValid(exchange));
-                                        if (!Boolean.parseBoolean(isValid)) {
-                                            return Mono.error(new RuntimeException("Invalid token"));
-                                        }
-
-                                        return Mono.just(modifiedJsonBody);
-                                    } else {
-                                        // If the content type is not JSON, leave it unchanged
-                                        return Mono.just(modifiedBody);
-                                    }
-                                }))
-                        .uri("http://localhost:8085"))
-
-                //EVENTS SERVICE
-                .route(" EVENTS-SERVICE", r -> r
-                        .path("/event/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, isValid) -> validateRequest(exchange)))
-                        .uri("http://localhost:8084"))
-
-                .route(" RESULT-SERVICE", r -> r
-                        .path("/result/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, isValid) -> validateRequest(exchange)))
-                        .uri("http://localhost:8084"))
-
-                //REQUEST SERVICE
-                .route(" REQUEST-SERVICE", r -> r
-                        .path("/request/**")
-                        .filters(f -> f.modifyRequestBody(String.class, String.class,
-                                (exchange, modifiedBody) -> {
-                                    HttpHeaders headers = exchange.getRequest().getHeaders();
-                                    MediaType contentType = headers.getContentType();
-
-                                    if (contentType != null && contentType.isCompatibleWith(MediaType.APPLICATION_JSON)) {
-                                        // Modify the JSON body as needed
-                                        String modifiedJsonBody = modifyJsonBody(modifiedBody);
-
-                                        // Validate the request
-                                        String isValid = String.valueOf(isRequestValid(exchange));
-                                        if (!Boolean.parseBoolean(isValid)) {
-                                            return Mono.error(new RuntimeException("Invalid token"));
-                                        }
-
-                                        return Mono.just(modifiedJsonBody);
-                                    } else {
-                                        // If the content type is not JSON, leave it unchanged
-                                        return Mono.just(modifiedBody);
-                                    }
-                                }))
-
-                        .uri("http://localhost:8086"))
+                .route("SECURITY-SERVICE-LOGIN", r -> configureSecurityRoute(r, "/api/v1/auth/login"))
+                .route("SECURITY-SERVICE-SIGNUP", r -> configureSecurityRoute(r, "/api/v1/auth/signup"))
+                .route("SECURITY-SERVICE-VERIFY", r -> configureSecurityRoute(r, "/api/v1/auth/verify"))
+                .route("SECURITY-SERVICE-RESEND", r -> configureSecurityRoute(r, "/api/v1/auth/resend"))
+                .route("ACCOUNT-SERVICE", r -> configureServiceRoute(r, "/account/**", "http://localhost:8082"))
+                .route("GAME-SERVICE", r -> configureServiceRoute(r, "/game/**", "http://localhost:8082"))
+                .route("PLAYER-SERVICE", r -> configureServiceRoute(r, "/player/**", "http://localhost:8082"))
+                .route("TEAM-SERVICE", r -> configureServiceRoute(r, "/team/**", "http://localhost:8082"))
+                .route("NEWS-SERVICE", r -> configureServiceRoute(r, "/article/**", "http://localhost:8085"))
+                .route("EVENTS-SERVICE", r -> configureServiceRoute(r, "/event/**", "http://localhost:8084"))
+                .route("RESULT-SERVICE", r -> configureServiceRoute(r, "/result/**", "http://localhost:8084"))
+                .route("REQUEST-SERVICE", r -> configureServiceRoute(r, "/request/**", "http://localhost:8086"))
                 .build();
     }
 
-    private Publisher<String> validateRequest(ServerWebExchange exchange) {
-        String isValid = String.valueOf(isRequestValid(exchange));
-        if (!Boolean.parseBoolean(isValid)) {
-            return Mono.error(new RuntimeException("Invalid token"));
+    private Buildable<Route> configureSecurityRoute(PredicateSpec r, String path) {
+        return r.path(path)
+                .uri("http://localhost:8081");
+    }
+
+    private Buildable<Route> configureServiceRoute(PredicateSpec r, String path, String uri) {
+        return r.path(path)
+                .filters(f -> f.modifyRequestBody(String.class, String.class, this::validateAndModifyRequest))
+                .uri(uri);
+    }
+
+    private Publisher<String> validateAndModifyRequest(ServerWebExchange exchange, String modifiedBody) {
+        HttpMethod method = exchange.getRequest().getMethod();
+        HttpHeaders headers = exchange.getRequest().getHeaders();
+        MediaType contentType = headers.getContentType();
+
+        if (method == HttpMethod.GET || (contentType != null && contentType.isCompatibleWith(MediaType.APPLICATION_JSON))) {
+            String modifiedJsonBody = modifyJsonBody(modifiedBody);
+
+            String isValid = String.valueOf(isRequestValid(exchange));
+            if (!Boolean.parseBoolean(isValid)) {
+                return Mono.error(new RuntimeException("Invalid token"));
+            }
+
+            return Mono.just(modifiedJsonBody);
+        } else {
+            return Mono.just(modifiedBody);
         }
-        return Mono.just(isValid);
     }
 
     private boolean isRequestValid(ServerWebExchange exchange) {
@@ -178,7 +109,11 @@ public class GatewayConfig {
     }
 
     private String modifyJsonBody(String originalJsonBody) {
-        // Example: Add a new field to the JSON body
+        if (originalJsonBody == null) {
+            // Handle the case where the originalJsonBody is null
+            return ""; // or throw an exception, or provide a default value
+        }
+
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode jsonNode = objectMapper.readTree(originalJsonBody);

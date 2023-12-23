@@ -5,6 +5,8 @@ import {SchedulePageComponent} from "./schecule-page/schedule-page.component";
 import {ResultPageComponent} from "./result-page/result-page.component";
 import {ScheculeResultHeaderComponent} from "./schecule-result-header/schecule-result-header.component";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -18,6 +20,8 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
   imports: [
     CommonModule,
     InfiniteScrollModule,
+    MatInputModule,
+    FormsModule,
   ]
 })
 export class ScheduleResultModule { }

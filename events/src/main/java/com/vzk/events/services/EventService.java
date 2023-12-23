@@ -15,7 +15,7 @@ public interface EventService {
 
     void deleteEvent(UUID id);
 
-    Page<EventDTO> getAllActiveEvents(PageRequest pageRequest);
+    Page<EventDTO> getAllActiveEvents(PageRequest pageRequest, String filer);
 
     List<EventDTO> getAllEvents();
 

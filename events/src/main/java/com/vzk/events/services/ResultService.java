@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface ResultService {
     ResultDTO createResult(CreatedResultDTO createdResultDTO);
 
-    Page<ResultDTO> getAllActiveResults(PageRequest pageRequest);
+    Page<ResultDTO> getAllActiveResults(PageRequest pageRequest, String filter);
 
     boolean existsResultWithId(UUID eventId);
 }

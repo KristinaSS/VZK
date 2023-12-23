@@ -2,6 +2,7 @@ package com.vzk.events.services.impl;
 
 import com.vzk.events.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.events.exceptions.EntityNotFoundException;
+import com.vzk.events.feign.GameClient;
 import com.vzk.events.models.Event;
 import com.vzk.events.repos.EventRepository;
 import com.vzk.events.services.EventService;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -33,6 +33,9 @@ public class EventServiceImpl implements EventService {
 
     private EventRepository eventRepository;
     private ResultService resultService;
+
+    @Autowired
+    private GameClient gameClient;
 
     @Autowired
     public EventServiceImpl(@Lazy EventRepository eventRepository, @Lazy ResultService resultService) {
@@ -59,7 +62,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Page<EventDTO> getAllActiveEvents(PageRequest pageRequest) {
+    public Page<EventDTO> getAllActiveEvents(PageRequest pageRequest, String filter) {
         LocalDateTime today = LocalDateTime.now();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
@@ -73,7 +76,7 @@ public class EventServiceImpl implements EventService {
                     return event.isActive() && (eventDate.isAfter(todayPast));
                 })
                 .map(EVENT_MAPPER::mapToDTO)
-                .sorted(Comparator.comparing(EventDTO::getDate))
+                .sorted((eventDTO1, eventDTO2) -> compareEvents(eventDTO1, eventDTO2, filter))
                 .collect(Collectors.toList());
 
         int pageSize = pageRequest.getPageSize();
@@ -138,5 +141,40 @@ public class EventServiceImpl implements EventService {
                     .eventId(event.getId())
                     .build());
         }
+    }
+
+    private int compareEvents(EventDTO resultDTO1, EventDTO resultDTO2, String filter) {
+        switch (filter) {
+            case "soonest":
+                return resultDTO2.getDate().compareTo(resultDTO1.getDate());
+            case "gASC":
+                int gameTitleComparison = compareGameTitles(resultDTO1, resultDTO2);
+                if (gameTitleComparison == 0) {
+                    return resultDTO1.getDate().compareTo(resultDTO2.getDate());
+                }
+                return gameTitleComparison;
+            case "gDSC":
+                int reverseGameTitleComparison = -compareGameTitles(resultDTO1, resultDTO2);
+                if (reverseGameTitleComparison == 0) {
+                    return resultDTO1.getDate().compareTo(resultDTO2.getDate());
+                }
+                return reverseGameTitleComparison;
+            default:
+                return resultDTO1.getDate().compareTo(resultDTO2.getDate());
+        }
+    }
+
+    private int compareGameTitles(EventDTO resultDTO1, EventDTO resultDTO2) {
+        List<GameDTO> gameList = gameClient.getAllGames().getBody();
+        GameDTO game1 = getGameById(resultDTO1.getGame().toString(), gameList);
+        GameDTO game2 = getGameById(resultDTO2.getGame().toString(), gameList);
+        return game1.getTitle().compareTo(game2.getTitle());
+    }
+
+    private GameDTO getGameById(String gameId, List<GameDTO> gameList) {
+        return gameList.stream()
+                .filter(gameDTO -> gameDTO.getId().toString().equals(gameId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Game not found: " + gameId));
     }
 }

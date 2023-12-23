@@ -13,7 +13,7 @@ export class SchedulePageComponent implements OnInit {
   futureEvents: Event[] | undefined = [];
   scrollDistance = 2;
   scrollUpDistance = 1;
-  private ngOnInitCalled = false;
+  selectedSortOption: string = 'soonest'; // Default value
 
   page = 0;
   isEndOfPage = false;
@@ -34,7 +34,7 @@ export class SchedulePageComponent implements OnInit {
     }
 
     try {
-      this.futureEvents = await (await this.eventService.getEvents(0)).toPromise();
+      this.futureEvents = await (await this.eventService.getEvents(0, this.selectedSortOption)).toPromise();
       if (this.futureEvents?.length === 0) {
         this.isEndOfPage = true;
       }
@@ -50,7 +50,7 @@ export class SchedulePageComponent implements OnInit {
     await this.ngOnInitPromise;
 
     try {
-      let data = await (await this.eventService.getEvents(this.page)).toPromise();
+      let data = await (await this.eventService.getEvents(this.page, this.selectedSortOption)).toPromise();
       // @ts-ignore
       this.futureEvents = [...this.futureEvents, ...data];
 
@@ -66,5 +66,19 @@ export class SchedulePageComponent implements OnInit {
 
   getGame(id: string): Game {
     return this.gameService.getGame(id);
+  }
+
+  async onSortOptionChange() {
+    console.log('Selected sort option:', this.selectedSortOption);
+    this.page = 0;
+    try {
+      this.futureEvents = await (await this.eventService.getEvents(0, this.selectedSortOption)).toPromise();
+      if (this.futureEvents?.length === 0) {
+        this.isEndOfPage = true;
+      }
+      this.page++;
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
   }
 }

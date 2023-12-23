@@ -41,7 +41,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /event/all/active:
-    get:
+    post:
       tags:
         - Event
       summary: Getting all active events
@@ -54,6 +54,12 @@ paths:
           schema:
             type: integer
             default: 0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterDTO"
       responses:
         "201":
           description: Successful retrieval of all events.
@@ -306,7 +312,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
   /result/all/active:
-    get:
+    post:
       tags:
         - Result
       summary: Getting all active results
@@ -319,6 +325,12 @@ paths:
           schema:
             type: integer
             default: 0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterDTO"
       responses:
         "201":
           description: Successful retrieval of all results.
@@ -468,3 +480,21 @@ components:
         dateTo:
           type: string
           required: false
+    FilterDTO:
+      type: object
+      properties:
+        filter:
+          type: string
+          required: true
+    GameDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        image:
+          type: string
+        logo:
+          type: string

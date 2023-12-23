@@ -31,14 +31,14 @@ export class ScheduleBoxComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.nextTwoEvents = await (await this.eventService.getEvents(0)).toPromise();
+      this.nextTwoEvents = await (await this.eventService.getEvents(0, "soonest")).toPromise();
       this.nextTwoEvents =  this.nextTwoEvents?.slice(0,2);
     } catch (error) {
       console.error('Error fetching events:', error);
     }
 
     try {
-      this.nextTwoResults = await (await this.eventService.getResults(0)).toPromise();
+      this.nextTwoResults = await (await this.eventService.getResults(0, "latest")).toPromise();
       this.nextTwoResults =  this.nextTwoResults?.slice(0,2);
     } catch (error) {
       console.error('Error fetching results:', error);

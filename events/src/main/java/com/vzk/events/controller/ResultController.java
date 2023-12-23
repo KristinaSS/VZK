@@ -3,6 +3,7 @@ package com.vzk.events.controller;
 import com.vzk.events.services.ResultService;
 import org.openapitools.api.ResultApi;
 import org.openapitools.model.CreatedResultDTO;
+import org.openapitools.model.FilterDTO;
 import org.openapitools.model.ResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class ResultController implements ResultApi {
@@ -24,9 +24,9 @@ public class ResultController implements ResultApi {
     }
 
     @Override
-    public ResponseEntity<List<ResultDTO>> getAllActiveEvents(Integer page) {
+    public ResponseEntity<List<ResultDTO>> getAllActiveEvents(FilterDTO filterDTO, Integer page) {
         int pageSize = 8;
         PageRequest pageRequest = PageRequest.of(page, pageSize);
-        return ResponseEntity.ok(resultService.getAllActiveResults(pageRequest).getContent());
+        return ResponseEntity.ok(resultService.getAllActiveResults(pageRequest, filterDTO.getFilter()).getContent());
     }
 }

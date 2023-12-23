@@ -1,5 +1,16 @@
 <div class="schedule-box" infinite-scroll [infiniteScrollDistance]="scrollDistance"
      [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadData()">
+  <div style="display: flex; justify-content: flex-end;">
+    <mat-form-field>
+      <mat-label>Sort by:</mat-label>
+      <select matNativeControl required [(ngModel)]="selectedSortOption" (change)="onSortOptionChange()">
+        <option value="soonest" selected>Soonest</option>
+        <option value="furthest">Furthest</option>
+        <option value="gASC">Game ASC</option>
+        <option value="gDSC">Game DSC</option>
+      </select>
+    </mat-form-field>
+  </div>
   <div *ngFor="let event of futureEvents" class="event-container">
     <div class="event-details">
       <div class="event-title-wrapper">

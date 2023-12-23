@@ -1,4 +1,7 @@
 spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
   datasource:
     url: jdbc:mysql://localhost:3306/vzk_events
     username: root
