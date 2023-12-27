@@ -17,6 +17,7 @@ export class NavbarComponent {
   loggedIn = false;
   isHidden: boolean = false;
   username = sessionStorage.getItem("username");
+  role = sessionStorage.getItem("role");
 
 
   translationsAbout: { [key: string]: Translation };
@@ -65,6 +66,7 @@ export class NavbarComponent {
 
     dialogRef.afterClosed().subscribe(() => {
       this.loggedIn = sessionStorage.getItem("logged") == "true";
+      this.role = sessionStorage.getItem("role");
     });
   }
   private refreshPage() {

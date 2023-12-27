@@ -25,7 +25,6 @@ export class ViewProfilePageComponent implements OnInit {
     } else {
       // @ts-ignore
       this.userRole = sessionStorage.getItem("role");
-      console.log(this.userRole);
     }
   }
 

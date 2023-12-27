@@ -62,7 +62,6 @@ export class LoginDialogComponent {
       let role = roleResponse.role;
       // @ts-ignore
       sessionStorage.setItem("role", role)
-      console.log(sessionStorage.getItem("role"));
     } catch (error) {
       console.error('Error getting role:', error);
     }
