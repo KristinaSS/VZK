@@ -23,6 +23,9 @@
         <div class="event-description">{{ event.info }}</div>
       </div>
     </div>
+    <div *ngIf="nextTwoEvents?.length === 0" class="no-articles-message">
+      No events available
+    </div>
     <div class="arrow-button-wrapper">
       <button class="arrow-button upcoming-var" (click)="viewMore(1)">{{getTranslation('7')}}<span class="arrow"></span></button>
     </div>
@@ -45,6 +48,9 @@
         <div class="event-game">{{ getGame(result.game).title }}</div>
         <div class="event-description">{{ result.description }}</div>
       </div>
+    </div>
+    <div *ngIf="nextTwoResults?.length === 0" class="no-articles-message">
+      No results available
     </div>
     <div class="arrow-button-wrapper">
       <button class="arrow-button result-var" (click)="viewMore(2)">{{getTranslation('7')}}<span class="arrow"></span></button>

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtResponse} from "../../models/jwt-token/jwt-response";
 import {FormGroup} from "@angular/forms";
 import {VerifyToken} from "../../models/verificationToken/verify-token";
+import {RoleResponse} from "../../models/RoleResponse/role-response";
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,18 @@ export class AuthenticationService {
       {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + token
+        })
+      });
+  }
+
+  async getRole() {
+    let vToken = sessionStorage.getItem("token");
+    vToken = vToken || 'anonymous';
+    return this.http.post<RoleResponse>('/server/api/v1/auth/role',
+      {vToken},
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + vToken
         })
       });
   }

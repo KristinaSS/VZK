@@ -15,6 +15,11 @@ public class AuthController implements AuthenticationApi {
     private AuthService authService;
 
     @Override
+    public ResponseEntity<RoleResponse> getRole(VerificationToken verificationToken) {
+        return ResponseEntity.ok(authService.getRole(verificationToken.getvToken()));
+    }
+
+    @Override
     public ResponseEntity<JwtAuthenticationResponse> login(CredentialsDTO credentialsDTO) {
         return ResponseEntity.ok(authService.signIn(credentialsDTO));
     }

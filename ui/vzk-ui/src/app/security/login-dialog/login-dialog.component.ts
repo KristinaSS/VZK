@@ -30,6 +30,9 @@ export class LoginDialogComponent {
       // @ts-ignore
       sessionStorage.setItem("username", data.username)
       sessionStorage.setItem("logged", "true");
+
+      await this.loadRole();
+
       window.location.reload();
       this.dialogRef.close();
     } catch (error) {
@@ -49,5 +52,18 @@ export class LoginDialogComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {});
+  }
+
+  async loadRole(){
+    try{
+      let roleResponse = await (await this.authenticationService.getRole()).toPromise();
+      // @ts-ignore
+      let role = roleResponse.role;
+      // @ts-ignore
+      sessionStorage.setItem("role", role)
+      console.log(sessionStorage.getItem("role"));
+    } catch (error) {
+      console.error('Error getting role:', error);
+    }
   }
 }

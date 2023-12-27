@@ -231,6 +231,44 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /api/v1/auth/role:
+    post:
+      summary: Get person permission
+      operationId: getRole
+      tags:
+        - authentication
+      requestBody:
+        description: Get person permission
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerificationToken"
+      responses:
+        '200':
+          description: Successful verification
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -340,4 +378,9 @@ components:
       type: object
       properties:
         status:
+          type: string
+    RoleResponse:
+      type: object
+      properties:
+        role:
           type: string

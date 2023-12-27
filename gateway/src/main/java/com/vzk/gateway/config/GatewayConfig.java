@@ -43,10 +43,7 @@ public class GatewayConfig {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("SECURITY-SERVICE-LOGIN", r -> configureSecurityRoute(r, "/api/v1/auth/login"))
-                .route("SECURITY-SERVICE-SIGNUP", r -> configureSecurityRoute(r, "/api/v1/auth/signup"))
-                .route("SECURITY-SERVICE-VERIFY", r -> configureSecurityRoute(r, "/api/v1/auth/verify"))
-                .route("SECURITY-SERVICE-RESEND", r -> configureSecurityRoute(r, "/api/v1/auth/resend"))
+                .route("SECURITY-SERVICE", r -> configureServiceRoute(r, "/api/v1/auth/**", "http://localhost:8081"))
                 .route("ACCOUNT-SERVICE", r -> configureServiceRoute(r, "/account/**", "http://localhost:8082"))
                 .route("GAME-SERVICE", r -> configureServiceRoute(r, "/game/**", "http://localhost:8082"))
                 .route("PLAYER-SERVICE", r -> configureServiceRoute(r, "/player/**", "http://localhost:8082"))

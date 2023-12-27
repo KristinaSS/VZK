@@ -20,6 +20,7 @@ import {SecurityModule} from "./security/security.module";
 import { CommonDialogComponent } from './utils/dialogs/common-dialog/common-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { VerifyPageComponent } from './pages/verify-page/verify-page.component';
+import {ViewProfileModule} from "./pages/viewprofilepage/view-profile.module";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { VerifyPageComponent } from './pages/verify-page/verify-page.component';
     ViewArticleModule,
     SecurityModule,
     MatDialogModule,
+    ViewProfileModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

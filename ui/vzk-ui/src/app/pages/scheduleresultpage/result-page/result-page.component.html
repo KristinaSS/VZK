@@ -1,6 +1,6 @@
 <div class="result-box" infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadData()">
   <div style="display: flex; justify-content: flex-end;">
-    <mat-form-field>
+    <mat-form-field *ngIf="results && results.length > 0">
       <mat-label>Sort by:</mat-label>
       <select matNativeControl required [(ngModel)]="selectedSortOption" (change)="onSortOptionChange()">
         <option value="latest" selected>Latest</option>
@@ -36,6 +36,9 @@
         <i class="arrow right" (click)="openReplay(result.replayURL)"></i>
       </div>
     </div>
+  </div>
+  <div *ngIf="results?.length === 0" class="no-articles-message">
+    No results available
   </div>
 </div>
 

@@ -41,6 +41,7 @@ export class NavbarComponent {
   logout() {
     this.loggedIn = false;
     sessionStorage.removeItem("token")
+    sessionStorage.removeItem("role")
     sessionStorage.setItem("logged", "false")
     this.loggedIn = false;
 
@@ -51,8 +52,6 @@ export class NavbarComponent {
     setTimeout(() => {
       window.scrollTo({top: 0, behavior: 'smooth'});
     }, 100);
-  }
-  navigateToProfile() {
   }
   toggleHiddenDiv(value: boolean): void {
     this.isHidden = value;

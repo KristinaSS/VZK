@@ -1,7 +1,7 @@
 <div class="schedule-box" infinite-scroll [infiniteScrollDistance]="scrollDistance"
      [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadData()">
   <div style="display: flex; justify-content: flex-end;">
-    <mat-form-field>
+    <mat-form-field *ngIf="futureEvents && futureEvents.length > 0">
       <mat-label>Sort by:</mat-label>
       <select matNativeControl required [(ngModel)]="selectedSortOption" (change)="onSortOptionChange()">
         <option value="soonest" selected>Soonest</option>
@@ -31,5 +31,8 @@
       <hr class="event-divider"/>
       <div class="event-description">{{ event.info }}</div>
     </div>
+  </div>
+  <div *ngIf="futureEvents?.length === 0" class="no-articles-message">
+    No events available
   </div>
 </div>

@@ -17,6 +17,9 @@ public class RequestPaths {
     //GUEST
     public static final String SECURITY_LOGIN = "/api/v1/auth/login";
     public static final String SECURITY_SIGNUP = "/api/v1/auth/signup";
+    public static final String SECURITY_VERIFY = "/api/v1/auth/verify";
+    public static final String SECURITY_RESEND = "/api/v1/auth/resend";
+    public static final String SECURITY_ROLE = "/api/v1/auth/role";
     public static final String GAME_GET_ALL_GAMES = "/game/all";
     public static final String PLAYER_GET_ALL_ACTIVE = "/player/all/active";
     public static final String TEAM_GET_ALL_PL_BY_TEAM = "/team/%7Bid%7D/players";
@@ -52,6 +55,9 @@ public class RequestPaths {
         tempPathPermissionMap.put(GAME_GET_ALL_GAMES, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(SECURITY_LOGIN, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(SECURITY_SIGNUP, Collections.singletonList("guest-permissions"));
+        tempPathPermissionMap.put(SECURITY_VERIFY, Collections.singletonList("guest-permissions"));
+        tempPathPermissionMap.put(SECURITY_RESEND, Collections.singletonList("guest-permissions"));
+        tempPathPermissionMap.put(SECURITY_ROLE, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(PLAYER_GET_ALL_ACTIVE, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(TEAM_GET_ALL_PL_BY_TEAM, Collections.singletonList("guest-permissions"));
         tempPathPermissionMap.put(TEAM_GET_ALL_ACTIVE_TEAMS, Collections.singletonList("guest-permissions"));

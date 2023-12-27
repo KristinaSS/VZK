@@ -1,0 +1,14 @@
+.content{
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+  display:grid;
+}
+
+.page-wrapper{
+  width: 70%;
+  background: rgb(255, 255, 255, 0.85);
+  padding: 30px;
+}

@@ -15,7 +15,7 @@
     <li><a class="center nav-item desktop-item" (click)="navigateToPage('contact')" >{{getTranslation('4')}}</a></li>
     <li><a class="center nav-item desktop-item" (click)="navigateToPage('about')" >{{getTranslation('5')}}</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="!loggedIn" (click)="login()">{{getTranslation('6')}}</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn">{{getTranslation('7')}}</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn"  (click)="navigateToPage('profile')">{{getTranslation('7')}}</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 1</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 2</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn">Option 3</a></li>
@@ -34,7 +34,7 @@
         <div class="my-account"> {{username}} </div>
       </a>
       <div class="dropdown-content login-profile" [ngStyle]="{'display': isHidden ? 'flex' : 'none'}" (mouseover)="toggleHiddenDiv(true)" (mouseout)="toggleHiddenDiv(false)">
-        <a class="dropdown-item" (click)="navigateToProfile()">{{getTranslation('7')}}</a>
+        <a class="dropdown-item" (click)="navigateToPage('profile')" >{{getTranslation('7')}}</a>
         <a class="dropdown-item">Option 1</a>
         <a class="dropdown-item">Option 2</a>
         <a class="dropdown-item">Option 3</a>

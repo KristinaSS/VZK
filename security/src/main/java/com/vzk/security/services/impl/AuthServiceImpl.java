@@ -8,6 +8,7 @@ import com.vzk.security.services.JwtGeneratorInterface;
 import com.vzk.security.services.UserService;
 import feign.FeignException;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.model.*;
@@ -111,6 +112,18 @@ public class AuthServiceImpl implements AuthService {
         sendVerificationEmail(account.getEmail(), jwt);
     }
 
+    @Override
+    public RoleResponse getRole(String token) {
+        final String jwt = getJwt(token);
+        final String userEmail = jwtService.extractUserName(jwt);
+
+        AccountDTO accountDTO = accountClient.getAccountByEmail(userEmail, userEmail).getBody();
+        assert accountDTO != null;
+        RoleDTO roleDTO = rolesClient.getRolesByAccountId(accountDTO.getId(), accountDTO.getId()).get(0);
+
+        return RoleResponse.builder().role(roleDTO.getName()).build();
+    }
+
     private void modifyUser(String status, String userEmail) {
         AccountDTO account = accountClient.getAccountByEmail(userEmail, userEmail).getBody();
         if (status.equals("verified") && userEmail != null) {
@@ -139,10 +152,17 @@ public class AuthServiceImpl implements AuthService {
         message.setTo(to);
         message.setSubject("Account Verification");
         message.setText("Click the following link to verify your account: "
-                + "http://localhost:4200/verify/"+ to +"/" + token);
+                + "http://localhost:4200/verify/" + to + "/" + token);
         message.setFrom(senderEmail);
 
         mailSender.send(message);
+    }
+
+    private String getJwt(String token) {
+        if (StringUtils.isEmpty(token)) {
+            throw new JwtException("Provided token is invalid");
+        }
+        return token;
     }
 }
 
