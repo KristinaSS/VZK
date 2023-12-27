@@ -21,7 +21,8 @@ export class VerifyPageComponent implements OnInit {
   async ngOnInit() {
     this.token = this.route.snapshot.paramMap.get('vToken');
     this.email = this.route.snapshot.paramMap.get('email');
-    console.log(this.token);
+    this.checkIfExpired();
+
     try {
       let response = await (await this.authenticationService.verifyToken(this.token, this.email)).toPromise();
       this.verificationStatus = response?.status;
@@ -31,6 +32,19 @@ export class VerifyPageComponent implements OnInit {
       console.error('Error verifying account:', error);
       this.verificationStatus = 'error';
       this.handleVerificationResponse();
+    }
+  }
+
+  async checkIfExpired() {
+    const role = sessionStorage.getItem('role');
+    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
+    let verificationStatus = response?.status;
+
+    if (role !== null && verificationStatus !== "verified") {
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("role")
+      sessionStorage.setItem("logged", "false")
+      window.location.reload();
     }
   }
 

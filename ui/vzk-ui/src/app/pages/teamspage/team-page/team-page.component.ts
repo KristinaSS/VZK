@@ -3,6 +3,7 @@ import {Game} from "../../../models/game/game";
 import {GameService} from "../../../services/game-service/game.service";
 import {Translation} from "../../../models/translation/translation";
 import {TranslationService} from "../../../services/translation-service/translation.service";
+import {AuthenticationService} from "../../../services/authentication-service/authentication.service";
 
 @Component({
   selector: 'app-team-page',
@@ -15,10 +16,11 @@ export class TeamPageComponent implements OnInit {
   translationsAbout: { [key: string]: Translation };
 
   constructor(
-    private translationService: TranslationService, private gameService: GameService) {
+    private translationService: TranslationService, private gameService: GameService, private authenticationService: AuthenticationService) {
     this.translationsAbout = translationService.translationsTeams;
   }
   ngOnInit(): void {
+    this.checkIfExpired();
     this.gameService.getGames().subscribe(
       (data: Game[]) => {
         this.gameList = data;
@@ -27,5 +29,18 @@ export class TeamPageComponent implements OnInit {
         console.error('Error fetching games:', error);
       }
     );
+  }
+
+  async checkIfExpired() {
+    const role = sessionStorage.getItem('role');
+    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
+    let verificationStatus = response?.status;
+
+    if (role !== null && verificationStatus !== "verified") {
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("role")
+      sessionStorage.setItem("logged", "false")
+      window.location.reload();
+    }
   }
 }

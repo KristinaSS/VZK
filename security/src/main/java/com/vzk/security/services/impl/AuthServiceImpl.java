@@ -88,17 +88,21 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public VerificationResponse verify(String token, String email) {
         VerificationResponse status = VerificationResponse.builder().status("error").build();
+        if(token.equals("anonymous")){
+            status.setStatus("verified");
+            return status;
+        }
 
         try {
             if (StringUtils.isNotEmpty(email)) {
-                UserDetails userDetails = userService.userDetailsService().loadUserByUsername(email);
-                status.setStatus(jwtService.isTokenValid(token, userDetails) ? "verified" : "expired");
+                verifyTokenAndModifyUser(token, email, email);
+            } else if (StringUtils.isNotEmpty(token) && StringUtils.isEmpty(email)) {
+                final String userEmail = jwtService.extractUserName(token);
+                status.setStatus(verifyTokenAndModifyUser(token, userEmail, email));
             }
         } catch (ExpiredJwtException exception) {
             status.setStatus("expired");
         }
-
-        modifyUser(status.getStatus(), email);
 
         return status;
     }
@@ -124,10 +128,19 @@ public class AuthServiceImpl implements AuthService {
         return RoleResponse.builder().role(roleDTO.getName()).build();
     }
 
+    private String verifyTokenAndModifyUser(String token, String userEmail, String email) {
+        UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
+        String status = jwtService.isTokenValid(token, userDetails) ? "verified" : "expired";
+
+        if (status.equals("verified") && email != null) {
+            modifyUser(status, userEmail);
+        }
+        return status;
+    }
+
     private void modifyUser(String status, String userEmail) {
         AccountDTO account = accountClient.getAccountByEmail(userEmail, userEmail).getBody();
-        if (status.equals("verified") && userEmail != null) {
-            assert account != null;
+        if (status.equals("verified") && userEmail != null && account != null) {
             accountClient.updateAccount(UpdateAccountDTO.builder().id(account.getId()).build());
         }
     }

@@ -56,6 +56,18 @@ export class AuthenticationService {
       });
   }
 
+  async checkIfExpired() {
+    let vToken = sessionStorage.getItem("token");
+    vToken = vToken || 'anonymous';
+    return this.http.post<VerifyToken>('/server/api/v1/auth/verify',
+      {vToken},
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + vToken
+        })
+      });
+  }
+
   async resend(email: string | null) {
     let token = sessionStorage.getItem("token");
     token = token || 'anonymous';

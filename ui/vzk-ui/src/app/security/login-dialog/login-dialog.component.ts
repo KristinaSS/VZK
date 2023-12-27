@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {AuthenticationService} from "../../services/authentication-service/authentication.service";
-import {User} from "../../models/user/user";
 import {JwtResponse} from "../../models/jwt-token/jwt-response";
 import {SignupDialogComponent} from "../sign-up-dialog/signup-dialog.component";
 import {CommonDialogComponent} from "../../utils/dialogs/common-dialog/common-dialog.component";
@@ -20,7 +19,8 @@ export class LoginDialogComponent {
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     private authenticationService: AuthenticationService,
     public dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   async onLogin() {
     try {
@@ -39,7 +39,7 @@ export class LoginDialogComponent {
       console.error('Error logging in:', error);
       this.dialog.open(CommonDialogComponent, {
         width: '300px',
-        data: { message: "Invalid email or password"}
+        data: {message: "Invalid email or password"}
       });
     }
   }
@@ -51,11 +51,12 @@ export class LoginDialogComponent {
       width: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => {
+    });
   }
 
-  async loadRole(){
-    try{
+  async loadRole() {
+    try {
       let roleResponse = await (await this.authenticationService.getRole()).toPromise();
       // @ts-ignore
       let role = roleResponse.role;

@@ -11,11 +11,13 @@ export class ViewProfilePageComponent implements OnInit {
   userRole = "";
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService,
   ) {
   }
 
   async ngOnInit() {
+    await this.checkIfExpired();
     const isLogged = sessionStorage.getItem('logged') === 'true';
 
     if (!isLogged) {
@@ -26,4 +28,18 @@ export class ViewProfilePageComponent implements OnInit {
       console.log(this.userRole);
     }
   }
+
+  async checkIfExpired() {
+    const role = sessionStorage.getItem('role');
+    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
+    let verificationStatus = response?.status;
+
+    if (role !== null && verificationStatus !== "verified") {
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("role")
+      sessionStorage.setItem("logged", "false")
+      window.location.reload();
+    }
+  }
+
 }

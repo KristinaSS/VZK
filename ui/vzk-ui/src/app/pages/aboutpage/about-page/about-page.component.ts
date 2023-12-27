@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import {Translation} from "../../../models/translation/translation";
 import {TranslationService} from "../../../services/translation-service/translation.service";
+import {AuthenticationService} from "../../../services/authentication-service/authentication.service";
 
 @Component({
   selector: 'app-about-page',
@@ -14,12 +15,15 @@ export class AboutPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private el: ElementRef,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private authenticationService: AuthenticationService
   ) {
     this.translationsAbout = translationService.translationsAbout;
   }
 
   ngOnInit() {
+    this.checkIfExpired();
+
     // Scroll to the "partners" section when the component is initialized
     this.route.fragment.subscribe((fragment: string | null) => {
       if (fragment === 'partners') {
@@ -42,6 +46,19 @@ export class AboutPageComponent implements OnInit {
     const element = this.el.nativeElement.querySelector('#partners');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  async checkIfExpired(){
+    const role = sessionStorage.getItem('role');
+    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
+    let verificationStatus = response?.status;
+
+    if (role !== null && verificationStatus !== "verified") {
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("role")
+      sessionStorage.setItem("logged", "false")
+      window.location.reload();
     }
   }
 }
