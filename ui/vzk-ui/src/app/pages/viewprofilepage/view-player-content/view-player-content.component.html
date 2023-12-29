@@ -3,7 +3,7 @@
     <div class="page-wrapper-inner">
       <div class="details-wrapper page-wrapper-inner">
         <div *ngIf="account?.countryOrigin" class="row">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-solid fa-earth-americas icon row">
             <div class="detail font">Country:</div>
             <div class="label">
               {{ account?.countryOrigin }}
@@ -11,7 +11,7 @@
           </i>
         </div>
         <div *ngIf="account?.birthday" class="row">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-solid fa-cake-candles icon row">
             <div class="detail font">Birthday:</div>
             <div class="label">
               {{ account?.birthday }}
@@ -19,7 +19,7 @@
           </i>
         </div>
         <div *ngIf="account?.gender" class="row">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-solid fa-venus-mars icon row">
             <div class="detail font">Gender:</div>
             <div class="label">
               {{ account?.gender }}
@@ -27,41 +27,41 @@
           </i>
         </div>
         <div *ngIf="account?.twitter" class="row">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-brands fa-twitter icon row">
             <div class="detail font">Twitter:</div>
             <div class="label">
-              {{ account?.twitter }}
+              <a [href]="account?.twitter">Link</a>
             </div>
           </i>
         </div>
         <div *ngIf="account?.instagram" class="row">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-brands fa-instagram icon row">
             <div class="detail font">Instagram:</div>
             <div class="label">
-              {{ account?.instagram }}
+              <a [href]="account?.instagram">Link</a>
             </div>
           </i>
         </div>
         <div *ngIf="account?.youtube" class="row">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-brands fa-youtube icon row">
             <div class="detail font">Youtube:</div>
             <div class="label">
-              {{ account?.youtube }}
+              <a [href]="account?.youtube">Link</a>
             </div>
           </i>
         </div>
-        <div *ngIf="account?.twitter" class="row">
-          <i class="fa-regular fa-envelope icon row">
+        <div *ngIf="account?.twitch" class="row">
+          <i class="fa-brands fa-twitch icon row">
             <div class="detail font">Twitch:</div>
             <div class="label">
-              {{ account?.twitch }}
+              <a [href]="account?.twitch">Link</a>
             </div>
           </i>
         </div>
       </div>
     </div>
     <div class="page-wrapper-inner">
-      <div class="contact-title font">Player Details</div>
+      <div class="contact-title font">Account Details</div>
       <div class="details-wrapper page-wrapper-inner">
         <div *ngIf="account?.game" class="row game-div">
           <div class="detail font">Game:</div>
@@ -76,7 +76,7 @@
           </i>
         </div>
         <div *ngIf="account?.role" class="row ">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-solid fa-dice-d6 icon row">
             <div class="detail font">Role:</div>
             <div class="label">
               {{ account?.role }}
@@ -84,7 +84,7 @@
           </i>
         </div>
         <div *ngIf="account?.team" class="row ">
-          <i class="fa-regular fa-envelope icon row">
+          <i class="fa-solid fa-user-group icon row">
             <div class="detail font">Team:</div>
             <div class="label">
               {{ account?.team }}
