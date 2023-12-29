@@ -18,4 +18,6 @@ public interface PlayerService {
     List<PlayerDTO> getAllActivePlayers();
 
     void updatePlayer(UpdatePlayerDTO updatePlayerDTO);
+
+    ShortPlayerDTO getShortPlayerByEmail(String email);
 }

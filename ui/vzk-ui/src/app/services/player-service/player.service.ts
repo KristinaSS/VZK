@@ -37,4 +37,17 @@ export class PlayerService {
       responseType: 'json',
     });
   }
+
+  getDetails(email: string | undefined) {
+    let token = sessionStorage.getItem("token");
+    token = token || 'anonymous';
+
+    return this.http.get<Player>('/server/player/short/{email}?email=' + email, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      }),
+      observe: 'body',
+      responseType: 'json',
+    });
+  }
 }

@@ -25,7 +25,7 @@ public class Team {
     @JoinColumn(name = "captain", referencedColumnName = "id")
     private Account captain;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "game")
     private Game game;
 

@@ -1,14 +1,121 @@
-.content{
-  margin-top: 20px;
+.content {
   font-family: Arial, sans-serif;
   width: 100%;
   align-items: center;
   justify-items: center;
-  display:grid;
+  display: grid;
+  margin-top: 30px;
 }
 
-.page-wrapper{
+.page-wrapper {
   width: 70%;
   background: rgb(255, 255, 255, 0.85);
   padding: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-wrapper-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 20px;
+}
+
+.user-profile {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+button {
+  display: block;
+  padding: 10px;
+  background-color: #ff003c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4b0b18;
+}
+
+.circular--portrait {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #301717;
+  object-position: center top;
+}
+
+.inner {
+  transform: scale(1.1);
+}
+
+.contact-title {
+  font-size: 40px !important;
+  font-weight: bold !important;
+  margin-bottom: 15px;
+}
+
+.font {
+  font-family: Impact, serif;
+  font-weight: normal;
+  font-size: 23px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+}
+
+.icon {
+  margin: 10px;
+  font-size: 23px;
+}
+
+.detail {
+  padding: 10px;
+}
+
+.label {
+  font-family: Arial, sans-serif;
+  font-weight: normal !important;
+}
+
+.btn-edit {
+  width: 150px;
+}
+
+.logo-img{
+  width: 200px;
+  margin-top: -60px;
+}
+
+.col-2{
+  margin-top: -50px;
+}
+
+.game-div{
+  flex-direction: column;
 }

@@ -1,6 +1,6 @@
 <app-view-profile-banner></app-view-profile-banner>
 <app-view-profile-content [account]="account" ></app-view-profile-content>
-<app-view-player-content *ngIf="userRole=='player'"></app-view-player-content>
+<app-view-player-content *ngIf="userRole=='player'" [account]="account"></app-view-player-content>
 <app-view-caster-content *ngIf="userRole=='caster'"></app-view-caster-content>
 <app-view-coach-content *ngIf="userRole=='coach'"></app-view-coach-content>
 <app-view-partner-content *ngIf="userRole=='partner'"></app-view-partner-content>

@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.openapitools.model.CreatePlayerDTO;
 import org.openapitools.model.PlayerDTO;
+import org.openapitools.model.ShortPlayerDTO;
 import org.openapitools.model.UpdatePlayerDTO;
 
 @Mapper
@@ -61,4 +62,21 @@ public interface PlayerMapper {
     @Mapping(source = "playerDTO.youtube", target = "youtube")
     @Mapping(source = "playerDTO.instagram", target = "instagram")
     AccountDetails mapToModel(UpdatePlayerDTO playerDTO, Team team, Account linkedAccount);
+
+    @Mapping(source = "account.name", target = "name")
+    @Mapping(source = "account.email", target = "email")
+    @Mapping(source = "account.username", target = "username")
+    @Mapping(source = "accountDetails.team.name", target = "team")
+    @Mapping(source = "accountDetails.team.game.logo", target = "game")
+    @Mapping(source = "accountDetails.birthday", target = "birthday")
+    @Mapping(source = "accountDetails.countryOrigin", target = "countryOrigin")
+    @Mapping(source = "accountDetails.image", target = "image")
+    @Mapping(source = "accountDetails.gender", target = "gender")
+    @Mapping(source = "accountDetails.playerName", target = "playerName")
+    @Mapping(source = "accountDetails.role", target = "role")
+    @Mapping(source = "accountDetails.twitter", target = "twitter")
+    @Mapping(source = "accountDetails.twitch", target = "twitch")
+    @Mapping(source = "accountDetails.youtube", target = "youtube")
+    @Mapping(source = "accountDetails.instagram", target = "instagram")
+    ShortPlayerDTO mapToShortDTO(Account account, AccountDetails accountDetails);
 }

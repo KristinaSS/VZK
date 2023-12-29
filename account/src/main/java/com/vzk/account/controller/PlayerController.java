@@ -4,6 +4,7 @@ import com.vzk.account.services.PlayerService;
 import org.openapitools.api.PlayerApi;
 import org.openapitools.model.CreatePlayerDTO;
 import org.openapitools.model.PlayerDTO;
+import org.openapitools.model.ShortPlayerDTO;
 import org.openapitools.model.UpdatePlayerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,11 @@ public class PlayerController implements PlayerApi {
     @Override
     public ResponseEntity<PlayerDTO> getPlayerById(UUID player) {
         return ResponseEntity.ok(playerService.getPlayerById(player.toString()));
+    }
+
+    @Override
+    public ResponseEntity<ShortPlayerDTO> getShortPlayerByEmail(String email) {
+        return ResponseEntity.ok(playerService.getShortPlayerByEmail(email));
     }
 
     @Override

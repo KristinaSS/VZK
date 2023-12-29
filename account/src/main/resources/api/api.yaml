@@ -478,6 +478,44 @@ paths:
           name: email
           required: true
           description: Unique player email
+  /player/short/{email}:
+    get:
+      tags:
+        - Player
+      summary: Getting single short player by email
+      operationId: getShortPlayerByEmail
+      responses:
+        "201":
+          description: Successful retrieval of short player.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortPlayerDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: email
+          required: true
+          description: Unique player email
   /player/update:
     post:
       tags:
@@ -1022,6 +1060,43 @@ components:
         team:
           type: string
           format: uuid
+        birthday:
+          type: string
+        countryOrigin:
+          type: string
+        playerName:
+          type: string
+        role:
+          type: string
+        twitter:
+          type: string
+        twitch:
+          type: string
+        youtube:
+          type: string
+        instagram:
+          type: string
+        image:
+          type: string
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+    ShortPlayerDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        team:
+          type: string
+        game:
+          type: string
         birthday:
           type: string
         countryOrigin:

@@ -12,10 +12,7 @@ import com.vzk.account.repos.AccountDetailsRepository;
 import com.vzk.account.repos.AccountRepository;
 import com.vzk.account.repos.TeamRepository;
 import com.vzk.account.services.PlayerService;
-import org.openapitools.model.CreatePlayerDTO;
-import org.openapitools.model.PlayerDTO;
-import org.openapitools.model.RoleDTO;
-import org.openapitools.model.UpdatePlayerDTO;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -129,6 +126,18 @@ public class PlayerServiceImpl implements PlayerService {
         verifyEmail(updatePlayerDTO.getEmail(), updatePlayerDTO.getId().toString());
 
         accountDetailsRepository.save(updatedPlayer);
+    }
+
+    @Override
+    public ShortPlayerDTO getShortPlayerByEmail(String email) {
+        Account linkedAccount = accountRepository.findAccountByEmail(email);
+
+        //check if account exists
+        verifyAccountExists(linkedAccount, email);
+
+        AccountDetails accountDetails = findPlayer(linkedAccount, email);
+
+        return PLAYER_MAPPER.mapToShortDTO(linkedAccount, accountDetails);
     }
 
     private AccountDetails findPlayer(String id) {

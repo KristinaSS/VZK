@@ -48,7 +48,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         if (authAcc.getUsername().equals(userEmail) && StringUtils.isNotEmpty(userEmail)) {
             UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
-            if (hasPermissionForPath(jwtAuthorizationRequest, userDetails)
+            if (hasPermissionForProfilePath(jwtAuthorizationRequest, userDetails)
+                    || hasPermissionForPlayerPath(jwtAuthorizationRequest, userDetails)
                     || hasPermission(userDetails, jwtAuthorizationRequest.getPath())) {
                 return new JwtAuthorizationResponse(true);
             }
@@ -113,8 +114,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         return requiredPermissions.isEmpty() ? null : requiredPermissions.get(0);
     }
 
-    private boolean hasPermissionForPath(JwtAuthorizationRequest request, UserDetails userDetails) {
-        if (!CHECK_PATHS_LIST.contains(request.getPath())) {
+    private boolean hasPermissionForProfilePath(JwtAuthorizationRequest request, UserDetails userDetails) {
+        if (!VIEW_PROFILE_PATHS_LIST.contains(request.getPath())) {
             return false;
         }
 
@@ -132,5 +133,26 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         }
 
         return userPermissions.contains(ADMIN_VIEW_PROFILES);
+    }
+
+    private boolean hasPermissionForPlayerPath(JwtAuthorizationRequest request, UserDetails userDetails) {
+        if (!VIEW_PLAYER_PATHS_LIST.contains(request.getPath())) {
+            return false;
+        }
+
+        List<String> userPermissions = getPermissions(userDetails);
+
+        if (request.getEmail() != null && request.getEmail().equals(userDetails.getUsername())) {
+            return true;
+        }
+
+        if (request.getId() != null) {
+            AccountDTO account = accountClient.getAccountByEmail(userDetails.getUsername(), userDetails.getUsername()).getBody();
+            if (account != null && userPermissions.contains(USER_VIEW_PLAYER) && request.getId().equals(account.getId().toString())) {
+                return true;
+            }
+        }
+
+        return userPermissions.contains(NON_USER_VIEW_PLAYER);
     }
 }

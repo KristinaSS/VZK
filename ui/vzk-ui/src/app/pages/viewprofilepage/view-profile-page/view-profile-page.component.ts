@@ -58,7 +58,11 @@ export class ViewProfilePageComponent implements OnInit {
       let emailResponse = await this.playerService.getAccountEmail().toPromise();
       this.email = emailResponse?.email;
 
-      this.account = await this.playerService.getAccount(this.email).toPromise();
+      if (this.userRole =='user' || this.userRole =='admin' || this.userRole =='partner'){
+        this.account = await this.playerService.getAccount(this.email).toPromise();
+      } else {
+        this.account = await this.playerService.getDetails(this.email).toPromise();
+      }
     }catch (error){
       console.error('Error fetching account:', error);
     }
