@@ -2,6 +2,7 @@ package com.vzk.account.services;
 
 import org.openapitools.model.AccountDTO;
 import org.openapitools.model.CreateAccountDTO;
+import org.openapitools.model.ShortAccountDTO;
 import org.openapitools.model.UpdateAccountDTO;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface AccountService {
     List<AccountDTO> getAllActiveAccounts();
 
     void updateAccount(UpdateAccountDTO updateAccountDTO);
+
+    ShortAccountDTO getShortAccountByEmail(String email);
 }

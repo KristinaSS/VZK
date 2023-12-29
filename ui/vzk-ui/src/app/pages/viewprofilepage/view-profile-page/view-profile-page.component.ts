@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from "../../../services/authentication-service/authentication.service";
+import {PlayerService} from "../../../services/player-service/player.service";
+import {Player} from "../../../models/player/player";
 
 @Component({
   selector: 'app-view-profile-page',
@@ -9,10 +11,13 @@ import {AuthenticationService} from "../../../services/authentication-service/au
 })
 export class ViewProfilePageComponent implements OnInit {
   userRole = "";
+  email: string | undefined = "";
+  account: Player | undefined;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
+    private playerService: PlayerService,
   ) {
   }
 
@@ -25,13 +30,20 @@ export class ViewProfilePageComponent implements OnInit {
     } else {
       // @ts-ignore
       this.userRole = sessionStorage.getItem("role");
+      await this.getAccount();
     }
   }
 
-  async checkIfExpired() {
+  async checkIfExpired(){
     const role = sessionStorage.getItem('role');
-    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
-    let verificationStatus = response?.status;
+    let verificationStatus: string | undefined = "";
+    try {
+      let response = await (await this.authenticationService.checkIfExpired()).toPromise();
+       verificationStatus = response?.status;
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      verificationStatus = "expired";
+    }
 
     if (role !== null && verificationStatus !== "verified") {
       sessionStorage.removeItem("token")
@@ -41,4 +53,14 @@ export class ViewProfilePageComponent implements OnInit {
     }
   }
 
+  async getAccount(){
+    try {
+      let emailResponse = await this.playerService.getAccountEmail().toPromise();
+      this.email = emailResponse?.email;
+
+      this.account = await this.playerService.getAccount(this.email).toPromise();
+    }catch (error){
+      console.error('Error fetching account:', error);
+    }
+  }
 }

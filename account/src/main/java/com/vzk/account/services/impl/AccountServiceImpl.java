@@ -8,6 +8,7 @@ import com.vzk.account.repos.AccountRepository;
 import com.vzk.account.services.AccountService;
 import org.openapitools.model.AccountDTO;
 import org.openapitools.model.CreateAccountDTO;
+import org.openapitools.model.ShortAccountDTO;
 import org.openapitools.model.UpdateAccountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,6 +91,15 @@ public class AccountServiceImpl implements AccountService {
         updated.setActive(true);
 
         accountRepository.save(updated);
+    }
+
+    @Override
+    public ShortAccountDTO getShortAccountByEmail(String email) {
+        Account account = accountRepository.findAccountByEmail(email);
+        if (account == null) {
+            throw new EntityNotFoundException(ENTITY, "email", email);
+        }
+        return ACCOUNT_MAPPER.mapToShortDTO(account);
     }
 
     private Account findAccount(UUID id) {

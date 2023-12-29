@@ -3,6 +3,7 @@ package com.vzk.account.mapper;
 import com.vzk.account.models.Account;
 import org.mapstruct.factory.Mappers;
 import org.openapitools.model.AccountDTO;
+import org.openapitools.model.ShortAccountDTO;
 import org.openapitools.model.UpdateAccountDTO;
 import org.openapitools.model.CreateAccountDTO;
 import org.mapstruct.Mapper;
@@ -40,4 +41,9 @@ public interface AccountMapper {
     @Mapping(source = "password", target = "password")
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
     Account mapToModel(CreateAccountDTO accountDTO);
+
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "username", target = "username")
+    ShortAccountDTO mapToShortDTO(Account account);
 }

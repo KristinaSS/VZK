@@ -11,5 +11,7 @@ public interface AuthService {
 
     void resend(String email);
 
-    RoleResponse getRole(String s);
+    RoleResponse getRole(String token);
+
+    EmailResponse getEmail(String token);
 }

@@ -269,6 +269,44 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /api/v1/auth/email:
+    post:
+      summary: Get person email
+      operationId: getEmail
+      tags:
+        - authentication
+      requestBody:
+        description: Get person email
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerificationToken"
+      responses:
+        '200':
+          description: Successful get of email
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -383,4 +421,9 @@ components:
       type: object
       properties:
         role:
+          type: string
+    EmailResponse:
+      type: object
+      properties:
+        email:
           type: string

@@ -103,7 +103,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         if ("anonymous".equals(jwt)) {
             // User is anonymous
             String permission = getAnonymousPermission(path);
-            return permission != null && permission.equals("guest-permissions");
+            return permission != null && permission.equals(GUEST_PERMISSIONS);
         }
         return false;
     }

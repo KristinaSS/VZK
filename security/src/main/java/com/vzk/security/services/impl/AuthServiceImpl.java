@@ -128,6 +128,14 @@ public class AuthServiceImpl implements AuthService {
         return RoleResponse.builder().role(roleDTO.getName()).build();
     }
 
+    @Override
+    public EmailResponse getEmail(String token) {
+        final String jwt = getJwt(token);
+        final String userEmail = jwtService.extractUserName(jwt);
+
+        return EmailResponse.builder().email(userEmail).build();
+    }
+
     private String verifyTokenAndModifyUser(String token, String userEmail, String email) {
         UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
         String status = jwtService.isTokenValid(token, userDetails) ? "verified" : "expired";

@@ -187,6 +187,44 @@ paths:
           name: email
           required: true
           description: Unique account email
+  /account/short/email/{email}:
+    get:
+      tags:
+        - Account
+      summary: Getting single short account by email
+      operationId: getShortAccountByEmail
+      responses:
+        "201":
+          description: Successful retrieval of short account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortAccountDTO'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: email
+          required: true
+          description: Unique account email
   /account/update:
     post:
       tags:
@@ -939,6 +977,15 @@ components:
           type: string
         isActive:
           type: boolean
+    ShortAccountDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
     TeamDTO:
       properties:
         id:

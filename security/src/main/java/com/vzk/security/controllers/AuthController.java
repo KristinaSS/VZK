@@ -15,6 +15,11 @@ public class AuthController implements AuthenticationApi {
     private AuthService authService;
 
     @Override
+    public ResponseEntity<EmailResponse> getEmail(VerificationToken verificationToken) {
+        return ResponseEntity.ok(authService.getEmail(verificationToken.getvToken()));
+    }
+
+    @Override
     public ResponseEntity<RoleResponse> getRole(VerificationToken verificationToken) {
         return ResponseEntity.ok(authService.getRole(verificationToken.getvToken()));
     }

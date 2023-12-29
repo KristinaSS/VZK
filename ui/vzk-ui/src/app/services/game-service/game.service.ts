@@ -17,7 +17,7 @@ export class GameService {
     let token = sessionStorage.getItem("token");
     token = token || 'anonymous';
 
-    return this.http.get<Game[]>('/server/game/all', {
+    return this.http.get<Game[]>('/server/account/all', {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token
       }),

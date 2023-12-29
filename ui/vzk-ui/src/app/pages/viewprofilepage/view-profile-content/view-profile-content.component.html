@@ -1,6 +1,37 @@
 <div class="content">
   <div class="page-wrapper">
-    This is content visible only to people with a "user" role.<br>
-    What to expect:<br>
+    <div class="circular--portrait">
+      <img src="../../../assets/imgs/VZK.png" height="300px"/>
+    </div>
+    <div class="page-wrapper-inner">
+      <div class="contact-title font">Account Details</div>
+      <div class="details-wrapper page-wrapper-inner">
+        <div class="row">
+          <i class="fa-solid fa-address-card icon row">
+            <div class="detail font">Name: </div>
+            <div class="label">
+              {{ account?.name }}
+            </div>
+          </i>
+        </div>
+        <div class="row">
+          <i class="fa-regular fa-envelope icon row">
+            <div class="detail font">Email: </div>
+            <div class="label">
+              {{ account?.email }}
+            </div>
+          </i>
+        </div>
+        <div class="row">
+          <i class="fa-solid fa-gamepad icon row">
+            <div class="detail font">Username: </div>
+            <div class="label">
+              {{ account?.username }}
+            </div>
+          </i>
+        </div>
+        <button (click)="editProfile()" class="btn-edit">Edit</button>
+      </div>
+    </div>
   </div>
 </div>

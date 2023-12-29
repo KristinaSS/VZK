@@ -4,6 +4,7 @@ import com.vzk.account.services.AccountService;
 import org.openapitools.api.AccountApi;
 import org.openapitools.model.AccountDTO;
 import org.openapitools.model.CreateAccountDTO;
+import org.openapitools.model.ShortAccountDTO;
 import org.openapitools.model.UpdateAccountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,11 @@ public class AccountController implements AccountApi {
     @Override //works
     public ResponseEntity<List<AccountDTO>> getAllActiveAccounts() {
         return ResponseEntity.ok(accountService.getAllActiveAccounts());
+    }
+
+    @Override
+    public ResponseEntity<ShortAccountDTO> getShortAccountByEmail(String email) {
+        return ResponseEntity.ok(accountService.getShortAccountByEmail(email));
     }
 
     @Override

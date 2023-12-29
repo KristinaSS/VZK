@@ -9,6 +9,7 @@ import { ViewManagerContentComponent } from './view-manager-content/view-manager
 import { ViewAdminContentComponent } from './view-admin-content/view-admin-content.component';
 import { ViewPartnerContentComponent } from './view-partner-content/view-partner-content.component';
 import { ViewProfileBannerComponent } from './view-profile-banner/view-profile-banner.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -23,9 +24,10 @@ import { ViewProfileBannerComponent } from './view-profile-banner/view-profile-b
     ViewPartnerContentComponent,
     ViewProfileBannerComponent,
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule
+    ]
 })
 export class ViewProfileModule {
 }

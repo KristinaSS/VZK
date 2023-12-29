@@ -55,11 +55,6 @@ public class GatewayConfig {
                 .build();
     }
 
-    private Buildable<Route> configureSecurityRoute(PredicateSpec r, String path) {
-        return r.path(path)
-                .uri("http://localhost:8081");
-    }
-
     private Buildable<Route> configureServiceRoute(PredicateSpec r, String path, String uri) {
         return r.path(path)
                 .filters(f -> f.modifyRequestBody(String.class, String.class, this::validateAndModifyRequest))
