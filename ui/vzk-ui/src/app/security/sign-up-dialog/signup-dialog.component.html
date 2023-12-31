@@ -17,6 +17,9 @@
       <mat-form-field class="form-group">
         <input matInput placeholder="Password" type="password" formControlName="password" class="custom-mat-input" />
       </mat-form-field>
+      <mat-form-field class="form-group">
+        <input matInput placeholder="Password Again" type="passwordAgain" formControlName="password" class="custom-mat-input" />
+      </mat-form-field>
       <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error-message" style="color: red;">
         <ul>
           <li>Min 8 characters</li>
@@ -24,8 +27,10 @@
           <li>At least 1 uppercase letter</li>
           <li>At least 1 lowercase letter</li>
           <li>At least 1 number</li>
-          <li>At least 1 special character</li>
         </ul>
+      </div>
+      <div *ngIf="signupForm.get('passwordAgain')?.invalid && signupForm.get('passwordAgain')?.touched" class="error-message" style="color: red;">
+        Passwords do not match!
       </div>
     </div>
     <div class="button-container">

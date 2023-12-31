@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export function firstLetterUppercaseValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -7,7 +7,7 @@ export function firstLetterUppercaseValidator(): ValidatorFn {
     if (value && value.length >= 3) {
       const firstLetter = value.charAt(0);
       if (firstLetter !== firstLetter.toUpperCase()) {
-        return { firstLetterUppercase: true };
+        return {firstLetterUppercase: true};
       }
     }
     return null;
@@ -48,21 +48,35 @@ export function ageValidator(minAge: number): ValidatorFn {
     if (currentDate.getMonth() < birthDate.getMonth() ||
       (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())) {
       // Subtract 1 from age if the birthdate hasn't occurred yet this year
-      return age - 1 < minAge ? { 'minAge': true } : null;
+      return age - 1 < minAge ? {'minAge': true} : null;
     }
 
-    return age < minAge ? { 'minAge': true } : null;
+    return age < minAge ? {'minAge': true} : null;
   };
 }
 
 export function passwordValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,45}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,45}$/;
 
     if (!control.value) {
       return null; // If the control is empty, don't perform validation
     }
 
-    return passwordRegex.test(control.value) ? null : { invalidPassword: true };
+    return passwordRegex.test(control.value) ? null : {invalidPassword: true};
   };
 }
+
+export function samePasswordValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const password = control.root.get('password')?.value;
+
+    if (password && control.value && password !== control.value) {
+      return { 'passwordMismatch': true };
+    }
+
+    return null;
+  };
+}
+
+

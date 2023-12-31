@@ -9,7 +9,12 @@ import { ViewManagerContentComponent } from './view-manager-content/view-manager
 import { ViewAdminContentComponent } from './view-admin-content/view-admin-content.component';
 import { ViewPartnerContentComponent } from './view-partner-content/view-partner-content.component';
 import { ViewProfileBannerComponent } from './view-profile-banner/view-profile-banner.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { EditAccountDialogComponent } from './edit-account-dialog/edit-account-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -23,11 +28,17 @@ import {FormsModule} from "@angular/forms";
     ViewAdminContentComponent,
     ViewPartnerContentComponent,
     ViewProfileBannerComponent,
+    EditAccountDialogComponent,
   ],
-    imports: [
-        CommonModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ]
 })
 export class ViewProfileModule {
 }

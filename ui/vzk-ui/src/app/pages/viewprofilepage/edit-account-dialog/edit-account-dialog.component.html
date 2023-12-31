@@ -1,0 +1,45 @@
+<div class="signup-dialog">
+  <h2>Edit Account</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmitClick()">
+    <div class="form-group-container">
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>First Name</mat-label>
+        <input matInput [placeholder]="(account?.name ?? '').split(' ')[0]" formControlName="fName" class="custom-mat-input" />
+      </mat-form-field>
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Last Name</mat-label>
+        <input matInput [placeholder]="(account?.name ?? '').split(' ')[1]" formControlName="lName" class="custom-mat-input" />
+      </mat-form-field>
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Email</mat-label>
+        <input matInput [placeholder]="(account?.email ?? '')" formControlName="email" class="custom-mat-input" [disabled]="isEmailDisabled"/>
+      </mat-form-field>
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Username</mat-label>
+        <input matInput [placeholder]="(account?.username ?? '')" formControlName="username" class="custom-mat-input" />
+      </mat-form-field>
+      <mat-form-field class="form-group">
+        <input matInput placeholder="Password" type="text" formControlName="password" class="custom-mat-input" />
+      </mat-form-field>
+      <mat-form-field class="form-group">
+        <input matInput placeholder="Password Again" type="text" formControlName="passwordAgain" class="custom-mat-input" />
+      </mat-form-field>
+      <div *ngIf="editForm.get('password')?.invalid && editForm.get('password')?.touched" class="error-message" style="color: red;">
+        <ul>
+          <li>Min 8 characters</li>
+          <li>Max 45 characters</li>
+          <li>At least 1 uppercase letter</li>
+          <li>At least 1 lowercase letter</li>
+          <li>At least 1 number</li>
+        </ul>
+      </div>
+      <div *ngIf="editForm.get('passwordAgain')!.hasError('passwordMismatch') && editForm.get('passwordAgain')?.touched" class="error-message" style="color: red;">
+        Passwords do not match!
+      </div>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button type="submit" color="primary" [disabled]="isUpdateDisabled">Update</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </form>
+</div>
