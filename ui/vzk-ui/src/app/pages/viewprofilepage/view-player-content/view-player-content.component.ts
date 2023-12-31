@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Player} from "../../../models/player/player";
+import {EditPlayerDialogComponent} from "../dialogs/edit-player-dialog/edit-player-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-view-player-content',
@@ -9,8 +11,22 @@ import {Player} from "../../../models/player/player";
 export class ViewPlayerContentComponent {
   @Input() account: Player | undefined;
 
+
+  constructor(
+    public dialog: MatDialog
+  ) {
+  }
+
   editPlayer() {
-    console.log("this account " + this.account?.name)
+    const dialogRef = this.dialog.open(EditPlayerDialogComponent, {
+      data: {acc: this.account},
+      width: '300px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload();
+    });
   }
 
   formattedBirthday(): string | undefined {

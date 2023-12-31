@@ -113,22 +113,27 @@ export class AuthenticationService {
       });
   }
 
-/*  async updatePlayer(player: Player, password: string) {
+  async updatePlayer(editForm: FormGroup) {
     let vToken = sessionStorage.getItem("token");
     vToken = vToken || 'anonymous';
 
-    const name = player.name;
-    const email = player.email;
-    const username = player.username;
+    let countryOrigin = editForm.get('email')?.value;
+    let birthday = editForm.get('username')?.value;
+    let gender = editForm.get('password')?.value;
+    let playerName = editForm.get('fName')?.value;
+    let instagram = editForm.get('email')?.value;
+    let twitter = editForm.get('username')?.value;
+    let twitch = editForm.get('password')?.value;
+    let youtube = editForm.get('fName')?.value;
 
-    return this.http.post<RoleResponse>('/server/api/v1/auth/player/update',
+    return this.http.post<Player>('/server/player/update',
       {
-        name, email, username, password
+        countryOrigin, birthday, gender, playerName, instagram, twitter, twitch, youtube
       },
       {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + vToken
         })
       });
-  }*/
+  }
 }

@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Player} from "../../../models/player/player";
-import {CommonDialogComponent} from "../../../utils/dialogs/common-dialog/common-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {EditAccountDialogComponent} from "../edit-account-dialog/edit-account-dialog.component";
+import {EditAccountDialogComponent} from "../dialogs/edit-account-dialog/edit-account-dialog.component";
 
 @Component({
   selector: 'app-view-profile-content',
@@ -14,12 +13,18 @@ export class ViewProfileContentComponent {
 
   constructor(
     public dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   editProfile() {
-    this.dialog.open(EditAccountDialogComponent, {
-      data: { acc: this.account },
-      width: '300px'
+    const dialogRef = this.dialog.open(EditAccountDialogComponent, {
+      data: {acc: this.account},
+      width: '300px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload();
     });
   }
 }

@@ -5,10 +5,10 @@ import {
   firstLetterUppercaseValidator,
   passwordValidator,
   samePasswordValidator
-} from "../../../utils/validators/custom-contact-form-validators";
-import {AuthenticationService} from "../../../services/authentication-service/authentication.service";
-import {Player} from "../../../models/player/player";
-import {CommonDialogComponent} from "../../../utils/dialogs/common-dialog/common-dialog.component";
+} from "../../../../utils/validators/custom-contact-form-validators";
+import {AuthenticationService} from "../../../../services/authentication-service/authentication.service";
+import {Player} from "../../../../models/player/player";
+import {CommonDialogComponent} from "../../../../utils/dialogs/common-dialog/common-dialog.component";
 
 @Component({
   selector: 'app-edit-account-dialog',
@@ -34,7 +34,7 @@ export class EditAccountDialogComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       fName: ['', [Validators.minLength(3), firstLetterUppercaseValidator(), Validators.maxLength(50)]],
       lName: ['', [Validators.minLength(3), firstLetterUppercaseValidator(), Validators.maxLength(50)]],
-      email: [{ value: '', disabled: true }],
+      email: [{value: '', disabled: true}],
       username: [''],
       password: ['', [passwordValidator(), Validators.maxLength(45)]],
       passwordAgain: ['', [passwordValidator(), Validators.maxLength(45), samePasswordValidator()]],
@@ -82,22 +82,29 @@ export class EditAccountDialogComponent implements OnInit {
     }
   }
 
-
   async onSubmitClick() {
     if (this.editForm.valid) {
       try {
         await (await this.authenticationService.updateAccount(this.editForm)).toPromise();
         console.log('Form submitted:', this.editForm.value);
         this.dialog.closeAll();
-        this.dialog.open(CommonDialogComponent, {
+        let successDialog = this.dialog.open(CommonDialogComponent, {
           width: '300px',
-          data: { message: "Account has been updated." }
+          data: {message: "Account has been updated."}
+        });
+
+        successDialog.afterClosed().subscribe(() => {
+          window.location.reload();
         });
       } catch (error) {
         console.error('Error occurred:', error);
-        this.dialog.open(CommonDialogComponent, {
+        let errorDialog = this.dialog.open(CommonDialogComponent, {
           width: '300px',
-          data: { message: "An error occurred while updating account." }
+          data: {message: "An error occurred while updating account."}
+        });
+
+        errorDialog.afterClosed().subscribe(() => {
+          this.dialog.closeAll();
         });
       }
     }

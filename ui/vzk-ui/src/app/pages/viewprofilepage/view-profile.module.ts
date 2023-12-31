@@ -10,11 +10,14 @@ import { ViewAdminContentComponent } from './view-admin-content/view-admin-conte
 import { ViewPartnerContentComponent } from './view-partner-content/view-partner-content.component';
 import { ViewProfileBannerComponent } from './view-profile-banner/view-profile-banner.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { EditAccountDialogComponent } from './edit-account-dialog/edit-account-dialog.component';
+import { EditAccountDialogComponent } from './dialogs/edit-account-dialog/edit-account-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { EditPlayerDialogComponent } from './dialogs/edit-player-dialog/edit-player-dialog.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -29,6 +32,7 @@ import {MatInputModule} from "@angular/material/input";
     ViewPartnerContentComponent,
     ViewProfileBannerComponent,
     EditAccountDialogComponent,
+    EditPlayerDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +41,9 @@ import {MatInputModule} from "@angular/material/input";
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatSelectModule
   ]
 })
 export class ViewProfileModule {

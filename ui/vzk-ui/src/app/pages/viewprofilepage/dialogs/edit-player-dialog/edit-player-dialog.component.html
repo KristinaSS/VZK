@@ -1,0 +1,61 @@
+<div class="signup-dialog">
+  <h2>Edit Account Details</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmitClick()">
+    <div class="form-group-container">
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Country</mat-label>
+        <mat-select
+          class="text-input" id="country" name="countryOrigin"
+          formControlName="countryOrigin">
+          <mat-option value="" disabled selected hidden>{{account?.countryOrigin}}</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country.name">{{country.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Birthday</mat-label>
+        <input matInput [placeholder]="(account?.birthday ?? '')" type="date" formControlName="birthday" class="custom-mat-input"/>
+      </mat-form-field>
+      <div *ngIf="editForm.get('birthday')!.invalid && editForm.get('birthday')?.touched" class="error-message" style="color: red;">
+        You must be at least 16 years old!
+      </div>
+
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Player Name</mat-label>
+        <input matInput [placeholder]="(account?.playerName ?? '')" formControlName="playerName"
+               class="custom-mat-input"/>
+      </mat-form-field>
+
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>{{account?.gender}}</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="MALE">Male</mat-option>
+          <mat-option value="FEMALE">Female</mat-option>
+          <mat-option value="OTHER">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Instagram</mat-label>
+        <input matInput [placeholder]="(account?.instagram ?? '')" formControlName="instagram"
+               class="custom-mat-input"/>
+      </mat-form-field>
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Twitter</mat-label>
+        <input matInput [placeholder]="(account?.twitter ?? '')" formControlName="twitter" class="custom-mat-input"/>
+      </mat-form-field>
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Twitch</mat-label>
+        <input matInput [placeholder]="(account?.twitch ?? '')" formControlName="twitch" class="custom-mat-input"/>
+      </mat-form-field>
+      <mat-form-field class="form-group" [floatLabel]="'always'">
+        <mat-label>Youtube</mat-label>
+        <input matInput [placeholder]="(account?.youtube ?? '')" formControlName="youtube" class="custom-mat-input"/>
+      </mat-form-field>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button type="submit" color="primary" [disabled]="isUpdateDisabled">Update</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </form>
+</div>
