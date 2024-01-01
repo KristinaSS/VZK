@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {TermsPageComponent} from "./terms-page/terms-page.component";
 import {TermsHeaderComponent} from "./terms-header/terms-header.component";
 import {TermsContentComponent} from "./terms-content/terms-content.component";
-
 
 
 @NgModule({
@@ -16,4 +15,5 @@ import {TermsContentComponent} from "./terms-content/terms-content.component";
     CommonModule
   ]
 })
-export class TermsModule { }
+export class TermsModule {
+}

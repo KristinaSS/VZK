@@ -8,7 +8,7 @@ import {AuthenticationService} from "../../../services/authentication-service/au
   templateUrl: './terms-page.component.html',
   styleUrls: ['./terms-page.component.css']
 })
-export class TermsPageComponent implements OnInit{
+export class TermsPageComponent implements OnInit {
   translationsAbout: { [key: string]: Translation };
 
   constructor(

@@ -13,6 +13,15 @@ import {AboutPageComponent} from "./pages/aboutpage/about-page/about-page.compon
 import {TermsPageComponent} from "./pages/termspage/terms-page/terms-page.component";
 import {VerifyPageComponent} from "./pages/verify-page/verify-page.component";
 import {ViewProfilePageComponent} from "./pages/viewprofilepage/view-profile-page/view-profile-page.component";
+import {AdminPanelPageComponent} from "./pages/panels/admin-panel-page/admin-panel-page/admin-panel-page.component";
+import {CasterPanelPageComponent} from "./pages/panels/caster-panel-page/caster-panel-page/caster-panel-page.component";
+import {CoachPanelPageComponent} from "./pages/panels/coach-panel-page/coach-panel-page/coach-panel-page.component";
+import {
+  ManagerPanelPageComponent
+} from "./pages/panels/manager-panel-page/manager-panel-page/manager-panel-page.component";
+import {
+  PartnerPanelPageComponent
+} from "./pages/panels/partner-panel-page/partner-panel-page/partner-panel-page.component";
 
 const routes: Routes = [
   {
@@ -62,6 +71,26 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ViewProfilePageComponent
+  },
+  {
+    path: 'admin',
+    component: AdminPanelPageComponent
+  },
+  {
+    path: 'caster',
+    component: CasterPanelPageComponent
+  },
+  {
+    path: 'coach',
+    component: CoachPanelPageComponent
+  },
+  {
+    path: 'manager',
+    component: ManagerPanelPageComponent
+  },
+  {
+    path: 'partner',
+    component: PartnerPanelPageComponent
   },
   {
     path: '**',

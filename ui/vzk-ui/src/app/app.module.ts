@@ -21,6 +21,11 @@ import { CommonDialogComponent } from './utils/dialogs/common-dialog/common-dial
 import {MatDialogModule} from "@angular/material/dialog";
 import { VerifyPageComponent } from './pages/verify-page/verify-page.component';
 import {ViewProfileModule} from "./pages/viewprofilepage/view-profile.module";
+import { AdminPanelPageComponent } from './pages/panels/admin-panel-page/admin-panel-page/admin-panel-page.component';
+import { CasterPanelPageComponent } from './pages/panels/caster-panel-page/caster-panel-page/caster-panel-page.component';
+import { CoachPanelPageComponent } from './pages/panels/coach-panel-page/coach-panel-page/coach-panel-page.component';
+import { ManagerPanelPageComponent } from './pages/panels/manager-panel-page/manager-panel-page/manager-panel-page.component';
+import { PartnerPanelPageComponent } from './pages/panels/partner-panel-page/partner-panel-page/partner-panel-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +36,11 @@ import {ViewProfileModule} from "./pages/viewprofilepage/view-profile.module";
     FooterComponent,
     CommonDialogComponent,
     VerifyPageComponent,
+    AdminPanelPageComponent,
+    CasterPanelPageComponent,
+    CoachPanelPageComponent,
+    ManagerPanelPageComponent,
+    PartnerPanelPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,11 +16,11 @@
     <li><a class="center nav-item desktop-item" (click)="navigateToPage('about')" >{{getTranslation('5')}}</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="!loggedIn" (click)="login()">{{getTranslation('6')}}</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn"  (click)="navigateToPage('profile')">{{getTranslation('7')}}</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='coach'">Coach Panel</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='caster'">Caster Panel</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='partner'">Partner Panel</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='manager'">Manager Panel</a></li>
-    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='admin'">Admin Panel</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='coach'" (click)="navigateToPage('coach')" >Coach Panel</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='caster'" (click)="navigateToPage('caster')">Caster Panel</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='partner'" (click)="navigateToPage('partner')">Partner Panel</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='manager'" (click)="navigateToPage('manager')">Manager Panel</a></li>
+    <li><a class="center nav-item mobile-item" *ngIf="loggedIn && role==='admin'" (click)="navigateToPage('admin')">Admin Panel</a></li>
     <li><a class="center nav-item mobile-item" *ngIf="loggedIn" (click)="logout()">{{getTranslation('8')}}</a></li>
   </ul>
   <ul class="nav-dropdown">
@@ -37,11 +37,11 @@
       </a>
       <div class="dropdown-content login-profile" [ngStyle]="{'display': isHidden ? 'flex' : 'none'}" (mouseover)="toggleHiddenDiv(true)" (mouseout)="toggleHiddenDiv(false)">
         <a class="dropdown-item" *ngIf="loggedIn" (click)="navigateToPage('profile')" >{{getTranslation('7')}}</a>
-        <a class="dropdown-item" *ngIf="loggedIn && role==='coach'">Coach Panel</a>
-        <a class="dropdown-item" *ngIf="loggedIn && role==='caster'">Caster Panel</a>
-        <a class="dropdown-item" *ngIf="loggedIn && role==='partner'">Partner Panel</a>
-        <a class="dropdown-item" *ngIf="loggedIn && role==='manager'">Manager Panel</a>
-        <a class="dropdown-item" *ngIf="loggedIn && role==='admin'">Admin Panel</a>
+        <a class="dropdown-item" *ngIf="loggedIn && role==='coach'" (click)="navigateToPage('coach')">Coach Panel</a>
+        <a class="dropdown-item" *ngIf="loggedIn && role==='caster'" (click)="navigateToPage('caster')">Caster Panel</a>
+        <a class="dropdown-item" *ngIf="loggedIn && role==='partner'" (click)="navigateToPage('partner')">Partner Panel</a>
+        <a class="dropdown-item" *ngIf="loggedIn && role==='manager'" (click)="navigateToPage('manager')">Manager Panel</a>
+        <a class="dropdown-item" *ngIf="loggedIn && role==='admin'" (click)="navigateToPage('admin')">Admin Panel</a>
         <a class="dropdown-item" *ngIf="loggedIn " (click)="logout()">{{getTranslation('8')}}</a>
       </div>
     </li>
