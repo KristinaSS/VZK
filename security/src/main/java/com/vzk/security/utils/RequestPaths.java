@@ -3,11 +3,6 @@ package com.vzk.security.utils;
 import java.util.*;
 
 public class RequestPaths {
-    //NO ROLE OR PERM
-
-    public static final String ACCOUNT_UPDATE_USER = "/account/update";
-
-
     //PATHS
 
     //MIX
