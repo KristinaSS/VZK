@@ -38,7 +38,6 @@ export class SignupDialogComponent implements OnInit {
     if (this.signupForm.valid) {
       try {
         await (await this.authenticationService.signup(this.signupForm)).toPromise();
-        console.log('Form submitted:', this.signupForm.value);
         this.dialog.closeAll();
         this.dialog.open(CommonDialogComponent, {
           width: '300px',

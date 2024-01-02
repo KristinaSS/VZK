@@ -69,7 +69,6 @@ export class SchedulePageComponent implements OnInit {
   }
 
   async onSortOptionChange() {
-    console.log('Selected sort option:', this.selectedSortOption);
     this.page = 0;
     try {
       this.futureEvents = await (await this.eventService.getEvents(0, this.selectedSortOption)).toPromise();

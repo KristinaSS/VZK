@@ -79,31 +79,22 @@ export class EditAccountDialogComponent implements OnInit {
       const areNamesValid = fNameChanged && lNameChanged && !isOneNameEmpty;
 
       if(nameEmpty && passEmpty && usernameEmpty){
-        console.log("0");
         this.isUpdateDisabled = true;
       }else if(nameEmpty && passEmpty && usernameChanged){
-        console.log("1");
         this.isUpdateDisabled = false;
       } else if(nameEmpty && arePassValid && usernameEmpty){
-        console.log("2");
         this.isUpdateDisabled = false;
       } else if(nameEmpty && arePassValid && usernameChanged){
-        console.log("3");
         this.isUpdateDisabled = false;
       } else if(areNamesValid && passEmpty && usernameEmpty){
-        console.log("4");
         this.isUpdateDisabled = false;
       } else if(areNamesValid && passEmpty && usernameChanged){
-        console.log("5");
         this.isUpdateDisabled = false;
       } else if(areNamesValid && arePassValid && usernameEmpty){
-        console.log("6");
         this.isUpdateDisabled = false;
       } else if(areNamesValid && arePassValid && usernameChanged){
-        console.log("7");
         this.isUpdateDisabled = false;
       } else {
-        console.log("default");
         this.isUpdateDisabled = true;
       }
     }
@@ -116,15 +107,12 @@ export class EditAccountDialogComponent implements OnInit {
     if (this.editForm.valid) {
       try {
         await (await this.authenticationService.updateAccount(this.editForm)).toPromise();
-        console.log('Form submitted:', this.editForm.value);
 
         // Open the success dialog
         let successDialog = this.dialog.open(CommonDialogComponent, {
           width: '300px',
           data: { message: "Account has been updated." }
         });
-
-        console.log("this.account.username " + this.account.username);
 
         // After closing the success dialog
         successDialog.afterClosed().subscribe(() => {

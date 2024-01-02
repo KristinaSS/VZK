@@ -19,6 +19,7 @@ export class TeamPageComponent implements OnInit {
     private translationService: TranslationService, private gameService: GameService, private authenticationService: AuthenticationService) {
     this.translationsAbout = translationService.translationsTeams;
   }
+
   ngOnInit(): void {
     this.checkIfExpired();
     this.gameService.getGames().subscribe(
@@ -32,11 +33,10 @@ export class TeamPageComponent implements OnInit {
   }
 
   async checkIfExpired() {
-    const role = sessionStorage.getItem('role');
-    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
-    let verificationStatus = response?.status;
-
-    if (role !== null && verificationStatus !== "verified") {
+    try {
+      await (await this.authenticationService.checkIfExpired()).toPromise();
+    } catch (error) {
+      console.error('Session has been expired:', error);
       sessionStorage.removeItem("token")
       sessionStorage.removeItem("role")
       sessionStorage.setItem("logged", "false")

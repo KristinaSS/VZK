@@ -26,18 +26,18 @@ export class ScheduleResultPageComponent implements OnInit{
     this.checkIfExpired();
   }
 
-  async checkIfExpired() {
-    const role = sessionStorage.getItem('role');
-    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
-    let verificationStatus = response?.status;
-
-    if (role !== null && verificationStatus !== "verified") {
+  async checkIfExpired(){
+    try {
+      await (await this.authenticationService.checkIfExpired()).toPromise();
+    } catch (error) {
+      console.error('Session has been expired:', error);
       sessionStorage.removeItem("token")
       sessionStorage.removeItem("role")
       sessionStorage.setItem("logged", "false")
       window.location.reload();
     }
   }
+
   showContent(contentNumber: number): void {
     if (contentNumber === 1) {
       this.currentContent = 1;

@@ -35,7 +35,6 @@ export class ViewProfilePageComponent implements OnInit {
 
     // @ts-ignore
     if(sessionStorage.getItem("username") != this.account.username){
-      console.log()
       // @ts-ignore
       sessionStorage.setItem("username", this.account.username);
       window.location.reload();
@@ -43,23 +42,17 @@ export class ViewProfilePageComponent implements OnInit {
   }
 
   async checkIfExpired(){
-    const role = sessionStorage.getItem('role');
-    let verificationStatus: string | undefined = "";
     try {
-      let response = await (await this.authenticationService.checkIfExpired()).toPromise();
-       verificationStatus = response?.status;
+      await (await this.authenticationService.checkIfExpired()).toPromise();
     } catch (error) {
-      console.error('Error fetching articles:', error);
-      verificationStatus = "expired";
-    }
-
-    if (role !== null && verificationStatus !== "verified") {
+      console.error('Session has been expired:', error);
       sessionStorage.removeItem("token")
       sessionStorage.removeItem("role")
       sessionStorage.setItem("logged", "false")
       window.location.reload();
     }
   }
+
 
   async getAccount(){
     try {

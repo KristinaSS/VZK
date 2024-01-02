@@ -73,7 +73,6 @@ export class ResultPageComponent implements OnInit {
   }
 
   async onSortOptionChange() {
-    console.log('Selected sort option:', this.selectedSortOption);
     this.page = 0;
     try {
       this.results = await (await this.eventService.getResults(0, this.selectedSortOption)).toPromise();

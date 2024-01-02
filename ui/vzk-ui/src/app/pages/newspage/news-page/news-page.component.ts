@@ -8,7 +8,7 @@ import {AuthenticationService} from "../../../services/authentication-service/au
   templateUrl: './news-page.component.html',
   styleUrls: ['./news-page.component.css']
 })
-export class NewsPageComponent implements OnInit{
+export class NewsPageComponent implements OnInit {
   translationsAbout: { [key: string]: Translation };
 
   constructor(
@@ -23,11 +23,10 @@ export class NewsPageComponent implements OnInit{
   }
 
   async checkIfExpired() {
-    const role = sessionStorage.getItem('role');
-    let response = await (await this.authenticationService.checkIfExpired()).toPromise();
-    let verificationStatus = response?.status;
-
-    if (role !== null && verificationStatus !== "verified") {
+    try {
+      await (await this.authenticationService.checkIfExpired()).toPromise();
+    } catch (error) {
+      console.error('Session has been expired:', error);
       sessionStorage.removeItem("token")
       sessionStorage.removeItem("role")
       sessionStorage.setItem("logged", "false")
@@ -35,3 +34,4 @@ export class NewsPageComponent implements OnInit{
     }
   }
 }
+

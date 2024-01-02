@@ -92,25 +92,33 @@ export class EditPlayerDialogComponent {
   async onSubmitClick() {
     if (this.editForm.valid) {
       try {
-        await (await this.authenticationService.updatePlayer(this.editForm)).toPromise();
-        console.log('Form submitted:', this.editForm.value);
-        this.dialog.closeAll();
+        // @ts-ignore
+        await (await this.authenticationService.updatePlayer(this.editForm, this.account.email)).toPromise();
+        // Open the success dialog
         let successDialog = this.dialog.open(CommonDialogComponent, {
           width: '300px',
-          data: {message: "Player has been updated."}
+          data: { message: "Player has been updated." }
         });
 
+        // After closing the success dialog
         successDialog.afterClosed().subscribe(() => {
+          // Close all dialogs
+          this.dialog.closeAll();
+          // Refresh the page
           window.location.reload();
         });
       } catch (error) {
         console.error('Error occurred:', error);
+
+        // Open the error dialog
         let errorDialog = this.dialog.open(CommonDialogComponent, {
           width: '300px',
-          data: {message: "An error occurred while updating player."}
+          data: { message: "An error occurred while updating player." }
         });
 
+        // After closing the error dialog
         errorDialog.afterClosed().subscribe(() => {
+          // Close all dialogs
           this.dialog.closeAll();
         });
       }

@@ -4,8 +4,6 @@ import {JwtResponse} from "../../models/jwt-token/jwt-response";
 import {FormGroup} from "@angular/forms";
 import {VerifyToken} from "../../models/verificationToken/verify-token";
 import {RoleResponse} from "../../models/RoleResponse/role-response";
-import {Player} from "../../models/player/player";
-import {user} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +36,7 @@ export class AuthenticationService {
 
     let fName = signupForm.get('fName')?.value;
     let lName = signupForm.get('lName')?.value;
-    let name =  fName + " " + lName;
+    let name = fName + " " + lName;
     name = name.trim();
 
     return this.http.post('/server/api/v1/auth/signup',
@@ -121,27 +119,45 @@ export class AuthenticationService {
       });
   }
 
-  async updatePlayer(editForm: FormGroup) {
-    let vToken = sessionStorage.getItem("token");
-    vToken = vToken || 'anonymous';
+  async updatePlayer(editForm: FormGroup, email: string) {
+    const vToken = sessionStorage.getItem("token") || 'anonymous';
 
-    let countryOrigin = editForm.get('email')?.value;
-    let birthday = editForm.get('username')?.value;
-    let gender = editForm.get('password')?.value;
-    let playerName = editForm.get('fName')?.value;
-    let instagram = editForm.get('email')?.value;
-    let twitter = editForm.get('username')?.value;
-    let twitch = editForm.get('password')?.value;
-    let youtube = editForm.get('fName')?.value;
+    let countryOrigin = editForm.get('countryOrigin')?.value || null;
+    const birthday = editForm.get('birthday')?.value || null;
+    const gender = editForm.get('gender')?.value || null;
+    const playerName = editForm.get('playerName')?.value || null;
+    const instagram = editForm.get('instagram')?.value || null;
+    const twitter = editForm.get('twitter')?.value || null;
+    const twitch = editForm.get('twitch')?.value || null;
+    const youtube = editForm.get('youtube')?.value || null;
+    const image = editForm.get('image')?.value || null;
 
-    return this.http.post('/server/player/update/user',
-      {
-        countryOrigin, birthday, gender, playerName, instagram, twitter, twitch, youtube
-      },
-      {
-        headers: new HttpHeaders({
-          'Authorization': 'Bearer ' + vToken
-        })
-      });
+    if (countryOrigin == "United Kingdom of Great Britain and Northern Ireland") {
+      countryOrigin = "UK";
+    }
+    if (countryOrigin == "United States of America") {
+      countryOrigin = "USA";
+    }
+
+    const payload = {
+      email,
+      birthday,
+      countryOrigin,
+      image,
+      playerName,
+      gender,
+      instagram,
+      twitter,
+      twitch,
+      youtube,
+    };
+
+    return this.http.post('/server/player/update/user', payload, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + vToken,
+        'Content-Type': 'application/json', // Make sure to set the content type
+      }),
+    });
   }
+
 }
