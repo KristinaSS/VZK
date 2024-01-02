@@ -225,18 +225,51 @@ paths:
           name: email
           required: true
           description: Unique account email
-  /account/update:
+  /account/update/user:
     post:
       tags:
         - Account
       summary: Update account
-      operationId: updateAccount
+      operationId: updateAccountUser
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateAccountDTO"
+              $ref: "#/components/schemas/UpdateAccountUserDTO"
+      responses:
+        "201":
+          description: Successful update of account.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /account/update/admin:
+    post:
+      tags:
+        - Account
+      summary: Update account
+      operationId: updateAccountAdmin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountAdminDTO"
       responses:
         "201":
           description: Successful update of account.
@@ -516,18 +549,51 @@ paths:
           name: email
           required: true
           description: Unique player email
-  /player/update:
+  /player/update/user:
     post:
       tags:
         - Player
       summary: Update player
-      operationId: updatePlayer
+      operationId: updatePlayerUser
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdatePlayerDTO"
+              $ref: "#/components/schemas/UpdatePlayerUserDTO"
+      responses:
+        "201":
+          description: Successful update of player.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+  /player/update/admin:
+    post:
+      tags:
+        - Player
+      summary: Update player
+      operationId: updatePlayerAdmin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePlayerAdminDTO"
       responses:
         "201":
           description: Successful update of player.
@@ -1121,25 +1187,6 @@ components:
             - MALE
             - FEMALE
             - OTHER
-    UpdateAccountDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          required: true
-        name:
-          type: string
-          required: false
-        email:
-          type: string
-          required: false
-        username:
-          type: string
-          required: false
-        password:
-          type: string
-          required: false
     CreateAccountDTO:
       type: object
       properties:
@@ -1153,63 +1200,6 @@ components:
           type: string
           required: false
         password:
-          type: string
-          required: false
-    UpdatePlayerDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          required: true
-        name:
-          type: string
-          required: false
-        email:
-          type: string
-          required: false
-        username:
-          type: string
-          required: false
-        password:
-          type: string
-          required: false
-        team:
-          type: string
-          format: uuid
-          required: false
-        birthday:
-          type: string
-          required: false
-        countryOrigin:
-          type: string
-          required: false
-        image:
-          type: string
-          required: false
-        playerName:
-          type: string
-          required: true
-        gender:
-          type: string
-          required: false
-          enum:
-            - MALE
-            - FEMALE
-            - OTHER
-        role:
-          type: string
-          required: false
-        twitter:
-          type: string
-          required: false
-        twitch:
-          type: string
-          required: false
-        youtube:
-          type: string
-          required: false
-        instagram:
           type: string
           required: false
     CreatePlayerDTO:
@@ -1347,4 +1337,120 @@ components:
           type: string
         isActive:
           type: boolean
-
+    UpdateAccountUserDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          required: false
+        email:
+          type: string
+          required: true
+        username:
+          type: string
+          required: false
+        password:
+          type: string
+          required: false
+    UpdateAccountAdminDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          required: false
+        emailOld:
+          type: string
+          required: false
+        emailNew:
+          type: string
+          required: false
+        username:
+          type: string
+          required: false
+    UpdatePlayerUserDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          required: true
+        birthday:
+          type: string
+          required: false
+        countryOrigin:
+          type: string
+          required: false
+        image:
+          type: string
+          required: false
+        playerName:
+          type: string
+          required: true
+        gender:
+          type: string
+          required: false
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        twitter:
+          type: string
+          required: false
+        twitch:
+          type: string
+          required: false
+        youtube:
+          type: string
+          required: false
+        instagram:
+          type: string
+          required: false
+    UpdatePlayerAdminDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          required: true
+        team:
+          type: string
+          format: uuid
+          required: false
+        birthday:
+          type: string
+          required: false
+        countryOrigin:
+          type: string
+          required: false
+        image:
+          type: string
+          required: false
+        playerName:
+          type: string
+          required: true
+        gender:
+          type: string
+          required: false
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        role:
+          type: string
+          required: false
+        twitter:
+          type: string
+          required: false
+        twitch:
+          type: string
+          required: false
+        youtube:
+          type: string
+          required: false
+        instagram:
+          type: string
+          required: false

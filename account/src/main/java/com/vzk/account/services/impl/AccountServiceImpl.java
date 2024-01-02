@@ -3,13 +3,11 @@ package com.vzk.account.services.impl;
 import com.vzk.account.exceptions.EmailUnavailableException;
 import com.vzk.account.exceptions.EntityAlreadyDeactivatedException;
 import com.vzk.account.exceptions.EntityNotFoundException;
+import com.vzk.account.exceptions.InvalidInputDataException;
 import com.vzk.account.models.Account;
 import com.vzk.account.repos.AccountRepository;
 import com.vzk.account.services.AccountService;
-import org.openapitools.model.AccountDTO;
-import org.openapitools.model.CreateAccountDTO;
-import org.openapitools.model.ShortAccountDTO;
-import org.openapitools.model.UpdateAccountDTO;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,14 +76,29 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void updateAccount(UpdateAccountDTO updateAccountDTO) {
+    public ShortAccountDTO getShortAccountByEmail(String email) {
+        Account account = accountRepository.findAccountByEmail(email);
+        if (account == null) {
+            throw new EntityNotFoundException(ENTITY, "email", email);
+        }
+        return ACCOUNT_MAPPER.mapToShortDTO(account);
+    }
+
+    @Override
+    public void updateAccountAdmin(UpdateAccountAdminDTO updateAccountDTO) {
+        if (updateAccountDTO.getEmailOld() == null || updateAccountDTO.getEmailOld().isEmpty() ||
+                updateAccountDTO.getEmailNew() == null || updateAccountDTO.getEmailNew().isEmpty()) {
+            throw new InvalidInputDataException();
+        }
+
         Account account = ACCOUNT_MAPPER.mapToModel(updateAccountDTO);
 
         //check if account exists
-        Account checkedAccount = findAccount(account.getId());
+        Account checkedAccount = ACCOUNT_MAPPER.mapToModel(getAccountByEmail(updateAccountDTO.getEmailOld()));
 
         //check if email available
-        verifyEmailUnique(checkedAccount.getEmail(), true);
+        verifyEmailUnique(account.getEmail(), updateAccountDTO.getEmailNew().equals(updateAccountDTO.getEmailOld()));
+
 
         Account updated = updateAccountFields(checkedAccount, account);
         updated.setActive(true);
@@ -94,12 +107,19 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ShortAccountDTO getShortAccountByEmail(String email) {
-        Account account = accountRepository.findAccountByEmail(email);
-        if (account == null) {
-            throw new EntityNotFoundException(ENTITY, "email", email);
-        }
-        return ACCOUNT_MAPPER.mapToShortDTO(account);
+    public void updateAccountUser(UpdateAccountUserDTO updateAccountUserDTO) {
+        Account account = ACCOUNT_MAPPER.mapToModel(updateAccountUserDTO);
+
+        //check if account exists
+        Account checkedAccount = ACCOUNT_MAPPER.mapToModel(getAccountByEmail(account.getEmail()));
+
+        //check if email available
+        verifyEmailUnique(checkedAccount.getEmail(), true);
+
+        Account updated = updateAccountFields(checkedAccount, account);
+        updated.setActive(true);
+
+        accountRepository.save(updated);
     }
 
     private Account findAccount(UUID id) {
@@ -122,16 +142,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private Account updateAccountFields(Account account, Account updated) {
-        if (updated.getName() != null) {
+        if (updated.getName() != null && !updated.getName().isEmpty()) {
             account.setName(updated.getName());
         }
-        if (updated.getUsername() != null) {
+        if (updated.getUsername() != null && !updated.getUsername().isEmpty()) {
             account.setUsername(updated.getUsername());
         }
-        if (updated.getEmail() != null) {
+        if (updated.getEmail() != null && !updated.getEmail().isEmpty()) {
             account.setEmail(updated.getEmail());
         }
-        if (updated.getPassword() != null) {
+        if (updated.getPassword() != null && !updated.getPassword().isEmpty()) {
             account.setPassword(updated.getPassword());
         }
 

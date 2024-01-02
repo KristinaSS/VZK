@@ -6,10 +6,7 @@ import com.vzk.account.models.Team;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import org.openapitools.model.CreatePlayerDTO;
-import org.openapitools.model.PlayerDTO;
-import org.openapitools.model.ShortPlayerDTO;
-import org.openapitools.model.UpdatePlayerDTO;
+import org.openapitools.model.*;
 
 @Mapper
 public interface PlayerMapper {
@@ -49,19 +46,32 @@ public interface PlayerMapper {
     AccountDetails mapToModel(CreatePlayerDTO playerDTO, Team team, Account linkedAccount);
 
     @Mapping(source = "playerDTO.id", target = "id")
+    @Mapping(source = "linkedAccount", target = "account")
     @Mapping(source = "team", target = "team")
     @Mapping(source = "playerDTO.birthday", target = "birthday")
     @Mapping(source = "playerDTO.countryOrigin", target = "countryOrigin")
     @Mapping(source = "playerDTO.image", target = "image")
     @Mapping(source = "playerDTO.gender", target = "gender")
     @Mapping(source = "playerDTO.playerName", target = "playerName")
-    @Mapping(source = "linkedAccount", target = "account")
     @Mapping(source = "playerDTO.role", target = "role")
     @Mapping(source = "playerDTO.twitter", target = "twitter")
     @Mapping(source = "playerDTO.twitch", target = "twitch")
     @Mapping(source = "playerDTO.youtube", target = "youtube")
     @Mapping(source = "playerDTO.instagram", target = "instagram")
-    AccountDetails mapToModel(UpdatePlayerDTO playerDTO, Team team, Account linkedAccount);
+    AccountDetails mapToModel(UpdatePlayerAdminDTO playerDTO, Team team, Account linkedAccount);
+
+    @Mapping(source = "playerDTO.id", target = "id")
+    @Mapping(source = "linkedAccount", target = "account")
+    @Mapping(source = "playerDTO.birthday", target = "birthday")
+    @Mapping(source = "playerDTO.countryOrigin", target = "countryOrigin")
+    @Mapping(source = "playerDTO.image", target = "image")
+    @Mapping(source = "playerDTO.gender", target = "gender")
+    @Mapping(source = "playerDTO.playerName", target = "playerName")
+    @Mapping(source = "playerDTO.twitter", target = "twitter")
+    @Mapping(source = "playerDTO.twitch", target = "twitch")
+    @Mapping(source = "playerDTO.youtube", target = "youtube")
+    @Mapping(source = "playerDTO.instagram", target = "instagram")
+    AccountDetails mapToModel(UpdatePlayerUserDTO playerDTO, Account linkedAccount);
 
     @Mapping(source = "account.name", target = "name")
     @Mapping(source = "account.email", target = "email")

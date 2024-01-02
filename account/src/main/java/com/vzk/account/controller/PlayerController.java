@@ -2,10 +2,7 @@ package com.vzk.account.controller;
 
 import com.vzk.account.services.PlayerService;
 import org.openapitools.api.PlayerApi;
-import org.openapitools.model.CreatePlayerDTO;
-import org.openapitools.model.PlayerDTO;
-import org.openapitools.model.ShortPlayerDTO;
-import org.openapitools.model.UpdatePlayerDTO;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,8 +56,14 @@ public class PlayerController implements PlayerApi {
     }
 
     @Override
-    public ResponseEntity<Void> updatePlayer(UpdatePlayerDTO updatePlayerDTO) {
-        playerService.updatePlayer(updatePlayerDTO);
+    public ResponseEntity<Void> updatePlayerAdmin(UpdatePlayerAdminDTO updatePlayerDTO) {
+        playerService.updatePlayerAdmin(updatePlayerDTO);
+        return ResponseEntity.ok(null);
+    }
+
+    @Override
+    public ResponseEntity<Void> updatePlayerUser(UpdatePlayerUserDTO updatePlayerUserDTO) {
+        playerService.updatePlayerUser(updatePlayerUserDTO);
         return ResponseEntity.ok(null);
     }
 }

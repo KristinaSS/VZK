@@ -34,8 +34,8 @@ export class EditAccountDialogComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       fName: ['', [Validators.minLength(3), firstLetterUppercaseValidator(), Validators.maxLength(50)]],
       lName: ['', [Validators.minLength(3), firstLetterUppercaseValidator(), Validators.maxLength(50)]],
-      email: [{value: '', disabled: true}],
-      username: [''],
+      email: [{value: this.account.email, disabled: true}],
+      username: ['', [Validators.minLength(3)]],
       password: ['', [passwordValidator(), Validators.maxLength(45)]],
       passwordAgain: ['', [passwordValidator(), Validators.maxLength(45), samePasswordValidator()]],
     });
@@ -59,54 +59,96 @@ export class EditAccountDialogComponent implements OnInit {
       const passwordControl = this.editForm.get('password');
       const passwordAgainControl = this.editForm.get('passwordAgain');
 
-      const fNameChanged = fNameControl?.dirty && fNameControl?.valid;
-      const lNameChanged = lNameControl?.dirty && lNameControl?.valid;
+      const fNameChanged = fNameControl?.dirty && fNameControl?.valid && usernameControl?.valid;
+      const lNameChanged = lNameControl?.dirty && lNameControl?.valid && usernameControl?.valid ;
       const usernameChanged = usernameControl?.dirty && usernameControl?.valid;
       const passwordChanged = passwordControl?.dirty && passwordControl?.valid;
-      const passwordAgainChanged = passwordAgainControl?.dirty && passwordAgainControl?.valid;
-
-      // If password is dirty, mark passwordAgain as dirty
       if (passwordChanged && !passwordAgainControl?.dirty) {
         passwordAgainControl?.markAsDirty();
       }
+      const passwordAgainChanged = passwordAgainControl?.dirty && passwordAgainControl?.valid;
 
-      const areNamesFilled = (fNameControl?.value && lNameControl?.value) || (!fNameControl?.value && !lNameControl?.value);
-      const areNamesValid = fNameControl?.valid && lNameControl?.valid;
-      const areNamesChanged = (fNameChanged && lNameChanged) || (!fNameChanged && !lNameChanged);
+      const nameEmpty = (fNameControl == null || fNameControl.value.length == 0) && (lNameControl == null || lNameControl.value.length == 0);
+      const passEmpty = (passwordControl == null || passwordControl.value.length == 0) && (passwordAgainControl == null || passwordAgainControl.value.length == 0);
+      const usernameEmpty = usernameControl == null || usernameControl.value.length == 0;
 
-      this.isUpdateDisabled = !(
-        (areNamesChanged && areNamesValid && usernameControl?.valid && passwordControl?.valid && passwordAgainControl?.valid) ||
-        (passwordChanged && passwordAgainChanged && areNamesValid && areNamesChanged && usernameControl?.valid) ||
-        (areNamesChanged && usernameChanged && areNamesValid && passwordControl?.valid && passwordAgainControl?.valid)
-      ) || !areNamesFilled;
+      const isOneNameEmpty = (fNameControl == null || fNameControl.value.length == 0) || (lNameControl == null || lNameControl.value.length == 0);
+      const isOnePassEmpty = (passwordControl == null || passwordControl.value.length == 0) || (passwordAgainControl == null || passwordAgainControl.value.length == 0);
+
+      const arePassValid = passwordChanged && passwordAgainChanged && !isOnePassEmpty;
+      const areNamesValid = fNameChanged && lNameChanged && !isOneNameEmpty;
+
+      if(nameEmpty && passEmpty && usernameEmpty){
+        console.log("0");
+        this.isUpdateDisabled = true;
+      }else if(nameEmpty && passEmpty && usernameChanged){
+        console.log("1");
+        this.isUpdateDisabled = false;
+      } else if(nameEmpty && arePassValid && usernameEmpty){
+        console.log("2");
+        this.isUpdateDisabled = false;
+      } else if(nameEmpty && arePassValid && usernameChanged){
+        console.log("3");
+        this.isUpdateDisabled = false;
+      } else if(areNamesValid && passEmpty && usernameEmpty){
+        console.log("4");
+        this.isUpdateDisabled = false;
+      } else if(areNamesValid && passEmpty && usernameChanged){
+        console.log("5");
+        this.isUpdateDisabled = false;
+      } else if(areNamesValid && arePassValid && usernameEmpty){
+        console.log("6");
+        this.isUpdateDisabled = false;
+      } else if(areNamesValid && arePassValid && usernameChanged){
+        console.log("7");
+        this.isUpdateDisabled = false;
+      } else {
+        console.log("default");
+        this.isUpdateDisabled = true;
+      }
     }
   }
+
+
+
 
   async onSubmitClick() {
     if (this.editForm.valid) {
       try {
         await (await this.authenticationService.updateAccount(this.editForm)).toPromise();
         console.log('Form submitted:', this.editForm.value);
-        this.dialog.closeAll();
+
+        // Open the success dialog
         let successDialog = this.dialog.open(CommonDialogComponent, {
           width: '300px',
-          data: {message: "Account has been updated."}
+          data: { message: "Account has been updated." }
         });
 
+        console.log("this.account.username " + this.account.username);
+
+        // After closing the success dialog
         successDialog.afterClosed().subscribe(() => {
+          // Close all dialogs
+          this.dialog.closeAll();
+          // Refresh the page
           window.location.reload();
         });
       } catch (error) {
         console.error('Error occurred:', error);
+
+        // Open the error dialog
         let errorDialog = this.dialog.open(CommonDialogComponent, {
           width: '300px',
-          data: {message: "An error occurred while updating account."}
+          data: { message: "An error occurred while updating account." }
         });
 
+        // After closing the error dialog
         errorDialog.afterClosed().subscribe(() => {
+          // Close all dialogs
           this.dialog.closeAll();
         });
       }
     }
   }
+
 }

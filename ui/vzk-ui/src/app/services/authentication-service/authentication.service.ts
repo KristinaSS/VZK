@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {VerifyToken} from "../../models/verificationToken/verify-token";
 import {RoleResponse} from "../../models/RoleResponse/role-response";
 import {Player} from "../../models/player/player";
+import {user} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,11 @@ export class AuthenticationService {
     let email = signupForm.get('email')?.value;
     let username = signupForm.get('username')?.value;
     let password = signupForm.get('password')?.value;
-    let name = signupForm.get('fName')?.value + " " + signupForm.get('lName')?.value;
+
+    let fName = signupForm.get('fName')?.value;
+    let lName = signupForm.get('lName')?.value;
+    let name =  fName + " " + lName;
+    name = name.trim();
 
     return this.http.post('/server/api/v1/auth/signup',
       {name, email, username, password},
@@ -101,8 +106,11 @@ export class AuthenticationService {
     let username = editForm.get('username')?.value;
     let password = editForm.get('password')?.value;
     let name = editForm.get('fName')?.value + " " + editForm.get('lName')?.value;
+    username = username.trim();
+    password = password.trim();
+    name = name.trim();
 
-    return this.http.post<Player>('/server/api/v1/auth/user/update',
+    return this.http.post('/server/api/v1/auth/user/update',
       {
         name, email, username, password
       },
@@ -126,7 +134,7 @@ export class AuthenticationService {
     let twitch = editForm.get('password')?.value;
     let youtube = editForm.get('fName')?.value;
 
-    return this.http.post<Player>('/server/player/update',
+    return this.http.post('/server/player/update/user',
       {
         countryOrigin, birthday, gender, playerName, instagram, twitter, twitch, youtube
       },

@@ -115,20 +115,6 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void updatePlayer(UpdatePlayerDTO updatePlayerDTO) {
-        AccountDetails updatedPlayer = PLAYER_MAPPER.mapToModel(updatePlayerDTO, null, null);
-        Account linkedAccount = accountRepository.findAccountByEmail(updatePlayerDTO.getEmail());
-
-        //check if account exists
-        verifyAccountExists(linkedAccount, updatePlayerDTO.getEmail());
-
-        //check no diff in email
-        verifyEmail(updatePlayerDTO.getEmail(), updatePlayerDTO.getId().toString());
-
-        accountDetailsRepository.save(updatedPlayer);
-    }
-
-    @Override
     public ShortPlayerDTO getShortPlayerByEmail(String email) {
         Account linkedAccount = accountRepository.findAccountByEmail(email);
 
@@ -138,6 +124,80 @@ public class PlayerServiceImpl implements PlayerService {
         AccountDetails accountDetails = findPlayer(linkedAccount, email);
 
         return PLAYER_MAPPER.mapToShortDTO(linkedAccount, accountDetails);
+    }
+
+    @Override
+    public void updatePlayerAdmin(UpdatePlayerAdminDTO updatePlayerDTO) {
+        Account linkedAccount = accountRepository.findAccountByEmail(updatePlayerDTO.getEmail());
+        Team linkedTeam = updatePlayerDTO.getTeam() == null || updatePlayerDTO.getTeam().toString().isEmpty()
+                ? null
+                : teamRepository.findById(updatePlayerDTO.getTeam()).orElseThrow(
+                () -> new EntityNotFoundException("Team", "id", updatePlayerDTO.getTeam().toString()));
+        AccountDetails updatedPlayer = PLAYER_MAPPER.mapToModel(updatePlayerDTO, linkedTeam, linkedAccount);
+
+        //check if account exists
+        verifyAccountExists(linkedAccount, updatePlayerDTO.getEmail());
+
+        AccountDetails current = accountDetailsRepository.findAccountDetailsByAccount(linkedAccount);
+
+        AccountDetails saved = updatePlayerFields(current, updatedPlayer);
+
+        accountDetailsRepository.save(saved);
+    }
+
+    @Override
+    public void updatePlayerUser(UpdatePlayerUserDTO updatePlayerUserDTO) {
+        Account linkedAccount = accountRepository.findAccountByEmail(updatePlayerUserDTO.getEmail());
+        AccountDetails updatedPlayer = PLAYER_MAPPER.mapToModel(updatePlayerUserDTO, linkedAccount);
+
+        //check if account exists
+        verifyAccountExists(linkedAccount, updatePlayerUserDTO.getEmail());
+        AccountDetails current = accountDetailsRepository.findAccountDetailsByAccount(linkedAccount);
+
+        //check no diff in email
+        verifyEmail(updatePlayerUserDTO.getEmail(), current.getAccount().getEmail());
+
+        AccountDetails saved = updatePlayerFields(current, updatedPlayer);
+
+        accountDetailsRepository.save(saved);
+    }
+
+    private AccountDetails updatePlayerFields(AccountDetails accountDetails, AccountDetails updated) {
+        if (updated.getTeam() != null) {
+            accountDetails.setTeam(updated.getTeam());
+        }
+        if (updated.getPlayerName() != null && !updated.getPlayerName().isEmpty()) {
+            accountDetails.setPlayerName(updated.getPlayerName());
+        }
+        if (updated.getRole() != null && !updated.getRole().isEmpty()) {
+            accountDetails.setRole(updated.getRole());
+        }
+        if (updated.getBirthday() != null && !updated.getBirthday().isEmpty()) {
+            accountDetails.setBirthday(updated.getBirthday());
+        }
+        if (updated.getGender() != null) {
+            accountDetails.setGender(updated.getGender());
+        }
+        if (updated.getImage() != null && !updated.getImage().isEmpty()) {
+            accountDetails.setImage(updated.getImage());
+        }
+        if (updated.getCountryOrigin() != null && !updated.getCountryOrigin().isEmpty()) {
+            accountDetails.setCountryOrigin(updated.getCountryOrigin());
+        }
+        if (updated.getInstagram() != null && !updated.getInstagram().isEmpty()) {
+            accountDetails.setInstagram(updated.getInstagram());
+        }
+        if (updated.getTwitch() != null && !updated.getTwitch().isEmpty()) {
+            accountDetails.setTwitch(updated.getTwitch());
+        }
+        if (updated.getTwitter() != null && !updated.getTwitter().isEmpty()) {
+            accountDetails.setTwitter(updated.getTwitter());
+        }
+        if (updated.getYoutube() != null && !updated.getYoutube().isEmpty()) {
+            accountDetails.setYoutube(updated.getYoutube());
+        }
+
+        return accountDetails;
     }
 
     private AccountDetails findPlayer(String id) {
@@ -165,9 +225,8 @@ public class PlayerServiceImpl implements PlayerService {
         }
     }
 
-    private void verifyEmail(String email, String id) {
-        AccountDetails oldPlayer = findPlayer(id);
-        if (!oldPlayer.getAccount().getEmail().equals(email)) {
+    private void verifyEmail(String email, String emailCur) {
+        if (!emailCur.equals(email)) {
             throw new InvalidUpdatePlayerException(email);
         }
     }

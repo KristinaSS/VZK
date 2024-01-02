@@ -14,4 +14,6 @@ public interface AuthService {
     RoleResponse getRole(String token);
 
     EmailResponse getEmail(String token);
+
+    void updateUser(UpdateAccountDTO updateAccountDTO);
 }

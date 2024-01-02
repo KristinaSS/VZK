@@ -136,6 +136,16 @@ public class AuthServiceImpl implements AuthService {
         return EmailResponse.builder().email(userEmail).build();
     }
 
+    @Override
+    public void updateUser(UpdateAccountDTO updateAccountDTO) {
+        String password = updateAccountDTO.getPassword();
+        if(password != null && !password.isEmpty()){
+            String encryptedPass = passwordEncoder.encode(password);
+            updateAccountDTO.setPassword(encryptedPass);
+        }
+        accountClient.updateAccount(updateAccountDTO);
+    }
+
     private String verifyTokenAndModifyUser(String token, String userEmail, String email) {
         UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
         String status = jwtService.isTokenValid(token, userDetails) ? "verified" : "expired";
@@ -149,7 +159,7 @@ public class AuthServiceImpl implements AuthService {
     private void modifyUser(String status, String userEmail) {
         AccountDTO account = accountClient.getAccountByEmail(userEmail, userEmail).getBody();
         if (status.equals("verified") && userEmail != null && account != null) {
-            accountClient.updateAccount(UpdateAccountDTO.builder().id(account.getId()).build());
+            accountClient.updateAccount(UpdateAccountDTO.builder().email(account.getEmail()).build());
         }
     }
 

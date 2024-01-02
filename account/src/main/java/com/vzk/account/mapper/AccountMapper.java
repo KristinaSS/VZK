@@ -2,10 +2,7 @@ package com.vzk.account.mapper;
 
 import com.vzk.account.models.Account;
 import org.mapstruct.factory.Mappers;
-import org.openapitools.model.AccountDTO;
-import org.openapitools.model.ShortAccountDTO;
-import org.openapitools.model.UpdateAccountDTO;
-import org.openapitools.model.CreateAccountDTO;
+import org.openapitools.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -28,12 +25,15 @@ public interface AccountMapper {
     @Mapping(source = "isActive", target = "isActive")
     Account mapToModel(AccountDTO accountDTO);
 
-    @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
-    @Mapping(source = "email", target = "email")
+    @Mapping(source = "emailNew", target = "email")
+    @Mapping(source = "username", target = "username")
+    Account mapToModel(UpdateAccountAdminDTO accountDTO);
+
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
-    Account mapToModel(UpdateAccountDTO accountDTO);
+    Account mapToModel(UpdateAccountUserDTO accountDTO);
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")

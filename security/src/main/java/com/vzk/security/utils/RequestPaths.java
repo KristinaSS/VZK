@@ -33,26 +33,36 @@ public class RequestPaths {
     //ADMIN
     public static final String ACCOUNT_GET_ALL_ACCOUNTS = "/account/all";
     public static final String ACCOUNT_GET_ALL_ACCOUNTS_ACTIVE = "/account/all/active";
+    public static final String ACCOUNT_UPDATE_ACC_ADMIN = "/account/update/admin";
+
 
     //USER
     public static final String SECURITY_EMAIL = "/api/v1/auth/email";
     public static final String SECURITY_ROLE = "/api/v1/auth/role";
+    public static final String ACCOUNT_UPDATE_ACC_USER = "/account/update/user";
+    public static final String SECURITY_UPDATE_ACC_USER = "/api/v1/auth/user/update";
 
     //PLAYER
     public static final String PLAYER_GET_SHORT_BY_EMAIL = "/player/short/%7Bemail%7D";
+    public static final String PLAYER_UPDATE_ACC_USER = "/player/update/user";
 
     //MANAGER
     public static final String PLAYER_GET_ALL_ACTIVE = "/player/all/active";
+    public static final String PLAYER_UPDATE_ACC_ADMIN = "/player/update/admin";
 
     //PERMISSIONS
     public static final String ADMIN_VIEW_PROFILES = "view-user-profile-non-owner";
     public static final String USER_VIEW_PROFILES = "view-user-profile";
     public static final String GUEST_PERMISSIONS = "guest-permissions";
-    public static final String EDIT_USER_PROFILE = "edit-user-profile";
     public static final String VIEW_ALL_PROFILES = "view-all-profiles";
     public static final String VIEW_ALL_PLAYERS = "view-all-player";
     public static final String NON_USER_VIEW_PLAYER = "view-player-profile-non-owner";
     public static final String USER_VIEW_PLAYER = "view-player-profile";
+    public static final String EDIT_USER_PROFILE = "edit-user-profile";
+    public static final String EDIT_PLAYER_PROFILE = "edit-player-profile";
+    public static final String EDIT_USER_ADMIN = "edit-user-admin";
+    public static final String EDIT_PLAYER_ADMIN = "edit-player-admin";
+
 
 
     public static final Map<String, List<String>> PATHS_PERMISSIONS_MAP;
@@ -86,11 +96,13 @@ public class RequestPaths {
         tempPathPermissionMap.put(NEWS_GET_ALL_ACTIVE_FILTER_ARTICLES, Collections.singletonList(GUEST_PERMISSIONS));
 
         //user permissions
-        tempPathPermissionMap.put(ACCOUNT_UPDATE_USER, Collections.singletonList(EDIT_USER_PROFILE)); //todo to be added
         tempPathPermissionMap.put(SECURITY_EMAIL, Collections.singletonList(USER_VIEW_PROFILES));
         tempPathPermissionMap.put(SECURITY_ROLE, Collections.singletonList(USER_VIEW_PROFILES));
+        tempPathPermissionMap.put(ACCOUNT_UPDATE_ACC_USER, Collections.singletonList(EDIT_USER_PROFILE));
+        tempPathPermissionMap.put(SECURITY_UPDATE_ACC_USER, Collections.singletonList(EDIT_USER_PROFILE));
 
         //player permissions
+        tempPathPermissionMap.put(PLAYER_UPDATE_ACC_USER, Collections.singletonList(EDIT_PLAYER_PROFILE));
 
         //caster permissions
 
@@ -98,12 +110,14 @@ public class RequestPaths {
 
         //manager permissions
         tempPathPermissionMap.put(PLAYER_GET_ALL_ACTIVE, Collections.singletonList(VIEW_ALL_PLAYERS));
+        tempPathPermissionMap.put(PLAYER_UPDATE_ACC_ADMIN, Collections.singletonList(EDIT_PLAYER_ADMIN));
 
         //partner permissions
 
         //admin permissions
         tempPathPermissionMap.put(ACCOUNT_GET_ALL_ACCOUNTS, Collections.singletonList(VIEW_ALL_PROFILES));
         tempPathPermissionMap.put(ACCOUNT_GET_ALL_ACCOUNTS_ACTIVE, Collections.singletonList(VIEW_ALL_PROFILES));
+        tempPathPermissionMap.put(ACCOUNT_UPDATE_ACC_ADMIN, Collections.singletonList(EDIT_USER_ADMIN));
 
         //mix permissions
         tempPathPermissionMap.put(ACCOUNT_GET_SHORT_BY_EMAIL, Arrays.asList(ADMIN_VIEW_PROFILES, USER_VIEW_PROFILES));

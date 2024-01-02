@@ -32,6 +32,14 @@ export class ViewProfilePageComponent implements OnInit {
       this.userRole = sessionStorage.getItem("role");
       await this.getAccount();
     }
+
+    // @ts-ignore
+    if(sessionStorage.getItem("username") != this.account.username){
+      console.log()
+      // @ts-ignore
+      sessionStorage.setItem("username", this.account.username);
+      window.location.reload();
+    }
   }
 
   async checkIfExpired(){

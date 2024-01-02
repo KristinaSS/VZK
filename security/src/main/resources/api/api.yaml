@@ -307,6 +307,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorDto"
+  /api/v1/auth/user/update:
+    post:
+      summary: update a user
+      operationId: updateUser
+      tags:
+        - authentication
+      requestBody:
+        description: Update user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountDTO"
+      responses:
+        '200':
+          description: Successful creation of user
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDto"
 components:
   schemas:
     ErrorDto:
@@ -378,9 +412,15 @@ components:
     UpdateAccountDTO:
       type: object
       properties:
-        id:
+        name:
           type: string
-          format: uuid
+          required: false
+        email:
+          type: string
+          required: true
+        username:
+          type: string
+          required: false
         password:
           type: string
           required: false

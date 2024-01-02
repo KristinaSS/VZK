@@ -2,10 +2,7 @@ package com.vzk.account.controller;
 
 import com.vzk.account.services.AccountService;
 import org.openapitools.api.AccountApi;
-import org.openapitools.model.AccountDTO;
-import org.openapitools.model.CreateAccountDTO;
-import org.openapitools.model.ShortAccountDTO;
-import org.openapitools.model.UpdateAccountDTO;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,12 +18,6 @@ public class AccountController implements AccountApi {
     @Override //works
     public ResponseEntity<AccountDTO> createAccount(CreateAccountDTO createAccountDTO) {
         return ResponseEntity.ok(accountService.createAccount(createAccountDTO));
-    }
-
-    @Override
-    public ResponseEntity<Void> deleteAccount(UUID account) {
-        accountService.deleteAccount(account.toString());
-        return ResponseEntity.ok(null);
     }
 
     @Override //works
@@ -49,14 +40,26 @@ public class AccountController implements AccountApi {
         return ResponseEntity.ok(accountService.getAllActiveAccounts());
     }
 
-    @Override
+    @Override //works
     public ResponseEntity<ShortAccountDTO> getShortAccountByEmail(String email) {
         return ResponseEntity.ok(accountService.getShortAccountByEmail(email));
     }
 
     @Override
-    public ResponseEntity<Void> updateAccount(UpdateAccountDTO updateAccountDTO) {
-        accountService.updateAccount(updateAccountDTO);
+    public ResponseEntity<Void> deleteAccount(UUID account) {
+        accountService.deleteAccount(account.toString());
+        return ResponseEntity.ok(null);
+    }
+
+    @Override
+    public ResponseEntity<Void> updateAccountAdmin(UpdateAccountAdminDTO updateAccountAdminDTO) {
+        accountService.updateAccountAdmin(updateAccountAdminDTO);
+        return ResponseEntity.ok(null);
+    }
+
+    @Override
+    public ResponseEntity<Void> updateAccountUser(UpdateAccountUserDTO updateAccountUserDTO) {
+        accountService.updateAccountUser(updateAccountUserDTO);
         return ResponseEntity.ok(null);
     }
 }

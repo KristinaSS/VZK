@@ -34,6 +34,7 @@ export class EditPlayerDialogComponent {
       birthday: ['', [ageValidator(16)]],
       gender: [''],
       playerName: [''],
+      image: [''],//todo add image dropdown and pick and update "updateUpdateButtonState()"
       instagram: ['', [urlValidator()]],
       twitter: ['', [urlValidator()]],
       twitch: ['', [urlValidator()]],

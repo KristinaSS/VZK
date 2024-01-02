@@ -42,6 +42,12 @@ public class AuthController implements AuthenticationApi {
     }
 
     @Override
+    public ResponseEntity<Void> updateUser(UpdateAccountDTO updateAccountDTO) {
+        authService.updateUser(updateAccountDTO);
+        return ResponseEntity.ok(null);
+    }
+
+    @Override
     public ResponseEntity<VerificationResponse> verify(VerificationToken verificationToken) {
         return ResponseEntity.ok(authService.verify(verificationToken.getvToken(), verificationToken.getEmail()));
     }

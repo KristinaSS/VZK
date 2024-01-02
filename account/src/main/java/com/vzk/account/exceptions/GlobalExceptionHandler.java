@@ -24,6 +24,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                         .build());
     }
 
+    @ExceptionHandler(value = {InvalidInputDataException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorDto> handleConflict(InvalidInputDataException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ErrorDto.builder()
+                        .code(""+ HttpStatus.BAD_REQUEST)
+                        .message(ex.getMessage())
+                        .build());
+    }
+
     @ExceptionHandler(value = {EntityNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorDto> handleConflict(EntityNotFoundException ex) {

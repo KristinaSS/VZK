@@ -9,7 +9,7 @@ public class Constants {
 
     public static final String ACCOUNT_CREATE_ACCOUNT_URL = "/account/create";
 
-    public static final String ACCOUNT_UPDATE_ACCOUNT_URL = "/account/update";
+    public static final String ACCOUNT_UPDATE_ACCOUNT_URL = "/account/update/user";
 
     public static final String ACCOUNT_SERVICE_NAME = "account-service";
 
