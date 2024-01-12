@@ -51,6 +51,7 @@ export class AuthenticationService {
   async verifyToken(vToken: string | null, email: string | null) {
     let token = sessionStorage.getItem("token");
     token = token || 'anonymous';
+
     return this.http.post<VerifyToken>('/server/api/v1/auth/verify',
       {vToken, email},
       {

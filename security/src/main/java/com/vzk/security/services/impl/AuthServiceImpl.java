@@ -95,7 +95,7 @@ public class AuthServiceImpl implements AuthService {
 
         try {
             if (StringUtils.isNotEmpty(email)) {
-                verifyTokenAndModifyUser(token, email, email);
+                status.setStatus(verifyTokenAndModifyUser(token, email, email));
             } else if (StringUtils.isNotEmpty(token) && StringUtils.isEmpty(email)) {
                 final String userEmail = jwtService.extractUserName(token);
                 status.setStatus(verifyTokenAndModifyUser(token, userEmail, email));
@@ -157,9 +157,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private void modifyUser(String status, String userEmail) {
-        AccountDTO account = accountClient.getAccountByEmail(userEmail, userEmail).getBody();
-        if (status.equals("verified") && userEmail != null && account != null) {
-            accountClient.updateAccount(UpdateAccountDTO.builder().email(account.getEmail()).build());
+        accountClient.getAccountByEmail(userEmail, userEmail).getBody();
+        if (status.equals("verified") && userEmail != null) {
+            accountClient.updateAccount(UpdateAccountDTO.builder().email(userEmail).build());
         }
     }
 

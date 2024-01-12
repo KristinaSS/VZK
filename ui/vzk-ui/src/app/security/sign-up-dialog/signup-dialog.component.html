@@ -18,7 +18,7 @@
         <input matInput placeholder="Password" type="password" formControlName="password" class="custom-mat-input" />
       </mat-form-field>
       <mat-form-field class="form-group">
-        <input matInput placeholder="Password Again" type="passwordAgain" formControlName="password" class="custom-mat-input" />
+        <input matInput placeholder="Password Again" type="password" formControlName="passwordAgain" class="custom-mat-input" />
       </mat-form-field>
       <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error-message" style="color: red;">
         <ul>
