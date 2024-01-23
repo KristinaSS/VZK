@@ -76,7 +76,7 @@ public class EventServiceImpl implements EventService {
                     return event.isActive() && (eventDate.isAfter(todayPast));
                 })
                 .map(EVENT_MAPPER::mapToDTO)
-                .sorted((eventDTO1, eventDTO2) -> compareEvents(eventDTO1, eventDTO2, filter))
+                .sorted((eventDTO1, eventDTO2) -> compareEvents(eventDTO2, eventDTO1, filter))
                 .collect(Collectors.toList());
 
         int pageSize = pageRequest.getPageSize();
