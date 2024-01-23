@@ -76,7 +76,7 @@ public class EventServiceImpl implements EventService {
                     return event.isActive() && (eventDate.isAfter(todayPast));
                 })
                 .map(EVENT_MAPPER::mapToDTO)
-                .sorted((eventDTO1, eventDTO2) -> compareEvents(eventDTO2, eventDTO1, filter))
+                .sorted((eventDTO1, eventDTO2) -> compareEvents(eventDTO1, eventDTO2, filter))
                 .collect(Collectors.toList());
 
         int pageSize = pageRequest.getPageSize();
@@ -146,7 +146,7 @@ public class EventServiceImpl implements EventService {
     private int compareEvents(EventDTO resultDTO1, EventDTO resultDTO2, String filter) {
         switch (filter) {
             case "soonest":
-                return resultDTO2.getDate().compareTo(resultDTO1.getDate());
+                return resultDTO1.getDate().compareTo(resultDTO2.getDate());
             case "gASC":
                 int gameTitleComparison = compareGameTitles(resultDTO1, resultDTO2);
                 if (gameTitleComparison == 0) {
@@ -160,7 +160,7 @@ public class EventServiceImpl implements EventService {
                 }
                 return reverseGameTitleComparison;
             default:
-                return resultDTO1.getDate().compareTo(resultDTO2.getDate());
+                return resultDTO2.getDate().compareTo(resultDTO1.getDate());
         }
     }
 
