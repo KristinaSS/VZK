@@ -9,7 +9,7 @@ declare var Twitch: any;
   styleUrls: ['./twitch-box.component.css']
 })
 export class TwitchBoxComponent implements AfterViewInit{
-  channelId = 'riotgames';
+  channelId = 'verzikesports';
   format= 'video';
 
   @Input() translationsAbout!: { [key: string]: Translation };
